@@ -223,3 +223,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 1000
   speed: 3
+  bullet: {fileID: 1247004467446724, guid: cb5f473a6bd8b9741a6ef32a73699cf1, type: 2}
+  bulletCoolTime: 0.1

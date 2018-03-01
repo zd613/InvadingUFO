@@ -28,14 +28,15 @@ namespace Ame
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
 
-        private void OnCollisionEnter(Collision collision)
+        private void OnTriggerEnter(Collider other)
         {
-            var target = collision.gameObject.GetComponent<IDamagable>();
+            var target = other.gameObject.GetComponentInParent<IDamagable>();
             if (target != null)
             {
                 target.ApplyDamage(damage);
                 Destroy(gameObject);
             }
         }
+
     }
 }
