@@ -15,6 +15,7 @@ namespace Ame
         [SerializeField]
         Vector3 goal;
 
+
         public float Hp { get; private set; }
 
         private void Start()
