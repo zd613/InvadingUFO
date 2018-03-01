@@ -18,15 +18,15 @@ namespace Ame
 
         Coroutine bulletCoroutine;
 
-        private void Start()
-        {
+        public float pitch = 10;
+        public float yaw = 10;
 
-        }
 
         private void Update()
         {
             Attack();
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            Rotate();
+            Move();
         }
 
         public void ApplyDamage(int damageValue, GameObject attacker)
@@ -36,6 +36,40 @@ namespace Ame
             {
                 Destroy(gameObject);
             }
+        }
+
+        void Move()
+        {
+            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        }
+
+        void Rotate()
+        {
+            //pitch
+            float p = 0;
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                p = 1;
+            }
+            else if (Input.GetKey(KeyCode.DownArrow))
+            {
+                p = -1;
+            }
+            transform.Rotate(Vector3.right * p * pitch * Time.deltaTime);
+
+            //yaw
+            float y = 0;
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                y = 1;
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                y = -1;
+            }
+            transform.Rotate(Vector3.up, y * yaw * Time.deltaTime, Space.World);
+
+
         }
 
         void Attack()
