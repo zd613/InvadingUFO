@@ -13,6 +13,7 @@ namespace Ame
         public int distance = 20;
 
         private Vector3 start;
+        public GameObject Attacker { get; private set; }
 
         private void Awake()
         {
@@ -30,13 +31,23 @@ namespace Ame
 
         private void OnTriggerEnter(Collider other)
         {
+            if (other.transform.root.gameObject == Attacker)
+            {
+                return;
+            }
+
             var target = other.gameObject.GetComponentInParent<IDamagable>();
             if (target != null)
             {
-                target.ApplyDamage(damage);
+                target.ApplyDamage(damage, Attacker);
                 Destroy(gameObject);
             }
+
         }
 
+        public void SetAttacker(GameObject attacker)
+        {
+            Attacker = attacker;
+        }
     }
 }

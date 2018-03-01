@@ -29,7 +29,7 @@ namespace Ame
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
 
-        public void ApplyDamage(int damageValue)
+        public void ApplyDamage(int damageValue, GameObject attacker)
         {
             hp -= damageValue;
             if (hp <= 0)
@@ -51,7 +51,8 @@ namespace Ame
 
         IEnumerator CreateBullet()
         {
-            Instantiate(bullet, transform.position, transform.rotation);
+            var obj = Instantiate(bullet, transform.position, transform.rotation);
+            obj.GetComponent<Bullet>().SetAttacker(gameObject);
             yield return new WaitForSeconds(bulletCoolTime);
             bulletCoroutine = null;
         }

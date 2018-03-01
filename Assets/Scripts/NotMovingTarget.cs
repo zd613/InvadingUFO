@@ -12,23 +12,15 @@ namespace Ame
         private int hp = 1000;
         public int Hp
         {
-            get { return hp; }           
+            get { return hp; }
         }
 
-        public void ApplyDamage(int damageValue)
+        public void ApplyDamage(int damageValue, GameObject attacker)
         {
             hp -= damageValue;
             if (Hp <= 0)
             {
                 Destroy(gameObject);
-            }
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                ApplyDamage(100);
             }
         }
     }

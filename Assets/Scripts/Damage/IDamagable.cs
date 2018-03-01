@@ -8,6 +8,6 @@ namespace Ame
 {
     public interface IDamagable
     {
-        void ApplyDamage(int damageValue);
+        void ApplyDamage(int damageValue,GameObject attacker);
     }
 }
