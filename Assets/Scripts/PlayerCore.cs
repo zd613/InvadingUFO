@@ -12,6 +12,7 @@ namespace Ame
         public int speed = 3;
 
         public GameObject bullet;
+        public GameObject muzzle;
 
         public float bulletCoolTime = 0.1f;
         private float bCoolTime = 0;
@@ -85,7 +86,7 @@ namespace Ame
 
         IEnumerator CreateBullet()
         {
-            var obj = Instantiate(bullet, transform.position, transform.rotation);
+            var obj = Instantiate(bullet, muzzle.transform.position, transform.rotation);
             obj.GetComponent<Bullet>().SetAttacker(gameObject);
             yield return new WaitForSeconds(bulletCoolTime);
             bulletCoroutine = null;
