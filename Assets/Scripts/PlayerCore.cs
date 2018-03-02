@@ -36,7 +36,7 @@ namespace Ame
                 _ => RotateYaw(_);
 
             provider.OnBoost +=
-                (b) => speed = b ? normalSpeed * boostRate : normalSpeed;
+                (b) => SetSpeed(b);
         }
 
         private void Update()
@@ -51,6 +51,11 @@ namespace Ame
             {
                 Destroy(gameObject);
             }
+        }
+
+        void SetSpeed(bool boost)
+        {
+            speed = boost ? normalSpeed * boostRate : normalSpeed;
         }
 
         void Move()
