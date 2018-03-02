@@ -49,5 +49,7 @@ namespace Ame
                 Destroy(gameObject);
             }
         }
+
+
     }
 }

@@ -26,6 +26,8 @@ namespace Ame
         private float speed;
         public float boostRate = 1.4f;
 
+        
+
         private void Start()
         {
             provider = GetComponent<PlayerInputProvider>();
@@ -87,6 +89,11 @@ namespace Ame
             obj.GetComponent<Bullet>().SetAttacker(gameObject);
             yield return new WaitForSeconds(bulletCoolTime);
             bulletCoroutine = null;
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            ApplyDamage(hp, collision.transform.root.gameObject);
         }
     }
 }
