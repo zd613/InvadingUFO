@@ -9,7 +9,7 @@ namespace Ame
     public class PlayerCore : MonoBehaviour, IDamagable
     {
         public int hp = 1000;
-        public int speed = 3;
+        public int normalSpeed = 3;
 
         public GameObject bullet;
         public GameObject muzzle;
@@ -23,6 +23,8 @@ namespace Ame
         public float yaw = 10;
 
         PlayerInputProvider provider;
+        private float speed;
+        public float boostRate = 1.4f;
 
         private void Start()
         {
@@ -32,6 +34,9 @@ namespace Ame
                 _ => RotatePitch(_);
             provider.OnYawRotation +=
                 _ => RotateYaw(_);
+
+            provider.OnBoost +=
+                (b) => speed = b ? normalSpeed * boostRate : normalSpeed;
         }
 
         private void Update()

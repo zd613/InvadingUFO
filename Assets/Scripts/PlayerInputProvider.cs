@@ -10,6 +10,9 @@ namespace Ame
     public class PlayerInputProvider : MonoBehaviour
     {
         public Action OnBulletAttack;
+
+        
+        public Action<bool> OnBoost;
         public Action<float> OnPitchRotation;
         public Action<float> OnYawRotation;
 
@@ -48,6 +51,18 @@ namespace Ame
                     y = -1;
                 }
                 OnYawRotation(y);
+            }
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                if (OnBoost != null)
+                {
+                    OnBoost(true);
+                }
+            }
+            else
+            {
+                OnBoost(false);
             }
         }
     }
