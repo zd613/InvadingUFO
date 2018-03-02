@@ -15,6 +15,7 @@ namespace Ame
         [SerializeField]
         Vector3 goal;
 
+
         public float Hp { get; private set; }
 
         private void Start()
@@ -26,9 +27,6 @@ namespace Ame
 
         private void Update()
         {
-            print(Hp);
-            if (Input.GetKeyDown(KeyCode.A))
-                ApplyDamage(100);
             var diff = Vector3.Distance(transform.position, goal);
             if (diff < 0.001f)
             {
@@ -43,7 +41,7 @@ namespace Ame
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
 
-        public void ApplyDamage(int damageValue)
+        public void ApplyDamage(int damageValue, GameObject attacker)
         {
             Hp -= damageValue;
             if (Hp <= 0)
@@ -51,5 +49,7 @@ namespace Ame
                 Destroy(gameObject);
             }
         }
+
+
     }
 }
