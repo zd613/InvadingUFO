@@ -26,6 +26,9 @@ namespace Ame
         private float speed;
         public float boostRate = 1.4f;
 
+        bool lockRotaion = false;
+        int lockRotationValue = 1;
+
         
 
         private void Start()
@@ -55,6 +58,19 @@ namespace Ame
             }
         }
 
+        public void LockRotation()
+        {
+            lockRotationValue = 0;
+            lockRotaion = true;
+        }
+
+        public void UnlockRotation()
+        {
+            lockRotationValue = 1;
+            lockRotaion = false;
+        }
+
+
         void SetSpeed(bool boost)
         {
             speed = boost ? normalSpeed * boostRate : normalSpeed;
@@ -75,12 +91,12 @@ namespace Ame
 
         public void RotatePitch(float value)
         {
-            transform.Rotate(Vector3.right * value * pitch * Time.deltaTime);
+            transform.Rotate(Vector3.right * value * lockRotationValue * pitch * Time.deltaTime);
         }
 
         public void RotateYaw(float value)
         {
-            transform.Rotate(Vector3.up, value * yaw * Time.deltaTime, Space.World);
+            transform.Rotate(Vector3.up, value * yaw * lockRotationValue * Time.deltaTime, Space.World);
         }
 
         IEnumerator CreateBullet()

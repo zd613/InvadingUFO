@@ -15,7 +15,7 @@ namespace Ame
         public Action<bool> OnBoost;
         public Action<float> OnPitchRotation;
         public Action<float> OnYawRotation;
-
+        
 
         private void Update()
         {
