@@ -152,6 +152,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114938893116986922, guid: beb4a4495af87284ab9cfa9146f629fe,
+        type: 2}
+      propertyPath: normalSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114938893116986922, guid: beb4a4495af87284ab9cfa9146f629fe,
+        type: 2}
+      propertyPath: pitch
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 114938893116986922, guid: beb4a4495af87284ab9cfa9146f629fe,
+        type: 2}
+      propertyPath: yaw
+      value: 40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
   m_IsPrefabParent: 0
@@ -193,16 +208,6 @@ Prefab:
     - target: {fileID: 4375978578143372, guid: cf0a6688b9a4f1f49a640becf1e43200, type: 2}
       propertyPath: m_RootOrder
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 54245534657140028, guid: cf0a6688b9a4f1f49a640becf1e43200,
-        type: 2}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 54245534657140028, guid: cf0a6688b9a4f1f49a640becf1e43200,
-        type: 2}
-      propertyPath: m_IsKinematic
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cf0a6688b9a4f1f49a640becf1e43200, type: 2}
