@@ -28,14 +28,14 @@ namespace Ame
 
         private void Update()
         {
-            if (Vector3.Distance(transform.position, goal) < eps)
-            {
-                print("ho");
+            //if (Vector3.Distance(transform.position, goal) < eps)
+            //{
+            //    print("ho");
 
-                return;
+            //    return;
 
-            }
-            moveAction();
+            //}
+            //moveAction();
 
         }
     }

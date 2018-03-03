@@ -19,7 +19,7 @@ namespace Ame
         public event Action Rotate;
 
         UfoInputProvider provider;
-
+        
         public float Hp { get; private set; }
 
         private void Awake()
@@ -52,6 +52,9 @@ namespace Ame
             }
         }
 
-
+        private void OnCollisionEnter(Collision collision)
+        {
+            Destroy(gameObject);
+        }
     }
 }
