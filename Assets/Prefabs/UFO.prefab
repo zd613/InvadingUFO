@@ -167,14 +167,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0a79afa0d5638543883f612a1d1cf2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.93
+  speed: 1
 --- !u!114 &114843219107056852
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1732097499732408}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 059d8a3d9f03956419eb36b9b5b446d2, type: 3}
   m_Name: 
