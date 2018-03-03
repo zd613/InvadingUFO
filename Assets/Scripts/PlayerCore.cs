@@ -113,6 +113,5 @@ namespace Ame
             lockRotationValue = 1;
             lockRotaion = false;
         }
-
     }
 }

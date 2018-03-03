@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 
 namespace Ame
 {
@@ -15,30 +15,32 @@ namespace Ame
         [SerializeField]
         Vector3 goal;
 
+        public event Action Move;
+        public event Action Rotate;
+
+        UfoInputProvider provider;
 
         public float Hp { get; private set; }
 
-        private void Start()
+        private void Awake()
         {
             transform.position = start;
             transform.rotation = Quaternion.LookRotation(goal - start);
             Hp = 300;
+            Move = () => { };
+            Rotate = () => { };
+        }
+
+        private void Start()
+        {
+            provider = GetComponent<UfoInputProvider>();
+            
         }
 
         private void Update()
         {
-            var diff = Vector3.Distance(transform.position, goal);
-            if (diff < 0.001f)
-            {
-                return;
-            }
-
-            GoStraight();
-        }
-
-        private void GoStraight()
-        {
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            Move();
+            Rotate();
         }
 
         public void ApplyDamage(int damageValue, GameObject attacker)
