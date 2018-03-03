@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Ame
 {
-    public class PlayerCore : MonoBehaviour, IDamagable
+    public class PlayerCore : MonoBehaviour, IDamagable, IRestrictableRotation
     {
         public int hp = 1000;
         public int normalSpeed = 3;
@@ -26,7 +26,10 @@ namespace Ame
         private float speed;
         public float boostRate = 1.4f;
 
-        
+        bool lockRotaion = false;
+        int lockRotationValue = 1;
+
+
 
         private void Start()
         {
@@ -55,6 +58,9 @@ namespace Ame
             }
         }
 
+
+
+
         void SetSpeed(bool boost)
         {
             speed = boost ? normalSpeed * boostRate : normalSpeed;
@@ -75,12 +81,12 @@ namespace Ame
 
         public void RotatePitch(float value)
         {
-            transform.Rotate(Vector3.right * value * pitch * Time.deltaTime);
+            transform.Rotate(Vector3.right * value * lockRotationValue * pitch * Time.deltaTime);
         }
 
         public void RotateYaw(float value)
         {
-            transform.Rotate(Vector3.up, value * yaw * Time.deltaTime, Space.World);
+            transform.Rotate(Vector3.up, value * yaw * lockRotationValue * Time.deltaTime, Space.World);
         }
 
         IEnumerator CreateBullet()
@@ -95,5 +101,18 @@ namespace Ame
         {
             ApplyDamage(hp, collision.transform.root.gameObject);
         }
+
+        public void RestrictRotation()
+        {
+            lockRotationValue = 0;
+            lockRotaion = true;
+        }
+
+        public void FreeRotation()
+        {
+            lockRotationValue = 1;
+            lockRotaion = false;
+        }
+
     }
 }
