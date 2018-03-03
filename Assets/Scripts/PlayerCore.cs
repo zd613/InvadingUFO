@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Ame
 {
-    public class PlayerCore : MonoBehaviour, IDamagable
+    public class PlayerCore : MonoBehaviour, IDamagable, IRestrictableRotation
     {
         public int hp = 1000;
         public int normalSpeed = 3;
@@ -29,7 +29,7 @@ namespace Ame
         bool lockRotaion = false;
         int lockRotationValue = 1;
 
-        
+
 
         private void Start()
         {
@@ -58,17 +58,7 @@ namespace Ame
             }
         }
 
-        public void LockRotation()
-        {
-            lockRotationValue = 0;
-            lockRotaion = true;
-        }
 
-        public void UnlockRotation()
-        {
-            lockRotationValue = 1;
-            lockRotaion = false;
-        }
 
 
         void SetSpeed(bool boost)
@@ -111,5 +101,18 @@ namespace Ame
         {
             ApplyDamage(hp, collision.transform.root.gameObject);
         }
+
+        public void RestrictRotation()
+        {
+            lockRotationValue = 0;
+            lockRotaion = true;
+        }
+
+        public void FreeRotation()
+        {
+            lockRotationValue = 1;
+            lockRotaion = false;
+        }
+
     }
 }
