@@ -8,31 +8,48 @@ namespace Ame
 {
     public class UfoCore : MonoBehaviour, IDamagable
     {
+        public PlayerInputProvider inputProvider;
 
-        public event Action Move;
-        public event Action Rotate;
+        event Action Move;
+        event Action<float, float> Rotate;
 
-        UfoInputProvider provider;
-        
+
+        [Space]
+        public UfoMove ufoMove;
+        public UfoRotation ufoRotation;
+
         public float Hp { get; private set; }
 
         private void Awake()
         {
-             Hp = 300;
-            Move = () => { };
-            Rotate = () => { };
+            //Hp = 300;
+            //Move = () => { };
+            //Rotate = () => { };
+
+            //if (inputProvider != null)
+            //{
+            //    inputProvider.OnPitchRotation +=
+            //        (rotaionValue) =>
+            //        {
+
+            //        };
+            //}
         }
 
         private void Start()
         {
-            provider = GetComponent<UfoInputProvider>();
-            
+            Move += ufoMove.Move;
+            Rotate += (pitch, yaw) => ufoRotation.Rotate(pitch, yaw);
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            Move();
-            Rotate();
+            if (Move != null)
+            {
+                Move();
+            }
+            print(inputProvider.PitchValue);
+            Rotate(inputProvider.PitchValue, inputProvider.YawValue);
         }
 
         public void ApplyDamage(int damageValue, GameObject attacker)

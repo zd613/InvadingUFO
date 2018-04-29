@@ -9,59 +9,16 @@ namespace Ame
     public class UfoMove : MonoBehaviour
     {
         public float speed;
-        public MoveMode currentMode = MoveMode.Straight;
+        Rigidbody rb;
 
-        private UfoCore core;
-
-        private void Start()
+        private void Awake()
         {
-            core = GetComponent<UfoCore>();
-
-            if (currentMode == MoveMode.Straight)
-                core.Move += GoStraight;
-        }
-
-        public void ChangeMode(MoveMode nextMode)
-        {
-            if (nextMode == this.currentMode)
-                return;
-
-            var now = GetAction(this.currentMode);
-            core.Move -= now;
-            core.Move += GetAction(nextMode);
+            rb = GetComponent<Rigidbody>();
         }
 
         public void Move()
         {
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
         }
-
-        public void GoStraight()
-        {
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
-        }
-
-        void Stop() { }
-
-
-        System.Action GetAction(MoveMode mode)
-        {
-            switch (mode)
-            {
-                case MoveMode.Stop:
-                    return Stop;
-                case MoveMode.Straight:
-                    return GoStraight;
-                default:
-                    return null;
-            }
-        }
-
-    }
-
-    public enum MoveMode
-    {
-        Stop,
-        Straight,
     }
 }
