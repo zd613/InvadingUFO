@@ -7,25 +7,21 @@ using System;
 
 namespace Ame
 {
-    public class PlayerInputProvider : MonoBehaviour
+    public class PlayerInputProvider : AbstractInputProvider
     {
-        //
-        public bool BulletAttack { get; private set; }
-        public float PitchValue { get; private set; }
-        public float YawValue { get; private set; }
-        public bool Boost { get; private set; }
-
-
+        //いらない？
         //
         //攻撃
-        public Action OnBulletAttack;
+        public event Action OnBulletAttack;
 
         //移動
-        public Action<bool> OnBoost;
+        public event Action<bool> OnBoost;
 
         //回転
-        public Action<float> OnPitchRotation;
-        public Action<float> OnYawRotation;
+        public event Action<float> OnPitchRotation;
+        public event Action<float> OnYawRotation;
+
+        //
 
         private void Update()
         {

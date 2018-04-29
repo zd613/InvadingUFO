@@ -8,6 +8,9 @@ namespace Ame
 {
     public class UfoMove : MonoBehaviour
     {
+        public bool isActive = true;
+
+        [Header("パラメータ")]
         public float speed;
         Rigidbody rb;
 
@@ -18,6 +21,10 @@ namespace Ame
 
         public void Move()
         {
+            if (!isActive)
+            {
+                return;
+            }
             rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
         }
     }

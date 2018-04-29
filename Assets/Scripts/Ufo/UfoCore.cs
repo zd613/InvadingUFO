@@ -8,7 +8,7 @@ namespace Ame
 {
     public class UfoCore : MonoBehaviour, IDamagable
     {
-        public PlayerInputProvider inputProvider;
+        public AbstractInputProvider inputProvider;
 
         event Action Move;
         event Action<float, float> Rotate;
@@ -48,7 +48,6 @@ namespace Ame
             {
                 Move();
             }
-            print(inputProvider.PitchValue);
             Rotate(inputProvider.PitchValue, inputProvider.YawValue);
         }
 

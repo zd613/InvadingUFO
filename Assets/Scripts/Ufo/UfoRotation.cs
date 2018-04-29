@@ -8,6 +8,7 @@ namespace Ame
 {
     public class UfoRotation : MonoBehaviour
     {
+        public bool isActive = true;
 
         ////インスペクタで設定
         //public PlayerInputProvider inputProvider;
@@ -47,6 +48,14 @@ namespace Ame
 
         private void Awake()
         {
+            if (reverseRollControl)
+            {
+                power.Roll = -power.Roll;
+            }
+            if (reversePitchControl)
+            {
+                power.Pitch = -power.Pitch;
+            }
             rb = GetComponent<Rigidbody>();
             //if (inputProvider != null)
             //{
@@ -56,19 +65,6 @@ namespace Ame
             //}
         }
 
-        private void Start()
-        {
-
-            if (reverseRollControl)
-            {
-                power.Roll = -power.Roll;
-            }
-            if (reversePitchControl)
-            {
-                power.Pitch = -power.Pitch;
-            }
-
-        }
 
         //private void Update()
         //{
@@ -93,6 +89,8 @@ namespace Ame
 
         public void Rotate(float pitch, float yaw)
         {
+            if (!isActive)
+                return;
             Pitch(pitch);
             Yaw(yaw);
         }
