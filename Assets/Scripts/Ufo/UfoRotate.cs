@@ -12,11 +12,11 @@ namespace Ame
 
         private void Start()
         {
-            var core = GetComponent<UfoCore>();
-            if (mode == UfoRotationMode.Y30)
-                core.Rotate += Rotate;
-            else if (mode == UfoRotationMode.Y60)
-                core.Rotate += Rotate60;
+            //var core = GetComponent<UfoCore>();
+            //if (mode == UfoRotationMode.Y30)
+            //    core.Rotate += Rotate;
+            //else if (mode == UfoRotationMode.Y60)
+            //    core.Rotate += Rotate60;
         }
 
         void Rotate()

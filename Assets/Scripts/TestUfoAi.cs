@@ -15,16 +15,16 @@ namespace Ame
 
         private void Awake()
         {
-            transform.rotation = Quaternion.LookRotation(goal - transform.position);
+            //transform.rotation = Quaternion.LookRotation(goal - transform.position);
             //start = transform.position;
         }
 
         System.Action moveAction;
 
-        private void Start()
-        {
-            moveAction = GetComponent<UfoMove>().Move;
-        }
+        //private void Start()
+        //{
+        //    moveAction = GetComponent<UfoMove>().Move;
+        //}
 
         private void Update()
         {

@@ -8,12 +8,6 @@ namespace Ame
 {
     public class UfoCore : MonoBehaviour, IDamagable
     {
-        [SerializeField]
-        float speed = 1;
-        [SerializeField]
-        Vector3 start;
-        [SerializeField]
-        Vector3 goal;
 
         public event Action Move;
         public event Action Rotate;
@@ -24,9 +18,7 @@ namespace Ame
 
         private void Awake()
         {
-            transform.position = start;
-            transform.rotation = Quaternion.LookRotation(goal - start);
-            Hp = 300;
+             Hp = 300;
             Move = () => { };
             Rotate = () => { };
         }
