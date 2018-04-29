@@ -13,7 +13,7 @@ namespace Ame
         public int distance = 20;
 
         private Vector3 start;
-        public GameObject Attacker { get; private set; }
+        public GameObject Attacker { get; set; }
 
         private void Awake()
         {
@@ -43,11 +43,6 @@ namespace Ame
                 Destroy(gameObject);
             }
 
-        }
-
-        public void SetAttacker(GameObject attacker)
-        {
-            Attacker = attacker;
         }
     }
 }

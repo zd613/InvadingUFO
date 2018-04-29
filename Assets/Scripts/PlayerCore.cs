@@ -92,7 +92,7 @@ namespace Ame
         IEnumerator CreateBullet()
         {
             var obj = Instantiate(bullet, muzzle.transform.position, transform.rotation);
-            obj.GetComponent<Bullet>().SetAttacker(gameObject);
+            obj.GetComponent<Bullet>().Attacker = gameObject;
             yield return new WaitForSeconds(bulletCoolTime);
             bulletCoroutine = null;
         }

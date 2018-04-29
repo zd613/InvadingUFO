@@ -17,6 +17,7 @@ namespace Ame
         [Space]
         public UfoMove ufoMove;
         public UfoRotation ufoRotation;
+        public UfoAttack ufoAttack;
 
         public float Hp { get; private set; }
 
@@ -42,6 +43,14 @@ namespace Ame
             Rotate += (pitch, yaw) => ufoRotation.Rotate(pitch, yaw);
         }
 
+        private void Update()
+        {
+            if (inputProvider.BulletAttack)
+            {
+                ufoAttack.Fire();
+            }
+        }
+
         private void FixedUpdate()
         {
             if (Move != null)
@@ -49,6 +58,8 @@ namespace Ame
                 Move();
             }
             Rotate(inputProvider.PitchValue, inputProvider.YawValue);
+
+            
         }
 
         public void ApplyDamage(int damageValue, GameObject attacker)
