@@ -8,10 +8,27 @@ public class UfoAttack : MonoBehaviour
     [Header("プレハブ")]
     public GameObject gunPrefab;
     public Transform muzzleTransform;
+    [Header("パラメータ")]
+    public float coolTimeSecond;
+    Coroutine fireCoroutine;
 
-    public void Fire()
+
+    public bool Fire()
     {
-        Instantiate(gunPrefab, muzzleTransform.position, muzzleTransform.rotation);
+        if (fireCoroutine != null)
+        {
+            return false;
+        }
 
+
+        Instantiate(gunPrefab, muzzleTransform.position, muzzleTransform.rotation);
+        fireCoroutine = StartCoroutine(FireInterval());
+        return true;
+    }
+
+    IEnumerator FireInterval()
+    {
+        yield return new WaitForSeconds(coolTimeSecond);
+        fireCoroutine = null;
     }
 }
