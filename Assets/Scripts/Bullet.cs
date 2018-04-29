@@ -31,19 +31,17 @@ namespace Ame
 
         private void OnTriggerEnter(Collider other)
         {
-            var obj = other.GetComponentInParent<Transform>().gameObject;
+            //TODO:UFO Coreを一般的なものに変える
+            var obj = other.GetComponentInParent<UfoCore>().gameObject;
             if (obj == Attacker)
             {
                 return;
             }
-            //if (other.transform.root.gameObject == Attacker)
-            //{
-            //    return;
-            //}
 
             var target = other.gameObject.GetComponentInParent<IDamagable>();
             if (target != null)
             {
+                print(obj.name);
                 target.ApplyDamage(damage, Attacker);
                 Destroy(gameObject);
             }

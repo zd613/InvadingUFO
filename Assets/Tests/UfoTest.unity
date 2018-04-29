@@ -7210,7 +7210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 1
-  speed: 4.54
+  speed: 3.67
 --- !u!114 &1622218983
 MonoBehaviour:
   m_ObjectHideFlags: 0
