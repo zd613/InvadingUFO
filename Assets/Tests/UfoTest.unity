@@ -7359,6 +7359,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunPrefab: {fileID: 1276179585195120, guid: eff451f7d6406ed4095db67f4aa2b20b, type: 2}
   muzzleTransform: {fileID: 649610067}
+  coolTimeSecond: 0.1
 --- !u!1 &1632868021
 GameObject:
   m_ObjectHideFlags: 0
