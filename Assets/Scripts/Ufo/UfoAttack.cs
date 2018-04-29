@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Ame;
 
 public class UfoAttack : MonoBehaviour
 {
@@ -20,10 +21,17 @@ public class UfoAttack : MonoBehaviour
             return false;
         }
 
+        CreateBullet();
 
-        Instantiate(gunPrefab, muzzleTransform.position, muzzleTransform.rotation);
         fireCoroutine = StartCoroutine(FireInterval());
         return true;
+    }
+
+    void CreateBullet()
+    {
+        var obj = Instantiate(gunPrefab, muzzleTransform.position, muzzleTransform.rotation);
+        var bullet = obj.GetComponent<Bullet>();
+        bullet.Attacker = gameObject;
     }
 
     IEnumerator FireInterval()

@@ -31,10 +31,15 @@ namespace Ame
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.transform.root.gameObject == Attacker)
+            var obj = other.GetComponentInParent<Transform>().gameObject;
+            if (obj == Attacker)
             {
                 return;
             }
+            //if (other.transform.root.gameObject == Attacker)
+            //{
+            //    return;
+            //}
 
             var target = other.gameObject.GetComponentInParent<IDamagable>();
             if (target != null)

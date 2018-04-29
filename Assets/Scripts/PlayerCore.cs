@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Ame
 {
-    public class PlayerCore : MonoBehaviour, IDamagable, IRestrictableRotation
+    public class PlayerCore : MonoBehaviour, IRestrictableRotation
     {
         public int hp = 1000;
         public int normalSpeed = 3;
