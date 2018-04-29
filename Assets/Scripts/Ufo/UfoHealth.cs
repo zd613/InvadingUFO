@@ -10,6 +10,7 @@ public class UfoHealth : MonoBehaviour, IDamagable
     public void ApplyDamage(float damageValue, GameObject attacker)
     {
         hp -= damageValue;
+        print("damaged:hp" + hp + " left");
         if (hp <= 0)
         {
             Destroy(gameObject);
@@ -27,5 +28,6 @@ public class UfoHealth : MonoBehaviour, IDamagable
                 return;
         }
         ApplyDamage(hp, collision.gameObject);
+
     }
 }
