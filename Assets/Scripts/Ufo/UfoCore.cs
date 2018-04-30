@@ -37,13 +37,11 @@ namespace Ame
 
         private void FixedUpdate()
         {
+            Rotate(inputProvider.PitchValue, inputProvider.YawValue);
             if (Move != null)
             {
                 Move();
-            }
-            Rotate(inputProvider.PitchValue, inputProvider.YawValue);
-
-            
+            }      
         }
 
 
