@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Ame;
 using UnityEngine.UI;
+using System;
 
 public class Health : MonoBehaviour, IDamagable
 {
@@ -12,6 +13,10 @@ public class Health : MonoBehaviour, IDamagable
 
     [Header("UI")]
     public Image hpBar;
+
+    public event Action OnDamageTaken;
+
+    public float MaxHp { get { return maxHp; } }
 
     protected virtual void Awake()
     {
@@ -25,8 +30,15 @@ public class Health : MonoBehaviour, IDamagable
             return;
         }
         hp -= damageValue;
+
         ChangeHpBar();
         print("damaged:hp" + hp + " left");
+        if (OnDamageTaken != null)
+        {
+            OnDamageTaken();
+        }
+
+        //killed
         if (hp <= 0)
         {
             isAlive = false;
