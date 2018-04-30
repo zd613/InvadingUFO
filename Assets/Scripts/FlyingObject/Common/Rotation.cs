@@ -6,7 +6,7 @@ public class Rotation : MonoBehaviour
 {
     public bool isActive = true;
 
-    Rigidbody rb;
+    protected Rigidbody rb;
 
     [Space]
     public RotationPower power;
@@ -21,25 +21,22 @@ public class Rotation : MonoBehaviour
 
     //反転
     [SerializeField]
-    private bool reverseRollControl = true;
+    protected bool reverseRollControl = true;
     [SerializeField]
-    private bool reversePitchControl;
+    protected bool reversePitchControl;
 
     //ボーダー
-    private float pitchReverseBorder = 2;
-    private float rollReverseBorder = 2;
+    protected float pitchReverseBorder = 2;
+    protected float rollReverseBorder = 2;
 
 
-    private Vector3 signedEulerAngles;
+    protected Vector3 signedEulerAngles;
 
 
-    private Limit pitchLimit = new Limit(-30, 30);//test value
-    private Limit rollLimit = new Limit(-30, 30);//test value
+    protected Limit pitchLimit = new Limit(-30, 30);//test value
+    protected Limit rollLimit = new Limit(-30, 30);//test value
 
-    public bool FixRotation { get; set; }
-    private Quaternion initialRotation;
-
-    private void Awake()
+    protected virtual void Awake()
     {
         if (reverseRollControl)
         {
@@ -74,7 +71,7 @@ public class Rotation : MonoBehaviour
     //    UpdateSignedEulerAngles();
     //}
 
-    public void Rotate(float pitch, float yaw)
+    public virtual void Rotate(float pitch, float yaw)
     {
         if (!isActive)
             return;
@@ -84,7 +81,7 @@ public class Rotation : MonoBehaviour
 
     #region Rotations
 
-    private void Pitch(float value)
+    protected virtual void Pitch(float value)
     {
         if (value == 0)
         {
@@ -98,7 +95,7 @@ public class Rotation : MonoBehaviour
         }
     }
 
-    private void Roll(float value)
+    protected virtual void Roll(float value)
     {
         if (value == 0)
         {
@@ -120,7 +117,7 @@ public class Rotation : MonoBehaviour
 
     //}
 
-    private void Yaw(float value)
+    protected virtual void Yaw(float value)
     {
         if (value == 0)
         {
@@ -134,7 +131,7 @@ public class Rotation : MonoBehaviour
         }
     }
 
-    private void ReverseToInitialPosition(Vector3 axis, float signedEulerAngle, float reverseBorder, float reversePower)
+    protected virtual void ReverseToInitialPosition(Vector3 axis, float signedEulerAngle, float reverseBorder, float reversePower)
     {
         if (!revertToInitialPosition)
             return;

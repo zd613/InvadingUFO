@@ -8,14 +8,14 @@ public class Movement : MonoBehaviour
 
     [Header("パラメータ")]
     public float speed;
-    Rigidbody rb;
+    protected Rigidbody rb;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    public void Move()
+    public virtual void Move()
     {
         if (!isActive)
         {
