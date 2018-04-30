@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MouseInputProvider : AbstractInputProvider
 {
+    public float crosshairRayLength = 3;
+    public float threashold = 2;
+
     Vector2 center;
 
     float radius;//px
@@ -30,6 +33,15 @@ public class MouseInputProvider : AbstractInputProvider
         }
 
         //rotate
+        //RotationInput();
+
+        RotationInput2();
+
+
+    }
+
+    void RotationInput()
+    {
 
         //スクリーンサイズ変更時に代わるのでupdate
         center = new Vector2(Screen.width / 2, Screen.height / 2);
@@ -66,6 +78,51 @@ public class MouseInputProvider : AbstractInputProvider
                 YawValue = 1;
             }
             else if (relativeMousePos.x < -radius)
+            {
+                YawValue = -1;
+            }
+        }
+    }
+
+
+    void RotationInput2()
+    {
+        //both screen pos
+        var mousePos = Input.mousePosition;
+        var crosshairPos =
+            RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position + transform.forward * crosshairRayLength);
+
+        print(mousePos + "," + crosshairPos);
+
+        Vector2 deltaV3 = new Vector2(mousePos.x - crosshairPos.x, mousePos.y - crosshairPos.y);
+
+        if (Mathf.Abs(deltaV3.y) < threashold)
+        {
+            PitchValue = 0;
+        }
+        else
+        {
+            if (deltaV3.y > 0)
+            {
+                PitchValue = 1;
+            }
+            else
+            {
+                PitchValue = -1;
+            }
+        }
+
+        if (Mathf.Abs(deltaV3.x) < threashold)
+        {
+            YawValue = 0;
+        }
+        else
+        {
+            if (deltaV3.x > 0)
+            {
+                YawValue = 1;
+            }
+            else
             {
                 YawValue = -1;
             }

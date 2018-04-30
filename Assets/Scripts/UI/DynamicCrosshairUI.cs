@@ -21,8 +21,6 @@ public class DynamicCrosshairUI : MonoBehaviour
 
         var targetPos = player.transform.forward * playerRayLength;
         //rectTransform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, targetPos);
-
-
         rectTransform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, player.transform.position + player.transform.forward * playerRayLength);
 
     }

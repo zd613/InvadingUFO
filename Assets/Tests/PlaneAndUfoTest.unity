@@ -2206,7 +2206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1756804373}
   crosshair: {fileID: 1856258867}
-  playerRayLength: 1
+  playerRayLength: 7
 --- !u!1 &1137631714
 GameObject:
   m_ObjectHideFlags: 0
@@ -2751,6 +2751,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948d4fce91477b94abfd7e4fb1d5fb34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crosshairRayLength: 7
+  threashold: 3
 --- !u!114 &1756804375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2780,9 +2782,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActive: 1
   power:
-    Pitch: 30
-    Roll: 30
-    Yaw: 30
+    Pitch: 50
+    Roll: 50
+    Yaw: 50
   reversePower:
     Pitch: 30
     Roll: 30
