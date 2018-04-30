@@ -15,23 +15,21 @@ namespace Ame
 
 
         [Space]
-        public UfoMove ufoMove;
-        public UfoRotation ufoRotation;
-        public UfoAttack ufoAttack;
-
-        public float Hp { get; private set; }
+        public Movement move;
+        public Rotation rotation;
+        public Attack attack;
 
         private void Start()
         {
-            Move += ufoMove.Move;
-            Rotate += (pitch, yaw) => ufoRotation.Rotate(pitch, yaw);
+            Move += move.Move;
+            Rotate += (pitch, yaw) => rotation.Rotate(pitch, yaw);
         }
 
         private void Update()
         {
             if (inputProvider.BulletAttack)
             {
-                ufoAttack.Fire();
+                attack.Fire();
             }
         }
 
