@@ -438,7 +438,7 @@ GameObject:
   - component: {fileID: 270756606}
   - component: {fileID: 270756605}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: FpsPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1274,6 +1274,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fpsText: {fileID: 855967784}
   averageFpsText: {fileID: 582341455}
+  normalColor: {r: 0, g: 0, b: 0, a: 1}
+  middleColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  lowColor: {r: 1, g: 0, b: 0, a: 1}
   averageFpsArrayLength: 60
 --- !u!1 &1337487467
 GameObject:

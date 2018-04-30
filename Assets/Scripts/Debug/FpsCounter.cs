@@ -12,6 +12,9 @@ public class FpsCounter : MonoBehaviour
     private Text fpsText;
     [SerializeField]
     private Text averageFpsText;
+    public Color normalColor = Color.black;
+    public Color middleColor = Color.yellow;
+    public Color lowColor = Color.red;
 
     [Header("設定")]
     [SerializeField]
@@ -23,10 +26,7 @@ public class FpsCounter : MonoBehaviour
     private float[] fpsArray;
     private int count = 0;
 
-    [Header("色")]
-    public Color normalColor = Color.black;
-    public Color middleColor = Color.yellow;
-    public Color lowColor = Color.red;
+
 
     private void Awake()
     {
