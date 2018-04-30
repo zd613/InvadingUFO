@@ -228,6 +228,7 @@ GameObject:
   - component: {fileID: 395435579}
   - component: {fileID: 395435582}
   - component: {fileID: 395435583}
+  - component: {fileID: 395435584}
   - component: {fileID: 395435578}
   m_Layer: 0
   m_Name: PlayerPlane
@@ -313,6 +314,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputProvider: {fileID: 395435578}
+  movement: {fileID: 395435584}
+  ufoRotation: {fileID: 0}
+  ufoAttack: {fileID: 0}
 --- !u!114 &395435583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,7 +328,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7dbbf28860acf343a3c9dca761b0b15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAlive: 1
   hp: 100
+--- !u!114 &395435584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 395435577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c08e23f5212ede94cba1ce6bdfb40ed5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActive: 1
+  speed: 2
 --- !u!1 &494383777
 GameObject:
   m_ObjectHideFlags: 0
