@@ -6,8 +6,7 @@ using UnityEngine;
 
 namespace Ame
 {
-    public interface IDamagable
-    {
-        void ApplyDamage(float damageValue,GameObject attacker);
-    }
+	public class UfoInputProvider : MonoBehaviour 
+	{
+	}
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Ame
 {
-    public class PlayerCore : MonoBehaviour, IDamagable, IRestrictableRotation
+    public class PlayerCore : MonoBehaviour, IRestrictableRotation
     {
         public int hp = 1000;
         public int normalSpeed = 3;
@@ -92,7 +92,7 @@ namespace Ame
         IEnumerator CreateBullet()
         {
             var obj = Instantiate(bullet, muzzle.transform.position, transform.rotation);
-            obj.GetComponent<Bullet>().SetAttacker(gameObject);
+            obj.GetComponent<Bullet>().Attacker = gameObject;
             yield return new WaitForSeconds(bulletCoolTime);
             bulletCoroutine = null;
         }
@@ -113,6 +113,5 @@ namespace Ame
             lockRotationValue = 1;
             lockRotaion = false;
         }
-
     }
 }

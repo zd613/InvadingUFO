@@ -13,7 +13,10 @@ namespace Ame
         public int distance = 20;
 
         private Vector3 start;
-        public GameObject Attacker { get; private set; }
+        public GameObject Attacker { get; set; }
+
+        //２回目防止用
+        bool hit = false;
 
         private void Awake()
         {
@@ -31,7 +34,11 @@ namespace Ame
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.transform.root.gameObject == Attacker)
+            if (hit)
+                return;
+            //TODO:UFO Coreを一般的なものに変える
+            var obj = other.GetComponentInParent<UfoCore>().gameObject;
+            if (obj == Attacker)
             {
                 return;
             }
@@ -41,13 +48,9 @@ namespace Ame
             {
                 target.ApplyDamage(damage, Attacker);
                 Destroy(gameObject);
+                hit = true;
             }
 
-        }
-
-        public void SetAttacker(GameObject attacker)
-        {
-            Attacker = attacker;
         }
     }
 }

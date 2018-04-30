@@ -9,13 +9,13 @@ namespace Ame
     public class NotMovingTarget : MonoBehaviour, IDamagable
     {
         [SerializeField]
-        private int hp = 1000;
-        public int Hp
+        private float hp = 1000;
+        public float Hp
         {
             get { return hp; }
         }
 
-        public void ApplyDamage(int damageValue, GameObject attacker)
+        public void ApplyDamage(float damageValue, GameObject attacker)
         {
             hp -= damageValue;
             if (Hp <= 0)
