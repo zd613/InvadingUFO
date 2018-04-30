@@ -47,17 +47,18 @@ namespace Ame
             var target = other.gameObject.GetComponentInParent<IDamagable>();
             if (target != null)
             {
-                CreateHitEffect(obj.transform);
+                CreateHitEffect();
                 target.ApplyDamage(damage, Attacker);
-                Destroy(gameObject);
                 hit = true;
+
+                Destroy(gameObject);
             }
 
         }
 
-        void CreateHitEffect(Transform target)
+        void CreateHitEffect()
         {
-            Instantiate(hitEffectPrefab, target.position, hitEffectPrefab.transform.rotation);
+            Instantiate(hitEffectPrefab, transform.position, hitEffectPrefab.transform.rotation);
         }
     }
 }
