@@ -15,7 +15,7 @@ public class PlaneCore : MonoBehaviour
     [Space]
     public Movement movement;
     public Rotation rotation;
-    public UfoAttack ufoAttack;
+    public Attack attack;
 
     private void Start()
     {
@@ -27,7 +27,7 @@ public class PlaneCore : MonoBehaviour
     {
         if (inputProvider.BulletAttack)
         {
-            ufoAttack.Fire();
+            attack.Fire();
         }
     }
 
