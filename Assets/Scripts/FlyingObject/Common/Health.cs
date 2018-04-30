@@ -25,7 +25,7 @@ public class Health : MonoBehaviour, IDamagable
 
     //地面などに当たった時
     //一撃でhp0になる
-    private void OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter(Collision collision)
     {
         var bullet = collision.gameObject.GetComponent<Bullet>();
         if (bullet != null)

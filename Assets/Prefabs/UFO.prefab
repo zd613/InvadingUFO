@@ -138,10 +138,10 @@ GameObject:
   - component: {fileID: 4375978578143372}
   - component: {fileID: 54245534657140028}
   - component: {fileID: 114996871533770882}
-  - component: {fileID: 114140395717231582}
-  - component: {fileID: 114643469542448088}
-  - component: {fileID: 114145052293487440}
-  - component: {fileID: 114807836806998692}
+  - component: {fileID: 114428723778518592}
+  - component: {fileID: 114324623761992502}
+  - component: {fileID: 114738454706348660}
+  - component: {fileID: 114697053002159288}
   - component: {fileID: 114891214728600880}
   m_Layer: 0
   m_Name: UFO
@@ -189,7 +189,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1732097499732408}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4774690732398114}
@@ -526,7 +526,7 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1264484825392710}
   m_Enabled: 1
---- !u!114 &114140395717231582
+--- !u!114 &114324623761992502
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -534,34 +534,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1732097499732408}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0a79afa0d5638543883f612a1d1cf2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isActive: 1
-  speed: 3.67
---- !u!114 &114145052293487440
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1732097499732408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8888a1ec780d26945a5b983424e40c28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gunPrefab: {fileID: 1514578246780428, guid: 70336a4b7f2c64249ab1803094fce518, type: 2}
-  muzzleTransform: {fileID: 4912648425494646}
-  coolTimeSecond: 0.1
---- !u!114 &114643469542448088
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1732097499732408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 059d8a3d9f03956419eb36b9b5b446d2, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f0658fa0f57e3948bd3ec609a260e4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 1
@@ -573,10 +546,10 @@ MonoBehaviour:
     Pitch: 4.59
     Roll: 5.55
     Yaw: 4.95
-  revertToInitialPosition: 1
+  revertToInitialPosition: 0
   reverseRollControl: 1
   reversePitchControl: 0
---- !u!114 &114807836806998692
+--- !u!114 &114428723778518592
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -584,10 +557,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 1732097499732408}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32ea2ce9401cfd245ba632279a71c0fc, type: 3}
+  m_Script: {fileID: 11500000, guid: c08e23f5212ede94cba1ce6bdfb40ed5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 1
+  speed: 3.67
+--- !u!114 &114697053002159288
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1732097499732408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7dbbf28860acf343a3c9dca761b0b15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAlive: 1
   hp: 100
+--- !u!114 &114738454706348660
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1732097499732408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea911013e4062fb4e96e995e39790ef5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunPrefab: {fileID: 1514578246780428, guid: 70336a4b7f2c64249ab1803094fce518, type: 2}
+  muzzleTransform: {fileID: 4912648425494646}
+  coolTimeSecond: 0.1
 --- !u!114 &114891214728600880
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -612,9 +613,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputProvider: {fileID: 114891214728600880}
-  ufoMove: {fileID: 114140395717231582}
-  ufoRotation: {fileID: 114643469542448088}
-  ufoAttack: {fileID: 114145052293487440}
+  move: {fileID: 114428723778518592}
+  rotation: {fileID: 114324623761992502}
+  attack: {fileID: 114738454706348660}
 --- !u!124 &124682453757482920
 Behaviour:
   m_ObjectHideFlags: 1

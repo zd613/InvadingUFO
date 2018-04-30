@@ -10,10 +10,10 @@ public class Attack : MonoBehaviour
     public Transform muzzleTransform;
     [Header("パラメータ")]
     public float coolTimeSecond;
-    Coroutine fireCoroutine;
+    protected Coroutine fireCoroutine;
 
 
-    public bool Fire()
+    public virtual bool Fire()
     {
         if (fireCoroutine != null)
         {
@@ -26,14 +26,14 @@ public class Attack : MonoBehaviour
         return true;
     }
 
-    void CreateBullet()
+    protected void CreateBullet()
     {
         var obj = Instantiate(gunPrefab, muzzleTransform.position, muzzleTransform.rotation);
         var bullet = obj.GetComponent<Bullet>();
         bullet.Attacker = gameObject;
     }
 
-    IEnumerator FireInterval()
+    protected IEnumerator FireInterval()
     {
         yield return new WaitForSeconds(coolTimeSecond);
         fireCoroutine = null;
