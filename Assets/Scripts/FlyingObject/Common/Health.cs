@@ -2,11 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Ame;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour, IDamagable
 {
     public bool isAlive = true;
     public float hp = 100;
+    private float maxHp;
+
+    [Header("UI")]
+    public Image hpBar;
+
+    protected virtual void Awake()
+    {
+        maxHp = hp;
+    }
 
     public void ApplyDamage(float damageValue, GameObject attacker)
     {
@@ -15,6 +25,7 @@ public class Health : MonoBehaviour, IDamagable
             return;
         }
         hp -= damageValue;
+        ChangeHpBar();
         print("damaged:hp" + hp + " left");
         if (hp <= 0)
         {
@@ -35,5 +46,12 @@ public class Health : MonoBehaviour, IDamagable
         }
         ApplyDamage(hp, collision.gameObject);
 
+    }
+
+    protected void ChangeHpBar()
+    {
+        if (hpBar == null)
+            return;
+        hpBar.fillAmount = hp / maxHp;
     }
 }
