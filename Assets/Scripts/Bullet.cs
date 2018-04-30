@@ -36,8 +36,7 @@ namespace Ame
         {
             if (hit)
                 return;
-            //TODO:UFO Coreを一般的なものに変える
-            var obj = other.GetComponentInParent<UfoCore>().gameObject;
+            var obj = other.GetComponentInParent<CommonCore>().gameObject;
             if (obj == Attacker)
             {
                 return;

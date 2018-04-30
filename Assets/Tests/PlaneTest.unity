@@ -312,13 +312,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 395435577}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 610abfe6a38debc49ae8586c5f11601c, type: 3}
+  m_Script: {fileID: 11500000, guid: 841ab65f87e11394aa075380310a6d52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inputProvider: {fileID: 395435578}
-  movement: {fileID: 395435584}
-  rotation: {fileID: 395435585}
-  attack: {fileID: 395435586}
 --- !u!114 &395435583
 MonoBehaviour:
   m_ObjectHideFlags: 0

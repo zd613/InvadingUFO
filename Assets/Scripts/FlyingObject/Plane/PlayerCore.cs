@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace Ame
 {
+    [System.Obsolete("つかわない")]
     public class PlayerCore : MonoBehaviour, IRestrictableRotation
     {
         public int hp = 1000;
