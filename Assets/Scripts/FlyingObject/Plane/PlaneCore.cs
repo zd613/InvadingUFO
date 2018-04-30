@@ -14,13 +14,13 @@ public class PlaneCore : MonoBehaviour
 
     [Space]
     public Movement movement;
-    public UfoRotation ufoRotation;
+    public Rotation rotation;
     public UfoAttack ufoAttack;
 
     private void Start()
     {
         Move += movement.Move;
-        Rotate += (pitch, yaw) => ufoRotation.Rotate(pitch, yaw);
+        Rotate += (pitch, yaw) => rotation.Rotate(pitch, yaw);
     }
 
     private void Update()
@@ -33,7 +33,7 @@ public class PlaneCore : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Rotate(inputProvider.PitchValue, inputProvider.YawValue);
+        Rotate(inputProvider.PitchValue, inputProvider.YawValue);
         if (Move != null)
         {
             Move();
