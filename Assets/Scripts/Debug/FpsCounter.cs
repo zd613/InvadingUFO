@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System.Linq;
 
 
-public class DebugUI : MonoBehaviour
+public class FpsCounter : MonoBehaviour
 {
     [Header("UI")]
     [SerializeField]
@@ -22,6 +22,11 @@ public class DebugUI : MonoBehaviour
 
     private float[] fpsArray;
     private int count = 0;
+
+    [Header("色")]
+    public Color normalColor = Color.black;
+    public Color middleColor = Color.yellow;
+    public Color lowColor = Color.red;
 
     private void Awake()
     {
@@ -41,11 +46,29 @@ public class DebugUI : MonoBehaviour
 
         if (fpsText != null)
         {
+            ChangeColor(fpsText, Fps);
             fpsText.text = "fps:" + Fps;
         }
         if (averageFpsText != null)
         {
+            ChangeColor(averageFpsText, AverageFps);
             averageFpsText.text = "average fps:" + AverageFps;
+        }
+    }
+
+    void ChangeColor(Text text, float fps)
+    {
+        if (fps < 15)
+        {
+            text.color = lowColor;
+        }
+        else if (fps < 40)
+        {
+            text.color = middleColor;
+        }
+        else
+        {
+            text.color = normalColor;
         }
     }
 }
