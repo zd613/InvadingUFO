@@ -15,6 +15,8 @@ namespace Ame
         private Vector3 start;
         public GameObject Attacker { get; set; }
 
+        public GameObject hitEffectPrefab;
+
         //２回目防止用
         bool hit = false;
 
@@ -45,11 +47,17 @@ namespace Ame
             var target = other.gameObject.GetComponentInParent<IDamagable>();
             if (target != null)
             {
+                CreateHitEffect(obj.transform);
                 target.ApplyDamage(damage, Attacker);
                 Destroy(gameObject);
                 hit = true;
             }
 
+        }
+
+        void CreateHitEffect(Transform target)
+        {
+            Instantiate(hitEffectPrefab, target.position, hitEffectPrefab.transform.rotation);
         }
     }
 }

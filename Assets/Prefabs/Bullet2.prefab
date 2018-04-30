@@ -68,6 +68,8 @@ MonoBehaviour:
   speed: 10
   damage: 10
   distance: 20
+  hitEffectPrefab: {fileID: 1187429217532524, guid: 901c6461d099b1541af5e3217efb74b6,
+    type: 2}
 --- !u!120 &120587199138010406
 LineRenderer:
   m_ObjectHideFlags: 1
