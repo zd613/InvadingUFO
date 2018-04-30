@@ -38,11 +38,11 @@ public class MouseInputProvider : AbstractInputProvider
         //x,yに値はいる
         Vector2 mousePos = Input.mousePosition;
         //testObject.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 1));
-        print(mousePos);
+        //print(mousePos);
 
         //centerを中心とした座標に変換
         Vector2 relativeMousePos = mousePos - center;
-        print(InCircle(radius, relativeMousePos) + "," + radius + "," + mousePos);
+        //print(InCircle(radius, relativeMousePos) + "," + radius + "," + mousePos);
         if (InCircle(radius, relativeMousePos))
         {
             PitchValue = 0;
