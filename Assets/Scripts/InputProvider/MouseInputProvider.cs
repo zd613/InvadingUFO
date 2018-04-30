@@ -33,41 +33,51 @@ public class MouseInputProvider : AbstractInputProvider
 
         //スクリーンサイズ変更時に代わるのでupdate
         center = new Vector2(Screen.width / 2, Screen.height / 2);
-        radius = Mathf.Max(Screen.height, Screen.width) / 6;
+        radius = Mathf.Min(Screen.height, Screen.width) / 5;
 
         //x,yに値はいる
-        var mousePos = Input.mousePosition;
+        Vector2 mousePos = Input.mousePosition;
         //testObject.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 1));
-
         print(mousePos);
 
-
-        //Pitch
-        if (mousePos.y > center.y + radius)
-        {
-            PitchValue = 1;
-        }
-        else if (mousePos.y < center.y - radius)
-        {
-            PitchValue = -1;
-        }
-        else
+        //centerを中心とした座標に変換
+        Vector2 relativeMousePos = mousePos - center;
+        print(InCircle(radius, relativeMousePos) + "," + radius + "," + mousePos);
+        if (InCircle(radius, relativeMousePos))
         {
             PitchValue = 0;
-        }
-
-        //Yaw
-        if (mousePos.x > center.x + radius)
-        {
-            YawValue = 1;
-        }
-        else if (mousePos.x < center.x - radius)
-        {
-            YawValue = -1;
+            YawValue = 0;
         }
         else
         {
-            YawValue = 0;
+            //Pitch
+            if (relativeMousePos.y > radius)
+            {
+                PitchValue = 1;
+            }
+            else if (relativeMousePos.y < -radius)
+            {
+                PitchValue = -1;
+            }
+
+            //Yaw
+            if (relativeMousePos.x > radius)
+            {
+                YawValue = 1;
+            }
+            else if (relativeMousePos.x < -radius)
+            {
+                YawValue = -1;
+            }
         }
+
+
+    }
+
+
+    //円内にpointがあるかどうか
+    bool InCircle(float radius, Vector2 point)
+    {
+        return (point.sqrMagnitude <= radius * radius);
     }
 }

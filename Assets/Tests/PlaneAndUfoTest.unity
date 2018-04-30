@@ -2590,7 +2590,7 @@ MonoBehaviour:
     Yaw: 30
   revertToInitialPosition: 0
   reverseRollControl: 1
-  reversePitchControl: 0
+  reversePitchControl: 1
 --- !u!114 &1756804377
 MonoBehaviour:
   m_ObjectHideFlags: 0
