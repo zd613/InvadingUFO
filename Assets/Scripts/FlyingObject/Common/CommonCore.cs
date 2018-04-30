@@ -53,16 +53,17 @@ public class CommonCore : MonoBehaviour
         {
             attack.Fire();
         }
-    }
-
-    protected virtual void FixedUpdate()
-    {
         Rotate(inputProvider.PitchValue, inputProvider.YawValue);
         if (Move != null)
         {
             Move();
         }
     }
+
+    //protected virtual void FixedUpdate()
+    //{
+
+    //}
 
     protected void NoAction() { }
 }

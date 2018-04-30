@@ -11,17 +11,24 @@ public class FollowingCamera : MonoBehaviour
     public Transform target;
 
     public Vector3 offset;
+    public float movingSpeed;//
     public float rotationSpeed;//2.7f
+
 
     private void LateUpdate()
     {
         if (target == null)
             return;
-        transform.position = target.position + CalculateOffset();
 
+        var desiredPos = target.position + CalculateOffset();
+        transform.position = Vector3.Slerp(transform.position, desiredPos, Time.deltaTime * movingSpeed);
+        //transform.position = target.transform.position + CalculateOffset();
+        //var rot = Quaternion.Slerp(transform.rotation, target.transform.rotation, rotationSpeed * Time.deltaTime);
+
+        //transform.rotation = rot;
         //ターゲットとカメラの向き
         var lookRot = Quaternion.LookRotation(target.position - transform.position);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * rotationSpeed);
     }
 
     Vector3 CalculateOffset()
