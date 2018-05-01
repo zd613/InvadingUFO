@@ -1253,7 +1253,7 @@ Prefab:
     - target: {fileID: 114645784630107220, guid: 6d8115aaf51234f43867ca39f9a3f460,
         type: 2}
       propertyPath: rotationSpeed
-      value: 0.37
+      value: 2.44
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6d8115aaf51234f43867ca39f9a3f460, type: 2}
@@ -1698,6 +1698,7 @@ GameObject:
   - component: {fileID: 1677335642}
   - component: {fileID: 1677335641}
   - component: {fileID: 1677335640}
+  - component: {fileID: 1677335644}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1772,6 +1773,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1677335644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1677335639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea911013e4062fb4e96e995e39790ef5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunPrefab: {fileID: 1514578246780428, guid: 70336a4b7f2c64249ab1803094fce518, type: 2}
+  muzzleTransform: {fileID: 1633508952}
+  coolTimeSecond: 0.6
 --- !u!4 &1677335647
 Transform:
   m_ObjectHideFlags: 0
