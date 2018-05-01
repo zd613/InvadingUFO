@@ -6,7 +6,7 @@ public class MouseInputProvider : AbstractInputProvider
 {
     public float crosshairRayLength = 3;
     public float threashold = 2;
-
+    private float threashold2;
     Vector2 center;
 
     float radius;//px
@@ -18,6 +18,8 @@ public class MouseInputProvider : AbstractInputProvider
         //testObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
         //testObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         radius = Mathf.Max(Screen.height, Screen.width) / 6;
+
+        threashold2 = threashold / 2;
     }
 
     private void Update()
@@ -37,6 +39,7 @@ public class MouseInputProvider : AbstractInputProvider
 
         RotationInput2();
 
+        //print(PitchValue + "," + YawValue);
 
     }
 
@@ -92,13 +95,25 @@ public class MouseInputProvider : AbstractInputProvider
         var crosshairPos =
             RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position + transform.forward * crosshairRayLength);
 
-        print(mousePos + "," + crosshairPos);
+        //print(mousePos + "," + crosshairPos);
 
         Vector2 deltaV3 = new Vector2(mousePos.x - crosshairPos.x, mousePos.y - crosshairPos.y);
-
+        /*
         if (Mathf.Abs(deltaV3.y) < threashold)
         {
-            PitchValue = 0;
+            if (deltaV3.y > threashold2)
+            {
+                PitchValue = 0.3f;
+            }
+            else if (deltaV3.y < -threashold2)
+            {
+                PitchValue = -0.3f;
+            }
+            else
+            {
+                PitchValue = 0;
+
+            }
         }
         else
         {
@@ -110,11 +125,26 @@ public class MouseInputProvider : AbstractInputProvider
             {
                 PitchValue = -1;
             }
-        }
-
+        }*/
+        
+        YawInput(deltaV3.x);
+        /*
         if (Mathf.Abs(deltaV3.x) < threashold)
         {
-            YawValue = 0;
+            if (deltaV3.x > threashold2)
+            {
+                YawValue = 0.01f;
+            }
+            else if (deltaV3.x < -threashold2)
+            {
+                YawValue = -0.01f;
+            }
+            else
+            {
+                YawValue = 0;
+            }
+            print(YawValue);
+
         }
         else
         {
@@ -127,10 +157,40 @@ public class MouseInputProvider : AbstractInputProvider
                 YawValue = -1;
             }
         }
-
+        */
 
     }
 
+    void YawInput(float delta)
+    {
+        float eps = 3;//px
+        //y=sqrt(x)にしたがってyawValueを決める
+        var th = Screen.width / 80;//閾値
+        float absDelta = Mathf.Abs(delta);
+        if (absDelta > th)
+        {
+            if (delta > 0)
+                YawValue = 1;
+            else
+                YawValue = -1;
+        }
+        else if (absDelta < eps)
+        {
+            YawValue = 0;
+        }
+        else
+        {
+            YawValue = Mathf.Sqrt(absDelta / th);
+            if (YawValue > 1)
+                YawValue = 1;
+            else if (YawValue < 0.00001)
+            {
+                YawValue = 0;
+            }
+            if (delta < 0)
+                YawValue = -YawValue;
+        }
+    }
 
     //円内にpointがあるかどうか
     bool InCircle(float radius, Vector2 point)
