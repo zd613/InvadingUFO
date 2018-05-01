@@ -51,7 +51,10 @@ public class CommonCore : MonoBehaviour
     {
         if (inputProvider.BulletAttack)
         {
-            attack.Fire();
+            if (attack != null)
+            {
+                attack.Fire();
+            }
         }
         Rotate(inputProvider.PitchValue, inputProvider.YawValue);
         if (Move != null)

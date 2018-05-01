@@ -34,9 +34,6 @@ public class MouseInputProvider : AbstractInputProvider
             BulletAttack = false;
         }
 
-        //rotate
-        //RotationInput();
-
         RotationInput2();
 
         //print(PitchValue + "," + YawValue);
@@ -87,7 +84,6 @@ public class MouseInputProvider : AbstractInputProvider
         }
     }
 
-
     void RotationInput2()
     {
         //both screen pos
@@ -126,8 +122,9 @@ public class MouseInputProvider : AbstractInputProvider
                 PitchValue = -1;
             }
         }*/
-        
-        YawInput(deltaV3.x);
+
+        PitchValue = GetInputValue(deltaV3.y);
+        YawValue = GetInputValue(deltaV3.x);
         /*
         if (Mathf.Abs(deltaV3.x) < threashold)
         {
@@ -165,31 +162,51 @@ public class MouseInputProvider : AbstractInputProvider
     {
         float eps = 3;//px
         //y=sqrt(x)にしたがってyawValueを決める
-        var th = Screen.width / 80;//閾値
+        //var th = Screen.width / 80;//閾値
         float absDelta = Mathf.Abs(delta);
-        if (absDelta > th)
+        //if (absDelta > th)
+        //{
+        //    if (delta > 0)
+        //        YawValue = 1;
+        //    else
+        //        YawValue = -1;
+        //}
+        //else if (absDelta < eps)
+        //{
+        //    YawValue = 0;
+        //}
+        //else
+        //{
+        //    YawValue = Mathf.Sqrt(absDelta / th);
+        //    if (YawValue > 1)
+        //        YawValue = 1;
+        //    else if (YawValue < 0.01)
+        //    {
+        //        YawValue = 0;
+        //    }
+        //    if (delta < 0)
+        //        YawValue = -YawValue;
+        //}
+
+    }
+
+    float GetInputValue(float delta)
+    {
+        float absDelta = Mathf.Abs(delta);
+        float inputValue = 0;
+        if (absDelta < 0.5f)
         {
-            if (delta > 0)
-                YawValue = 1;
-            else
-                YawValue = -1;
-        }
-        else if (absDelta < eps)
-        {
-            YawValue = 0;
+            inputValue = 0;
         }
         else
         {
-            YawValue = Mathf.Sqrt(absDelta / th);
-            if (YawValue > 1)
-                YawValue = 1;
-            else if (YawValue < 0.00001)
-            {
-                YawValue = 0;
-            }
-            if (delta < 0)
-                YawValue = -YawValue;
+            inputValue = delta / 50;//y=1/50 x
+            if (inputValue > 1)
+                inputValue = 1;
+            else if (inputValue < -1)
+                inputValue = -1;
         }
+        return inputValue;
     }
 
     //円内にpointがあるかどうか
