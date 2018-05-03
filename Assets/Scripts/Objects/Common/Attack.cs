@@ -12,7 +12,6 @@ public class Attack : MonoBehaviour
     public float coolTimeSecond;
     protected Coroutine fireCoroutine;
 
-
     public virtual bool Fire()
     {
         if (fireCoroutine != null)

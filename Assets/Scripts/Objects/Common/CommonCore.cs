@@ -7,14 +7,14 @@ public class CommonCore : MonoBehaviour
 {
     public AbstractInputProvider inputProvider;
 
-    event Action Move;
-    event Action<float, float> Rotate;
+    protected event Action Move;
+    protected event Action<float, float> Rotate;
 
 
-    
-    Movement movement;
-    Rotation rotation;
-    Attack attack;
+
+    protected Movement movement;
+    protected Rotation rotation;
+    protected Attack attack;
 
     protected virtual void Awake()
     {
@@ -23,27 +23,6 @@ public class CommonCore : MonoBehaviour
         rotation = GetComponent<Rotation>();
         attack = GetComponent<Attack>();
         //
-
-        if (movement == null)
-        {
-            Move += () => NoAction();
-        }
-        else
-        {
-            Move += movement.Move;
-        }
-
-
-        if (rotation == null)
-        {
-            Rotate += 
-                (pitch, yaw) => NoAction();
-        }
-        else
-        {
-            Rotate += 
-                (pitch, yaw) => rotation.Rotate(pitch, yaw);
-        }
     }
 
 
@@ -56,10 +35,15 @@ public class CommonCore : MonoBehaviour
                 attack.Fire();
             }
         }
-        Rotate(inputProvider.PitchValue, inputProvider.YawValue);
-        if (Move != null)
+
+        if (rotation != null)
         {
-            Move();
+            rotation.Rotate(inputProvider.PitchValue, inputProvider.YawValue);
+        }
+
+        if (movement != null)
+        {
+            movement.Move();
         }
     }
 
