@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AACamera : MonoBehaviour
+public class AACamera : BaseCamera
 {
     [Header("targer")]
     public Transform antiAircraftGun;
@@ -18,15 +18,22 @@ public class AACamera : MonoBehaviour
         offset = transform.position - antiAircraftGun.transform.position;
     }
 
-    private void LateUpdate()
+    protected override void LateUpdate()
     {
         if (antiAircraftGun == null)
             return;
 
+        base.LateUpdate();
+    }
+
+    protected override void Move()
+    {
         var desiredPos = antiAircraftGun.position + CalculateOffset();
         transform.position = Vector3.Slerp(transform.position, desiredPos, Time.deltaTime * movingSpeed);
+    }
 
-        //ターゲットとカメラの向き
+    protected override void Rotate()
+    {
         var lookRot = Quaternion.LookRotation(aaTarget.position - transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * rotationSpeed);
     }
