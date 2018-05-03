@@ -7,7 +7,7 @@ public class AACamera : BaseCamera
     [Header("targer")]
     public Transform antiAircraftGun;
     [Header("crosshair")]
-    public Transform aaTarget;
+    public Transform antiAircraftCrosshair;
 
     Vector3 offset;
     public float movingSpeed = 2.7f;//
@@ -34,7 +34,7 @@ public class AACamera : BaseCamera
 
     protected override void Rotate()
     {
-        var lookRot = Quaternion.LookRotation(aaTarget.position - transform.position);
+        var lookRot = Quaternion.LookRotation(antiAircraftCrosshair.position - transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * rotationSpeed);
     }
 

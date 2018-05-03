@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1633756341158684}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.646, z: -2.53}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -97,10 +97,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3bd83b197ff3e94b8ba789657a22830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  freezeMove: 1
-  freezeRotation: 1
+  freezeMove: 0
+  freezeRotation: 0
   antiAircraftGun: {fileID: 0}
-  aaTarget: {fileID: 0}
+  antiAircraftCrosshair: {fileID: 0}
   movingSpeed: 2.7
   rotationSpeed: 2.7
 --- !u!124 &124632528274669292

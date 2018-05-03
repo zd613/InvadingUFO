@@ -683,7 +683,7 @@ Prefab:
       objectReference: {fileID: 1259923411}
     - target: {fileID: 114448241777988518, guid: 0a1d022e3f9d6c94a81fbaed1cbfe546,
         type: 2}
-      propertyPath: aaTarget
+      propertyPath: antiAircraftCrosshair
       value: 
       objectReference: {fileID: 1300792558}
     m_RemovedComponents: []
