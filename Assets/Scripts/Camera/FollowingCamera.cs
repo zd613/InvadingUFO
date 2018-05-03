@@ -20,10 +20,19 @@ public class FollowingCamera : BaseCamera
         if (target == null)
             return;
 
+        base.LateUpdate();
+  
+    }
+
+    protected override void Move()
+    {
         var desiredPos = target.position + CalculateOffset();
         transform.position = Vector3.Slerp(transform.position, desiredPos, Time.deltaTime * movingSpeed);
 
-        //ターゲットとカメラの向き
+    }
+
+    protected override void Rotate()
+    {
         var lookRot = Quaternion.LookRotation(target.position - transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * rotationSpeed);
     }
