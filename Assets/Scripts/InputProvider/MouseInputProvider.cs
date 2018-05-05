@@ -11,7 +11,6 @@ public class MouseInputProvider : AbstractInputProvider
     Vector2 center;
 
     float radius;//px
-    //GameObject testObject;
 
     private void Awake()
     {

@@ -33,8 +33,7 @@ public class Rotation : MonoBehaviour
     protected Vector3 signedEulerAngles;
 
 
-    protected Limit pitchLimit = new Limit(-30, 30);//test value
-    protected Limit rollLimit = new Limit(-30, 30);//test value
+
 
     protected virtual void Awake()
     {
@@ -83,6 +82,7 @@ public class Rotation : MonoBehaviour
 
     protected virtual void Pitch(float value)
     {
+        //TODO:float で0と比較してる
         if (value == 0)
         {
             //float signedEulerAngleX = transform.eulerAngles.x > 180 ? transform.eulerAngles.x - 360 : transform.eulerAngles.x;
