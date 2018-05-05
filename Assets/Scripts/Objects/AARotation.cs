@@ -22,7 +22,7 @@ public class AARotation : Rotation
         var rot = transform.eulerAngles;
         var la = Mathf.Clamp(GetSignedEulerAngle(rot.x), pitchLimit.Min, pitchLimit.Max);
         rot.x = la;
-        print(transform.eulerAngles);
+        //print(transform.eulerAngles);
         transform.eulerAngles = rot;
     }
 

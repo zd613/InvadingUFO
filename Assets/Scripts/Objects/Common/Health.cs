@@ -10,6 +10,7 @@ public class Health : MonoBehaviour, IDamagable
     public bool isAlive = true;
     public float hp = 100;
     private float maxHp;
+    public GameObject subRoot;
 
     [Header("UI")]
     public Image hpBar;
@@ -17,6 +18,10 @@ public class Health : MonoBehaviour, IDamagable
     public event Action OnDamageTaken;
 
     public float MaxHp { get { return maxHp; } }
+
+    [Header("爆発")]
+    public GameObject explosion;
+    public AudioSource explosionSound;
 
     protected virtual void Awake()
     {
@@ -42,7 +47,26 @@ public class Health : MonoBehaviour, IDamagable
         if (hp <= 0)
         {
             isAlive = false;
-            Destroy(gameObject);
+            if (explosion != null)
+            {
+                var ex = Instantiate(explosion, transform.position, transform.rotation);
+                ex.transform.localScale = ex.transform.localScale * 5;//大きさ適当
+            }
+
+            //sound
+            if (explosionSound != null)
+            {
+                explosionSound.Play();
+                float soundTime = explosionSound.clip.length;
+                print(soundTime);
+                subRoot.gameObject.SetActive(false);
+
+                Destroy(gameObject, soundTime);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
