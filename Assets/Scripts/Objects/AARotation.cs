@@ -22,6 +22,7 @@ public class AARotation : Rotation
         var rot = transform.eulerAngles;
         var la = Mathf.Clamp(GetSignedEulerAngle(rot.x), pitchLimit.Min, pitchLimit.Max);
         rot.x = la;
+        print(transform.eulerAngles);
         transform.eulerAngles = rot;
     }
 
@@ -30,7 +31,7 @@ public class AARotation : Rotation
         if (value == 0)
             return;
 
-        transform.Rotate(Vector3.up * value * power.Yaw * Time.deltaTime);
+        transform.Rotate(Vector3.up * value * power.Yaw * Time.deltaTime, Space.World);
 
         //limit yaw
         var rot = transform.eulerAngles;
