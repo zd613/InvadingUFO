@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4816813891733574}
   - component: {fileID: 198811612147347304}
   - component: {fileID: 199753763960170524}
+  - component: {fileID: 114596026761855744}
   m_Layer: 0
   m_Name: ParticleHitEffect
   m_TagString: Untagged
@@ -36,11 +37,24 @@ Transform:
   m_GameObject: {fileID: 1187429217532524}
   m_LocalRotation: {x: -1, y: 0, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
+--- !u!114 &114596026761855744
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1187429217532524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5720b0ec9186a9f4dbeb6af2a62495de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mode: 2
+  delay: 0
 --- !u!198 &198811612147347304
 ParticleSystem:
   m_ObjectHideFlags: 1
