@@ -20,7 +20,7 @@ public class AARotation : Rotation
 
         //limit pitch
         var rot = transform.eulerAngles;
-        var la = GetLimitedEulerAngle(pitchLimit, rot.x);
+        var la = Mathf.Clamp(GetSignedEulerAngle(rot.x), pitchLimit.Min, pitchLimit.Max);
         rot.x = la;
         transform.eulerAngles = rot;
     }
@@ -34,7 +34,7 @@ public class AARotation : Rotation
 
         //limit yaw
         var rot = transform.eulerAngles;
-        var la = GetLimitedEulerAngle(yawLimit, rot.y);
+        var la = Mathf.Clamp(GetSignedEulerAngle(rot.y), yawLimit.Min, yawLimit.Max);
         rot.y = la;
         transform.eulerAngles = rot;
     }
@@ -49,21 +49,4 @@ public class AARotation : Rotation
         return angle < 0 ? angle + 360 : angle;
     }
 
-
-
-    void LimitRotation(AngleRange angleRange, float angleX)
-    {
-        var eulerAngles = transform.eulerAngles;
-        if (!angleRange.IsIn(angleX))
-        {
-            var rot = GetSignedEulerAngle(eulerAngles.x);
-            rot = Mathf.Clamp(rot, angleRange.Min, angleRange.Max);
-
-            //rb.transform.eulerAngles = eulerAngles;
-
-            //rb.rotation = Quaternion.Euler(eulerAngles);
-            transform.eulerAngles = eulerAngles;
-
-        }
-    }
 }
