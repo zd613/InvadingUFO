@@ -11,7 +11,9 @@ public class Attack : MonoBehaviour
     [Header("パラメータ")]
     public float coolTimeSecond;
     protected Coroutine fireCoroutine;
-
+    [Header("音")]   
+    public AudioSource shootSound;
+    
 
     public virtual bool Fire()
     {
@@ -21,7 +23,10 @@ public class Attack : MonoBehaviour
         }
 
         CreateBullet();
-
+        if (shootSound != null)
+        {
+            shootSound.Play();
+        }
         fireCoroutine = StartCoroutine(FireInterval());
         return true;
     }

@@ -32,7 +32,7 @@ public class Health : MonoBehaviour, IDamagable
         hp -= damageValue;
 
         ChangeHpBar();
-        print("damaged:hp" + hp + " left");
+        //print("damaged:hp" + hp + " left");
         if (OnDamageTaken != null)
         {
             OnDamageTaken();

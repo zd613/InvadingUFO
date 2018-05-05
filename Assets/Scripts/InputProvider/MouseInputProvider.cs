@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Ame;
 
 public class MouseInputProvider : AbstractInputProvider
 {
@@ -10,10 +11,10 @@ public class MouseInputProvider : AbstractInputProvider
     Vector2 center;
 
     float radius;//px
-    //GameObject testObject;
 
     private void Awake()
     {
+        crosshairRayLength = GetComponent<Attack>().gunPrefab.GetComponent<Bullet>().distance;
         center = new Vector2(Screen.width / 2, Screen.height / 2);
         //testObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
         //testObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);

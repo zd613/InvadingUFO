@@ -97,8 +97,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdfeaa99e966a83499d934df9b98ec36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  freezeMove: 0
+  freezeRotation: 0
   target: {fileID: 0}
   offset: {x: 0, y: 0.3, z: -0.9}
+  movingSpeed: 0
   rotationSpeed: 2.7
 --- !u!124 &124729641822310020
 Behaviour:
