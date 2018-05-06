@@ -58,6 +58,7 @@ public class Health : MonoBehaviour, IDamagable
             {
                 explosionSound.Play();
                 float soundTime = explosionSound.clip.length;
+
                 subRoot.gameObject.SetActive(false);
 
                 Destroy(gameObject, soundTime);

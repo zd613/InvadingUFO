@@ -10,7 +10,7 @@ public class Attack : MonoBehaviour
     public Transform muzzleTransform;
     [Header("パラメータ")]
     public bool showDebugRay = true;
-    public float coolTimeSecond;
+    public float coolTimeSecond = 0.25f;
     protected Coroutine fireCoroutine;
     [Header("音")]
     public AudioSource shootSound;
