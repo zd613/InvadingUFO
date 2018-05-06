@@ -12,6 +12,8 @@ public class AAPlayerCore : CommonCore
     float gunRange = 0;
     RectTransform crosshairRectTransform;
 
+    public float GunRange { get { return gunRange; } }
+
     protected override void Awake()
     {
         base.Awake();

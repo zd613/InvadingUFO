@@ -9,11 +9,28 @@ public class Attack : MonoBehaviour
     public GameObject gunPrefab;
     public Transform muzzleTransform;
     [Header("パラメータ")]
+    public bool showDebugRay = true;
     public float coolTimeSecond;
     protected Coroutine fireCoroutine;
-    [Header("音")]   
+    [Header("音")]
     public AudioSource shootSound;
-    
+
+    private float rayLength;
+
+    protected virtual void Start()
+    {
+        var aapc = GetComponent<AAPlayerCore>();
+        if (aapc != null)
+        {
+            rayLength = aapc.GunRange;
+        }
+    }
+
+    protected virtual void Update()
+    {
+        if (showDebugRay)
+            Debug.DrawRay(muzzleTransform.position, transform.forward * rayLength);
+    }
 
     public virtual bool Fire()
     {
