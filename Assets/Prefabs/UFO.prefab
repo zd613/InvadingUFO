@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 223895974897196148}
   - component: {fileID: 114650553055741900}
   - component: {fileID: 114609050104811284}
+  - component: {fileID: 114751603498940682}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -847,8 +848,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunPrefab: {fileID: 1514578246780428, guid: 70336a4b7f2c64249ab1803094fce518, type: 2}
   muzzleTransform: {fileID: 4912648425494646}
+  showDebugRay: 1
   coolTimeSecond: 0.1
   shootSound: {fileID: 0}
+--- !u!114 &114751603498940682
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1485863620991970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d498eed466f74c643a73626fdb3e7c5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114891214728600880
 MonoBehaviour:
   m_ObjectHideFlags: 1
