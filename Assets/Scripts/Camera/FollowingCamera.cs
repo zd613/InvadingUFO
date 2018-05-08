@@ -10,10 +10,19 @@ public class FollowingCamera : BaseCamera
     [Header("追跡するオブジェクト")]
     public Transform target;
 
+    public bool useInitialPositionForOffset = true;
+    [Tooltip("useInitialPositionForOffsetがfalseの時に使うoffset")]
     public Vector3 offset;
-    public float movingSpeed;//
-    public float rotationSpeed;//2.7f
+    public float movingSpeed = 2.7f;//適当な値
+    public float rotationSpeed = 2.7f;//2.7f適当な値
 
+    private void Awake()
+    {
+        if (useInitialPositionForOffset)
+        {
+            offset = transform.position - target.transform.position;
+        }
+    }
 
     protected override void LateUpdate()
     {
@@ -21,7 +30,7 @@ public class FollowingCamera : BaseCamera
             return;
 
         base.LateUpdate();
-  
+
     }
 
     protected override void Move()
