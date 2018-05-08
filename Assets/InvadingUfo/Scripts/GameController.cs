@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -38,5 +39,21 @@ public class GameController : MonoBehaviour
         isPlaying = true;
     }
 
+
+    public void ChangeScene(string sceneName)
+    {
+        print("change");
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void QuitGame()
+    {
+        print("hi");
+        Application.Quit();
+#if UNITY_EDITOR
+        print("uni");
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+    }
 
 }
