@@ -395,28 +395,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 1214669732578884, guid: 6d8115aaf51234f43867ca39f9a3f460, type: 2}
-      propertyPath: m_Name
-      value: Main Camera (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 114645784630107220, guid: 6d8115aaf51234f43867ca39f9a3f460,
         type: 2}
       propertyPath: target
       value: 
       objectReference: {fileID: 599673396}
-    - target: {fileID: 4531872634889514, guid: 6d8115aaf51234f43867ca39f9a3f460, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 6.82
-      objectReference: {fileID: 0}
-    - target: {fileID: 114645784630107220, guid: 6d8115aaf51234f43867ca39f9a3f460,
-        type: 2}
-      propertyPath: movingSpeed
-      value: 3.56
-      objectReference: {fileID: 0}
-    - target: {fileID: 114645784630107220, guid: 6d8115aaf51234f43867ca39f9a3f460,
-        type: 2}
-      propertyPath: offset.z
-      value: -2.47
+    - target: {fileID: 1214669732578884, guid: 6d8115aaf51234f43867ca39f9a3f460, type: 2}
+      propertyPath: m_Name
+      value: FollowCamera
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6d8115aaf51234f43867ca39f9a3f460, type: 2}
