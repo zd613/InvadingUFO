@@ -413,6 +413,11 @@ Prefab:
       propertyPath: movingSpeed
       value: 3.56
       objectReference: {fileID: 0}
+    - target: {fileID: 114645784630107220, guid: 6d8115aaf51234f43867ca39f9a3f460,
+        type: 2}
+      propertyPath: offset.z
+      value: -2.47
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6d8115aaf51234f43867ca39f9a3f460, type: 2}
   m_IsPrefabParent: 0
