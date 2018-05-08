@@ -18,6 +18,10 @@ public class CommonCore : MonoBehaviour
 
     protected virtual void Awake()
     {
+        if (inputProvider == null)
+        {
+            Debug.Log("Input Provider is null.set input provider");
+        }
         //
         movement = GetComponent<Movement>();
         rotation = GetComponent<Rotation>();
