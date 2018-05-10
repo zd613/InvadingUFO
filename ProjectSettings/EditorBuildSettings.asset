@@ -6,5 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Tests/AntiAircraftTest.unity
+    path: Assets/InvadingUfo/Tests/AntiAircraftTest.unity
     guid: ee01176933b36c84db5704e2b1f95bc9
+  - enabled: 1
+    path: Assets/InvadingUfo/Scenes/Title.unity
+    guid: e1c82e8ba9d4ddb4d9d8fb2e012baa17
