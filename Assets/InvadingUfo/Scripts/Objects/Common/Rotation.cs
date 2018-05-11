@@ -91,6 +91,7 @@ public class Rotation : MonoBehaviour
         else
         {
             rb.Rotate(Vector3.right * value * power.Pitch * Time.deltaTime);
+            //transform.Rotate(Vector3.right * value * power.Pitch * Time.deltaTime);
             //TODO:角度制限
         }
     }

@@ -5,9 +5,10 @@ using Ame;
 
 public class Attack : MonoBehaviour
 {
-    [Header("プレハブ")]
+    [Header("プレハブ、トランスフォーム")]
     public GameObject gunPrefab;
     public Transform muzzleTransform;
+    public ParticleSystem muzzleFlash;
     [Header("パラメータ")]
     public bool showDebugRay = true;
     public float coolTimeSecond = 0.25f;
@@ -16,6 +17,7 @@ public class Attack : MonoBehaviour
     public AudioSource shootSound;
 
     private float rayLength;
+
 
     protected virtual void Start()
     {
@@ -43,6 +45,10 @@ public class Attack : MonoBehaviour
         if (shootSound != null)
         {
             shootSound.Play();
+        }
+        if (muzzleFlash != null)
+        {
+            muzzleFlash.Play();
         }
         fireCoroutine = StartCoroutine(FireInterval());
         return true;
