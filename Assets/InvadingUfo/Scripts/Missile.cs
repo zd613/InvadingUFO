@@ -5,10 +5,12 @@ using System.Linq;
 
 public class Missile : MonoBehaviour
 {
+    public GameObject target;
+
     public float speed = 15;
     public float maxRange = 100;
-    public GameObject target;
     public GameObject hitEffect;
+    public float rotationSpeed = 20;
 
     public GameObject Target
     {
@@ -16,26 +18,29 @@ public class Missile : MonoBehaviour
         set { target = value; }
     }
 
-    Vector3 startPos;
-
-    private void Awake()
-    {
-
-        startPos = transform.position;
-
-    }
+    Vector3 prePos;
+    float totalDistance;
 
     private void Update()
     {
         if (target != null)
         {
             //follow target
+            var lookRot = Quaternion.LookRotation(target.transform.position - transform.position);
+            var rot = Quaternion.Slerp(transform.rotation, lookRot, rotationSpeed * Time.deltaTime);
+            transform.rotation = rot;
         }
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
-        if (Vector3.Distance(transform.position, startPos) > maxRange)
+
+
+        var deltaDistance = Vector3.Distance(prePos, transform.position);
+        totalDistance += deltaDistance;
+        if (totalDistance > maxRange)
         {
             OutOfRange();
         }
+
+        prePos = transform.position;
     }
 
 
