@@ -20,9 +20,35 @@ public class Missile : MonoBehaviour
 
     Vector3 prePos;
     float totalDistance;
+    public GameObject attacker;
+
+    private void Awake()
+    {
+        prePos = transform.position;
+        //var rb = GetComponent<Rigidbody>();
+        //rb.useGravity = true;
+        first = StartCoroutine(FirstS());
+    }
+    Coroutine first;
+    bool firstStage = true;
+
+    IEnumerator FirstS()
+    {
+        yield return new WaitForSeconds(2);
+        //TODO:後ろの火つける
+        firstStage = false;
+    }
 
     private void Update()
     {
+        if (firstStage)
+        {
+            transform.Translate(Vector3.forward * speed / 4 * Time.deltaTime);
+            transform.Translate(Vector3.down * 2 * Time.deltaTime, Space.World);
+            return;
+        }
+
+
         if (target != null)
         {
             //follow target
@@ -46,6 +72,8 @@ public class Missile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject == attacker)
+            return;
         foreach (var contact in collision.contacts)
         {
             var obj = Instantiate(hitEffect, contact.point, transform.rotation);

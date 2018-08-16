@@ -72,17 +72,17 @@ public class Health : MonoBehaviour, IDamagable
 
     //地面などに当たった時
     //一撃でhp0になる
-    protected virtual void OnCollisionEnter(Collision collision)
-    {
-        var bullet = collision.gameObject.GetComponent<Bullet>();
-        if (bullet != null)
-        {
-            if (bullet.Attacker == gameObject)
-                return;
-        }
-        ApplyDamage(hp, collision.gameObject);
+    //protected virtual void OnCollisionEnter(Collision collision)
+    //{
+    //    var bullet = collision.gameObject.GetComponent<Bullet>();
+    //    if (bullet != null)
+    //    {
+    //        if (bullet.Attacker == gameObject)
+    //            return;
+    //    }
+    //    ApplyDamage(hp, collision.gameObject);
 
-    }
+    //}
 
     protected void ChangeHpBar()
     {
