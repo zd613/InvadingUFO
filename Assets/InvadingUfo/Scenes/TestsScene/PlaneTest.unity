@@ -373,7 +373,7 @@ MonoBehaviour:
 Transform:
   m_PrefabParentObject: {fileID: 4434495508895396, guid: beb4a4495af87284ab9cfa9146f629fe,
     type: 2}
-  m_PrefabInternal: {fileID: 2002572086}
+  m_PrefabInternal: {fileID: 1980518885}
 --- !u!1 &980098089
 GameObject:
   m_ObjectHideFlags: 0
@@ -852,7 +852,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &2002572086
+--- !u!1001 &1980518885
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -896,10 +896,6 @@ Prefab:
       propertyPath: target
       value: 
       objectReference: {fileID: 1858317813}
-    - target: {fileID: 4727078970031112, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -0.22
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
   m_IsPrefabParent: 0
