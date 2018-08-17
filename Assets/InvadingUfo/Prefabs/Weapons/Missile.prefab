@@ -208,12 +208,12 @@ MonoBehaviour:
   speed: 20
   maxRange: 100
   hitEffect: {fileID: 1187429217532524, guid: 901c6461d099b1541af5e3217efb74b6, type: 2}
-  rotationSpeed: 2
+  rotationSpeed: 1.8
   attacker: {fileID: 0}
   firstStageWaitSec: 0
   firstStageGravity: 0.3
   relativeSpeed: 0
-  noDamageTimeSecToAttacker: 1
+  noHitTimeSecToAttacker: 1
 --- !u!198 &198088468699681904
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -283,7 +283,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 1
+  moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0

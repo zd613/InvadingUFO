@@ -27,8 +27,8 @@ public class Missile : MonoBehaviour
 
 
     //発射時に発射したものと当たらないため
-    public float noDamageTimeSecToAttacker = 1;
-    bool canCauseDamageToAttacker = false;
+    public float noHitTimeSecToAttacker = 1;
+    bool canHitToAttacker = false;
 
     private void Awake()
     {
@@ -43,8 +43,11 @@ public class Missile : MonoBehaviour
 
     IEnumerator SwitchDamageToAttacker()
     {
-        yield return new WaitForSeconds(noDamageTimeSecToAttacker);
-        canCauseDamageToAttacker = true;
+        var collider = GetComponentInChildren<Collider>();
+        collider.isTrigger = true;
+        yield return new WaitForSeconds(noHitTimeSecToAttacker);
+        canHitToAttacker = true;
+        collider.isTrigger = false;
     }
 
     IEnumerator FirstSage()
@@ -88,7 +91,7 @@ public class Missile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!canCauseDamageToAttacker)
+        if (!canHitToAttacker)
         {
             if (collision.gameObject == attacker)
                 return;
