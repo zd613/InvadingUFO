@@ -42,8 +42,8 @@ public class FollowingCamera : BaseCamera
 
     protected override void Rotate()
     {
-        var lookRot = Quaternion.LookRotation(target.position - transform.position, target.TransformDirection(Vector3.forward)).eulerAngles;
-        var t = Quaternion.Slerp(transform.rotation, Quaternion.Euler(lookRot) , Time.deltaTime * rotationSpeed);
+        // var lookRot = Quaternion.LookRotation(target.position - transform.position, target.TransformDirection(Vector3.forward)).eulerAngles;
+        //var t = Quaternion.Slerp(transform.rotation, Quaternion.Euler(lookRot) , Time.deltaTime * rotationSpeed);
 
         //var newRot = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * rotationSpeed);
         //var ea = newRot.eulerAngles;
@@ -63,7 +63,13 @@ public class FollowingCamera : BaseCamera
 
         //newRot = Quaternion.Euler(ea);
         //transform.rotation = newRot;
-        transform.rotation = t;//target.transform.rotation;
+
+
+        //transform.rotation = t;//target.transform.rotation;
+
+        transform.LookAt(target);
+
+
     }
 
     Vector3 CalculateOffset()
