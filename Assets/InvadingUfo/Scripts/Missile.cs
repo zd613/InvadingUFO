@@ -21,20 +21,35 @@ public class Missile : MonoBehaviour
     Vector3 prePos;
     float totalDistance;
     public GameObject attacker;
+    public float firstStageWaitSec = 0.2f;
+    public float firstStageGravity = 0.2f;
+    public float relativeSpeed;
+
+
+    //発射時に発射したものと当たらないため
+    public float noDamageTimeSecToAttacker = 1;
+    bool canCauseDamageToAttacker = false;
 
     private void Awake()
     {
         prePos = transform.position;
         //var rb = GetComponent<Rigidbody>();
         //rb.useGravity = true;
-        first = StartCoroutine(FirstS());
+        first = StartCoroutine(FirstSage());
+        StartCoroutine(SwitchDamageToAttacker());
     }
     Coroutine first;
     bool firstStage = true;
 
-    IEnumerator FirstS()
+    IEnumerator SwitchDamageToAttacker()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(noDamageTimeSecToAttacker);
+        canCauseDamageToAttacker = true;
+    }
+
+    IEnumerator FirstSage()
+    {
+        yield return new WaitForSeconds(firstStageWaitSec);
         //TODO:後ろの火つける
         firstStage = false;
     }
@@ -43,10 +58,11 @@ public class Missile : MonoBehaviour
     {
         if (firstStage)
         {
-            transform.Translate(Vector3.forward * speed / 4 * Time.deltaTime);
-            transform.Translate(Vector3.down * 2 * Time.deltaTime, Space.World);
+            transform.Translate(Vector3.forward * relativeSpeed * Time.deltaTime);
+            transform.Translate(Vector3.down * firstStageGravity * Time.deltaTime, Space.World);
             return;
         }
+
 
 
         if (target != null)
@@ -72,8 +88,12 @@ public class Missile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject == attacker)
-            return;
+        if (!canCauseDamageToAttacker)
+        {
+            if (collision.gameObject == attacker)
+                return;
+        }
+
         foreach (var contact in collision.contacts)
         {
             var obj = Instantiate(hitEffect, contact.point, transform.rotation);
