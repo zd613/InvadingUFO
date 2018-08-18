@@ -1,0 +1,15 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PathController : MonoBehaviour
+{
+    public List<Path> paths;
+    public bool isCirclePath;
+
+
+    private void OnDrawGizmos()
+    {
+        
+    }
+}
