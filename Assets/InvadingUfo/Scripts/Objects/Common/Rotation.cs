@@ -70,6 +70,10 @@ public class Rotation : MonoBehaviour
     //    UpdateSignedEulerAngles();
     //}
 
+
+
+    //pitch,yaw が1となっていたら、それぞれのpowerの値　degree/sec 回転する
+    //pitch yawの値を0-1で調整することで回転を制御する
     public virtual void Rotate(float pitch, float yaw)
     {
         if (!isActive)
@@ -80,6 +84,7 @@ public class Rotation : MonoBehaviour
 
     #region Rotations
 
+    //value が　0の時回転しない　1の時power.Yaw の値 degree/sec 回転する
     protected virtual void Pitch(float value)
     {
         //TODO:float で0と比較してる
@@ -144,6 +149,7 @@ public class Rotation : MonoBehaviour
         }
         //TODO:角度が0になるようにする
     }
+
 
     #endregion
 }

@@ -12,7 +12,7 @@ public class FollowPath : MonoBehaviour
     public PathController targetPath;
 
     public Path currentTarget;
-    float eps = 0.5f;
+    float eps = 0.1f;
 
 
 
@@ -26,75 +26,103 @@ public class FollowPath : MonoBehaviour
             currentTarget = targetPath.paths[0];
 
         }
+        previousDeltaDistance = GetDeltaDistance();
     }
 
     public float thres = 0.3f;
     public float value = 0.3f;
 
+    float previousDeltaDistance;
+
+    public float pitch = 1;
+    Vector3 pre;
+
+
     private void Update()
     {
         if (!targetPath.HasPath)
             return;
-        //飛行機のローカル座標で回転する向き決定
 
+        if (currentTarget == null)
+            return;
+        //飛行機のローカル座標で回転する向き決定
+        //var delta = GetDeltaDistance();
+        //var diff = Mathf.Abs(delta - previousDeltaDistance);
+        //var deltaV3 = (transform.position - pre);
+        //var dd = deltaV3.z / Time.deltaTime;
+        //print("diff:" + dd);
+
+
+        //rotation.Rotate(this.pitch, 0);
+        //pre = transform.position;
+        //previousDeltaDistance = delta;
+        //return;
+
+
+        var d = GetDeltaDistance();
+        if (d < eps)
+        {
+            if (currentTarget.next == null)
+                return;
+            currentTarget = currentTarget.next;
+            d = GetDeltaDistance();
+        }
+        else if (d > previousDeltaDistance)
+        {
+            print("離れていってる");
+            if (currentTarget.next == null)
+                return;
+            currentTarget = currentTarget.next;
+            d = GetDeltaDistance();
+        }
+        LookAt(targetPath.transform);
+
+        previousDeltaDistance = d;
+        return;
+    }
+
+
+    float GetDeltaDistance()
+        => Vector3.Distance(transform.position, currentTarget.transform.position);
+
+    //pitchのみ
+    //TODO:yawも追加
+    void LookAt(Transform target)
+    {
         float pitch = 0, yaw = 0;
         var v3 = transform.TransformDirection(currentTarget.transform.position - transform.position);
-        //ローカルのyでピッチ決定
-        if (v3.y > 0)
-        {
-            if (v3.y > thres)
-            {
-                pitch = -1;
-            }
-            else
-            {
-                //pitch = -value;
-                pitch = -Mathf.Sin(v3.y * Mathf.PI / 2);
-            }
-        }
-        else if (v3.y < 0)
-        {
-            if (v3.y > thres)
-            {
-                pitch = 1;
-            }
-            else
-            {
-                pitch = Mathf.Sin(Mathf.Abs(v3.y) * Mathf.PI / 2);
-                //pitch = value;
-            }
-        }
+        var q = Quaternion.LookRotation(currentTarget.transform.position - transform.position);
 
 
-        if (v3.x > 0)
+        float targetX = q.eulerAngles.x;
+        float currentX = transform.eulerAngles.x;
+        //transform.rotation.eulerAnglesをq.eulerAnglesにするとターゲットの方を向く
+        //print(transform.rotation.eulerAngles);
+        //print("lookat:" + q.eulerAngles);
+
+        print(targetX + ":" + currentX);
+
+        //360で180度以上のところはマイナスの角度に変換
+        targetX = ToSignedAngle(targetX);
+        currentX = ToSignedAngle(currentX);
+
+        if (Mathf.Abs(targetX - currentX) < 0.01f)
         {
-            if (v3.x > thres)
-            {
-                yaw = 1;
-            }
-            else
-            {
-                yaw = Mathf.Sin(v3.x * Mathf.PI / 2);
-            }
 
         }
-        else if (v3.x < 0)
+        else if (currentX - targetX > 0)
         {
-            if (v3.x > thres)
-            {
-                yaw = -1;
-            }
-            else
-            {
-                yaw = -Mathf.Sin(Mathf.Abs(v3.x) * Mathf.PI / 2);
-            }
+            pitch = -1;
         }
-        print(v3 + "/" + pitch + "," + yaw);
-        if (Vector3.Distance(transform.position, currentTarget.transform.position) < eps)
+        else if (currentX - targetX < 0)
         {
-            currentTarget = currentTarget.next;
+            pitch = 1;
         }
-
         rotation.Rotate(pitch, yaw);
     }
+
+
+
+    float ToSignedAngle(float angle)
+        => angle > 180 ? angle - 360 : angle;
 }
