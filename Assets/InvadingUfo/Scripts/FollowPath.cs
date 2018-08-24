@@ -90,34 +90,53 @@ public class FollowPath : MonoBehaviour
     void LookAt(Transform target)
     {
         float pitch = 0, yaw = 0;
+
         var v3 = transform.TransformDirection(currentTarget.transform.position - transform.position);
         var q = Quaternion.LookRotation(currentTarget.transform.position - transform.position);
-
-
-        float targetX = q.eulerAngles.x;
-        float currentX = transform.eulerAngles.x;
         //transform.rotation.eulerAnglesをq.eulerAnglesにするとターゲットの方を向く
         //print(transform.rotation.eulerAngles);
         //print("lookat:" + q.eulerAngles);
 
-        print(targetX + ":" + currentX);
-
+        float targetX = q.eulerAngles.x;
+        float currentX = transform.eulerAngles.x;
         //360で180度以上のところはマイナスの角度に変換
         targetX = ToSignedAngle(targetX);
         currentX = ToSignedAngle(currentX);
 
-        if (Mathf.Abs(targetX - currentX) < 0.01f)
-        {
+        float targetY = q.eulerAngles.y;
+        float currentY = transform.eulerAngles.y;
+        targetY = ToSignedAngle(targetY);
+        currentY = ToSignedAngle(currentY);
 
+        // print(targetX + ":" + currentX);
+
+        //Pitch
+
+        if (Mathf.Abs(targetX - currentX) < 0.08f)//ターゲットの方向向いているとき
+        {
         }
-        else if (currentX - targetX > 0)
+        else if (currentX - targetX > 0)//進行方向がforwardの時上側にパスのターゲットがある　
         {
             pitch = -1;
         }
-        else if (currentX - targetX < 0)
+        else if (currentX - targetX < 0)//下側
         {
             pitch = 1;
         }
+
+        //Yaw
+        if (Mathf.Abs(targetY - currentY) < 0.08f)//ターゲットの方向向いているとき
+        {
+        }
+        else if (currentY - targetY > 0)//進行方向がforwardの時上側にパスのターゲットがある　
+        {
+            yaw = -1;
+        }
+        else if (currentY - targetY < 0)//下側
+        {
+            yaw = 1;
+        }
+
         rotation.Rotate(pitch, yaw);
     }
 
