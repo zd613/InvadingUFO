@@ -32,6 +32,7 @@ public class CommonCore : MonoBehaviour
 
     protected virtual void Update()
     {
+        Debug.DrawRay(transform.position, transform.forward * 2, Color.red);
         if (inputProvider.BulletAttack)
         {
             if (attack != null)

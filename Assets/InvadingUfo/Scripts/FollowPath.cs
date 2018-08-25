@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(Rotation))]
-public class FollowPath : MonoBehaviour
+public class FollowPath : AbstractInputProvider
 {
     Movement move;
     Rotation rotation;
@@ -45,6 +45,7 @@ public class FollowPath : MonoBehaviour
 
         if (currentTarget == null)
             return;
+
         //飛行機のローカル座標で回転する向き決定
         //var delta = GetDeltaDistance();
         //var diff = Mathf.Abs(delta - previousDeltaDistance);
@@ -53,12 +54,7 @@ public class FollowPath : MonoBehaviour
         //print("diff:" + dd);
 
 
-        //rotation.Rotate(this.pitch, 0);
-        //pre = transform.position;
-        //previousDeltaDistance = delta;
-        //return;
-
-
+        //TODO:ターゲットが頻繁に更新されてる
         var d = GetDeltaDistance();
         if (d < eps)
         {
@@ -66,16 +62,27 @@ public class FollowPath : MonoBehaviour
                 return;
             currentTarget = currentTarget.next;
             d = GetDeltaDistance();
+
+            previousDeltaDistance = d;
+            print("change target : go through");
+            return;
         }
-        else if (d > previousDeltaDistance)
-        {
-            print("離れていってる");
-            if (currentTarget.next == null)
-                return;
-            currentTarget = currentTarget.next;
-            d = GetDeltaDistance();
-        }
-        LookAt(targetPath.transform);
+
+        //else if (d > previousDeltaDistance)
+        //{
+        //    print("離れていってる");
+        //    if (currentTarget.next == null)
+        //        return;
+        //    currentTarget = currentTarget.next;
+        //    d = GetDeltaDistance();
+        //    previousDeltaDistance = d;
+        //    return;
+        //}
+
+
+
+
+        SetPitchAndYaw(currentTarget.transform);
 
         previousDeltaDistance = d;
         return;
@@ -85,14 +92,18 @@ public class FollowPath : MonoBehaviour
     float GetDeltaDistance()
         => Vector3.Distance(transform.position, currentTarget.transform.position);
 
-    //pitchのみ
-    //TODO:yawも追加
-    void LookAt(Transform target)
+    void UpdateTarget()
+    {
+
+    }
+
+    //
+    void SetPitchAndYaw(Transform target)
     {
         float pitch = 0, yaw = 0;
 
-        var v3 = transform.TransformDirection(currentTarget.transform.position - transform.position);
-        var q = Quaternion.LookRotation(currentTarget.transform.position - transform.position);
+        //var v3 = transform.TransformDirection(currentTarget.transform.position - transform.position);
+        var q = Quaternion.LookRotation(target.transform.position - transform.position);
         //transform.rotation.eulerAnglesをq.eulerAnglesにするとターゲットの方を向く
         //print(transform.rotation.eulerAngles);
         //print("lookat:" + q.eulerAngles);
@@ -115,11 +126,19 @@ public class FollowPath : MonoBehaviour
         if (Mathf.Abs(targetX - currentX) < 0.08f)//ターゲットの方向向いているとき
         {
         }
-        else if (currentX - targetX > 0)//進行方向がforwardの時上側にパスのターゲットがある　
+        else if (currentX - targetX > 1)//進行方向がforwardの時上側にパスのターゲットがある　
         {
             pitch = -1;
         }
+        else if (currentX - targetX > 0)
+        {
+            pitch = -0.2f;
+        }
         else if (currentX - targetX < 0)//下側
+        {
+            pitch = 0.2f;
+        }
+        else if (currentX - targetX < -1f)
         {
             pitch = 1;
         }
@@ -128,16 +147,26 @@ public class FollowPath : MonoBehaviour
         if (Mathf.Abs(targetY - currentY) < 0.08f)//ターゲットの方向向いているとき
         {
         }
-        else if (currentY - targetY > 0)//進行方向がforwardの時上側にパスのターゲットがある　
+        else if (currentX - targetX > 1)//進行方向がforwardの時上側にパスのターゲットがある　
         {
-            yaw = -1;
+            pitch = -1;
         }
-        else if (currentY - targetY < 0)//下側
+        else if (currentY - targetY > 0)//
         {
-            yaw = 1;
+            yaw = -0.2f;
+        }
+        else if (currentY - targetY < 0)//
+        {
+            yaw = 0.2f;
+        }
+        else if (currentY - targetY < -1f)
+        {
+            yaw = 1f;
         }
 
-        rotation.Rotate(pitch, yaw);
+        YawValue = yaw;
+        PitchValue = pitch;
+        //rotation.Rotate(pitch, yaw);
     }
 
 

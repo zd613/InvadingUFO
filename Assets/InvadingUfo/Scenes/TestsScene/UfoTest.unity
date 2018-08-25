@@ -760,9 +760,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActive: 1
   power:
-    Pitch: 10
-    Roll: 4.74
-    Yaw: 10
+    Pitch: 20
+    Roll: 5.26
+    Yaw: 20
   reversePower:
     Pitch: 4.59
     Roll: 5.55
@@ -781,7 +781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 841ab65f87e11394aa075380310a6d52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputProvider: {fileID: 422920099}
+  inputProvider: {fileID: 422920103}
 --- !u!114 &422920103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -793,7 +793,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e90cb2bd9534c345bfd9d02717f5381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPath: {fileID: 1902757403}
+  targetPath: {fileID: 2057131310}
   currentTarget: {fileID: 0}
   thres: 1
   value: 0.41
@@ -1777,7 +1777,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1902757403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2061,6 +2061,12 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2019913579}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2057131310 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114462345510695226, guid: d0943514caf82544881e42fbc85d9d83,
+    type: 2}
+  m_PrefabInternal: {fileID: 2125131356}
+  m_Script: {fileID: 11500000, guid: 4e70a20b890896c47be920e861a8d946, type: 3}
 --- !u!1001 &2125131356
 Prefab:
   m_ObjectHideFlags: 0
@@ -2102,7 +2108,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1771532039726204, guid: d0943514caf82544881e42fbc85d9d83, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0943514caf82544881e42fbc85d9d83, type: 2}
