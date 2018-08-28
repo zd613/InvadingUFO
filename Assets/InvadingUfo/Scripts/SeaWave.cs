@@ -23,6 +23,7 @@ public class SeaWave : MonoBehaviour
         {
             print(item);
         }
+        meshFilter.mesh.MarkDynamic();
     }
 
     // Update is called once per frame
@@ -43,8 +44,8 @@ public class SeaWave : MonoBehaviour
         for (int i = 0; i < vertices.Length; i++)
         {
             var dest = baseVertices[i];
-            dest.y += amplitude / 2 * Mathf.Sin(2 * Mathf.PI / wavePeriod * (Time.time - baseVertices[i].x / v)) ;
-            dest.y += amplitude / 2 * Mathf.Sin(2 * Mathf.PI / wavePeriod * (Time.time - baseVertices[i].z / v))  ;
+            dest.y += amplitude / 2 * Mathf.Sin(2 * Mathf.PI / wavePeriod * (Time.time - baseVertices[i].x / v));
+            dest.y += amplitude / 2 * Mathf.Sin(2 * Mathf.PI / wavePeriod * (Time.time - baseVertices[i].z / v));
 
             vertices[i] = dest;
         }
@@ -52,5 +53,6 @@ public class SeaWave : MonoBehaviour
         mesh.vertices = vertices;
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
+        mesh.UploadMeshData(false);
     }
 }
