@@ -33,43 +33,29 @@ public class FollowingCamera : BaseCamera
 
     }
 
+
     protected override void Move()
     {
-        var desiredPos = target.position + CalculateOffset();
-        transform.position = Vector3.Slerp(transform.position, desiredPos, Time.deltaTime * movingSpeed);
-
+        // var desiredPos = target.position + CalculateOffset();
+        var desiredPos = target.TransformPoint(offset);
+        transform.position = Vector3.Lerp(transform.position, desiredPos, movingSpeed * Time.deltaTime);
+        //transform.position = desiredPos;
     }
 
     protected override void Rotate()
     {
-        // var lookRot = Quaternion.LookRotation(target.position - transform.position, target.TransformDirection(Vector3.forward)).eulerAngles;
-        //var t = Quaternion.Slerp(transform.rotation, Quaternion.Euler(lookRot) , Time.deltaTime * rotationSpeed);
+        ////上下さかさまになってしまうのを防ぐためtransform.up
+        var desiredRot = Quaternion.LookRotation(target.position - transform.position, transform.up);
 
-        //var newRot = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * rotationSpeed);
-        //var ea = newRot.eulerAngles;
-        //if (Mathf.Abs(newRot.eulerAngles.y - target.transform.eulerAngles.y) < 0.5f)
-        //{
-        //    ea.y = target.transform.eulerAngles.y;
-        //}
-
-        //ea.y = target.transform.eulerAngles.y;
-
-        //if (Mathf.Abs(newRot.eulerAngles.x - target.transform.eulerAngles.x) < 0.5f)
-        //{
-        //    var tmp = newRot.eulerAngles;
-        //    tmp.x = target.transform.eulerAngles.x;
-        //    newRot = Quaternion.Euler(tmp);
-        //}
-
-        //newRot = Quaternion.Euler(ea);
-        //transform.rotation = newRot;
+        //TODO:zは回転させない ここおかしい
+        //反転するようになる
+        //print(desiredRot);
+        //var rot = desiredRot.eulerAngles;
+        //rot.z = 0;
+        //print(rot);
 
 
-        //transform.rotation = t;//target.transform.rotation;
-
-        transform.LookAt(target);
-
-
+        transform.rotation = desiredRot;
     }
 
     Vector3 CalculateOffset()
