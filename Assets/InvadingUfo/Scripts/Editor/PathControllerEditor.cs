@@ -2,71 +2,75 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using Ame;
 
-[CustomEditor(typeof(PathController))]
-[CanEditMultipleObjects]
-public class PathControllerEditor : Editor
+namespace Ame
 {
-    GameObject scriptObject;
-
-    private void OnEnable()
+    [CustomEditor(typeof(PathController))]
+    [CanEditMultipleObjects]
+    public class PathControllerEditor : Editor
     {
-        scriptObject = ((PathController)target).gameObject;
-    }
+        GameObject scriptObject;
 
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
-        serializedObject.Update();
-
-        if (GUILayout.Button("Create Path"))
+        private void OnEnable()
         {
-            CreatePath();
+            scriptObject = ((PathController)target).gameObject;
         }
 
-        if (GUILayout.Button("Create Circle Path"))
+        public override void OnInspectorGUI()
         {
-            CreatePath(circle: true);
-        }
+            base.OnInspectorGUI();
+            serializedObject.Update();
 
-
-    }
-
-    void CreatePath(bool circle = false)
-    {
-        var script = scriptObject.GetComponent<PathController>();
-        script.paths.Clear();
-        script.isCirclePath = circle;
-
-        int num = 0;
-
-        Path pre = null;
-        foreach (Transform item in scriptObject.transform)
-        {
-
-            var path = item.GetComponent<Path>();
-            path.number = num;
-            path.previous = pre;
-            if (pre != null)
+            if (GUILayout.Button("Create Path"))
             {
-                pre.next = path;
+                CreatePath();
             }
-            script.paths.Add(path);
 
-            pre = path;
-            num++;
-        }
-
-        if (circle)
-        {
-            if (script.paths.Count > 1)
+            if (GUILayout.Button("Create Circle Path"))
             {
-                var first = script.paths[0];
-                var last = script.paths[script.paths.Count - 1];
-                first.previous = last;
-                last.next = first;
+                CreatePath(circle: true);
             }
+
+
         }
 
+        void CreatePath(bool circle = false)
+        {
+            var script = scriptObject.GetComponent<PathController>();
+            script.paths.Clear();
+            script.isCirclePath = circle;
+
+            int num = 0;
+
+            Path pre = null;
+            foreach (Transform item in scriptObject.transform)
+            {
+
+                var path = item.GetComponent<Path>();
+                path.number = num;
+                path.previous = pre;
+                if (pre != null)
+                {
+                    pre.next = path;
+                }
+                script.paths.Add(path);
+
+                pre = path;
+                num++;
+            }
+
+            if (circle)
+            {
+                if (script.paths.Count > 1)
+                {
+                    var first = script.paths[0];
+                    var last = script.paths[script.paths.Count - 1];
+                    first.previous = last;
+                    last.next = first;
+                }
+            }
+
+        }
     }
 }
