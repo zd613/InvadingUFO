@@ -22,6 +22,18 @@ public class FollowingCamera : BaseCamera
         {
             offset = transform.position - target.transform.position;
         }
+
+
+        var desiredRot = Quaternion.LookRotation(target.position - transform.position, transform.up);
+        var ea = desiredRot.eulerAngles;
+        var desiredRot2 = Quaternion.Euler(ea);
+        var q = desiredRot * Quaternion.Euler(0, 0, 10);
+        var ea2 = desiredRot2.eulerAngles;
+        print(desiredRot);
+        print(desiredRot2);
+
+        print(ea);
+        print(ea2);
     }
 
     protected override void LateUpdate()
@@ -44,18 +56,22 @@ public class FollowingCamera : BaseCamera
 
     protected override void Rotate()
     {
-        ////上下さかさまになってしまうのを防ぐためtransform.up
-        var desiredRot = Quaternion.LookRotation(target.position - transform.position, transform.up);
+        Debug.DrawRay(transform.position, transform.forward * 2, Color.blue);
+        Debug.DrawRay(transform.position, transform.up * 2, Color.green);
+        //////上下さかさまになってしまうのを防ぐためtransform.up
+        var desiredRot = Quaternion.LookRotation(target.position - transform.position,transform.up);
 
-        //TODO:zは回転させない ここおかしい
-        //反転するようになる
-        //print(desiredRot);
-        //var rot = desiredRot.eulerAngles;
-        //rot.z = 0;
-        //print(rot);
 
+        //print(desiredRot.eulerAngles);
+        //var q = Quaternion.AngleAxis(-desiredRot.eulerAngles.z, transform.forward);
+        //desiredRot = desiredRot * q;
+        var dr = desiredRot * Quaternion.AngleAxis(-desiredRot.eulerAngles.z, transform.forward);
+        print(dr.eulerAngles);
+        ////TODO:zは回転させない ここおかしい
+        ////反転するようになる
 
         transform.rotation = desiredRot;
+        //transform.Rotate(new Vector3(0, 0, -transform.localEulerAngles.z));
     }
 
     Vector3 CalculateOffset()
