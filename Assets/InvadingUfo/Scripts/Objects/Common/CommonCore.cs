@@ -10,6 +10,7 @@ public class CommonCore : MonoBehaviour
     protected event Action Move;
     protected event Action<float, float> Rotate;
 
+    public float Altitude { get { return transform.position.y; } }
 
 
     protected Movement movement;
