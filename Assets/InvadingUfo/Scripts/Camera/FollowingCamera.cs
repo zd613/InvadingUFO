@@ -66,7 +66,7 @@ public class FollowingCamera : BaseCamera
         //var q = Quaternion.AngleAxis(-desiredRot.eulerAngles.z, transform.forward);
         //desiredRot = desiredRot * q;
         var dr = desiredRot * Quaternion.AngleAxis(-desiredRot.eulerAngles.z, transform.forward);
-        print(dr.eulerAngles);
+        //print(dr.eulerAngles);
         ////TODO:zは回転させない ここおかしい
         ////反転するようになる
 
