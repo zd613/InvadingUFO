@@ -32,7 +32,15 @@ public class Rotation : MonoBehaviour
 
     protected Vector3 signedEulerAngles;
 
-
+    //pitch角度　制限
+    //-90から90度
+    //上側へ向くのが-
+    //上へ向く方
+    [Range(-90, 0)]
+    public float minPitchAngle = 45;
+    //下へ向く方
+    [Range(0, 90)]
+    public float maxPitchAngle = 45;
 
 
     protected virtual void Awake()
@@ -85,6 +93,7 @@ public class Rotation : MonoBehaviour
     #region Rotations
 
     //value が　0の時回転しない　1の時power.Yaw の値 degree/sec 回転する
+    //-1 の時　上側へ向く　1 は下側へ向く
     protected virtual void Pitch(float value)
     {
         //TODO:float で0と比較してる
@@ -95,6 +104,23 @@ public class Rotation : MonoBehaviour
         }
         else
         {
+            //pitch 制限
+            var rotX = transform.eulerAngles.x > 180 ? transform.eulerAngles.x - 360 : transform.eulerAngles.x;
+            if (rotX < minPitchAngle)
+            {
+                if (value > 0)
+                {
+                    value = 0;
+                }
+            }
+            else if (rotX > maxPitchAngle)
+            {
+                if (value < 0)
+                {
+                    value = 0;
+                }
+            }
+            //回転
             rb.Rotate(Vector3.right * value * power.Pitch * Time.deltaTime);
             //transform.Rotate(Vector3.right * value * power.Pitch * Time.deltaTime);
             //TODO:角度制限
