@@ -37,9 +37,11 @@ namespace Ame
 
         void CreatePath(bool circle = false)
         {
+
             var script = scriptObject.GetComponent<PathController>();
             script.paths.Clear();
             script.isCirclePath = circle;
+            EditorUtility.SetDirty(script);
 
             int num = 0;
 
@@ -70,7 +72,11 @@ namespace Ame
                     last.next = first;
                 }
             }
-
+            else
+            {
+                script.paths[0].previous = null;
+                script.paths[script.paths.Count - 1].next = null;
+            }
         }
     }
 }
