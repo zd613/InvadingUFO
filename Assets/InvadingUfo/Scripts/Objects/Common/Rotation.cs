@@ -107,16 +107,18 @@ public class Rotation : MonoBehaviour
         {
             //pitch 制限
             var rotX = transform.eulerAngles.x > 180 ? transform.eulerAngles.x - 360 : transform.eulerAngles.x;
+            //上方向の回転角度は-
             if (rotX < minPitchAngle)
             {
-                if (value > 0)
+                if (value < 0)
                 {
                     value = 0;
                 }
             }
+            //下方向への回転角度は+
             else if (rotX > maxPitchAngle)
             {
-                if (value < 0)
+                if (value > 0)
                 {
                     value = 0;
                 }
@@ -124,7 +126,6 @@ public class Rotation : MonoBehaviour
             //回転
             rb.Rotate(Vector3.right * value * power.Pitch * Time.deltaTime);
             //transform.Rotate(Vector3.right * value * power.Pitch * Time.deltaTime);
-            //TODO:角度制限
         }
     }
 
