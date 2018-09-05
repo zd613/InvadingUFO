@@ -30,12 +30,9 @@ public class FollowPath : AbstractInputProvider
         previousDeltaDistance = GetDeltaDistance();
     }
 
-    public float thres = 0.3f;
-    public float value = 0.3f;
 
     float previousDeltaDistance;
 
-    public float pitch = 1;
     Vector3 pre;
 
 
@@ -82,11 +79,9 @@ public class FollowPath : AbstractInputProvider
 
 
 
-
         SetPitchAndYaw(currentTarget.transform);
 
         previousDeltaDistance = d;
-        return;
     }
 
 
@@ -105,6 +100,7 @@ public class FollowPath : AbstractInputProvider
 
         //var v3 = transform.TransformDirection(currentTarget.transform.position - transform.position);
         var q = Quaternion.LookRotation(target.transform.position - transform.position);
+        Debug.DrawRay(transform.position, target.transform.position - transform.position, Color.yellow);
         //transform.rotation.eulerAnglesをq.eulerAnglesにするとターゲットの方を向く
         //print(transform.rotation.eulerAngles);
         //print("lookat:" + q.eulerAngles);
@@ -117,57 +113,64 @@ public class FollowPath : AbstractInputProvider
 
         float targetY = q.eulerAngles.y;
         float currentY = transform.eulerAngles.y;
+        print(targetY + ",c:" + currentY);
         targetY = ToSignedAngle(targetY);
         currentY = ToSignedAngle(currentY);
 
         // print(targetX + ":" + currentX);
 
         //Pitch
+        print("x:" + (currentX - targetX).ToString() + ",y:" + (currentY - targetY).ToString());
 
-        if (Mathf.Abs(targetX - currentX) < 0.08f)//ターゲットの方向向いているとき
+        var deltaRotX = currentX - targetX;
+        var deltaRotY = currentY - targetY;
+
+        if (Mathf.Abs(currentX - targetX) < 0.08f)//ターゲットの方向向いているとき
         {
         }
         else if (currentX - targetX > 1)//進行方向がforwardの時上側にパスのターゲットがある　
         {
             pitch = -1;
         }
-        else if (currentX - targetX > 0)
+        else if (currentX - targetX > 0)//上側　回転少なく
         {
             pitch = -0.2f;
         }
-        else if (currentX - targetX < 0)//下側
-        {
-            pitch = 0.2f;
-        }
-        else if (currentX - targetX < -1f)
+        else if (currentX - targetX < -1)//下側　回転最大
         {
             pitch = 1;
         }
+        else if (currentX - targetX < 0)//下側　回転少なく
+        {
+            pitch = 0.2f;
+        }
 
         //Yaw
-        if (Mathf.Abs(targetY - currentY) < 0.08f)//ターゲットの方向向いているとき
+        if (Mathf.Abs(currentY - targetY) < 0.08f)//ターゲットの方向向いているとき
         {
         }
-        else if (currentX - targetX > 1)//進行方向がforwardの時上側にパスのターゲットがある　
+        else if (currentY - targetY > 1)
         {
-            pitch = -1;
+            yaw = -1;//左側へと回転する
         }
         else if (currentY - targetY > 0)//
         {
             yaw = -0.2f;
         }
-        else if (currentY - targetY < 0)//
+        else if (currentY - targetY < -1)
+        {
+            yaw = 1;//右側へと回転する
+        }
+        else if (currentY - targetY < 0)
         {
             yaw = 0.2f;
-        }
-        else if (currentY - targetY < -1f)
-        {
-            yaw = 1f;
         }
 
         YawValue = yaw;
         PitchValue = pitch;
-        //rotation.Rotate(pitch, yaw);
+        //print("pitch:" + PitchValue + ",yaw:" + YawValue);
+        print(YawValue);
+
     }
 
 

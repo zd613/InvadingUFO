@@ -10,6 +10,5 @@ namespace Ame
         public Path previous;
         public Path next;
 
-
     }
 }

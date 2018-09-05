@@ -7,6 +7,9 @@ public class PathController : MonoBehaviour
 {
     public List<Path> paths;
     public bool isCirclePath;
+    [Header("path のオブジェクト設定")]
+    public Material material;
+    public float size = 1;
 
     public bool HasPath
     {
@@ -29,5 +32,28 @@ public class PathController : MonoBehaviour
             }
         }
         return paths[next];
+    }
+
+    private void OnValidate()
+    {
+        foreach (var item in paths)
+        {
+            //size
+            var scale = item.transform.localScale;
+            scale = new Vector3(size, size, size);
+            item.transform.localScale = scale;
+
+            //material
+            if (material != null)
+            {
+                var rs = item.GetComponentsInChildren<Renderer>();
+                foreach (var renderers in rs)
+                {
+                    renderers.material = material;
+                }
+            }
+
+        }
+
     }
 }

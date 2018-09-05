@@ -770,6 +770,8 @@ MonoBehaviour:
   revertToInitialPosition: 0
   reverseRollControl: 1
   reversePitchControl: 0
+  minPitchAngle: 45
+  maxPitchAngle: 45
 --- !u!114 &422920102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -864,6 +866,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActive: 1
   speed: 1
+  altitudeConstraint: 1
+  minAltitude: 0
+  maxAltitude: 50
 --- !u!1 &513499116
 GameObject:
   m_ObjectHideFlags: 0
