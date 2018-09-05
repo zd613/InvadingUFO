@@ -88,12 +88,7 @@ public class FollowPath : AbstractInputProvider
     float GetDeltaDistance()
         => Vector3.Distance(transform.position, currentTarget.transform.position);
 
-    void UpdateTarget()
-    {
 
-    }
-
-    //
     void SetPitchAndYaw(Transform target)
     {
         float pitch = 0, yaw = 0;
