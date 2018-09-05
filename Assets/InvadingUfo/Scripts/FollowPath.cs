@@ -111,19 +111,9 @@ public class FollowPath : AbstractInputProvider
         targetX = ToSignedAngle(targetX);
         currentX = ToSignedAngle(currentX);
 
-        float targetY = q.eulerAngles.y;
-        float currentY = transform.eulerAngles.y;
-        print(targetY + ",c:" + currentY);
-        targetY = ToSignedAngle(targetY);
-        currentY = ToSignedAngle(currentY);
-
-        // print(targetX + ":" + currentX);
-
         //Pitch
-        print("x:" + (currentX - targetX).ToString() + ",y:" + (currentY - targetY).ToString());
 
         var deltaRotX = currentX - targetX;
-        var deltaRotY = currentY - targetY;
 
         if (Mathf.Abs(currentX - targetX) < 0.08f)//ターゲットの方向向いているとき
         {
@@ -146,35 +136,45 @@ public class FollowPath : AbstractInputProvider
         }
 
         //Yaw
-        if (Mathf.Abs(currentY - targetY) < 0.08f)//ターゲットの方向向いているとき
+        var targetDir = target.position - transform.position;
+        var forward = transform.forward;
+
+        float angleY = Vector3.SignedAngle(forward, targetDir, Vector3.up);
+        print(angleY);
+
+
+        //右側に存在
+        if (angleY > 0.001f)
         {
+            if (angleY < 1)
+            {
+                yaw = 0.2f;
+            }
+            else
+            {
+                yaw = 1;
+            }
         }
-        else if (currentY - targetY > 1)
+        //左に存在
+        else if (angleY < -0.001f)
         {
-            yaw = -1;//左側へと回転する
-        }
-        else if (currentY - targetY > 0)//
-        {
-            yaw = -0.2f;
-        }
-        else if (currentY - targetY < -1)
-        {
-            yaw = 1;//右側へと回転する
-        }
-        else if (currentY - targetY < 0)
-        {
-            yaw = 0.2f;
+            if (angleY > -1)
+            {
+                yaw = -0.2f;
+            }
+            else
+            {
+                yaw = -1;
+            }
         }
 
         YawValue = yaw;
         PitchValue = pitch;
-        //print("pitch:" + PitchValue + ",yaw:" + YawValue);
-        print(YawValue);
-
     }
 
 
 
     float ToSignedAngle(float angle)
         => angle > 180 ? angle - 360 : angle;
+
 }
