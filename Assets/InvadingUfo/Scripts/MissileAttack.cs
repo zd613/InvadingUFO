@@ -11,6 +11,7 @@ public class MissileAttack : MonoBehaviour
 
     public float lockonRange = 10;
 
+
     // Use this for initialization
     void Start()
     {
@@ -24,8 +25,11 @@ public class MissileAttack : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.M))
         {
-
-            Fire(target);
+            if (coolDownCoroutine == null)
+            {
+                Fire(target);
+                coolDownCoroutine = StartCoroutine(CoolDown());
+            }
         }
     }
 
@@ -44,7 +48,6 @@ public class MissileAttack : MonoBehaviour
             //変換できて、自分自身でない
             if (go != null && !ReferenceEquals(go.transform, transform))
             {
-                print("hello");
                 var distance = Vector3.Distance(transform.position, go.transform.position);
                 if (distance > lockonRange)
                 {
@@ -58,7 +61,6 @@ public class MissileAttack : MonoBehaviour
                 }
             }
         }
-        print(min);
         target = nearest;
     }
 
@@ -73,5 +75,14 @@ public class MissileAttack : MonoBehaviour
         var missile = obj.GetComponent<Missile>();
         missile.attacker = gameObject;
         missile.target = target;
+    }
+
+    public float coolTimeSec = 4;
+
+    Coroutine coolDownCoroutine;
+    IEnumerator CoolDown()
+    {
+        yield return new WaitForSeconds(coolTimeSec);
+        coolDownCoroutine = null;
     }
 }

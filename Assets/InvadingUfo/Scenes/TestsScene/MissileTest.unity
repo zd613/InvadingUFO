@@ -280,7 +280,7 @@ MonoBehaviour:
   hp: 100
   subRoot: {fileID: 0}
   hpBar: {fileID: 0}
-  explosion: {fileID: 0}
+  explosion: {fileID: 1187429217532524, guid: 901c6461d099b1541af5e3217efb74b6, type: 2}
   explosionSound: {fileID: 0}
 --- !u!1 &1304730144
 GameObject:
@@ -523,16 +523,6 @@ Prefab:
     - target: {fileID: 4434495508895396, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
       propertyPath: m_RootOrder
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114972026578506518, guid: beb4a4495af87284ab9cfa9146f629fe,
-        type: 2}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 789170823}
-    - target: {fileID: 114972026578506518, guid: beb4a4495af87284ab9cfa9146f629fe,
-        type: 2}
-      propertyPath: lockonRange
-      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}

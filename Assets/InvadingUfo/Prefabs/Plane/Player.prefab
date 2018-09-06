@@ -1953,6 +1953,7 @@ MonoBehaviour:
     type: 2}
   missileLauncher: {fileID: 4727078970031112}
   target: {fileID: 0}
+  lockonRange: 40
 --- !u!198 &198391023768031956
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -11,6 +11,7 @@ public class Missile : MonoBehaviour
     public float maxRange = 100;
     public GameObject hitEffect;
     public float rotationSpeed = 20;
+    public float damage = 100;
 
     public GameObject Target
     {
@@ -104,6 +105,14 @@ public class Missile : MonoBehaviour
             //ls *= 2;
             //obj.transform.localScale = ls;
         }
+
+        //hp 削る
+        var health = collision.gameObject.GetComponent<Health>();
+        if (health != null)
+        {
+            health.ApplyDamage(damage, attacker);
+        }
+
         print("missile hit:" + collision.gameObject.name);
         Destroy(gameObject);
     }

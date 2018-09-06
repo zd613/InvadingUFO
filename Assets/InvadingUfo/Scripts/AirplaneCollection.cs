@@ -11,6 +11,6 @@ public class AirplaneCollection : MonoBehaviour
 
     private void Awake()
     {
-        planes=GameObject.Find
+        //planes=GameObject.Find
     }
 }
