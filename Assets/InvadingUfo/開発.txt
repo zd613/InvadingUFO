@@ -1,1 +1,8 @@
 飛行機 正面はz軸 
+
+
+サウンド
+効果音ラボ:https://soundeffect-lab.info/
+
+マシンガン2:missile1.mp3
+ミサイル:machinegun2.mp3
