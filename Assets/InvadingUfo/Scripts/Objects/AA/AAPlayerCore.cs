@@ -54,7 +54,7 @@ public class AAPlayerCore : CommonCore
                 var bullet = gp.GetComponent<Bullet>();
                 if (bullet != null)
                 {
-                    gunRange = bullet.distance;
+                    gunRange = bullet.range;
                 }
             }
         }

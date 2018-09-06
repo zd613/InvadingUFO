@@ -53,6 +53,7 @@ public class Attack : MonoBehaviour
     {
         var obj = Instantiate(gunPrefab, muzzleTransform.position, muzzleTransform.rotation);
         var bullet = obj.GetComponent<Bullet>();
+        bullet.range = gunRange;
         bullet.Attacker = gameObject;
     }
 

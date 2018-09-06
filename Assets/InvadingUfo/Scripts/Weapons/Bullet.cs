@@ -8,9 +8,9 @@ namespace Ame
 {
     public class Bullet : MonoBehaviour
     {
-        public int speed = 10;
-        public int damage = 10;
-        public int distance = 20;
+        public float speed = 10;
+        public float damage = 10;
+        public float range = 20;
 
         private Vector3 start;
         public GameObject Attacker { get; set; }
@@ -28,7 +28,7 @@ namespace Ame
         private void Update()
         {
 
-            if (Vector3.Distance(start, transform.position) > distance)
+            if (Vector3.Distance(start, transform.position) > range)
             {
                 Destroy(gameObject);
             }
@@ -51,13 +51,10 @@ namespace Ame
                         return;
                     }
                 }
-
             }
 
-
-            print("trigger");
+            //ダメージ処理
             var target = other.GetComponentInParent<IDamageable>();
-
             if (target != null)
             {
                 CreateHitEffect();

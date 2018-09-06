@@ -14,7 +14,7 @@ public class MouseInputProvider : AbstractInputProvider
 
     private void Awake()
     {
-        crosshairRayLength = GetComponent<Attack>().gunPrefab.GetComponent<Bullet>().distance;
+        crosshairRayLength = GetComponent<Attack>().gunPrefab.GetComponent<Bullet>().range;
         center = new Vector2(Screen.width / 2, Screen.height / 2);
         //testObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
         //testObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
