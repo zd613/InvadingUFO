@@ -15,6 +15,11 @@ namespace Ame
         public float rotationSpeed = 20;
         public float damage = 100;
 
+
+        public AudioSource fireSound;
+
+        public GameObject hitSoundPrefab;
+
         public GameObject Target
         {
             get { return target; }
@@ -40,6 +45,7 @@ namespace Ame
             //rb.useGravity = true;
             first = StartCoroutine(FirstSage());
             StartCoroutine(SwitchDamageToAttacker());
+            fireSound.Play();
         }
         Coroutine first;
         bool firstStage = true;
@@ -116,6 +122,12 @@ namespace Ame
             }
 
             print("missile hit:" + collision.gameObject.name);
+
+            if (hitSoundPrefab != null)
+            {
+                Instantiate(hitSoundPrefab, transform.position, Quaternion.identity);
+            }
+
             Destroy(gameObject);
         }
 
