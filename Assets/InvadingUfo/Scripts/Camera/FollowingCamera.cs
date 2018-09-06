@@ -16,6 +16,10 @@ public class FollowingCamera : BaseCamera
     public float movingSpeed = 2.7f;//適当な値
     public float rotationSpeed = 2.7f;//2.7f適当な値
 
+    public float pitchRotationSpeed = 60;
+    //time:0-1 の間
+    public AnimationCurve yawCurve;
+
     private void Awake()
     {
         if (useInitialPositionForOffset)
@@ -61,13 +65,40 @@ public class FollowingCamera : BaseCamera
         Debug.DrawRay(transform.position, transform.forward * 2, Color.blue);
         Debug.DrawRay(transform.position, transform.up * 2, Color.green);
 
+        Rotate2();
 
+    }
+
+    void Rotate1()
+    {
+        Yaw();
+        Pitch();
+    }
+
+    //一回転しないなら動くはず
+    void Rotate2()
+    {
+        //////上下さかさまになってしまうのを防ぐためtransform.up
+        var desiredRot = Quaternion.LookRotation(target.position - transform.position, transform.up);
+        desiredRot = Quaternion.Slerp(transform.rotation, desiredRot, 0.2f);
+        var ea = desiredRot.eulerAngles;
+        ea.z = 0;
+        desiredRot = Quaternion.Euler(ea);
+        //var dr = desiredRot * Quaternion.AngleAxis(-desiredRot.eulerAngles.z, transform.forward);
+        transform.rotation = desiredRot;
+    }
+
+    void Yaw()
+    {
         //y
         var targetDir = target.position - transform.position;
         var forward = transform.forward;
+        //上下は無視するのでyを0にする
+        targetDir.y = 0;
+        forward.y = 0;
         var angleY = Vector3.SignedAngle(forward, targetDir, Vector3.up);
-        print(angleY);
 
+        //print("angle Y " + angleY);
         //ほぼターゲットを見てる
         if (Mathf.Abs(angleY) < 2)
         {
@@ -77,46 +108,67 @@ public class FollowingCamera : BaseCamera
         else
         {
             float rotationValueY = 0;
-            if (angleY > 5)//カメラの右側にターゲット
+            var signY = Mathf.Sign(angleY);
+
+            var absY = Mathf.Abs(angleY);
+            const float thres = 20;
+            if (absY > thres)
             {
                 rotationValueY = 1;
             }
-            else if (angleY > 2)
+            else
             {
-                rotationValueY = 0.01f;
+                rotationValueY = yawCurve.Evaluate(absY / thres);
             }
-            else if (angleY < -5)
-            {
-                rotationValueY = -1;
-            }
-            else if (angleY < -2)
-            {
-                rotationValueY = -0.01f;
-            }
-            print(rotationValueY);
+            //rotationValueYが正のとき右側へ回転
+            rotationValueY *= signY;
+
+            //print(rotationValueY);
 
             transform.Rotate(Vector3.up, rotationValueY * rotationSpeed * Time.deltaTime, Space.World);
         }
 
-        //var angleX = Vector3.SignedAngle(forward, targetDir, transform.right);
+    }
+
+    void Pitch()
+    {
+        var forward = transform.forward;
+        var targetDir = target.position - transform.position;
+        var localTargetDir = transform.InverseTransformDirection(targetDir);
+        var angleX = Vector3.SignedAngle(Vector3.forward, localTargetDir, transform.right);
 
 
-        //transform.Rotate(transform.right, angleX * Time.deltaTime);
+        //angleX +が下側　- が上側にターゲット
+        print(angleX);
+        if (Mathf.Abs(angleX) < 2)
+        {
+            //transform.Rotate(Vector3.up, -angleY, Space.World);
+        }
+        //
+        else
+        {
+            float rotationValueX = 0;
+            var signX = Mathf.Sign(angleX);
 
+            var absX = Mathf.Abs(angleX);
+            const float thres = 40;
+            if (absX > thres)
+            {
+                rotationValueX = 1;
+            }
+            else
+            {
+                rotationValueX = yawCurve.Evaluate(absX / thres);
+            }
+            //rotationValueYが正のとき下側へ回転
+            rotationValueX *= signX;
 
+            //print(rotationValueY);
 
+            transform.Rotate(Vector3.right, rotationValueX * pitchRotationSpeed * Time.deltaTime);
+        }
 
-
-
-        return;
-
-        //////上下さかさまになってしまうのを防ぐためtransform.up
-        var desiredRot = Quaternion.LookRotation(target.position - transform.position, transform.up);
-        var dr = desiredRot * Quaternion.AngleAxis(-desiredRot.eulerAngles.z, transform.forward);
-        transform.rotation = desiredRot;
-
-
-
+        transform.Rotate(transform.right, angleX * Time.deltaTime);
     }
 
     Vector3 CalculateOffset()
