@@ -189,11 +189,11 @@ GameObject:
   - component: {fileID: 789170827}
   - component: {fileID: 789170826}
   - component: {fileID: 789170825}
+  - component: {fileID: 789170829}
   - component: {fileID: 789170824}
   - component: {fileID: 789170828}
-  - component: {fileID: 789170829}
   m_Layer: 0
-  m_Name: Target
+  m_Name: StaticTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

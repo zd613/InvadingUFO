@@ -30,6 +30,8 @@ namespace Ame
 
             if (Vector3.Distance(start, transform.position) > range)
             {
+                print(range);
+                print(Vector3.Distance(start, transform.position));
                 Destroy(gameObject);
             }
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
