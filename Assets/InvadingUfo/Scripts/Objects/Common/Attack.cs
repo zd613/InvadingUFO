@@ -12,7 +12,7 @@ public class Attack : MonoBehaviour
     [Header("パラメータ")]
     public bool showDebugRay = true;
     public float coolTimeSecond = 0.25f;
-    protected Coroutine fireCoroutine;
+    protected Coroutine coolDownCoroutine;
     [Header("音")]
     public AudioSource shootSound;
 
@@ -36,7 +36,7 @@ public class Attack : MonoBehaviour
 
     public virtual bool Fire()
     {
-        if (fireCoroutine != null)
+        if (coolDownCoroutine != null)
         {
             return false;
         }
@@ -50,7 +50,7 @@ public class Attack : MonoBehaviour
         {
             muzzleFlash.Play();
         }
-        fireCoroutine = StartCoroutine(FireInterval());
+        coolDownCoroutine = StartCoroutine(CoolDown());
         return true;
     }
 
@@ -61,9 +61,9 @@ public class Attack : MonoBehaviour
         bullet.Attacker = gameObject;
     }
 
-    protected IEnumerator FireInterval()
+    protected IEnumerator CoolDown()
     {
         yield return new WaitForSeconds(coolTimeSecond);
-        fireCoroutine = null;
+        coolDownCoroutine = null;
     }
 }
