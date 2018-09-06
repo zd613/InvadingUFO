@@ -16,22 +16,17 @@ public class Attack : MonoBehaviour
     [Header("音")]
     public AudioSource shootSound;
 
-    private float rayLength;
+    public float gunRange = 20;
 
 
     protected virtual void Start()
     {
-        var aapc = GetComponent<AAPlayerCore>();
-        if (aapc != null)
-        {
-            rayLength = aapc.GunRange;
-        }
     }
 
     protected virtual void Update()
     {
         if (showDebugRay)
-            Debug.DrawRay(muzzleTransform.position, transform.forward * rayLength);
+            Debug.DrawRay(muzzleTransform.position, transform.forward * gunRange);
     }
 
     public virtual bool Fire()

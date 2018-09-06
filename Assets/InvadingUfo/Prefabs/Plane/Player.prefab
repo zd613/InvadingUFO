@@ -1868,6 +1868,7 @@ MonoBehaviour:
   showDebugRay: 1
   coolTimeSecond: 0.1
   shootSound: {fileID: 0}
+  gunRange: 30
 --- !u!114 &114409018027591596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1953,7 +1954,8 @@ MonoBehaviour:
     type: 2}
   missileLauncher: {fileID: 4727078970031112}
   target: {fileID: 0}
-  lockonRange: 40
+  lockonRange: 50
+  coolTimeSec: 4
 --- !u!198 &198391023768031956
 ParticleSystem:
   m_ObjectHideFlags: 1

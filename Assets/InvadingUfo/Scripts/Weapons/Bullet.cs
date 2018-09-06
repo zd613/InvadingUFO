@@ -27,6 +27,7 @@ namespace Ame
 
         private void Update()
         {
+
             if (Vector3.Distance(start, transform.position) > distance)
             {
                 Destroy(gameObject);
@@ -39,13 +40,24 @@ namespace Ame
             if (hit)
                 return;
 
-            var obj = other.GetComponentInParent<CommonCore>().gameObject;
-            if (obj == Attacker)
+            //attackerと衝突判定なし
+            if (Attacker != null)
             {
-                return;
+                var commonCore = other.GetComponentInParent<CommonCore>();
+                if (commonCore != null)
+                {
+                    if (commonCore.gameObject == Attacker)
+                    {
+                        return;
+                    }
+                }
+
             }
 
-            var target = other.gameObject.GetComponentInParent<IDamageable>();
+
+            print("trigger");
+            var target = other.GetComponentInParent<IDamageable>();
+
             if (target != null)
             {
                 CreateHitEffect();
