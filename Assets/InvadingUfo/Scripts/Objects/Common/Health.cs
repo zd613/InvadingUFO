@@ -5,7 +5,7 @@ using Ame;
 using UnityEngine.UI;
 using System;
 
-public class Health : MonoBehaviour, IDamagable
+public class Health : MonoBehaviour, IDamageable
 {
     public bool isAlive = true;
     public float hp = 100;

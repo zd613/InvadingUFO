@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Ame;
 
-public class UfoHealth : MonoBehaviour, IDamagable
+public class UfoHealth : MonoBehaviour, IDamageable
 {
     public float hp = 100;
 

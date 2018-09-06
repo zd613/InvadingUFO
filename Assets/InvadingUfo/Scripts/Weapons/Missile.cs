@@ -3,122 +3,125 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class Missile : MonoBehaviour
+namespace Ame
 {
-    public GameObject target;
-
-    public float speed = 15;
-    public float maxRange = 100;
-    public GameObject hitEffect;
-    public float rotationSpeed = 20;
-    public float damage = 100;
-
-    public GameObject Target
+    public class Missile : MonoBehaviour
     {
-        get { return target; }
-        set { target = value; }
-    }
+        public GameObject target;
 
-    Vector3 prePos;
-    float totalDistance;
-    public GameObject attacker;
-    public float firstStageWaitSec = 0.2f;
-    public float firstStageGravity = 0.2f;
-    public float relativeSpeed;
+        public float speed = 15;
+        public float maxRange = 100;
+        public GameObject hitEffect;
+        public float rotationSpeed = 20;
+        public float damage = 100;
 
-
-    //発射時に発射したものと当たらないため
-    public float noHitTimeSecToAttacker = 1;
-    bool canHitToAttacker = false;
-
-    private void Awake()
-    {
-        prePos = transform.position;
-        //var rb = GetComponent<Rigidbody>();
-        //rb.useGravity = true;
-        first = StartCoroutine(FirstSage());
-        StartCoroutine(SwitchDamageToAttacker());
-    }
-    Coroutine first;
-    bool firstStage = true;
-
-    IEnumerator SwitchDamageToAttacker()
-    {
-        var collider = GetComponentInChildren<Collider>();
-        collider.isTrigger = true;
-        yield return new WaitForSeconds(noHitTimeSecToAttacker);
-        canHitToAttacker = true;
-        collider.isTrigger = false;
-    }
-
-    IEnumerator FirstSage()
-    {
-        yield return new WaitForSeconds(firstStageWaitSec);
-        //TODO:後ろの火つける
-        firstStage = false;
-    }
-
-    private void Update()
-    {
-        if (firstStage)
+        public GameObject Target
         {
-            transform.Translate(Vector3.forward * relativeSpeed * Time.deltaTime);
-            transform.Translate(Vector3.down * firstStageGravity * Time.deltaTime, Space.World);
-            return;
+            get { return target; }
+            set { target = value; }
         }
 
+        Vector3 prePos;
+        float totalDistance;
+        public GameObject attacker;
+        public float firstStageWaitSec = 0.2f;
+        public float firstStageGravity = 0.2f;
+        public float relativeSpeed;
 
 
-        if (target != null)
+        //発射時に発射したものと当たらないため
+        public float noHitTimeSecToAttacker = 1;
+        bool canHitToAttacker = false;
+
+        private void Awake()
         {
-            //follow target
-            var lookRot = Quaternion.LookRotation(target.transform.position - transform.position);
-            var rot = Quaternion.Slerp(transform.rotation, lookRot, rotationSpeed * Time.deltaTime);
-            transform.rotation = rot;
+            prePos = transform.position;
+            //var rb = GetComponent<Rigidbody>();
+            //rb.useGravity = true;
+            first = StartCoroutine(FirstSage());
+            StartCoroutine(SwitchDamageToAttacker());
         }
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        Coroutine first;
+        bool firstStage = true;
 
-
-        var deltaDistance = Vector3.Distance(prePos, transform.position);
-        totalDistance += deltaDistance;
-        if (totalDistance > maxRange)
+        IEnumerator SwitchDamageToAttacker()
         {
-            OutOfRange();
+            var collider = GetComponentInChildren<Collider>();
+            collider.isTrigger = true;
+            yield return new WaitForSeconds(noHitTimeSecToAttacker);
+            canHitToAttacker = true;
+            collider.isTrigger = false;
         }
 
-        prePos = transform.position;
-    }
-
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (!canHitToAttacker)
+        IEnumerator FirstSage()
         {
-            if (collision.gameObject == attacker)
+            yield return new WaitForSeconds(firstStageWaitSec);
+            //TODO:後ろの火つける
+            firstStage = false;
+        }
+
+        private void Update()
+        {
+            if (firstStage)
+            {
+                transform.Translate(Vector3.forward * relativeSpeed * Time.deltaTime);
+                transform.Translate(Vector3.down * firstStageGravity * Time.deltaTime, Space.World);
                 return;
+            }
+
+
+
+            if (target != null)
+            {
+                //follow target
+                var lookRot = Quaternion.LookRotation(target.transform.position - transform.position);
+                var rot = Quaternion.Slerp(transform.rotation, lookRot, rotationSpeed * Time.deltaTime);
+                transform.rotation = rot;
+            }
+            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+
+
+            var deltaDistance = Vector3.Distance(prePos, transform.position);
+            totalDistance += deltaDistance;
+            if (totalDistance > maxRange)
+            {
+                OutOfRange();
+            }
+
+            prePos = transform.position;
         }
 
-        foreach (var contact in collision.contacts)
+
+        private void OnCollisionEnter(Collision collision)
         {
-            var obj = Instantiate(hitEffect, contact.point, transform.rotation);
-            //var ls = obj.transform.localScale;
-            //ls *= 2;
-            //obj.transform.localScale = ls;
+            if (!canHitToAttacker)
+            {
+                if (collision.gameObject == attacker)
+                    return;
+            }
+
+            foreach (var contact in collision.contacts)
+            {
+                var obj = Instantiate(hitEffect, contact.point, transform.rotation);
+                //var ls = obj.transform.localScale;
+                //ls *= 2;
+                //obj.transform.localScale = ls;
+            }
+
+            //hp 削る
+            var health = collision.gameObject.GetComponent<IDamageable>();
+            if (health != null)
+            {
+                health.ApplyDamage(damage, attacker);
+            }
+
+            print("missile hit:" + collision.gameObject.name);
+            Destroy(gameObject);
         }
 
-        //hp 削る
-        var health = collision.gameObject.GetComponent<Health>();
-        if (health != null)
+        void OutOfRange()
         {
-            health.ApplyDamage(damage, attacker);
+            Destroy(gameObject);
         }
-
-        print("missile hit:" + collision.gameObject.name);
-        Destroy(gameObject);
-    }
-
-    void OutOfRange()
-    {
-        Destroy(gameObject);
     }
 }

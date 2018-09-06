@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Ame
 {
-    public interface IDamagable
+    public interface IDamageable
     {
         void ApplyDamage(float damageValue,GameObject attacker);
     }

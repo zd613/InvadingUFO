@@ -1,88 +1,90 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-//ミサイルは戦闘機から出たとき少し下側へ落ちて、後ろ側へ流れたのち、速度上げて、敵へと向かう
-public class MissileAttack : MonoBehaviour
+namespace Ame
 {
-    public GameObject missileObject;
-    public Transform missileLauncher;
-    public GameObject target;
-
-    public float lockonRange = 10;
-
-
-    // Use this for initialization
-    void Start()
+    //ミサイルは戦闘機から出たとき少し下側へ落ちて、後ろ側へ流れたのち、速度上げて、敵へと向かう
+    public class MissileAttack : MonoBehaviour
     {
-        //UpdateTarget();
-    }
+        public GameObject missileObject;
+        public Transform missileLauncher;
+        public GameObject target;
 
-    // Update is called once per frame
-    void Update()
-    {
-        UpdateTarget();
+        public float lockonRange = 10;
 
-        if (Input.GetKeyDown(KeyCode.M))
+
+        // Use this for initialization
+        void Start()
         {
-            if (coolDownCoroutine == null)
-            {
-                Fire(target);
-                coolDownCoroutine = StartCoroutine(CoolDown());
-            }
+            //UpdateTarget();
         }
-    }
 
-    void UpdateTarget()
-    {
-        var objects = GameObject.FindObjectsOfType(typeof(Health));
-
-        GameObject nearest = null;
-        float min = float.MaxValue;
-
-        foreach (var item in objects)
+        // Update is called once per frame
+        void Update()
         {
+            UpdateTarget();
 
-            var go = item as MonoBehaviour;
-
-            //変換できて、自分自身でない
-            if (go != null && !ReferenceEquals(go.transform, transform))
+            if (Input.GetKeyDown(KeyCode.M))
             {
-                var distance = Vector3.Distance(transform.position, go.transform.position);
-                if (distance > lockonRange)
+                if (coolDownCoroutine == null)
                 {
-                    continue;
-                }
-
-                if (min > distance)
-                {
-                    min = distance;
-                    nearest = go.gameObject;
+                    Fire(target);
+                    coolDownCoroutine = StartCoroutine(CoolDown());
                 }
             }
         }
-        target = nearest;
-    }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawWireSphere(transform.position, lockonRange);
-    }
+        void UpdateTarget()
+        {
+            var objects = GameObject.FindObjectsOfType(typeof(Health));
 
-    void Fire(GameObject target)
-    {
-        var obj = Instantiate(missileObject, missileLauncher.position, transform.rotation);
-        var missile = obj.GetComponent<Missile>();
-        missile.attacker = gameObject;
-        missile.target = target;
-    }
+            GameObject nearest = null;
+            float min = float.MaxValue;
 
-    public float coolTimeSec = 4;
+            foreach (var item in objects)
+            {
 
-    Coroutine coolDownCoroutine;
-    IEnumerator CoolDown()
-    {
-        yield return new WaitForSeconds(coolTimeSec);
-        coolDownCoroutine = null;
+                var go = item as MonoBehaviour;
+
+                //変換できて、自分自身でない
+                if (go != null && !ReferenceEquals(go.transform, transform))
+                {
+                    var distance = Vector3.Distance(transform.position, go.transform.position);
+                    if (distance > lockonRange)
+                    {
+                        continue;
+                    }
+
+                    if (min > distance)
+                    {
+                        min = distance;
+                        nearest = go.gameObject;
+                    }
+                }
+            }
+            target = nearest;
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.DrawWireSphere(transform.position, lockonRange);
+        }
+
+        void Fire(GameObject target)
+        {
+            var obj = Instantiate(missileObject, missileLauncher.position, transform.rotation);
+            var missile = obj.GetComponent<Missile>();
+            missile.attacker = gameObject;
+            missile.target = target;
+        }
+
+        public float coolTimeSec = 4;
+
+        Coroutine coolDownCoroutine;
+        IEnumerator CoolDown()
+        {
+            yield return new WaitForSeconds(coolTimeSec);
+            coolDownCoroutine = null;
+        }
     }
 }

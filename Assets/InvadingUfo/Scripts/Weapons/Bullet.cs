@@ -38,13 +38,14 @@ namespace Ame
         {
             if (hit)
                 return;
+
             var obj = other.GetComponentInParent<CommonCore>().gameObject;
             if (obj == Attacker)
             {
                 return;
             }
 
-            var target = other.gameObject.GetComponentInParent<IDamagable>();
+            var target = other.gameObject.GetComponentInParent<IDamageable>();
             if (target != null)
             {
                 CreateHitEffect();

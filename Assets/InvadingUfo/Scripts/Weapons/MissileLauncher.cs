@@ -2,53 +2,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MissileLauncher : MonoBehaviour
+namespace Ame
 {
-    public GameObject missilePrefab;
-    private float rotationSpeed = 20;
-
-    [Tooltip("test")]
-    public GameObject testTarget;
-
-    private void Update()
+    public class MissileLauncher : MonoBehaviour
     {
-        RotateLauncher();
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            LaunchMissile();
-        }
-    }
+        public GameObject missilePrefab;
+        private float rotationSpeed = 20;
 
-    void RotateLauncher()
-    {
-        int rotLR = 0;
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            rotLR = -1;
-        }
-        else if (Input.GetKey(KeyCode.RightArrow))
-        {
-            rotLR = 1;
-        }
-        int rotUD = 0;
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            rotUD = 1;
-        }
-        else if (Input.GetKey(KeyCode.DownArrow))
-        {
-            rotUD = -1;
-        }
-        transform.RotateAround(transform.position, transform.up, rotationSpeed * rotLR * Time.deltaTime);
-        transform.RotateAround(transform.position, transform.right, rotationSpeed * rotUD * Time.deltaTime);
-    }
+        [Tooltip("test")]
+        public GameObject testTarget;
 
-    Missile LaunchMissile()
-    {
-        var obj = Instantiate(missilePrefab, transform.position, Quaternion.LookRotation(transform.forward));
-        var missile = obj.GetComponent<Missile>();
-        missile.Target = testTarget;
-        return missile;
-    }
+        private void Update()
+        {
+            RotateLauncher();
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                LaunchMissile();
+            }
+        }
 
+        void RotateLauncher()
+        {
+            int rotLR = 0;
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                rotLR = -1;
+            }
+            else if (Input.GetKey(KeyCode.RightArrow))
+            {
+                rotLR = 1;
+            }
+            int rotUD = 0;
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                rotUD = 1;
+            }
+            else if (Input.GetKey(KeyCode.DownArrow))
+            {
+                rotUD = -1;
+            }
+            transform.RotateAround(transform.position, transform.up, rotationSpeed * rotLR * Time.deltaTime);
+            transform.RotateAround(transform.position, transform.right, rotationSpeed * rotUD * Time.deltaTime);
+        }
+
+        Missile LaunchMissile()
+        {
+            var obj = Instantiate(missilePrefab, transform.position, Quaternion.LookRotation(transform.forward));
+            var missile = obj.GetComponent<Missile>();
+            missile.Target = testTarget;
+            return missile;
+        }
+
+    }
 }
