@@ -12,12 +12,8 @@ namespace Ame
 
         public float lockonRange = 10;
 
+        public AudioSource missileFireSound;
 
-        // Use this for initialization
-        void Start()
-        {
-            //UpdateTarget();
-        }
 
         // Update is called once per frame
         void Update()
@@ -76,6 +72,12 @@ namespace Ame
             var missile = obj.GetComponent<Missile>();
             missile.attacker = gameObject;
             missile.target = target;
+
+            //sound
+            if(missileFireSound!=null)
+            {
+                missileFireSound.Play();
+            }
         }
 
         public float coolTimeSec = 4;

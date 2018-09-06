@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Ame;
 
+//TODO:BulletAttackなどの名前へ変更する
 public class Attack : MonoBehaviour
 {
     [Header("プレハブ、トランスフォーム")]
@@ -18,6 +19,7 @@ public class Attack : MonoBehaviour
 
     public float gunRange = 20;
 
+    bool isSoundPlaying = false;
 
     protected virtual void Start()
     {
@@ -37,9 +39,12 @@ public class Attack : MonoBehaviour
         }
 
         CreateBullet();
-        if (shootSound != null)
+        if (shootSound != null )
         {
-            shootSound.Play();
+            if (!shootSound.isPlaying)
+            {
+                shootSound.Play();
+            }
         }
         if (muzzleFlash != null)
         {
