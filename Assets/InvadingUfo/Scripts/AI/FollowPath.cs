@@ -135,7 +135,7 @@ public class FollowPath : AbstractInputProvider
         var forward = transform.forward;
 
         float angleY = Vector3.SignedAngle(forward, targetDir, Vector3.up);
-        print(angleY);
+        //print(angleY);
 
 
         //右側に存在
