@@ -599,7 +599,7 @@ Transform:
   m_GameObject: {fileID: 1647493456379382}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
   m_LocalPosition: {x: -0.122, y: -0.096, z: -1.298}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 4434495508895396}
   m_RootOrder: 1
@@ -663,8 +663,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1054719675181024}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 0, y: 31, z: 0}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 4772040046373004}
   - {fileID: 4180477962542232}
@@ -909,7 +909,7 @@ Transform:
   m_GameObject: {fileID: 1559309203191118}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
   m_LocalPosition: {x: 0.124, y: -0.09599972, z: -1.2979965}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 4434495508895396}
   m_RootOrder: 2
@@ -1915,10 +1915,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 1
-  speed: 5
+  speed: 50
   altitudeConstraint: 1
-  minAltitude: 0
-  maxAltitude: 50
+  minAltitude: -5
+  maxAltitude: 1000
 --- !u!114 &114225115773089744
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2109,7 +2109,6 @@ MonoBehaviour:
   missileLauncher: {fileID: 4727078970031112}
   target: {fileID: 0}
   lockonRange: 50
-  missileFireSound: {fileID: 82485983467817572}
   coolTimeSec: 4
 --- !u!198 &198391023768031956
 ParticleSystem:
