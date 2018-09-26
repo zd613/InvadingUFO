@@ -91,6 +91,11 @@ public class Rotation : MonoBehaviour
         Yaw(yaw);
     }
 
+    public void SetRotation(Vector3 eulerAngles)
+    {
+        transform.eulerAngles = eulerAngles;
+    }
+
     #region Rotations
 
     //value が　0の時回転しない　1の時power.Yaw の値 degree/sec 回転する

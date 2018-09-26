@@ -8,5 +8,5 @@ public class AbstractInputProvider : MonoBehaviour {
     public float PitchValue { get; protected set; }
     public float YawValue { get; protected set; }
     public bool Boost { get; protected set; }
-
+    
 }
