@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class Magnet : MonoBehaviour
 {
+    public AttractableCapther dispatcher;
     public float maxLength = 100;
     public float power = 10;
 
+    private void Start()
+    {
+        dispatcher.OnCaptch += GetAttractedObject;
+    }
     private void Update()
     {
         Debug.DrawRay(transform.position, Vector3.down * maxLength);
@@ -19,7 +24,7 @@ public class Magnet : MonoBehaviour
         {
             if (targetRigidbody != null)
             {
-                targetRigidbody.useGravity = true;
+                //targetRigidbody.useGravity = true;
                 targetRigidbody = null;
             }
         }
@@ -36,41 +41,51 @@ public class Magnet : MonoBehaviour
     Rigidbody targetRigidbody;
 
 
-    //TODO
+    //TODO:
     void Attract()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, maxDistance: maxLength))
+        int layerMask = LayerMask.GetMask("Attractable");
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, maxDistance: maxLength, layerMask: layerMask))
         {
-            if (!targetRigidbody)//null
+            var attractable = hit.transform.GetComponentInParent<IAttractable>();
+            print(hit.transform.name);
+            print(attractable == null ? "null" : "not");
+            if (attractable == null)
+                return;
+
+            if (targetRigidbody == null)//null
             {
                 targetRigidbody = hit.transform.GetComponent<Rigidbody>();
                 if (targetRigidbody == null)
                     return;
-                targetRigidbody.useGravity = false;
+
+                //targetRigidbody.useGravity = false;
             }
             else if (target != hit.transform.gameObject)//change target
             {
-                targetRigidbody.useGravity = true;
+                //targetRigidbody.useGravity = true;
 
 
                 targetRigidbody = hit.transform.GetComponent<Rigidbody>();
-                targetRigidbody.useGravity = false;
+
             }
 
             targetRigidbody.AddForce(Vector3.up * power);
 
 
-            //get target
-            if (Vector3.Distance(transform.position, hit.transform.position) < 20)
-            {
-                Destroy(hit.transform.gameObject);
-                targetRigidbody = null;
-            }
         }
 
     }
 
 
-
+    void GetAttractedObject(Collider collider)
+    {
+        if (Input.GetKey(KeyCode.X))
+        {
+            print(collider.name);
+            Destroy(collider.transform.gameObject);
+            targetRigidbody = null;
+        }
+    }
 }
