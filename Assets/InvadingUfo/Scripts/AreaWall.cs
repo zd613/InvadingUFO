@@ -7,6 +7,19 @@ public class AreaWall : MonoBehaviour
 {
     public float debugRayLength = 100;
 
+    public AreaWallCollider right;
+    public AreaWallCollider left;
+
+    private void Start()
+    {
+        right.OnTriggerEnterEvent += c => OnTriggerEnterMethod(c, false);
+        left.OnTriggerEnterEvent += c => OnTriggerEnterMethod(c, true);
+
+        right.OnTriggerExitEvent += OnTriggerExitMethod;
+        left.OnTriggerExitEvent += OnTriggerExitMethod;
+    }
+
+
     void Update()
     {
         Debug.DrawRay(transform.position, transform.forward * debugRayLength);
@@ -40,9 +53,10 @@ public class AreaWall : MonoBehaviour
 
     List<TurnInfo> turnList = new List<TurnInfo>();//objects to turn
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnterMethod(Collider other, bool isClockwise)
     {
         var root = other.transform.root;
+
         //TurnInfo exit = null;
 
         //すでにリストに入っていれば終了
@@ -55,32 +69,13 @@ public class AreaWall : MonoBehaviour
         }
 
         var rot = root.GetComponent<Rotation>();
-        if (rot != null)
-            rot.isActive = false;
-
-        //print(transform.eulerAngles.y);
-        //print(root.eulerAngles.y);
-
-        //decide clockwise 
-        float angle1;//左側の角度
-        float angle2;//右側の角度
-        angle1 = root.eulerAngles.y - transform.eulerAngles.y;//plane の角度y - 壁の角度y
-
-        if (angle1 < 0)
+        if (rot == null)
         {
-            angle2 = -angle1;
-            angle1 = 360 - angle2;
-        }
-        else
-        {
-            angle2 = 360 - angle1;
+            print("cannot rotate :" + root.name);
+            return;
         }
 
-        bool isClockwise = false;
-        if (angle1 < angle2)
-        {
-            isClockwise = true;
-        }
+
         //pitch to zero
         var ea = root.eulerAngles;
         ea.x = 0;
@@ -100,7 +95,7 @@ public class AreaWall : MonoBehaviour
     }
 
     //ターンが終わってステージに戻る
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExitMethod(Collider other)
     {
         var root = other.transform.root;
 
