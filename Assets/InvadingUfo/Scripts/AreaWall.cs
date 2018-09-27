@@ -25,9 +25,13 @@ public class AreaWall : MonoBehaviour
             }
 
             var angleY = item.RootTransform.eulerAngles.y;
-            if (Mathf.Abs(angleY - transform.eulerAngles.y) > 1)
+            if (Mathf.Abs(angleY - transform.eulerAngles.y) > 1)//壁のforward の方向に向いてるかどうか　1は小さい値
             {
                 item.Rotation.Rotate(0, yawValue);
+            }
+            else
+            {
+                item.CanExit = true;
             }
             item.Rotation.isActive = false;
         }
@@ -35,7 +39,6 @@ public class AreaWall : MonoBehaviour
     }
 
     List<TurnInfo> turnList = new List<TurnInfo>();//objects to turn
-    List<TurnInfo> exitList = new List<TurnInfo>();
 
     private void OnTriggerEnter(Collider other)
     {
@@ -55,8 +58,8 @@ public class AreaWall : MonoBehaviour
         if (rot != null)
             rot.isActive = false;
 
-        print(transform.eulerAngles.y);
-        print(root.eulerAngles.y);
+        //print(transform.eulerAngles.y);
+        //print(root.eulerAngles.y);
 
         //decide clockwise 
         float angle1;//左側の角度
@@ -88,13 +91,12 @@ public class AreaWall : MonoBehaviour
         {
             RootTransform = root,
             Rotation = rot,
-            StartEulerAngles = root.transform.eulerAngles,
             IsClockwise = isClockwise,
             CanExit = false,
         };
         turnList.Add(newInfo);
 
-        print("add turn list");
+        //print("add turn list");
     }
 
     //ターンが終わってステージに戻る
@@ -114,21 +116,22 @@ public class AreaWall : MonoBehaviour
                     break;
                 }
 
-                item.CanExit = true;
                 return;
             }
         }
 
+        if (info == null)
+            return;
+
         info.Rotation.isActive = true;
         turnList.Remove(info);
-       
+        //print("exit");
     }
 
     class TurnInfo
     {
         public Transform RootTransform;
         public Rotation Rotation;
-        public Vector3 StartEulerAngles;//いらない
         public bool IsClockwise;
         public bool CanExit;
     }
