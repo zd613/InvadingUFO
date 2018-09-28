@@ -7,7 +7,7 @@ using System;
 
 namespace Ame
 {
-    public class PlayerInputProvider : AbstractInputProvider
+    public class PlayerInputProvider : BaseInputProvider
     {
         //いらない？
         //
@@ -23,16 +23,12 @@ namespace Ame
 
         //
 
-        private void Update()
+        protected override void UpdateInputStatus()
         {
-
             if (Input.GetKey(KeyCode.Z))
             {
                 BulletAttack = true;
-                if (OnBulletAttack != null)
-                {
-                    OnBulletAttack();
-                }
+                OnBulletAttack?.Invoke();
             }
             else
             {
@@ -49,10 +45,7 @@ namespace Ame
             {
                 PitchValue = -1;
             }
-            if (OnPitchRotation != null)
-            {
-                OnPitchRotation(PitchValue);
-            }
+            OnPitchRotation?.Invoke(PitchValue);
 
             //Yaw
 
@@ -65,10 +58,7 @@ namespace Ame
             {
                 YawValue = -1;
             }
-            if (OnYawRotation != null)
-            {
-                OnYawRotation(YawValue);
-            }
+            OnYawRotation?.Invoke(YawValue);
 
 
             //boost 
@@ -76,20 +66,13 @@ namespace Ame
             if (Input.GetKey(KeyCode.Space))
             {
                 Boost = true;
-                if (OnBoost != null)
-                {
-                    OnBoost(true);
-                }
+                OnBoost?.Invoke(true);
             }
             else
             {
                 Boost = false;
-                if (OnBoost != null)
-                {
-                    OnBoost(false);
-                }
+                OnBoost?.Invoke(false);
             }
-
         }
     }
 }

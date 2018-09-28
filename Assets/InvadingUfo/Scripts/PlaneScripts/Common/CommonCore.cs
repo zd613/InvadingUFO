@@ -5,7 +5,8 @@ using System;
 
 public class CommonCore : MonoBehaviour
 {
-    public AbstractInputProvider inputProvider;
+    public bool useInputProvider = true;
+    public BaseInputProvider inputProvider;
 
     protected event Action Move;
     protected event Action<float, float> Rotate;
@@ -19,7 +20,7 @@ public class CommonCore : MonoBehaviour
 
     protected virtual void Awake()
     {
-        if (inputProvider == null)
+        if (useInputProvider && inputProvider == null)
         {
             Debug.Log("Input Provider is null.set input provider");
         }
@@ -52,11 +53,6 @@ public class CommonCore : MonoBehaviour
             movement.Move();
         }
     }
-
-    //protected virtual void FixedUpdate()
-    //{
-
-    //}
 
     protected void NoAction() { }
 }

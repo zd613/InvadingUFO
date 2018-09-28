@@ -8,7 +8,7 @@ namespace Ame
 {
     public class UfoCore : MonoBehaviour
     {
-        public AbstractInputProvider inputProvider;
+        public BaseInputProvider inputProvider;
 
         event Action Move;
         event Action<float, float> Rotate;

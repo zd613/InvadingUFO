@@ -5,7 +5,7 @@ using Ame;
 
 [RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(Rotation))]
-public class FollowPath : AbstractInputProvider
+public class FollowPath : BaseInputProvider
 {
     Movement move;
     Rotation rotation;
@@ -36,7 +36,7 @@ public class FollowPath : AbstractInputProvider
     Vector3 pre;
 
 
-    private void Update()
+    protected override void UpdateInputStatus()
     {
         if (!targetPath.HasPath)
             return;
@@ -83,6 +83,7 @@ public class FollowPath : AbstractInputProvider
 
         previousDeltaDistance = d;
     }
+
 
 
     float GetDeltaDistance()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Ame;
 
-public class MouseInputProvider : AbstractInputProvider
+public class MouseInputProvider : BaseInputProvider
 {
     public float crosshairRayLength = 3;
     public float threashold = 2;
@@ -23,7 +23,7 @@ public class MouseInputProvider : AbstractInputProvider
         threashold2 = threashold / 2;
     }
 
-    private void Update()
+    protected override void UpdateInputStatus()
     {
         //attack
         if (Input.GetMouseButton(0))

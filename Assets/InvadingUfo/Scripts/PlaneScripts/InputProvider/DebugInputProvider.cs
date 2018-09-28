@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DebugInputProvider : AbstractInputProvider
+public class DebugInputProvider : BaseInputProvider
 {
     System.Action updateAction;
     public DebugInputMode inputMode = DebugInputMode.All;
@@ -32,7 +32,7 @@ public class DebugInputProvider : AbstractInputProvider
         }
     }
 
-    private void Update()
+    protected override void UpdateInputStatus()
     {
         updateAction();
     }
