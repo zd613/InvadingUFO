@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 65121613188263920}
   - component: {fileID: 114120070120222340}
   m_Layer: 0
-  m_Name: Bullet2
+  m_Name: Bullet1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,7 +52,7 @@ Transform:
   m_GameObject: {fileID: 1514578246780428}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 4869756787002670}
   m_Father: {fileID: 0}
@@ -94,9 +94,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 537ae323c5a42b9449eb97f8aaa3ff3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 80
   damage: 10
-  range: 20
+  range: 300
   hitEffectPrefab: {fileID: 1187429217532524, guid: 901c6461d099b1541af5e3217efb74b6,
     type: 2}
 --- !u!120 &120121734694287986
@@ -107,7 +107,7 @@ LineRenderer:
   m_GameObject: {fileID: 1964418845111384}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 0
   m_LightProbeUsage: 0
@@ -140,7 +140,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 0.4}
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 0.1
+    widthMultiplier: 1
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -182,7 +182,7 @@ LineRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0.13186646
+        value: 0.22588348
         inSlope: 0
         outSlope: 0
         tangentMode: 0
