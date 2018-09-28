@@ -125,9 +125,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1413720915113914}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: 0.70710653, z: -0, w: 0.70710707}
+  m_LocalPosition: {x: 0, y: 29.8, z: 0}
+  m_LocalScale: {x: 8, y: 8, z: 10}
   m_Children:
   - {fileID: 4761579869247066}
   - {fileID: 4649951012094172}
@@ -330,8 +330,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 20
-  maxRange: 100
+  speed: 70
+  maxRange: 500
   hitEffect: {fileID: 1187429217532524, guid: 901c6461d099b1541af5e3217efb74b6, type: 2}
   rotationSpeed: 1.8
   damage: 100

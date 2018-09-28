@@ -1542,6 +1542,14 @@ Prefab:
       propertyPath: gunRange
       value: 300
       objectReference: {fileID: 0}
+    - target: {fileID: 4727078970031112, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.494
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727078970031112, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.192
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
   m_IsPrefabAsset: 0
