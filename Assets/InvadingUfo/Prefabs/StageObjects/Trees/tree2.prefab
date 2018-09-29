@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 65323119090257974}
   - component: {fileID: 65226583264356620}
   - component: {fileID: 65863586621672310}
+  - component: {fileID: 65581980402033886}
   m_Layer: 0
   m_Name: tree2
   m_TagString: Untagged
@@ -38,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1290319500902832}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -95,7 +96,7 @@ BoxCollider:
   m_GameObject: {fileID: 1290319500902832}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.55299485, y: 0.42419577, z: 0.4439193}
   m_Center: {x: 0.53355986, y: 1.0506487, z: -0.041946836}
@@ -107,11 +108,11 @@ BoxCollider:
   m_GameObject: {fileID: 1290319500902832}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.13083026, y: 1.598112, z: 0.22937694}
   m_Center: {x: 0.0041879565, y: 0.7738643, z: -0.007050827}
---- !u!65 &65863586621672310
+--- !u!65 &65581980402033886
 BoxCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,6 +121,18 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 14.754948, y: 17.521263, z: 6.025657}
+  m_Center: {x: 0.7230978, y: 8.508715, z: 0.37376404}
+--- !u!65 &65863586621672310
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1290319500902832}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.5353675, y: 0.57109094, z: 0.548977}
   m_Center: {x: -0.39775383, y: 1.270991, z: 0.01058203}
