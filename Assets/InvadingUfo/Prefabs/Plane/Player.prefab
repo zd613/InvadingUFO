@@ -1914,7 +1914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c08e23f5212ede94cba1ce6bdfb40ed5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isActive: 0
+  isActive: 1
   speed: 50
   altitudeConstraint: 1
   minAltitude: -5
@@ -2020,7 +2020,7 @@ MonoBehaviour:
   muzzleTransform: {fileID: 4587733986034058}
   muzzleFlash: {fileID: 198391023768031956}
   showDebugRay: 1
-  coolTimeSecond: 0.3
+  coolTimeSecond: 0.1
   shootSound: {fileID: 0}
   gunRange: 300
 --- !u!114 &114409018027591596

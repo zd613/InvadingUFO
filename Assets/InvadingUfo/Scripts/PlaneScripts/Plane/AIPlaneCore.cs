@@ -28,14 +28,14 @@ public class AIPlaneCore : CommonCore
             //rotation.Rotate(inputProvider.PitchValue, inputProvider.YawValue);
             var q = Quaternion.LookRotation(target.position - transform.position);
             var ea = q.eulerAngles;
-            print(ea + "," + transform.eulerAngles);
+            //print(ea + "," + transform.eulerAngles);
 
 
             //pitch yを見て判断
             var destY = ea.y;
             var currentY = transform.eulerAngles.y;
             var diffY = destY - currentY;
-            print(diffY);
+            //print(diffY);
 
             float yaw = 0;
             if (diffY > 0)

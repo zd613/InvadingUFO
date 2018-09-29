@@ -533,7 +533,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &110748327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7278,7 +7278,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &644263198
 Transform:
   m_ObjectHideFlags: 0
@@ -17919,7 +17919,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1097129705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18382,6 +18382,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ufoPrefab: {fileID: 1835181801364080, guid: b85c3271e03390a4fb0be04be8f1b0d3, type: 2}
+  spawnCount: 5
+  minInterval: 1
+  maxInterval: 2
 --- !u!4 &1132393731
 Transform:
   m_ObjectHideFlags: 0
@@ -18389,7 +18392,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1132393729}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 61.6, z: -27.35}
+  m_LocalPosition: {x: -92, y: 110, z: -1360}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -23365,11 +23368,6 @@ Prefab:
     - target: {fileID: 1054719675181024, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
       propertyPath: m_Name
       value: Plane
-      objectReference: {fileID: 0}
-    - target: {fileID: 114172723237620946, guid: beb4a4495af87284ab9cfa9146f629fe,
-        type: 2}
-      propertyPath: isActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
