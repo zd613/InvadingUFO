@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IAttractable
 {
-    void Attract();
+    void Attract(Transform magnet);
 }

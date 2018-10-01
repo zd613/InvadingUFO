@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Magnet : MonoBehaviour
 {
@@ -8,17 +9,24 @@ public class Magnet : MonoBehaviour
     public float maxLength = 100;
     public float power = 10;
 
+    public OnTriggerEnterSender enterSender;
+    public OnTriggerExitSender exitSender;
+
     private void Start()
     {
         dispatcher.OnCaptch += GetAttractedObject;
+        enterSender.OnTriggerEnterCalled += EnterCollider;
+        exitSender.OnTriggerExitCalled += GetOutOfCollider;
     }
     private void Update()
     {
         Debug.DrawRay(transform.position, Vector3.down * maxLength);
+        UpdateAttractingList();
 
         if (Input.GetKey(KeyCode.X))
         {
-            Attract();
+            //Attract();
+            Attract2();
         }
         else
         {
@@ -78,6 +86,54 @@ public class Magnet : MonoBehaviour
 
     }
 
+    //add attractable objects to the list
+    void EnterCollider(Collider collider)
+    {
+        var attractable = collider.GetComponentInParent<AttractableObject>();
+        if (attractable == null)
+            return;
+
+        if (attractableObjects.Contains(attractable))
+            return;
+
+        attractableObjects.Add(attractable);
+    }
+
+    //remove attractable objects if exists
+    void GetOutOfCollider(Collider collider)
+    {
+        var attractable = collider.GetComponentInParent<AttractableObject>();
+        if (attractable == null)
+            return;
+
+        if (!attractableObjects.Contains(attractable))
+            return;
+
+        attractableObjects.Remove(attractable);
+    }
+
+
+    List<AttractableObject> attractableObjects = new List<AttractableObject>();
+
+    void Attract2()
+    {
+        foreach (var item in attractableObjects)
+        {
+            if (item == null)
+                continue;
+            if (item.gameObject == null)
+                continue;
+
+            item.Attract(transform);
+        }
+    }
+
+    void UpdateAttractingList()
+    {
+        attractableObjects = attractableObjects.Where(x => x != null).ToList();
+
+    }
+
 
     void GetAttractedObject(Collider collider)
     {
@@ -87,5 +143,13 @@ public class Magnet : MonoBehaviour
             Destroy(collider.transform.gameObject);
             targetRigidbody = null;
         }
+    }
+
+
+
+    class C
+    {
+        public IAttractable IAttractable;
+        public GameObject GameObject;
     }
 }

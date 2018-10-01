@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class House : MonoBehaviour, IAttractable
+public class House : AttractableObject
 {
-    public void Attract()
-    {
-        
-    }
 }
