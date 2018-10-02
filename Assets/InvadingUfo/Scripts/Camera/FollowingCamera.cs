@@ -26,18 +26,6 @@ public class FollowingCamera : BaseCamera
         {
             offset = transform.position - target.transform.position;
         }
-
-
-        //var desiredRot = Quaternion.LookRotation(target.position - transform.position, transform.up);
-        //var ea = desiredRot.eulerAngles;
-        //var desiredRot2 = Quaternion.Euler(ea);
-        //var q = desiredRot * Quaternion.Euler(0, 0, 10);
-        //var ea2 = desiredRot2.eulerAngles;
-        //print(desiredRot);
-        //print(desiredRot2);
-
-        //print(ea);
-        //print(ea2);
     }
 
     protected override void LateUpdate()

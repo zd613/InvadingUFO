@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Ame;
+using UnityEngine.UI;
 
 //TODO:BulletAttackなどの名前へ変更する
 public class Attack : MonoBehaviour
@@ -17,18 +18,28 @@ public class Attack : MonoBehaviour
     [Header("音")]
     public AudioSource shootSound;
 
-    public float gunRange = 20;
+    public float gunRange = 300;
 
     bool isSoundPlaying = false;
 
+    [Header("crosshair")]
+    public SpriteRenderer crosshair;
+    public Color normalColor = Color.white;
+    public Color canHitColor = Color.red;
+
+
     protected virtual void Start()
     {
+        if(crosshair!=null)
+            crosshair.color = normalColor;
     }
 
     protected virtual void Update()
     {
         if (showDebugRay)
             Debug.DrawRay(muzzleTransform.position, transform.forward * gunRange);
+
+        UpdateCrosshairImage();
     }
 
     public virtual bool Fire()
@@ -39,7 +50,7 @@ public class Attack : MonoBehaviour
         }
 
         CreateBullet();
-        if (shootSound != null )
+        if (shootSound != null)
         {
             if (!shootSound.isPlaying)
             {
@@ -66,5 +77,26 @@ public class Attack : MonoBehaviour
     {
         yield return new WaitForSeconds(coolTimeSecond);
         coolDownCoroutine = null;
+    }
+
+    void UpdateCrosshairImage()
+    {
+        if (crosshair == null)
+            return;
+
+        Ray ray = new Ray(transform.position, transform.forward * gunRange);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            crosshair.transform.position = hit.point;
+            //if ()
+            crosshair.color = canHitColor;
+        }
+        else
+        {
+            crosshair.transform.position = transform.position + transform.forward * gunRange;
+
+            crosshair.color = normalColor;
+        }
     }
 }
