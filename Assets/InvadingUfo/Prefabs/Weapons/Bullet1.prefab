@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 537ae323c5a42b9449eb97f8aaa3ff3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 120
+  speed: 400
   damage: 10
   range: 300
   hitEffectPrefab: {fileID: 1187429217532524, guid: 901c6461d099b1541af5e3217efb74b6,

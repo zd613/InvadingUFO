@@ -44,6 +44,10 @@ public class Rotation : MonoBehaviour
     public float maxPitchAngle = 45;
 
 
+    //plane animation
+    public bool useAnimation = false;
+
+
     protected virtual void Awake()
     {
         if (reverseRollControl)

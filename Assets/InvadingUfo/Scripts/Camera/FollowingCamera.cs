@@ -34,7 +34,6 @@ public class FollowingCamera : BaseCamera
             return;
 
         base.LateUpdate();
-
     }
 
 
