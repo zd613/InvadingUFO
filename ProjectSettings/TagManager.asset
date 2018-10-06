@@ -17,9 +17,9 @@ TagManager:
   - Stage
   - AreaWall
   - Attractable
-  - 
-  - 
-  - 
+  - Plane
+  - Ufo
+  - NoWeaponAttack
   - 
   - 
   - 

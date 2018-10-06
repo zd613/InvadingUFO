@@ -20,7 +20,7 @@ public class AIPlaneCore : CommonCore
         var distance = Vector3.Distance(transform.position, target.position);
         if (distance < attack.gunRange)
         {
-            attack?.Fire();
+            //attack?.Fire();
         }
 
         if (rotation != null)
