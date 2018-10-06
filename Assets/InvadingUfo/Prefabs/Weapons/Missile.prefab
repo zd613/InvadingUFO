@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4756623060374992}
   - component: {fileID: 82942737092628750}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: MissileSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4828224123612676}
   - component: {fileID: 54334759746031768}
   - component: {fileID: 114914700304871566}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Missile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 23210765741239886}
   - component: {fileID: 95561381019537202}
   - component: {fileID: 65814321902403764}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: missile1_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 4649951012094172}
   - component: {fileID: 198088468699681904}
   - component: {fileID: 199529059721563622}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: AfterBurner
   m_TagString: Untagged
   m_Icon: {fileID: 0}

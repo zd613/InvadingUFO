@@ -30227,11 +30227,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 223524822016535618, guid: a9c502c4c9623394fa2df50f5989f3ce,
-        type: 2}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1446048595859694, guid: a9c502c4c9623394fa2df50f5989f3ce, type: 2}
       propertyPath: m_Name
       value: HpCanvas
@@ -30245,11 +30240,6 @@ Prefab:
         type: 2}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114063038266918558, guid: a9c502c4c9623394fa2df50f5989f3ce,
-        type: 2}
-      propertyPath: m_Value
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9c502c4c9623394fa2df50f5989f3ce, type: 2}
@@ -36913,6 +36903,14 @@ Prefab:
     - target: {fileID: 1054719675181024, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1696755872563062, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
+      propertyPath: m_Name
+      value: LockonCollider
+      objectReference: {fileID: 0}
+    - target: {fileID: 1696755872563062, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}

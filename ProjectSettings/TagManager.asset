@@ -19,8 +19,8 @@ TagManager:
   - Attractable
   - Plane
   - Ufo
-  - NoWeaponAttack
-  - 
+  - NoHitCollider
+  - Weapon
   - 
   - 
   - 
