@@ -13,7 +13,8 @@ public class Health : MonoBehaviour, IDamageable
     public GameObject subRoot;
 
     [Header("UI")]
-    public Image hpBar;
+    //public Image hpBar;
+    public Slider hpSlider;
 
     public event Action OnDamageTaken;
 
@@ -23,6 +24,14 @@ public class Health : MonoBehaviour, IDamageable
     public GameObject explosion;
     public AudioSource explosionSound;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            ApplyDamage(10, null);
+        }
+    }
+
     protected virtual void Awake()
     {
         maxHp = hp;
@@ -30,8 +39,8 @@ public class Health : MonoBehaviour, IDamageable
 
     public void ApplyDamage(float damageValue, GameObject attacker)
     {
-        print(damageValue + "," + attacker.name);
-        print(gameObject.name);
+        //print(damageValue + "," + attacker.name);
+        //print(gameObject.name);
         if (!isAlive)
         {
             return;
@@ -88,8 +97,13 @@ public class Health : MonoBehaviour, IDamageable
 
     protected void ChangeHpBar()
     {
-        if (hpBar == null)
+        if (hpSlider == null)
             return;
-        hpBar.fillAmount = hp / maxHp;
+        hpSlider.value = hp / maxHp;
+
+
+        //if (hpBar == null)
+        //    return;
+        //hpBar.fillAmount = hp / maxHp;
     }
 }
