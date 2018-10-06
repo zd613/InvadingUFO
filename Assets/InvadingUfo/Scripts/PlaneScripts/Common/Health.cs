@@ -30,6 +30,7 @@ public class Health : MonoBehaviour, IDamageable
 
     public void ApplyDamage(float damageValue, GameObject attacker)
     {
+        print(damageValue + "," + attacker.name);
         if (!isAlive)
         {
             return;
