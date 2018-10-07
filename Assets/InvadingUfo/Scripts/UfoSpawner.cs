@@ -10,18 +10,31 @@ public class UfoSpawner : MonoBehaviour
     public float minInterval = 1;
     public float maxInterval = 2;
 
+    public List<UfoRouteInfo> routeInfo;
+
     int current = 0;
+    int routeIndex = 0;
+    int routeCount = 0;
 
     private void Awake()
     {
         //SpawnUfo();
         StartCoroutine(S());
+        
     }
 
     void SpawnUfo()
     {
         var rot = Quaternion.identity;
         var obj = Instantiate(ufoPrefab, transform.position, rot);
+
+        var followPath = obj.GetComponent<FollowPathInputProvider>();
+        followPath.targetPath = routeInfo[routeIndex].path;
+        routeCount++;
+        if (routeCount >= routeInfo[routeIndex].ufoCount)
+        {
+            routeIndex++;
+        }
     }
 
     IEnumerator S()
@@ -30,7 +43,9 @@ public class UfoSpawner : MonoBehaviour
         {
             if (!isActive)
                 continue;
+
             SpawnUfo();
+
             current++;
             if (current >= spawnCount)
             {
@@ -40,4 +55,11 @@ public class UfoSpawner : MonoBehaviour
         }
     }
 
+}
+
+[System.Serializable]
+public class UfoRouteInfo
+{
+    public PathController path;
+    public int ufoCount;
 }

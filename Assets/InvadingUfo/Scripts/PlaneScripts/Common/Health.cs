@@ -120,7 +120,6 @@ public class Health : MonoBehaviour, IDamageable
                         var main = particleSystem.main;
                         main.duration = newDuration;
 
-                        print(particleSystem.main.duration);
                         particleSystem.Play();
                         Destroy(smokeInstance, main.duration);
                     }
