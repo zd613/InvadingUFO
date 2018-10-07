@@ -50,6 +50,5 @@ public class Movement : MonoBehaviour
         }
 
         rb.MovePosition(transform.position + forward * speed * Time.deltaTime);
-
     }
 }

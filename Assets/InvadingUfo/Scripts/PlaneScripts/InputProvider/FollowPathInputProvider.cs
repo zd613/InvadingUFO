@@ -62,7 +62,7 @@ public class FollowPathInputProvider : BaseInputProvider
             d = GetDeltaDistance();
 
             previousDeltaDistance = d;
-            print("change target : go through");
+            //print("change target : go through");
             return;
         }
 

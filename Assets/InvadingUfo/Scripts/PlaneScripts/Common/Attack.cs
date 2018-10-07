@@ -27,11 +27,16 @@ public class Attack : MonoBehaviour
     public Color normalColor = Color.white;
     public Color canHitColor = Color.red;
 
+    [Header("bullet")]
+    public float maxBulletCount;
+    public float currentBulletCount;
 
     protected virtual void Start()
     {
         if(crosshair!=null)
             crosshair.color = normalColor;
+
+        currentBulletCount = maxBulletCount;
     }
 
     protected virtual void Update()
