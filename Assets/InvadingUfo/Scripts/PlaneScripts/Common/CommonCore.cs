@@ -17,6 +17,7 @@ public class CommonCore : MonoBehaviour
     protected Movement movement;
     protected Rotation rotation;
     protected Attack attack;
+    protected Health health;
 
     protected virtual void Awake()
     {
@@ -28,7 +29,19 @@ public class CommonCore : MonoBehaviour
         movement = GetComponent<Movement>();
         rotation = GetComponent<Rotation>();
         attack = GetComponent<Attack>();
+        health = GetComponent<Health>();
         //
+
+        if (health != null)
+        {
+            health.OnDied += () =>
+            {
+                if (movement != null)
+                    movement.isActive = false;
+                if (rotation != null)
+                    rotation.isActive = false;
+            };
+        }
     }
 
 
