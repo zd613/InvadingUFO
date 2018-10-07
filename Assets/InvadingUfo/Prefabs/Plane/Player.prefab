@@ -4317,6 +4317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea911013e4062fb4e96e995e39790ef5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 1
   gunPrefab: {fileID: 1514578246780428, guid: 70336a4b7f2c64249ab1803094fce518, type: 2}
   muzzleTransform: {fileID: 4587733986034058}
   muzzleFlash: {fileID: 198391023768031956}
@@ -4347,11 +4348,14 @@ MonoBehaviour:
   canExplode: 1
   nonFracturedObjectParent: {fileID: 1250056392017260}
   fracturedObjectsParent: {fileID: 1372562068510036}
-  minForce: 100
-  maxForce: 200
+  minForce: 700
+  maxForce: 800
   radius: 0
-  explosion: {fileID: 0}
+  explosion: {fileID: 1746885223415286, guid: 6a1e01757e5a1d7479d889b35551fd0b, type: 2}
+  explosionOffset: {x: 0, y: 0, z: 0}
+  smoke: {fileID: 1688740497899856, guid: 6ed1d8a90347bb24a9900db50368618d, type: 2}
   explosionSound: {fileID: 0}
+  canCallOnCollisionEnter: 1
 --- !u!114 &114420282309518616
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4392,9 +4396,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActive: 1
   power:
-    Pitch: 30
-    Roll: 30
-    Yaw: 30
+    Pitch: 20
+    Roll: 20
+    Yaw: 20
   reversePower:
     Pitch: 30
     Roll: 30

@@ -30,6 +30,10 @@ public class Health : MonoBehaviour, IDamageable
     public float radius;
     public GameObject explosion;
     public Vector3 explosionOffset;
+    public GameObject smoke;
+    public float minSmokeDuration = 10;
+    public float maxSmokeDuration = 15;
+    public int maxSmokes = 8;
     public AudioSource explosionSound;
 
     [Header("接触判定")]
@@ -91,7 +95,7 @@ public class Health : MonoBehaviour, IDamageable
         float speed = move.speed;
 
 
-
+        int smokeCounter = 0;
         foreach (Transform t in fracturedObjectsParent.transform)
         {
             var rb = t.GetComponent<Rigidbody>();
@@ -101,6 +105,27 @@ public class Health : MonoBehaviour, IDamageable
                 // rb.AddForce(transform.forward * UnityEngine.Random.Range(minForce, maxForce));
                 rb.AddExplosionForce(UnityEngine.Random.Range(minForce, maxForce),
                     transform.position, radius);
+
+                if (smoke != null)
+                {
+                    if (UnityEngine.Random.Range(0, 2) == 1 && smokeCounter < maxSmokes)
+                    {
+                        var parent = rb.transform;
+                        var smokeInstance = Instantiate(smoke, parent.transform.position, transform.rotation);
+                        smokeInstance.transform.parent = parent.transform;
+
+                        var particleSystem = smokeInstance.GetComponentInChildren<ParticleSystem>();
+                        particleSystem.Stop();
+                        var newDuration = UnityEngine.Random.Range(minSmokeDuration, maxSmokeDuration);
+                        var main = particleSystem.main;
+                        main.duration = newDuration;
+
+                        print(particleSystem.main.duration);
+                        particleSystem.Play();
+                        Destroy(smokeInstance, main.duration);
+                    }
+
+                }
             }
         }
 
