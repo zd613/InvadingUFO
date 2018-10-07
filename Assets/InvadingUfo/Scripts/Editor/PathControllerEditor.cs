@@ -32,7 +32,20 @@ namespace Ame
                 CreatePath(circle: true);
             }
 
+            if(GUILayout.Button("Path Sphere Renderer (On Or Off)"))
+            {
+                Toggle();
+            }
+        }
 
+        void Toggle()
+        {
+            foreach (Transform item in scriptObject.transform)
+            {
+                var meshRenderer = item.GetChild(0).GetComponent<MeshRenderer>();
+                meshRenderer.enabled = !meshRenderer.enabled;
+                EditorUtility.SetDirty(meshRenderer);
+            }
         }
 
         void CreatePath(bool circle = false)
@@ -52,29 +65,6 @@ namespace Ame
             Path pre = null;
             foreach (Transform item in scriptObject.transform)
             {
-                //var path = item.GetComponent<Path>();
-                //var spath = new SerializedObject(path);
-                //spath.Update();
-                //spath.FindProperty("number").intValue = num;
-
-                //if(num!=0)
-                //{
-                //    spath.FindProperty("previous").objectReferenceValue = pre;
-                //}
-
-                ////next設定
-                //if (pre != null)//はじめのやつ
-                //{
-                //    var spre = new SerializedObject(pre);
-                //    spre.Update();
-                //    spre.FindProperty("next").objectReferenceValue = path;
-                //    spre.ApplyModifiedProperties();
-
-                //}
-
-
-                //spath.ApplyModifiedProperties();
-
                 var path = item.GetComponent<Path>();
                 path.number = num;
 
