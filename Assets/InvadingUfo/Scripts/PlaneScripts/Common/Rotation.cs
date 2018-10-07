@@ -43,9 +43,11 @@ public class Rotation : MonoBehaviour
     [Range(0, 90)]
     public float maxPitchAngle = 45;
 
+    public bool canTurnByAreaWall = false;
 
     //plane animation
     public bool useAnimation = false;
+
 
 
     protected virtual void Awake()

@@ -44,7 +44,9 @@ namespace Ame
         {
             if (lockonTargets == null)
                 return;
-            lockonTargets.RemoveAll(x => x?.gameObject == null);//撃墜されてたら
+
+            lockonTargets.RemoveAll(x => x == null);
+            lockonTargets.RemoveAll(x => x.gameObject == null);//撃墜されてたら
 
 
             //var objects = GameObject.FindObjectsOfType(typeof(Health));

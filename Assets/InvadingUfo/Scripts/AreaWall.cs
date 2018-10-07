@@ -74,6 +74,10 @@ public class AreaWall : MonoBehaviour
             print("cannot rotate :" + root.name);
             return;
         }
+        if (!rot.canTurnByAreaWall)
+        {
+            return;
+        }
 
 
         //pitch to zero

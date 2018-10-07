@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UfoSpawner : MonoBehaviour
 {
-
+    public bool isActive = true;
     public GameObject ufoPrefab;
     public int spawnCount;
     public float minInterval = 1;
@@ -28,6 +28,8 @@ public class UfoSpawner : MonoBehaviour
     {
         while (true)
         {
+            if (!isActive)
+                continue;
             SpawnUfo();
             current++;
             if (current >= spawnCount)
