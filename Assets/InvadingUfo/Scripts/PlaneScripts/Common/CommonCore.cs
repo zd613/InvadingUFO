@@ -32,14 +32,25 @@ public class CommonCore : MonoBehaviour
         health = GetComponent<Health>();
         //
 
+
+    }
+
+    protected virtual void Start()
+    {
         if (health != null)
         {
             health.OnDied += () =>
             {
+                GetComponent<Rigidbody>().isKinematic = true;
                 if (movement != null)
                     movement.isActive = false;
                 if (rotation != null)
                     rotation.isActive = false;
+                if (attack != null)
+                {
+                    attack.isActive = false;
+                    attack.crosshair?.gameObject?.SetActive(false);
+                }
             };
         }
     }
@@ -65,6 +76,7 @@ public class CommonCore : MonoBehaviour
         {
             movement.Move();
         }
+
     }
 
     protected void NoAction() { }

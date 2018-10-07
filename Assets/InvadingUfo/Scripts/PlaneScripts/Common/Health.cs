@@ -29,7 +29,11 @@ public class Health : MonoBehaviour, IDamageable
     public float maxForce = 20;
     public float radius;
     public GameObject explosion;
+    public Vector3 explosionOffset;
     public AudioSource explosionSound;
+
+    [Header("接触判定")]
+    public bool canCallOnCollisionEnter = false;
 
 
     protected virtual void Awake()
@@ -71,7 +75,8 @@ public class Health : MonoBehaviour, IDamageable
             }
             else
             {
-                Destroy(gameObject);
+                gameObject.SetActive(false);
+                //Destroy(gameObject);
             }
             OnDied?.Invoke();
         }
@@ -79,8 +84,6 @@ public class Health : MonoBehaviour, IDamageable
 
     void Explode()
     {
-        if (!canExplode)
-            return;
         nonFracturedObjectParent.SetActive(false);
         fracturedObjectsParent.SetActive(true);
 
@@ -95,21 +98,17 @@ public class Health : MonoBehaviour, IDamageable
             if (rb != null)
             {
                 rb.velocity = transform.forward * speed;
-               // rb.AddForce(transform.forward * UnityEngine.Random.Range(minForce, maxForce));
+                // rb.AddForce(transform.forward * UnityEngine.Random.Range(minForce, maxForce));
                 rb.AddExplosionForce(UnityEngine.Random.Range(minForce, maxForce),
                     transform.position, radius);
             }
         }
 
 
-
-        return;
         if (explosion != null)
         {
-            var ex = Instantiate(explosion, transform.position, transform.rotation);
-            ex.transform.localScale = ex.transform.localScale * 5;//大きさ適当
+            var ex = Instantiate(explosion, transform.position + explosionOffset, transform.rotation);
         }
-
         //sound
         if (explosionSound != null)
         {
@@ -120,25 +119,22 @@ public class Health : MonoBehaviour, IDamageable
 
             Destroy(gameObject, soundTime);
         }
-        else
-        {
-
-        }
     }
 
     //地面などに当たった時
     //一撃でhp0になる
-    //protected virtual void OnCollisionEnter(Collision collision)
-    //{
-    //    var bullet = collision.gameObject.GetComponent<Bullet>();
-    //    if (bullet != null)
-    //    {
-    //        if (bullet.Attacker == gameObject)
-    //            return;
-    //    }
-    //    ApplyDamage(hp, collision.gameObject);
+    protected virtual void OnCollisionEnter(Collision collision)
+    {
+        if (!canCallOnCollisionEnter)
+            return;
 
-    //}
+        KillInstantly(collision.gameObject);
+    }
+
+    public void KillInstantly(GameObject attacker)
+    {
+        ApplyDamage(hp, attacker);
+    }
 
     protected void ChangeHpBar()
     {

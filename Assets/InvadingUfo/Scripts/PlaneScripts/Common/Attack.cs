@@ -7,6 +7,7 @@ using UnityEngine.UI;
 //TODO:BulletAttackなどの名前へ変更する
 public class Attack : MonoBehaviour
 {
+    public bool isActive = true;
     [Header("プレハブ、トランスフォーム")]
     public GameObject gunPrefab;
     public Transform muzzleTransform;
@@ -33,7 +34,7 @@ public class Attack : MonoBehaviour
 
     protected virtual void Start()
     {
-        if(crosshair!=null)
+        if (crosshair != null)
             crosshair.color = normalColor;
 
         currentBulletCount = maxBulletCount;
@@ -41,6 +42,8 @@ public class Attack : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (!isActive)
+            return;
         if (showDebugRay)
             Debug.DrawRay(muzzleTransform.position, transform.forward * gunRange);
 
@@ -49,6 +52,8 @@ public class Attack : MonoBehaviour
 
     public virtual bool Fire()
     {
+        if (!isActive)
+            return false;
         if (coolDownCoroutine != null)
         {
             return false;

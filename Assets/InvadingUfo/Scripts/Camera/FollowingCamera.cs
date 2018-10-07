@@ -41,8 +41,9 @@ public class FollowingCamera : BaseCamera
     {
         // var desiredPos = target.position + CalculateOffset();
         var desiredPos = target.TransformPoint(offset);
-        transform.position = Vector3.Lerp(transform.position, desiredPos, movingSpeed * Time.deltaTime);
-        //transform.position = desiredPos;
+        var pos = Vector3.Lerp(transform.position, desiredPos, movingSpeed * Time.deltaTime);
+        pos.y = pos.y < 0 ? 0 : pos.y;//地面より下行かないように
+        transform.position = pos;
     }
 
 
