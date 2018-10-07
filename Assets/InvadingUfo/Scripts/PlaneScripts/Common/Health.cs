@@ -84,12 +84,18 @@ public class Health : MonoBehaviour, IDamageable
         nonFracturedObjectParent.SetActive(false);
         fracturedObjectsParent.SetActive(true);
 
+        var move = GetComponent<Movement>();
+        float speed = move.speed;
+
+
+
         foreach (Transform t in fracturedObjectsParent.transform)
         {
             var rb = t.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                rb.AddForce(transform.forward * UnityEngine.Random.Range(minForce, maxForce));
+                rb.velocity = transform.forward * speed;
+               // rb.AddForce(transform.forward * UnityEngine.Random.Range(minForce, maxForce));
                 rb.AddExplosionForce(UnityEngine.Random.Range(minForce, maxForce),
                     transform.position, radius);
             }
