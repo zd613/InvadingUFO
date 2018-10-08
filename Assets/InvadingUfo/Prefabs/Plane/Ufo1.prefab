@@ -493,8 +493,8 @@ GameObject:
   - component: {fileID: 33238237499888260}
   - component: {fileID: 23705170450143988}
   - component: {fileID: 65597555495883232}
-  - component: {fileID: 114443489619342216}
-  m_Layer: 0
+  - component: {fileID: 114495739287406146}
+  m_Layer: 13
   m_Name: AttractableObjectCatcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -585,7 +585,7 @@ GameObject:
   - component: {fileID: 64756761679660110}
   - component: {fileID: 114599746750950732}
   - component: {fileID: 114716358210200776}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: cone1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1199,7 +1199,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1835181801364080}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -193.2, y: 61.2, z: -1220}
+  m_LocalPosition: {x: -105.9, y: 61.2, z: -2.3}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 4241624554972918}
@@ -2981,7 +2981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d87af888ef8f49240b78e20b16ac1384, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114443489619342216
+--- !u!114 &114495739287406146
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2989,7 +2989,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1684964198363870}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 825dc07ac142a7d40baf320b66d3e0bd, type: 3}
+  m_Script: {fileID: 11500000, guid: be05edfdf18ed22409993b10ad8d0b89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114563278854427686
@@ -3156,7 +3156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b4d964c7b9108d44ac9e5669e2b780a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dispatcher: {fileID: 114443489619342216}
+  attractableObjectCatcher: {fileID: 114495739287406146}
   maxLength: 100
   power: 13
   enterSender: {fileID: 114716358210200776}

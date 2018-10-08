@@ -51,6 +51,8 @@ public class CommonCore : MonoBehaviour
                     attack.isActive = false;
                     attack.crosshair?.gameObject?.SetActive(false);
                 }
+
+
             };
         }
     }

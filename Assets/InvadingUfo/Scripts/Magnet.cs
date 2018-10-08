@@ -5,7 +5,7 @@ using System.Linq;
 
 public class Magnet : MonoBehaviour
 {
-    public AttractableCapther dispatcher;
+    public OnTriggerEnterSender attractableObjectCatcher;
     public float maxLength = 100;
     public float power = 10;
 
@@ -14,7 +14,7 @@ public class Magnet : MonoBehaviour
 
     private void Start()
     {
-        dispatcher.OnCaptch += GetAttractedObject;
+        attractableObjectCatcher.OnTriggerEnterCalled += GetAttractedObject;
         enterSender.OnTriggerEnterCalled += EnterCollider;
         exitSender.OnTriggerExitCalled += GetOutOfCollider;
     }
@@ -137,6 +137,7 @@ public class Magnet : MonoBehaviour
 
     void GetAttractedObject(Collider collider)
     {
+        Debug.Log(collider.name, this);
         if (Input.GetKey(KeyCode.X))
         {
             print(collider.name);

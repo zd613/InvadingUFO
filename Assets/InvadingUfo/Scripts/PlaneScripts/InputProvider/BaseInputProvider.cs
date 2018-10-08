@@ -11,7 +11,7 @@ public abstract class BaseInputProvider : MonoBehaviour
     public bool Boost { get; protected set; }
 
 
-    protected virtual void Update()
+    protected void Update()
     {
         UpdateInputStatus();
     }
