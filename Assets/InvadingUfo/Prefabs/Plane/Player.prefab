@@ -4328,8 +4328,10 @@ MonoBehaviour:
   crosshair: {fileID: 212424969541937468}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   canHitColor: {r: 1, g: 0, b: 0, a: 1}
-  maxBulletCount: 0
-  currentBulletCount: 0
+  maxBullet: 10
+  reloadTime: 3
+  bulletCounter: 0
+  reloadSlider: {fileID: 0}
 --- !u!114 &114409018027591596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4354,6 +4356,9 @@ MonoBehaviour:
   explosion: {fileID: 1746885223415286, guid: 6a1e01757e5a1d7479d889b35551fd0b, type: 2}
   explosionOffset: {x: 0, y: 0, z: 0}
   smoke: {fileID: 1688740497899856, guid: 6ed1d8a90347bb24a9900db50368618d, type: 2}
+  minSmokeDuration: 10
+  maxSmokeDuration: 15
+  maxSmokes: 8
   explosionSound: {fileID: 0}
   canCallOnCollisionEnter: 1
 --- !u!114 &114420282309518616
@@ -4440,8 +4445,12 @@ MonoBehaviour:
   target: {fileID: 0}
   lockonRange: 50
   lockonCollider: {fileID: 114598866755971590}
-  lockonTargets: []
   coolTimeSec: 4
+  maxMissile: 5
+  reloadTime: 10
+  missileCounterText: {fileID: 0}
+  reloadSlider: {fileID: 0}
+  lockonTargets: []
 --- !u!135 &135851943512065498
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -59,8 +59,6 @@ public class Attack : MonoBehaviour
 
     public virtual bool Fire()
     {
-
-        print(reloadSlider.value);
         if (!isActive)
             return false;
         if (reloadCoroutine != null)
