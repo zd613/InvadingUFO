@@ -22836,8 +22836,10 @@ MonoBehaviour:
   crosshair: {fileID: 0}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   canHitColor: {r: 1, g: 0, b: 0, a: 1}
-  maxBulletCount: 0
-  currentBulletCount: 0
+  maxBullet: 0
+  reloadTime: 3
+  bulletCounter: 0
+  reloadSlider: {fileID: 0}
 --- !u!114 &720102764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25001,8 +25003,10 @@ MonoBehaviour:
   crosshair: {fileID: 1692768854}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   canHitColor: {r: 1, g: 0, b: 0, a: 1}
-  maxBulletCount: 0
-  currentBulletCount: 0
+  maxBullet: 0
+  reloadTime: 3
+  bulletCounter: 0
+  reloadSlider: {fileID: 0}
 --- !u!114 &1078996958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38232,6 +38236,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 114388207042968374, guid: beb4a4495af87284ab9cfa9146f629fe,
+        type: 2}
+      propertyPath: reloadInterval
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114388207042968374, guid: beb4a4495af87284ab9cfa9146f629fe,
+        type: 2}
+      propertyPath: maxBullet
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114388207042968374, guid: beb4a4495af87284ab9cfa9146f629fe,
+        type: 2}
+      propertyPath: reloadSlider
+      value: 
+      objectReference: {fileID: 1934413677}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
   m_IsPrefabAsset: 0

@@ -29,15 +29,22 @@ public class Attack : MonoBehaviour
     public Color canHitColor = Color.red;
 
     [Header("bullet")]
-    public float maxBulletCount;
-    public float currentBulletCount;
+    public int maxBullet;
+    public float reloadTime = 3;
+    public int bulletCounter = 0;
+    Coroutine reloadCoroutine;
+    //TODO: UIのクラスへ移動 
+    //reloadの時と、弾撃つ時のsliderを変えた方がいいかも
+    //reload時は円状のuiで赤にするなど
+    public Slider reloadSlider;
+
 
     protected virtual void Start()
     {
         if (crosshair != null)
             crosshair.color = normalColor;
 
-        currentBulletCount = maxBulletCount;
+        bulletCounter = maxBullet;
     }
 
     protected virtual void Update()
@@ -52,12 +59,14 @@ public class Attack : MonoBehaviour
 
     public virtual bool Fire()
     {
+
+        print(reloadSlider.value);
         if (!isActive)
             return false;
-        if (coolDownCoroutine != null)
-        {
+        if (reloadCoroutine != null)
             return false;
-        }
+        if (coolDownCoroutine != null)
+            return false;
 
         CreateBullet();
         if (shootSound != null)
@@ -72,6 +81,21 @@ public class Attack : MonoBehaviour
             muzzleFlash.Play();
         }
         coolDownCoroutine = StartCoroutine(CoolDown());
+
+        bulletCounter--;
+        reloadSlider.value = (float)bulletCounter / maxBullet;
+
+        if (bulletCounter <= 0)
+        {
+            bulletCounter = 0;
+            if (reloadSlider != null)
+            {
+                reloadSlider.value = 0;
+            }
+            reloadCoroutine = StartCoroutine(Reload());
+        }
+
+
         return true;
     }
 
@@ -87,6 +111,32 @@ public class Attack : MonoBehaviour
     {
         yield return new WaitForSeconds(coolTimeSecond);
         coolDownCoroutine = null;
+    }
+
+    protected IEnumerator Reload()
+    {
+        yield return null;
+        float time = 0;
+        while (true)
+        {
+            time += Time.deltaTime;
+            if (time > reloadTime)
+            {
+                break;
+            }
+            if (reloadSlider != null)
+            {
+                reloadSlider.value = time / reloadTime;
+            }
+            yield return null;
+        }
+        bulletCounter = maxBullet;
+
+        if (reloadSlider != null)
+        {
+            reloadSlider.value = 1;
+        }
+        reloadCoroutine = null;
     }
 
     void UpdateCrosshairImage()
