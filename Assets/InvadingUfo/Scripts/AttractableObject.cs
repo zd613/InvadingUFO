@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AttractableObject : MonoBehaviour
 {
-    public float power = 40;
     Rigidbody rb;
 
     private void Awake()
@@ -12,7 +11,7 @@ public class AttractableObject : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    public void Attract(Transform magnet)
+    public void Attract(Transform magnet, float power = 40)
     {
 
         var dir = (magnet.position - transform.position).normalized;
