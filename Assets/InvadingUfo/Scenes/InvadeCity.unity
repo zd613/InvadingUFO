@@ -6046,7 +6046,7 @@ GameObject:
   - component: {fileID: 176821135}
   - component: {fileID: 176821134}
   m_Layer: 5
-  m_Name: BulletImage
+  m_Name: MissleImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22154,7 +22154,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1361395566}
   - {fileID: 356186630}
   - {fileID: 1227890482}
   - {fileID: 2082404657}
@@ -22162,6 +22161,7 @@ Transform:
   - {fileID: 1191406265}
   - {fileID: 1913184865}
   - {fileID: 96423819}
+  - {fileID: 1361395566}
   - {fileID: 1127279292}
   m_Father: {fileID: 0}
   m_RootOrder: 6
@@ -23750,8 +23750,14 @@ Prefab:
       propertyPath: targetPath
       value: 
       objectReference: {fileID: 2113611446}
-    - target: {fileID: 1835181801364080, guid: b85c3271e03390a4fb0be04be8f1b0d3, type: 2}
-      propertyPath: m_IsActive
+    - target: {fileID: 224973797383578470, guid: b85c3271e03390a4fb0be04be8f1b0d3,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224973797383578470, guid: b85c3271e03390a4fb0be04be8f1b0d3,
+        type: 2}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -37725,7 +37731,7 @@ GameObject:
   - component: {fileID: 1795300390}
   - component: {fileID: 1795300389}
   m_Layer: 5
-  m_Name: BulletImage
+  m_Name: HpImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
