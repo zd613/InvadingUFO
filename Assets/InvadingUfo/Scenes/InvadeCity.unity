@@ -16857,7 +16857,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 24.521, y: 0.00009727478}
+  m_AnchoredPosition: {x: 65, y: 0.00009727478}
   m_SizeDelta: {x: 274.2, y: 89.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &531057113
@@ -22811,8 +22811,12 @@ MonoBehaviour:
   target: {fileID: 0}
   lockonRange: 50
   lockonCollider: {fileID: 0}
-  lockonTargets: []
   coolTimeSec: 4
+  maxMissile: 0
+  reloadTime: 5
+  missileCounterText: {fileID: 0}
+  reloadSlider: {fileID: 0}
+  lockonTargets: []
 --- !u!114 &720102763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24966,8 +24970,12 @@ MonoBehaviour:
   target: {fileID: 0}
   lockonRange: 50
   lockonCollider: {fileID: 0}
-  lockonTargets: []
   coolTimeSec: 4
+  maxMissile: 0
+  reloadTime: 5
+  missileCounterText: {fileID: 0}
+  reloadSlider: {fileID: 0}
+  lockonTargets: []
 --- !u!114 &1078996956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25112,6 +25120,12 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1094734831 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114037793281539102, guid: 2e7d77f66229b40408a0044d04d8cd4a,
+    type: 2}
+  m_PrefabInternal: {fileID: 816269802}
+  m_Script: {fileID: -113659843, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &1095617518
 Prefab:
   m_ObjectHideFlags: 0
@@ -38251,6 +38265,26 @@ Prefab:
       propertyPath: reloadSlider
       value: 
       objectReference: {fileID: 1934413677}
+    - target: {fileID: 114972026578506518, guid: beb4a4495af87284ab9cfa9146f629fe,
+        type: 2}
+      propertyPath: missileCounterText
+      value: 
+      objectReference: {fileID: 531057113}
+    - target: {fileID: 114972026578506518, guid: beb4a4495af87284ab9cfa9146f629fe,
+        type: 2}
+      propertyPath: reloadSlider
+      value: 
+      objectReference: {fileID: 1094734831}
+    - target: {fileID: 114972026578506518, guid: beb4a4495af87284ab9cfa9146f629fe,
+        type: 2}
+      propertyPath: maxMissile
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114972026578506518, guid: beb4a4495af87284ab9cfa9146f629fe,
+        type: 2}
+      propertyPath: reloadTime
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
   m_IsPrefabAsset: 0

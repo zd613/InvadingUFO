@@ -12,6 +12,22 @@ namespace Ame
 
         public float lockonRange = 10;
         public OnTriggerEnterSender lockonCollider;
+        public float coolTimeSec = 4;
+        Coroutine coolDownCoroutine;
+        [Header("ミサイル")]
+        public int maxMissile;
+        int missileCounter;
+        public float reloadTime = 5;
+        Coroutine reloadCoroutine;
+        public UnityEngine.UI.Text missileCounterText;
+        public UnityEngine.UI.Slider reloadSlider;
+
+
+
+        private void Awake()
+        {
+            missileCounter = maxMissile;
+        }
 
         private void Start()
         {
@@ -20,6 +36,11 @@ namespace Ame
                 return;
             }
             lockonCollider.OnTriggerEnterCalled += A;
+
+            if (missileCounterText != null)
+            {
+                missileCounterText.text = missileCounter.ToString();
+            }
         }
 
         public List<CommonCore> lockonTargets = new List<CommonCore>();
@@ -31,11 +52,7 @@ namespace Ame
 
             if (Input.GetKeyDown(KeyCode.M))
             {
-                if (coolDownCoroutine == null)
-                {
-                    Fire(target);
-                    coolDownCoroutine = StartCoroutine(CoolDown());
-                }
+                Fire(null);
             }
         }
 
@@ -85,21 +102,70 @@ namespace Ame
 
         void Fire(GameObject target)
         {
+            if (coolDownCoroutine != null)
+                return;
+            if (reloadCoroutine != null)
+                return;
+
             var obj = Instantiate(missileObject, missileLauncher.position, transform.rotation);
             var missile = obj.GetComponent<Missile>();
             missile.attacker = gameObject;
             missile.target = target;
 
+            missileCounter--;
+            if (missileCounterText != null)
+            {
+                missileCounterText.text = missileCounter.ToString();
+            }
+
+
+            if (missileCounter <= 0)
+            {
+                reloadCoroutine = StartCoroutine(Reload());
+            }
+            else
+            {
+                coolDownCoroutine = StartCoroutine(CoolDown());
+            }
+
 
         }
 
-        public float coolTimeSec = 4;
-
-        Coroutine coolDownCoroutine;
         IEnumerator CoolDown()
         {
             yield return new WaitForSeconds(coolTimeSec);
             coolDownCoroutine = null;
+        }
+
+
+        //attackのと違う
+        protected IEnumerator Reload()
+        {
+            yield return null;
+            float time = 0;
+            while (true)
+            {
+                time += Time.deltaTime;
+                if (time > reloadTime)
+                {
+                    break;
+                }
+                if (reloadSlider != null)
+                {
+                    reloadSlider.value = time / reloadTime;
+                }
+                yield return null;
+            }
+            missileCounter = maxMissile;
+            if (reloadSlider != null)
+            {
+                reloadSlider.value = 0;
+            }
+            if (missileCounterText != null)
+            {
+                missileCounterText.text = missileCounter.ToString();
+            }
+            reloadCoroutine = null;
         }
 
         //TODO:common core を持っているやつはプレイヤーと味方とufoのどれかという前提で
