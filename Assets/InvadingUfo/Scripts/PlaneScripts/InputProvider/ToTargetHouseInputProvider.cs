@@ -17,6 +17,8 @@ public class ToTargetHouseInputProvider : BaseInputProvider
 
     protected override void UpdateInputStatus()
     {
+        if (targetHouse == null)
+            return;
         LookAt(targetHouse.transform.position + offset);
 
         CheckArrival();

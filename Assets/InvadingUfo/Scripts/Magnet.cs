@@ -14,7 +14,7 @@ public class Magnet : MonoBehaviour
 
     private void Start()
     {
-        attractableObjectCatcher.OnTriggerEnterCalled += GetAttractedObject;
+        attractableObjectCatcher.OnTriggerEnterCalled += GetAttractableObject;
         enterSender.OnTriggerEnterCalled += EnterCollider;
         exitSender.OnTriggerExitCalled += GetOutOfCollider;
     }
@@ -37,20 +37,19 @@ public class Magnet : MonoBehaviour
             }
         }
 
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            var move = GetComponent<Movement>();
-            move.isActive = !move.isActive;
-        }
     }
 
     GameObject target;
     Rigidbody targetRigidbody;
 
 
+    public void Attract()
+    {
+        Attract2();
+    }
+
     //TODO:
-    void Attract()
+    void Attract1()
     {
         RaycastHit hit;
         int layerMask = LayerMask.GetMask("Attractable");
@@ -124,7 +123,7 @@ public class Magnet : MonoBehaviour
             if (item.gameObject == null)
                 continue;
 
-            item.Attract(transform);
+            item.Attract(transform, power);
         }
     }
 
@@ -135,15 +134,12 @@ public class Magnet : MonoBehaviour
     }
 
 
-    void GetAttractedObject(Collider collider)
+    void GetAttractableObject(Collider collider)
     {
-        Debug.Log(collider.name, this);
-        if (Input.GetKey(KeyCode.X))
-        {
-            print(collider.name);
-            Destroy(collider.transform.gameObject);
-            targetRigidbody = null;
-        }
+        //Debug.Log(collider.name, this);
+        //print(collider.name);
+        Destroy(collider.transform.gameObject);
+        targetRigidbody = null;
     }
 
 
