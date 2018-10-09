@@ -79,7 +79,7 @@ public class FollowPathInputProvider : BaseInputProvider
 
 
 
-        LookAt(currentTarget.transform);
+        LookAt(currentTarget.transform.transform.position);
 
         previousDeltaDistance = d;
     }

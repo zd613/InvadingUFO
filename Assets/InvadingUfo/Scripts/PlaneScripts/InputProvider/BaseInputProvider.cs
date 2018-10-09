@@ -19,14 +19,17 @@ public abstract class BaseInputProvider : MonoBehaviour
     protected virtual void UpdateInputStatus() { }
 
 
-    //target の方に向くようにpitch とyawを設定する
-    protected void LookAt(Transform target)
+    /// <summary>
+    /// target の方に向くようにpitch とyawを設定する
+    /// </summary>
+    /// <param name="target"></param>
+    protected void LookAt(Vector3 target)
     {
         float pitch = 0, yaw = 0;
 
         //var v3 = transform.TransformDirection(currentTarget.transform.position - transform.position);
-        var q = Quaternion.LookRotation(target.transform.position - transform.position);
-        Debug.DrawRay(transform.position, target.transform.position - transform.position, Color.yellow);
+        var q = Quaternion.LookRotation(/*target.transform.position*/ target - transform.position);
+        Debug.DrawRay(transform.position, /*target.transform.position*/target - transform.position, Color.yellow);
         //transform.rotation.eulerAnglesをq.eulerAnglesにするとターゲットの方を向く
         //print(transform.rotation.eulerAngles);
         //print("lookat:" + q.eulerAngles);
@@ -62,7 +65,7 @@ public abstract class BaseInputProvider : MonoBehaviour
         }
 
         //Yaw
-        var targetDir = target.position - transform.position;
+        var targetDir = /*target.position*/target - transform.position;
         var forward = transform.forward;
 
         float angleY = Vector3.SignedAngle(forward, targetDir, Vector3.up);
