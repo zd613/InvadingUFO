@@ -14,6 +14,9 @@ public class Magnet : MonoBehaviour
     public OnTriggerEnterSender enterSender;
     public OnTriggerExitSender exitSender;
 
+    public bool isAttracting = false;
+
+
     private void Start()
     {
         attractableObjectCatcher.OnTriggerEnterCalled += GetAttractableObject;
@@ -27,7 +30,8 @@ public class Magnet : MonoBehaviour
         Debug.DrawRay(transform.position, Vector3.down * maxLength);
         UpdateAttractingList();
 
-        if (Input.GetKey(KeyCode.X))
+
+        if (isAttracting)
         {
             Attract();
         }
@@ -51,6 +55,16 @@ public class Magnet : MonoBehaviour
         if (!isActive)
             return;
         Attract2();
+    }
+
+    public void StartToAttract()
+    {
+        isAttracting = true;
+    }
+
+    public void StopToAttracting()
+    {
+        isAttracting = false;
     }
 
     //add attractable objects to the list
@@ -112,13 +126,5 @@ public class Magnet : MonoBehaviour
 
         Destroy(collider.transform.gameObject);
         targetRigidbody = null;
-    }
-
-
-
-    class C
-    {
-        public IAttractable IAttractable;
-        public GameObject GameObject;
     }
 }
