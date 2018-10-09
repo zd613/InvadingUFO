@@ -15,7 +15,8 @@ public class Magnet : MonoBehaviour
     public OnTriggerExitSender exitSender;
 
     public bool isAttracting = false;
-
+    GameObject target;
+    Rigidbody targetRigidbody;
 
     private void Start()
     {
@@ -46,8 +47,7 @@ public class Magnet : MonoBehaviour
 
     }
 
-    GameObject target;
-    Rigidbody targetRigidbody;
+
 
 
     public void Attract()
@@ -60,11 +60,13 @@ public class Magnet : MonoBehaviour
     public void StartToAttract()
     {
         isAttracting = true;
+        attractEffectObject.SetActive(true);
     }
 
     public void StopToAttracting()
     {
         isAttracting = false;
+        attractEffectObject.SetActive(false);
     }
 
     //add attractable objects to the list
