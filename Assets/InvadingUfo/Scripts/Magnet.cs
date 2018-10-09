@@ -106,6 +106,10 @@ public class Magnet : MonoBehaviour
     {
         //Debug.Log(collider.name, this);
         //print(collider.name);
+        var attractable = collider.GetComponentInParent<AttractableObject>();
+        if (attractable == null)
+            return;
+
         Destroy(collider.transform.gameObject);
         targetRigidbody = null;
     }

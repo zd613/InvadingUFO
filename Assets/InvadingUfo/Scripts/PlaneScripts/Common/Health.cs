@@ -101,7 +101,8 @@ public class Health : MonoBehaviour, IDamageable
             var rb = t.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                rb.velocity = transform.forward * speed;
+                if (move.isActive)
+                    rb.velocity = transform.forward * speed;
                 // rb.AddForce(transform.forward * UnityEngine.Random.Range(minForce, maxForce));
                 rb.AddExplosionForce(UnityEngine.Random.Range(minForce, maxForce),
                     transform.position, radius);

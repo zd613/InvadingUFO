@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class AIManetUfoInputProvider : BaseInputProvider
 {
-
-
     Magnet magnet;
+
+
+    House targetHouse;
+
+
 
     private void Start()
     {
@@ -16,5 +19,10 @@ public class AIManetUfoInputProvider : BaseInputProvider
     protected override void UpdateInputStatus()
     {
         magnet.Attract();
+    }
+
+    void GoToTarget()
+    {
+
     }
 }
