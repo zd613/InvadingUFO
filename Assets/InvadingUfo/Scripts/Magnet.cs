@@ -5,9 +5,11 @@ using System.Linq;
 
 public class Magnet : MonoBehaviour
 {
+    public bool isActive = true;
     public OnTriggerEnterSender attractableObjectCatcher;
     public float maxLength = 100;
     public float power = 10;
+    public GameObject attractEffectObject;
 
     public OnTriggerEnterSender enterSender;
     public OnTriggerExitSender exitSender;
@@ -20,13 +22,14 @@ public class Magnet : MonoBehaviour
     }
     private void Update()
     {
+        if (!isActive)
+            return;
         Debug.DrawRay(transform.position, Vector3.down * maxLength);
         UpdateAttractingList();
 
         if (Input.GetKey(KeyCode.X))
         {
-            //Attract();
-            Attract2();
+            Attract();
         }
         else
         {
@@ -45,44 +48,9 @@ public class Magnet : MonoBehaviour
 
     public void Attract()
     {
+        if (!isActive)
+            return;
         Attract2();
-    }
-
-    //TODO:
-    void Attract1()
-    {
-        RaycastHit hit;
-        int layerMask = LayerMask.GetMask("Attractable");
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, maxDistance: maxLength, layerMask: layerMask))
-        {
-            var attractable = hit.transform.GetComponentInParent<IAttractable>();
-            print(hit.transform.name);
-            print(attractable == null ? "null" : "not");
-            if (attractable == null)
-                return;
-
-            if (targetRigidbody == null)//null
-            {
-                targetRigidbody = hit.transform.GetComponent<Rigidbody>();
-                if (targetRigidbody == null)
-                    return;
-
-                //targetRigidbody.useGravity = false;
-            }
-            else if (target != hit.transform.gameObject)//change target
-            {
-                //targetRigidbody.useGravity = true;
-
-
-                targetRigidbody = hit.transform.GetComponent<Rigidbody>();
-
-            }
-
-            targetRigidbody.AddForce(Vector3.up * power);
-
-
-        }
-
     }
 
     //add attractable objects to the list

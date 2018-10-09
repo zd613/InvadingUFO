@@ -52,6 +52,13 @@ public class CommonCore : MonoBehaviour
                     attack.crosshair?.gameObject?.SetActive(false);
                 }
 
+                var magnet = GetComponent<Magnet>();
+                if (magnet != null)
+                {
+                    magnet.isActive = false;
+                    magnet.attractEffectObject.SetActive(false);
+                }
+
 
             };
         }
