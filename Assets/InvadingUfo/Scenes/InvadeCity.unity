@@ -23776,7 +23776,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4754621675241748, guid: b85c3271e03390a4fb0be04be8f1b0d3, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 45.8
+      value: -339
       objectReference: {fileID: 0}
     - target: {fileID: 4754621675241748, guid: b85c3271e03390a4fb0be04be8f1b0d3, type: 2}
       propertyPath: m_LocalRotation.x
@@ -23868,6 +23868,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetHouse: {fileID: 1525963696}
   offset: {x: 0, y: 100, z: 0}
+  isArrived: 0
 --- !u!114 &908090902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23879,6 +23880,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1b379eeae0e9c4478da10ce231a747a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  houseManager: {fileID: 1705696401}
+  target: {fileID: 0}
+  maxAttractCount: 3
+  toTarget: {fileID: 0}
 --- !u!1 &911226807
 GameObject:
   m_ObjectHideFlags: 0
@@ -37668,6 +37673,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   houseCount: 0
   activeHouseCount: 0
+  houses: []
 --- !u!114 &1711163329 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114462345510695226, guid: d0943514caf82544881e42fbc85d9d83,
