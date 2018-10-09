@@ -32,7 +32,7 @@ public class DebugInputProvider : BaseInputProvider
         }
     }
 
-    protected override void UpdateInputStatus()
+    public override void UpdateInputStatus()
     {
         updateAction();
     }

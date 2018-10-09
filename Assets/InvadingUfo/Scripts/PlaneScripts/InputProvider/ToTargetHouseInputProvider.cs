@@ -7,15 +7,17 @@ public class ToTargetHouseInputProvider : BaseInputProvider
     public House targetHouse;
     public Vector3 offset;
 
-    bool isArrived = false;
+    public bool isArrived = false;
     float eps = 1;
+
+    public event System.Action OnReached;
 
     private void Start()
     {
         CheckArrival();
     }
 
-    protected override void UpdateInputStatus()
+    public override void UpdateInputStatus()
     {
         if (targetHouse == null)
             return;
@@ -27,12 +29,14 @@ public class ToTargetHouseInputProvider : BaseInputProvider
     //到着判定
     void CheckArrival()
     {
+        if (!isArrived) ;
         var distance = Vector3.Distance(transform.position, targetHouse.transform.position + offset);
 
         if (distance < eps)
         {
             GetComponent<Movement>().isActive = false;
             isArrived = true;
+            OnReached?.Invoke();
         }
     }
 

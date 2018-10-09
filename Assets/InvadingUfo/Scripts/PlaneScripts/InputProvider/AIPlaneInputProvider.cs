@@ -15,7 +15,7 @@ public class AIPlaneInputProvider : BaseInputProvider
 
     private List<Transform> targets;
 
-    protected override void UpdateInputStatus()
+    public override void UpdateInputStatus()
     {
         if (target == null)
         {

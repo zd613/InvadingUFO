@@ -36,7 +36,7 @@ public class FollowPathInputProvider : BaseInputProvider
 
 
 
-    protected override void UpdateInputStatus()
+    public override void UpdateInputStatus()
     {
         if (!targetPath.HasPath)
             return;

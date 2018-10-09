@@ -23,7 +23,7 @@ public class MouseInputProvider : BaseInputProvider
         threashold2 = threashold / 2;
     }
 
-    protected override void UpdateInputStatus()
+    public override void UpdateInputStatus()
     {
         //attack
         if (Input.GetMouseButton(0))

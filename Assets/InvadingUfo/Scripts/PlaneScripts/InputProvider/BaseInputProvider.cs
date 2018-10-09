@@ -16,7 +16,7 @@ public abstract class BaseInputProvider : MonoBehaviour
         UpdateInputStatus();
     }
 
-    protected virtual void UpdateInputStatus() { }
+    public virtual void UpdateInputStatus() { }
 
 
     /// <summary>

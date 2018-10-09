@@ -23,7 +23,7 @@ namespace Ame
 
         //
 
-        protected override void UpdateInputStatus()
+        public override void UpdateInputStatus()
         {
             if (Input.GetKey(KeyCode.Z))
             {

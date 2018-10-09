@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -34,14 +35,25 @@ public class HouseManager : MonoBehaviour
 
     }
 
-    private void Update()
+    public House GetRandomHouse()
     {
-        
+        RemoveDestroyedHouses();
+        print(houses.Count);
+        var index = Random.Range(0, houses.Count);
+        return houses[index];
     }
 
-    void UpdateHouseCount()
+    private void Update()
     {
+    }
 
+    void RemoveDestroyedHouses()
+    {
+        for (int i = 0; i < houses.Count; i++)
+        {
+            if (houses[i] == null || houses[i].gameObject == null)
+                houses.RemoveAt(i);
+        }
     }
 
     public int GetActiveHouseCount()
