@@ -108,7 +108,7 @@ public class Health : MonoBehaviour, IDamageable
 
                 if (smoke != null)
                 {
-                    if (UnityEngine.Random.Range(0, 2) == 1 && smokeCounter < maxSmokes)
+                    if (/*UnityEngine.Random.Range(0, 2) == 1 &&*/ smokeCounter < maxSmokes)
                     {
                         var parent = rb.transform;
                         var smokeInstance = Instantiate(smoke, parent.transform.position, transform.rotation);
