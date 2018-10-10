@@ -20,7 +20,7 @@ public class UfoSpawner : MonoBehaviour
     {
         //SpawnUfo();
         StartCoroutine(S());
-        
+
     }
 
     void SpawnUfo()
@@ -42,7 +42,10 @@ public class UfoSpawner : MonoBehaviour
         while (true)
         {
             if (!isActive)
+            {
+                yield return null;
                 continue;
+            }
 
             SpawnUfo();
 
