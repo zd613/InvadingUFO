@@ -47,7 +47,7 @@ public class AIManetUfoInputProvider : BaseInputProvider
                 goToTargetState.offset = offset;
                 goToTargetState.OnReached += () =>
                 {
-                    stateContext.ChangeState(attractState, 10);
+                    stateContext.ChangeState(attractState, Random.Range(2, 4));
                     stateContext.State = attractState;
                     GetComponent<Movement>().isActive = false;
                 };

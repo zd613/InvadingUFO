@@ -13,7 +13,7 @@ public class StateContext
     {
         if (!canExecute)
             return;
-        //Debug.Log("execute");
+        Debug.Log("execute");
         State.Execute();
     }
 
@@ -26,9 +26,15 @@ public class StateContext
     public void ChangeState(BaseState state, float startDelaySec = 0)
     {
         State = state;
-        canExecute = false;
-        Func<Task> func = async () => await Task.Delay((int)(startDelaySec * 1000));
-        func();
-        canExecute = true;
+
+        Func<Task> delayFunc = async () => 
+        {
+            canExecute = false;
+            await Task.Delay((int)(startDelaySec * 1000));
+            canExecute = true;
+        };
+
+        delayFunc();
+
     }
 }

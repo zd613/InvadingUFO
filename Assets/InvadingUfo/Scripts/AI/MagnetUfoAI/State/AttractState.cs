@@ -19,7 +19,7 @@ public class AttractState : UfoBaseState
             StartAttracting();
         }
 
-        Debug.Log(magnet.AttractingObjectCount);
+        //Debug.Log(magnet.AttractingObjectCount);
 
         if (magnet.AttractingObjectCount == 0)
         {
