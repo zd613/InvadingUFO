@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class GoToTargetState : MagnetUfoBaseState
+public class GoToTargetState : UfoBaseState
 {
     public Transform transform;
     public Transform target;

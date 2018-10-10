@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class FindTargetState : MagnetUfoBaseState
+public class FindTargetState : UfoBaseState
 {
     public HouseManager houseManager;
     public House targetHouse;

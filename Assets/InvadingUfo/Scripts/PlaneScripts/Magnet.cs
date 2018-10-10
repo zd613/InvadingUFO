@@ -6,17 +6,21 @@ using System.Linq;
 public class Magnet : MonoBehaviour
 {
     public bool isActive = true;
-    public OnTriggerEnterSender attractableObjectCatcher;
     public float maxLength = 100;
     public float power = 10;
     public GameObject attractEffectObject;
 
+    public int AttractingObjectCount { get { return attractingObjects.Count; } }
+
+    public OnTriggerEnterSender attractableObjectCatcher;
     public OnTriggerEnterSender enterSender;
     public OnTriggerExitSender exitSender;
 
     public bool isAttracting = false;
     GameObject target;
     Rigidbody targetRigidbody;
+    List<AttractableObject> attractingObjects = new List<AttractableObject>();
+
 
     private void Start()
     {
@@ -63,7 +67,7 @@ public class Magnet : MonoBehaviour
         attractEffectObject.SetActive(true);
     }
 
-    public void StopToAttracting()
+    public void StopAttracting()
     {
         isAttracting = false;
         attractEffectObject.SetActive(false);
@@ -76,10 +80,10 @@ public class Magnet : MonoBehaviour
         if (attractable == null)
             return;
 
-        if (attractableObjects.Contains(attractable))
+        if (attractingObjects.Contains(attractable))
             return;
 
-        attractableObjects.Add(attractable);
+        attractingObjects.Add(attractable);
     }
 
     //remove attractable objects if exists
@@ -89,18 +93,17 @@ public class Magnet : MonoBehaviour
         if (attractable == null)
             return;
 
-        if (!attractableObjects.Contains(attractable))
+        if (!attractingObjects.Contains(attractable))
             return;
 
-        attractableObjects.Remove(attractable);
+        attractingObjects.Remove(attractable);
     }
 
 
-    List<AttractableObject> attractableObjects = new List<AttractableObject>();
 
     void Attract2()
     {
-        foreach (var item in attractableObjects)
+        foreach (var item in attractingObjects)
         {
             if (item == null)
                 continue;
@@ -113,7 +116,7 @@ public class Magnet : MonoBehaviour
 
     void UpdateAttractingList()
     {
-        attractableObjects = attractableObjects.Where(x => x != null).ToList();
+        attractingObjects = attractingObjects.Where(x => x != null).ToList();
 
     }
 
