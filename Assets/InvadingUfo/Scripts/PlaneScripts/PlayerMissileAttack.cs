@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+
 namespace Ame
 {
     //ミサイルは戦闘機から出たとき少し下側へ落ちて、後ろ側へ流れたのち、速度上げて、敵へと向かう
@@ -10,8 +12,11 @@ namespace Ame
         public Transform missileLauncher;
         public GameObject target;
 
+
         public float lockonRange = 10;
-        public OnTriggerEnterSender lockonCollider;
+        public OnTriggerEnterSender lockonColliderEnterSender;
+        public OnTriggerExitSender lockonColliderExitSender;
+
         public float coolTimeSec = 4;
         Coroutine coolDownCoroutine;
         [Header("ミサイル")]
@@ -22,7 +27,8 @@ namespace Ame
         public UnityEngine.UI.Text missileCounterText;
         public UnityEngine.UI.Slider reloadSlider;
 
-
+        public List<MissileTargetInfo> lockonTargets = new List<MissileTargetInfo>();
+        Rect rect = new Rect(0, 0, 1, 1);
 
         private void Awake()
         {
@@ -31,11 +37,15 @@ namespace Ame
 
         private void Start()
         {
-            if (lockonCollider == null)
+            if (lockonColliderEnterSender != null)
             {
-                return;
+                lockonColliderEnterSender.OnTriggerEnterCalled += TriggerEnter;
             }
-            lockonCollider.OnTriggerEnterCalled += A;
+            if (lockonColliderExitSender != null)
+            {
+                lockonColliderExitSender.OnTriggerExitCalled += TriggerExit;
+            }
+
 
             if (missileCounterText != null)
             {
@@ -43,56 +53,49 @@ namespace Ame
             }
         }
 
-        public List<CommonCore> lockonTargets = new List<CommonCore>();
-
-        // Update is called once per frame
         void Update()
         {
             UpdateTarget();
 
+            //set target
+            float min = float.MaxValue;
+            MissileTargetInfo nearest = null;
+            foreach (var item in lockonTargets)
+            {
+                if (item.CanSeeInView)
+                {
+                    var distance = Vector3.Distance(transform.position, item.CommonCore.transform.position);
+                    if (distance < min)
+                    {
+                        min = distance;
+                        nearest = item;
+                    }
+                }
+            }
+
+            target = nearest?.CommonCore?.gameObject;
+
+
             if (Input.GetKeyDown(KeyCode.M))
             {
-                Fire(null);
+                Fire(target);
             }
         }
 
-        //TODO:update targetをkaku
         void UpdateTarget()
         {
             if (lockonTargets == null)
                 return;
 
-            lockonTargets.RemoveAll(x => x == null);
-            lockonTargets.RemoveAll(x => x.gameObject == null);//撃墜されてたら
+            //死んでるやつ削除
+            lockonTargets.RemoveAll(x => x == null || x.CommonCore == null || !x.CommonCore.IsAlive);
 
+            //カメラで見えてるか判定
+            foreach (var item in lockonTargets)
+            {
+                item.CanSeeInView = CanSeeInView(item.CommonCore.transform.position);
+            }
 
-            //var objects = GameObject.FindObjectsOfType(typeof(Health));
-
-            //GameObject nearest = null;
-            //float min = float.MaxValue;
-
-            //foreach (var item in objects)
-            //{
-
-            //    var go = item as MonoBehaviour;
-
-            //    //変換できて、自分自身でない
-            //    if (go != null && !ReferenceEquals(go.transform, transform))
-            //    {
-            //        var distance = Vector3.Distance(transform.position, go.transform.position);
-            //        if (distance > lockonRange)
-            //        {
-            //            continue;
-            //        }
-
-            //        if (min > distance)
-            //        {
-            //            min = distance;
-            //            nearest = go.gameObject;
-            //        }
-            //    }
-            //}
-            //target = nearest;
         }
 
         private void OnDrawGizmosSelected()
@@ -127,8 +130,6 @@ namespace Ame
             {
                 coolDownCoroutine = StartCoroutine(CoolDown());
             }
-
-
         }
 
         IEnumerator CoolDown()
@@ -137,6 +138,10 @@ namespace Ame
             coolDownCoroutine = null;
         }
 
+        bool CanSeeInView(Vector3 position)
+        {
+            return rect.Contains(Camera.main.WorldToViewportPoint(position));
+        }
 
         //attackのと違う
         protected IEnumerator Reload()
@@ -170,17 +175,49 @@ namespace Ame
 
         //TODO:common core を持っているやつはプレイヤーと味方とufoのどれかという前提で
         //書いてる
-        void A(Collider other)
+        void TriggerEnter(Collider other)
         {
             var cc = other.GetComponentInParent<CommonCore>();
             if (cc == null)
                 return;
 
-            if (lockonTargets.Contains(cc))
+
+            foreach (var item in lockonTargets)
+            {
+                if (item.CommonCore == cc)
+                    return;
+            }
+
+
+            var info = new MissileTargetInfo()
+            {
+                CommonCore = cc,
+                CanSeeInView = CanSeeInView(cc.transform.position),
+            };
+            lockonTargets.Add(info);
+        }
+
+        private void TriggerExit(Collider other)
+        {
+            var cc = other.GetComponentInParent<CommonCore>();
+            if (cc == null)
                 return;
 
+            for (int i = 0; i < lockonTargets.Count; i++)
+            {
+                if (lockonTargets[i].CommonCore == cc)
+                {
+                    lockonTargets.RemoveAt(i);
+                }
+            }
+        }
 
-            lockonTargets.Add(cc);
+
+        [System.Serializable]
+        public class MissileTargetInfo
+        {
+            public CommonCore CommonCore;
+            public bool CanSeeInView;//画面上に表示されるかどうか
         }
     }
 }

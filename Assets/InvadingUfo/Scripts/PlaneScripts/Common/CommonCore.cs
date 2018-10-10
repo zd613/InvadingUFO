@@ -12,7 +12,7 @@ public class CommonCore : MonoBehaviour
     protected event Action<float, float> Rotate;
 
     public float Altitude { get { return transform.position.y; } }
-
+    public bool IsAlive { get { return health.isAlive; } }
 
     protected Movement movement;
     protected Rotation rotation;
@@ -55,8 +55,8 @@ public class CommonCore : MonoBehaviour
                 var magnet = GetComponent<Magnet>();
                 if (magnet != null)
                 {
-                    magnet.isActive = false;
                     magnet.attractEffectObject.SetActive(false);
+                    magnet.isActive = false;
                 }
 
 

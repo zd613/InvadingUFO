@@ -23074,7 +23074,8 @@ MonoBehaviour:
   missileLauncher: {fileID: 397455950}
   target: {fileID: 0}
   lockonRange: 50
-  lockonCollider: {fileID: 0}
+  lockonColliderEnterSender: {fileID: 0}
+  lockonColliderExitSender: {fileID: 0}
   coolTimeSec: 4
   maxMissile: 0
   reloadTime: 5
@@ -25515,7 +25516,8 @@ MonoBehaviour:
   missileLauncher: {fileID: 1739944384}
   target: {fileID: 0}
   lockonRange: 50
-  lockonCollider: {fileID: 0}
+  lockonColliderEnterSender: {fileID: 0}
+  lockonColliderExitSender: {fileID: 0}
   coolTimeSec: 4
   maxMissile: 0
   reloadTime: 5
@@ -39060,10 +39062,11 @@ Prefab:
       propertyPath: reloadSlider
       value: 
       objectReference: {fileID: 1934413677}
-    - target: {fileID: 4434495508895396, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
-      objectReference: {fileID: 0}
+    - target: {fileID: 114972026578506518, guid: beb4a4495af87284ab9cfa9146f629fe,
+        type: 2}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 908090890}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
   m_IsPrefabAsset: 0

@@ -919,6 +919,7 @@ GameObject:
   - component: {fileID: 23816536610169668}
   - component: {fileID: 135851943512065498}
   - component: {fileID: 114598866755971590}
+  - component: {fileID: 114317287196018420}
   m_Layer: 13
   m_Name: LockonCollider
   m_TagString: Untagged
@@ -1647,8 +1648,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1054719675181024}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 74.4, z: -501.3}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 74.4, z: 254}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 4772040046373004}
@@ -1657,7 +1658,7 @@ Transform:
   - {fileID: 4844336861503640}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4438134259119708
 Transform:
   m_ObjectHideFlags: 1
@@ -4306,6 +4307,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80ba59b970657e242ab77ddf6eac02ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114317287196018420
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1696755872563062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dd00b4705cee1845842b4643af60053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114388207042968374
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4442,12 +4454,13 @@ MonoBehaviour:
   missileObject: {fileID: 1413720915113914, guid: cef2af197178b4649becbea6542343c7,
     type: 2}
   missileLauncher: {fileID: 4727078970031112}
-  target: {fileID: 0}
-  lockonRange: 50
-  lockonCollider: {fileID: 114598866755971590}
+  target: {fileID: 1096392849746776}
+  lockonRange: 10
+  lockonColliderEnterSender: {fileID: 114598866755971590}
+  lockonColliderExitSender: {fileID: 114317287196018420}
   coolTimeSec: 4
-  maxMissile: 5
-  reloadTime: 10
+  maxMissile: 4
+  reloadTime: 5
   missileCounterText: {fileID: 0}
   reloadSlider: {fileID: 0}
   lockonTargets: []
