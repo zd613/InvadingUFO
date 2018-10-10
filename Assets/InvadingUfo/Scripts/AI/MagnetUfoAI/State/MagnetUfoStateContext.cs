@@ -8,6 +8,12 @@ public class MagnetUfoStateContext
 
     public void Execute()
     {
+        //Debug.Log("execute");
         State.Execute();
+    }
+
+    public override string ToString()
+    {
+        return State.ToString();
     }
 }

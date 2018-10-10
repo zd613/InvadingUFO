@@ -19,7 +19,7 @@ public class UfoSpawner : MonoBehaviour
     private void Awake()
     {
         //SpawnUfo();
-        StartCoroutine(S());
+        StartCoroutine(LoopSpawning());
 
     }
 
@@ -37,7 +37,7 @@ public class UfoSpawner : MonoBehaviour
         }
     }
 
-    IEnumerator S()
+    IEnumerator LoopSpawning()
     {
         while (true)
         {

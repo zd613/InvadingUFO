@@ -29,7 +29,8 @@ public class ToTargetHouseInputProvider : BaseInputProvider
     //到着判定
     void CheckArrival()
     {
-        if (!isArrived) ;
+        if (!isArrived)
+            return;
         var distance = Vector3.Distance(transform.position, targetHouse.transform.position + offset);
 
         if (distance < eps)

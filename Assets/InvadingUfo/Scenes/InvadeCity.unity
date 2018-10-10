@@ -24304,7 +24304,7 @@ Prefab:
     - target: {fileID: 114815955062493096, guid: b85c3271e03390a4fb0be04be8f1b0d3,
         type: 2}
       propertyPath: isActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114726527159552956, guid: b85c3271e03390a4fb0be04be8f1b0d3,
         type: 2}
@@ -24364,6 +24364,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   houseManager: {fileID: 1705696401}
   target: {fileID: 0}
+  offset: {x: 0, y: 100, z: 0}
   ufoHome: {fileID: 1132393731}
 --- !u!1 &911226807
 GameObject:

@@ -13,6 +13,13 @@ public class FindTargetState : MagnetUfoBaseState
     public override void Execute()
     {
         targetHouse = houseManager.GetRandomHouse();
+        Debug.Log(targetHouse == null ? "null" : "not");
         ProcessFinished?.Invoke();
+        
+    }
+
+    public override string ToString()
+    {
+        return "Find Target";
     }
 }
