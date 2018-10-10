@@ -23049,7 +23049,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 720102760}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e90cb2bd9534c345bfd9d02717f5381, type: 3}
   m_Name: 
@@ -23195,7 +23195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 841ab65f87e11394aa075380310a6d52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useInputProvider: 1
+  useInputProvider: 0
   inputProvider: {fileID: 720102761}
 --- !u!54 &720102768
 Rigidbody:
@@ -24352,8 +24352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   houseManager: {fileID: 1705696401}
   target: {fileID: 0}
-  maxAttractCount: 3
-  toTarget: {fileID: 0}
+  ufoHome: {fileID: 1132393731}
 --- !u!1 &911226807
 GameObject:
   m_ObjectHideFlags: 0
@@ -26153,7 +26152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af937c48a56fe96448171c6a879329f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isActive: 1
+  isActive: 0
   ufoPrefab: {fileID: 1835181801364080, guid: b85c3271e03390a4fb0be04be8f1b0d3, type: 2}
   spawnCount: 5
   minInterval: 1

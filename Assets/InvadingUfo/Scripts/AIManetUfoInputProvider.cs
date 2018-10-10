@@ -2,84 +2,119 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//ステート管理してる
+//state context
+
 public class AIManetUfoInputProvider : BaseInputProvider
 {
     public HouseManager houseManager;
     public House target;
 
-    //マグネットでとれる最大数
-    public int maxAttractCount = 3;
-    //マグネットで取った数
-    int currentAttractCounter = 0;//TODO:名前変更
+    public Transform ufoHome;
 
-    Magnet magnet;
-    AIState state;
+    ////マグネットでとれる最大数
+    //public int maxAttractCount = 3;
+    ////マグネットで取った数
+    //int currentAttractCounter = 0;//TODO:名前変更
 
-    public ToTargetHouseInputProvider toTarget;
-    System.Action updateAction;
+    //Magnet magnet;
+    //AIState state;
 
-    private void Awake()
-    {
-        magnet = GetComponent<Magnet>();
+    //public ToTargetHouseInputProvider toTarget;
+    //System.Action updateAction;
+
+    //private void Awake()
+    //{
+    //    magnet = GetComponent<Magnet>();
 
 
-    }
+    //}
+
+    MagnetUfoStateContext stateContext = new MagnetUfoStateContext();
+    FindTargetState findTargetState = new FindTargetState();
+    GoToTargetState goToTargetState = new GoToTargetState();
 
     private void Start()
     {
-        FindTarget();
-    }
+        //stateの設定
+        findTargetState.houseManager = houseManager;
+        findTargetState.ProcessFinished += () =>
+        {
+            if (findTargetState.targetHouse == null)
+            {
+                //戻る
+                goToTargetState.target = ufoHome;
+                stateContext.State = goToTargetState;
+            }
+            else
+            {
+                //ターゲットへ向かう
+                goToTargetState.target = findTargetState.targetHouse.transform;
+                stateContext.State = goToTargetState;
+            }
+        };
 
+        goToTargetState.TargetNotFound += () => stateContext.State = findTargetState;
+        goToTargetState.myTransform = transform;
+
+
+
+    }
 
 
     public override void UpdateInputStatus()
     {
-        updateAction?.Invoke();
+        stateContext.Execute();
     }
 
-    //returns isArrived
-    bool GoToTarget()
-    {
-        toTarget.UpdateInputStatus();
-        return toTarget.isArrived;
-    }
+    //public override void UpdateInputStatus()
+    //{
+    //    updateAction?.Invoke();
+    //}
 
-    void FindTarget()
-    {
-        target = houseManager.GetRandomHouse();
-    }
+    ////returns isArrived
+    //bool GoToTarget()
+    //{
+    //    toTarget.UpdateInputStatus();
+    //    return toTarget.isArrived;
+    //}
 
-    IEnumerator AIRoutine()
-    {
-        //ターゲット探す
+    //void FindTarget()
+    //{
+    //    target = houseManager.GetRandomHouse();
+    //}
 
-        while (true)
-        {
+    //IEnumerator AIRoutine()
+    //{
+    //    //ターゲット探す
 
-            FindTarget();
+    //    while (true)
+    //    {
 
-            //ターゲットへ向かう
-            if (target == null)
-            {
-                break;
-            }
+    //        FindTarget();
 
-
-            while (true)
-            {
-                bool isArrived = GoToTarget();
-                if (isArrived)
-                    break;
-                yield return null;
-            }
-
-            yield return null;
-        }
+    //        //ターゲットへ向かう
+    //        if (target == null)
+    //        {
+    //            break;
+    //        }
 
 
-        //ターゲットを吸い取る
+    //        while (true)
+    //        {
+    //            bool isArrived = GoToTarget();
+    //            if (isArrived)
+    //                break;
+    //            yield return null;
+    //        }
 
-    }
+    //        yield return null;
+    //    }
+
+
+    //    //ターゲットを吸い取る
+
+    //}
 }
 
 public enum AIState
