@@ -199,6 +199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 371832542}
   - component: {fileID: 371832543}
+  - component: {fileID: 371832544}
   m_Layer: 0
   m_Name: CityGenerator
   m_TagString: Untagged
@@ -239,13 +240,32 @@ MonoBehaviour:
   gridWidthCount: 50
   gridHeightCount: 50
   gridOffset: {x: 0.5, y: 0, z: 0.5}
+--- !u!114 &371832544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 371832541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f499478c5ec0d4d49987e33dcda960a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rootGameObject: {fileID: 0}
   roadParentName: Roads
   roadParentGameObject: {fileID: 0}
+  roadGenerationMode: 1
+  roadOffset: {x: 0.5, y: 0, z: 0.5}
   roadGameObject: {fileID: 1859189187163654, guid: 60669f6cdf98fb04fb1d6b928c2b8d40,
+    type: 2}
+  road2x2Crossroad: {fileID: 1859189187163654, guid: aa9baa5602a45b14b864ce599bf6d735,
+    type: 2}
+  road2x2Straight: {fileID: 1465376633539910, guid: 9face90c8fae4b64aa53738a0f1b0079,
+    type: 2}
+  road2x2Edge: {fileID: 1667120559962894, guid: dbf307259783b6545a2d21702c4ed6db,
     type: 2}
   deltaWidth: 5
   deltaHeight: 5
-  roadOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &688192828
 GameObject:
   m_ObjectHideFlags: 0
