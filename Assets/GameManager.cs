@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public Text gameOverText;
     [Range(0, 1)]
     public float speed = 0.02f;
+    public GameObject buttonPanel;
 
     private void Awake()
     {
@@ -62,6 +63,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameOver()
     {
+        buttonPanel.SetActive(false);
         yield return new WaitForSeconds(0.5f);
         gameOverUI.SetActive(true);
         float alpha = 0;
@@ -77,6 +79,7 @@ public class GameManager : MonoBehaviour
 
             yield return null;
         }
+        buttonPanel.SetActive(true);
     }
 
 
