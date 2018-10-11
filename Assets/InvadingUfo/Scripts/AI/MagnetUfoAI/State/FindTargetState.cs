@@ -13,7 +13,6 @@ public class FindTargetState : UfoBaseState
     public override void Execute()
     {
         targetHouse = houseManager.GetRandomHouse();
-        Debug.Log(targetHouse == null ? "null" : "not");
         ProcessFinished?.Invoke();
         
     }

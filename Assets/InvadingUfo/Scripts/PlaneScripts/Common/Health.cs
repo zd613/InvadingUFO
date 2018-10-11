@@ -17,7 +17,7 @@ public class Health : MonoBehaviour, IDamageable
     public Slider hpSlider;
 
     public event Action OnDamageTaken;
-    public event Action OnDied;
+    public event Action OnDeath;
 
     public float MaxHp { get { return maxHp; } }
 
@@ -82,7 +82,7 @@ public class Health : MonoBehaviour, IDamageable
                 gameObject.SetActive(false);
                 //Destroy(gameObject);
             }
-            OnDied?.Invoke();
+            OnDeath?.Invoke();
         }
     }
 

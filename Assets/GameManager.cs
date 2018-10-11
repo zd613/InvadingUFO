@@ -11,9 +11,17 @@ public class GameManager : MonoBehaviour
     public Text countDownText;
     public CommonCore player;
 
+    [Header("GameOver")]
+    public GameObject gameOverUI;
+    public Text gameOverText;
+    [Range(0, 1)]
+    public float speed = 0.02f;
+
     private void Awake()
     {
         //StartCoroutine(CountDown());
+
+        player.OnDeath += () => StartCoroutine(GameOver());
     }
 
     private void Update()
@@ -49,6 +57,25 @@ public class GameManager : MonoBehaviour
         if (player != null)
         {
             player.Rotation.isActive = true;
+        }
+    }
+
+    IEnumerator GameOver()
+    {
+        yield return new WaitForSeconds(0.5f);
+        gameOverUI.SetActive(true);
+        float alpha = 0;
+        while (alpha < 1)
+        {
+            var color = gameOverText.color;
+            color.a = alpha;
+            gameOverText.color = color;
+            gameOverUI.SetActive(true);
+
+
+            alpha += speed;
+
+            yield return null;
         }
     }
 

@@ -13,7 +13,7 @@ public class StateContext
     {
         if (!canExecute)
             return;
-        Debug.Log("execute");
+        //Debug.Log("execute");
         State.Execute();
     }
 

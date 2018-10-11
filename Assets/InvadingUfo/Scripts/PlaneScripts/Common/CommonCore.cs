@@ -16,6 +16,10 @@ public class CommonCore : MonoBehaviour
 
     public Rotation Rotation { get { return rotation; } }
 
+    //event
+    public event Action OnDeath;
+    //
+
     protected Movement movement;
     protected Rotation rotation;
     protected Attack attack;
@@ -33,7 +37,7 @@ public class CommonCore : MonoBehaviour
         attack = GetComponent<Attack>();
         health = GetComponent<Health>();
         //
-
+        health.OnDeath += () => OnDeath?.Invoke();
 
     }
 
@@ -41,7 +45,7 @@ public class CommonCore : MonoBehaviour
     {
         if (health != null)
         {
-            health.OnDied += () =>
+            health.OnDeath += () =>
             {
                 GetComponent<Rigidbody>().isKinematic = true;
                 if (movement != null)
@@ -87,6 +91,8 @@ public class CommonCore : MonoBehaviour
         {
             movement.Move();
         }
+
+
 
     }
 

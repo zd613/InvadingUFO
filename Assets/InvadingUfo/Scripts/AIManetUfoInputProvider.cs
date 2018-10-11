@@ -79,7 +79,7 @@ public class AIManetUfoInputProvider : BaseInputProvider
         YawValue = 0;
 
 
-        print(stateContext.ToString());
+        //print(stateContext.ToString());
         stateContext.Execute();
     }
 }
