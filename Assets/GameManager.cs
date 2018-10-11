@@ -1,12 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject menuUI;
     bool isRunning = true;
+    public Text countDownText;
+    public CommonCore player;
+
+    private void Awake()
+    {
+        //StartCoroutine(CountDown());
+    }
 
     private void Update()
     {
@@ -18,6 +26,29 @@ public class GameManager : MonoBehaviour
                 menuUI.SetActive(true);
                 isRunning = false;
             }
+        }
+    }
+
+    public IEnumerator CountDown()
+    {
+        if (player != null)
+        {
+            player.Rotation.isActive = false;
+        }
+
+        countDownText.gameObject.SetActive(true);
+        countDownText.text = "3";
+        yield return new WaitForSeconds(1);
+        countDownText.text = "2";
+        yield return new WaitForSeconds(1);
+        countDownText.text = "1";
+        yield return new WaitForSeconds(1);
+        countDownText.text = "スタート";
+        yield return new WaitForSeconds(1);
+        countDownText.gameObject.SetActive(false);
+        if (player != null)
+        {
+            player.Rotation.isActive = true;
         }
     }
 
@@ -41,7 +72,6 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("Title");
     }
-
 
     public void BackToGame()
     {

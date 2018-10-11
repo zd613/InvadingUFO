@@ -14,6 +14,8 @@ public class CommonCore : MonoBehaviour
     public float Altitude { get { return transform.position.y; } }
     public bool IsAlive { get { return health.isAlive; } }
 
+    public Rotation Rotation { get { return rotation; } }
+
     protected Movement movement;
     protected Rotation rotation;
     protected Attack attack;
