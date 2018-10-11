@@ -75,6 +75,7 @@ public class CityGenerator : MonoBehaviour
         if (roadParentGameObject == null)
         {
             roadParentGameObject = new GameObject(roadParentName);
+            roadParentGameObject.transform.SetParent(rootGameObject.transform);
         }
 
         //Transform pt = roadParentGameObject.transform;
@@ -86,8 +87,34 @@ public class CityGenerator : MonoBehaviour
         mat.color = Color.red;
         grid[rh, rw].GetComponent<MeshRenderer>().material = mat;
 
+        var height = grid.GetLength(0);
+        var width = grid.GetLength(1);
         CreateRoadWithCross(rw, rh);
 
+
+        //z方向移動 height
+        for (int h = 0; h < height; h++)
+        {
+            var diff = h - rh;
+            print(diff);
+            if ((Mathf.Abs(diff) % (deltaHeight + 1)) == 0)//差がdeltaHeight+1の倍数
+            {
+
+                CreateRoadWithCross(rw, h);
+            }
+        }
+
+
+        //x方向移動　width
+        for (int w = 0; w < width; w++)
+        {
+            var diff = w - rw;
+            if ((Mathf.Abs(diff) % (deltaWidth + 1)) == 0)//差がdeltaHeight+1の倍数
+            {
+
+                CreateRoadWithCross(w, rh);
+            }
+        }
 
 
 

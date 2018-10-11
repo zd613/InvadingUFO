@@ -243,8 +243,8 @@ MonoBehaviour:
   roadParentGameObject: {fileID: 0}
   roadGameObject: {fileID: 1859189187163654, guid: 60669f6cdf98fb04fb1d6b928c2b8d40,
     type: 2}
-  deltaWidth: 4
-  deltaHeight: 4
+  deltaWidth: 5
+  deltaHeight: 5
   roadOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &688192828
 GameObject:
