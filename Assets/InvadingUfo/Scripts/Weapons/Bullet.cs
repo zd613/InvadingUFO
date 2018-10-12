@@ -55,6 +55,18 @@ namespace Ame
                 }
             }
 
+            print("hi");
+
+            if (other.gameObject.layer == LayerMask.NameToLayer("Stage"))
+            {
+                print("stage");
+
+                CreateHitEffect();
+                hit = true;
+                Destroy(gameObject);
+                return;
+            }
+
             //ダメージ処理
             var target = other.GetComponentInParent<IDamageable>();
             if (target != null)

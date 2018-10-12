@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4599704123658122}
   - component: {fileID: 65121613188263920}
   - component: {fileID: 114120070120222340}
+  - component: {fileID: 54313314626692978}
   m_Layer: 14
   m_Name: Bullet1
   m_TagString: Untagged
@@ -71,6 +72,21 @@ Transform:
   m_Father: {fileID: 4599704123658122}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &54313314626692978
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1514578246780428}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &65121613188263920
 BoxCollider:
   m_ObjectHideFlags: 1

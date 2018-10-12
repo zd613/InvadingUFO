@@ -38,7 +38,7 @@ public class HouseManager : MonoBehaviour
     public House GetRandomHouse()
     {
         RemoveDestroyedHouses();
-        print(houses.Count);
+        //print(houses.Count);
         var index = Random.Range(0, houses.Count);
         return houses[index];
     }
