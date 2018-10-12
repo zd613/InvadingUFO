@@ -8,6 +8,9 @@ public class GridGenerator : MonoBehaviour
     public GameObject rootGameObject;
     public CityCellType[,] cellTypes;//grid のcellが何かの情報
 
+    [Header("")]
+    public bool startOnAwake;
+
     [Header("グリッド")]
     public string gridName = "Grid";
     public GameObject gridGameObject;
@@ -15,10 +18,21 @@ public class GridGenerator : MonoBehaviour
     public int cellHeight = 1;
     GameObject[,] grid;
 
+    public bool useCutomGameObject = false;
+    public List<GameObject> cellGameObjects;
+
     public int gridWidthCount = 10;
     public int gridHeightCount = 10;
 
     public Vector3 gridOffset;
+
+    private void Awake()
+    {
+        if (startOnAwake)
+        {
+            MakeGrid();
+        }
+    }
 
     public void SetRootAndGridInfo(GameObject rootGameObject, CityCellType[,] cellTypes)
     {
@@ -31,7 +45,8 @@ public class GridGenerator : MonoBehaviour
         if (gridGameObject == null)
         {
             gridGameObject = new GameObject(gridName);
-            gridGameObject.transform.SetParent(rootGameObject.transform);
+            if (rootGameObject != null)
+                gridGameObject.transform.SetParent(rootGameObject.transform);
         }
 
         grid = new GameObject[gridHeightCount, gridWidthCount];
@@ -41,9 +56,18 @@ public class GridGenerator : MonoBehaviour
         {
             for (int w = 0; w < grid.GetLength(1); w++)
             {
-                var plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
+                GameObject plane;
+                if (useCutomGameObject || cellGameObjects.Count != 0)
+                {
+                    plane = Instantiate(cellGameObjects[Random.Range(0, cellGameObjects.Count)]);
+                }
+                else
+                {
+                    plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
+                }
+
                 plane.transform.SetParent(gridGameObject.transform);
-                plane.transform.localPosition = (new Vector3(w, 0, h) + gridOffset) * CityGenerator.DefaultDeltaDistance;
+                plane.transform.localPosition = (new Vector3(w * cellWidth, 0, h * cellHeight) + gridOffset) * CityGenerator.DefaultDeltaDistance;
                 grid[h, w] = plane;
                 cellTypes[h, w] = CityCellType.None;
             }
