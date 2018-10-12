@@ -77,18 +77,23 @@ public class RoadGenerator : MonoBehaviour
         else if (roadGenerationMode == RoadGenerationMode.Cell2x2)
         {
             //2x2 の　セルの表現
-            int w0 = 0;//右
-            int w1 = 1;//左
-            int h0 = 0;//下
-            int h1 = 1;//上
+            int ur = 0;//右上
+            int lr = 0;//右下
+
+            int ul = 1;//左上
+            int ll = 1;//左下
 
             var height = cellTypes.GetLength(0);
             var width = cellTypes.GetLength(1);
 
-            var position = (new Vector3(0.5f, 0, 0.5f) + roadOffset) * CityGenerator.DefaultDeltaDistance;
-            //var obj = Instantiate(road2x2GameObject, position, Quaternion.identity);
+            float x = (float)(ll + lr) / 2;
+            float z = (float)(ul + ll) / 2;
+            var position = (new Vector3(x, 0, z) + roadOffset) * CityGenerator.DefaultDeltaDistance;
+            var obj = Instantiate(road2x2Crossroad, position, Quaternion.identity);
+            obj.transform.SetParent(roadParentGameObject.transform);
 
-
+            CreateRoad2x2(0, 0, RoadDir.X);
+            //CreateRoad2x2(0, 0, RoadDir.Z);
         }
 
 
@@ -118,6 +123,147 @@ public class RoadGenerator : MonoBehaviour
         }
     }
 
+    void CreateRoad2x2(int lowerLeftCellX, int lowerLeftCellZ, RoadDir dir)
+    {
+        //2x2 の　セルの表現
+        //int ur;//右上
+
+        int rX = lowerLeftCellX + 1;//右
+        int lX = lowerLeftCellX;//左
+        int lZ = lowerLeftCellZ;//下
+        int uZ = lowerLeftCellZ + 1;//上
+        //横
+        if (dir == RoadDir.Z)
+        {
+            //プラス
+            while (true)
+            {
+                if (cellTypes[lZ, lX] == CityCellType.Road)
+                    continue;
+
+                float x = (float)(rX + lX) / 2;
+                float z = (float)(lZ + uZ) / 2;
+                var position = (new Vector3(x, 0, z) + roadOffset) * CityGenerator.DefaultDeltaDistance;
+
+
+                cellTypes[lZ, lX] = CityCellType.Road;
+                cellTypes[lZ, rX] = CityCellType.Road;
+                cellTypes[uZ, lX] = CityCellType.Road;
+                cellTypes[uZ, lX] = CityCellType.Road;
+
+                var rot = Quaternion.identity;
+                var obj = Instantiate(road2x2Crossroad, position, transform.rotation);
+                obj.transform.Rotate(new Vector3(0, 90, 0), Space.World);
+                obj.transform.SetParent(roadParentGameObject.transform);
+
+                //lX = (lX + 2 + deltaWidth);
+                lZ += 2;
+                uZ = lZ + 1;
+                if (lZ >= cellTypes.GetLength(0))
+                    break;
+            }
+
+            rX = lowerLeftCellX + 1;//右
+            lX = lowerLeftCellX;//左
+            lZ = lowerLeftCellZ;//下
+            uZ = lowerLeftCellZ + 1;//上
+
+            while (lZ >= 0)
+            {
+                if (cellTypes[lZ, lX] == CityCellType.Road)
+                    continue;
+
+                float x = (float)(rX + lX) / 2;
+                float z = (float)(lZ + uZ) / 2;
+                var position = (new Vector3(x, 0, z) + roadOffset) * CityGenerator.DefaultDeltaDistance;
+
+                cellTypes[lZ, lX] = CityCellType.Road;
+                cellTypes[lZ, rX] = CityCellType.Road;
+                cellTypes[uZ, lX] = CityCellType.Road;
+                cellTypes[uZ, lX] = CityCellType.Road;
+
+                var rot = Quaternion.identity;
+                var obj = Instantiate(road2x2Crossroad, position, transform.rotation);
+                obj.transform.Rotate(new Vector3(0, 90, 0), Space.World);
+                obj.transform.SetParent(roadParentGameObject.transform);
+
+                //lX = (lX + 2 + deltaWidth);
+                lZ += 2;
+                uZ = lZ + 1;
+
+            }
+
+        }
+        //縦
+        else
+        {
+            //プラス
+            while (true)
+            {
+                if (cellTypes[lZ, lX] == CityCellType.Road)
+                    continue;
+                float x = (float)(rX + lX) / 2;
+                float z = (float)(lZ + uZ) / 2;
+                var position = (new Vector3(x, 0, z) + roadOffset) * CityGenerator.DefaultDeltaDistance;
+
+
+                cellTypes[lZ, lX] = CityCellType.Road;
+                cellTypes[lZ, rX] = CityCellType.Road;
+                cellTypes[uZ, lX] = CityCellType.Road;
+                cellTypes[uZ, lX] = CityCellType.Road;
+
+                var rot = Quaternion.identity;
+                var obj = Instantiate(road2x2Crossroad, position, transform.rotation);
+                //obj.transform.Rotate(new Vector3(0, 90, 0), Space.World);
+                obj.transform.SetParent(roadParentGameObject.transform);
+
+                //lX = (lX + 2 + deltaWidth);
+                lX += 2;
+                rX = lX + 1;
+
+                if (rX >= cellTypes.GetLength(1))
+                    break;
+            }
+
+            rX = lowerLeftCellX + 1;//右
+            lX = lowerLeftCellX;//左
+            lZ = lowerLeftCellZ;//下
+            uZ = lowerLeftCellZ + 1;//上
+
+            //マイナス
+            while (lX <= 0)
+            {
+                if (cellTypes[lZ, lX] == CityCellType.Road)
+                    continue;
+
+                float x = (float)(rX + lX) / 2;
+                float z = (float)(lZ + uZ) / 2;
+                var position = (new Vector3(x, 0, z) + roadOffset) * CityGenerator.DefaultDeltaDistance;
+
+                cellTypes[lZ, lX] = CityCellType.Road;
+                cellTypes[lZ, rX] = CityCellType.Road;
+                cellTypes[uZ, lX] = CityCellType.Road;
+                cellTypes[uZ, lX] = CityCellType.Road;
+
+                var rot = Quaternion.identity;
+                var obj = Instantiate(road2x2Crossroad, position, transform.rotation);
+                //obj.transform.Rotate(new Vector3(0, 90, 0), Space.World);
+                obj.transform.SetParent(roadParentGameObject.transform);
+
+                //lX = (lX + 2 + deltaWidth);
+                lX -= 2;
+                rX = lX + 1;
+
+
+            }
+        }
+    }
+
+    enum RoadDir
+    {
+        X,
+        Z,
+    }
 }
 
 

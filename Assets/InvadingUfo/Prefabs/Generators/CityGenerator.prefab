@@ -102,4 +102,4 @@ MonoBehaviour:
   cellGameObjects: []
   gridWidthCount: 100
   gridHeightCount: 100
-  gridOffset: {x: 0, y: 0, z: 0}
+  gridOffset: {x: 0.5, y: 0, z: 0.5}
