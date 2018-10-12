@@ -5,14 +5,20 @@ using UnityEngine;
 public class UfoSpawner : MonoBehaviour
 {
     public bool isActive = true;
-    public GameObject ufoPrefab;
-    public int spawnCount;
+
+    [Header("生成オブジェクト")]
+    public List<SpawnInfo> spawnInfo;
+
+
+    [Header("生成間の時間")]
     public float minInterval = 1;
     public float maxInterval = 2;
 
-    public List<UfoRouteInfo> routeInfo;
+    //public List<UfoRouteInfo> routeInfo;
 
-    int current = 0;
+    int spawnInfoListIndex = 0;
+    int infoGameObjectCounter = 0;
+
     int routeIndex = 0;
     int routeCount = 0;
 
@@ -23,22 +29,24 @@ public class UfoSpawner : MonoBehaviour
 
     }
 
-    void SpawnUfo()
+    void SpawnUfo(SpawnInfo info)
     {
         var rot = Quaternion.identity;
-        var obj = Instantiate(ufoPrefab, transform.position, rot);
+        var obj = Instantiate(info.GameObject, transform.position, rot);
 
-        var followPath = obj.GetComponent<FollowPathInputProvider>();
-        followPath.targetPath = routeInfo[routeIndex].path;
-        routeCount++;
-        if (routeCount >= routeInfo[routeIndex].ufoCount)
-        {
-            routeIndex++;
-        }
+        //var followPath = obj.GetComponent<FollowPathInputProvider>();
+        //followPath.targetPath = routeInfo[routeIndex].path;
+        //routeCount++;
+        //if (routeCount >= routeInfo[routeIndex].ufoCount)
+        //{
+        //    routeIndex++;
+        //}
     }
 
     IEnumerator LoopSpawning()
     {
+        if (spawnInfo.Count == 0)
+            yield break;
         while (true)
         {
             if (!isActive)
@@ -47,10 +55,16 @@ public class UfoSpawner : MonoBehaviour
                 continue;
             }
 
-            SpawnUfo();
+            SpawnUfo(spawnInfo[spawnInfoListIndex]);
+            infoGameObjectCounter++;
 
-            current++;
-            if (current >= spawnCount)
+            if (infoGameObjectCounter >= spawnInfo[spawnInfoListIndex].Count)
+            {
+                spawnInfoListIndex++;
+                infoGameObjectCounter = 0;
+            }
+
+            if (spawnInfoListIndex == spawnInfo.Count)
             {
                 break;
             }

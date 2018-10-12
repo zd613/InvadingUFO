@@ -12,9 +12,9 @@ public class FindTargetState : UfoBaseState
 
     public override void Execute()
     {
-        targetHouse = houseManager.GetRandomHouse();
+        targetHouse = houseManager?.GetRandomHouse();
         ProcessFinished?.Invoke();
-        
+
     }
 
     public override string ToString()

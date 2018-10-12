@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public float speed = 0.02f;
     public GameObject buttonPanel;
 
+
     private void Awake()
     {
         //StartCoroutine(CountDown());
