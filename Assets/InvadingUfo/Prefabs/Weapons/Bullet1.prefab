@@ -138,6 +138,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0.38}
   - {x: 0, y: 0, z: 0.4}
+  - {x: 0, y: 0, z: 0.4}
   m_Parameters:
     serializedVersion: 2
     widthMultiplier: 1
@@ -145,8 +146,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.01320076
-        value: 0.12088013
+        time: 0.006444931
+        value: 0.23025513
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -154,8 +155,8 @@ LineRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.22452332
-        value: 0.526651
+        time: 0.2414148
+        value: 0.698526
         inSlope: 1.3541058
         outSlope: 1.3541058
         tangentMode: 0
@@ -164,7 +165,7 @@ LineRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.65013736
-        value: 0.60439867
+        value: 0.83096117
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -172,8 +173,8 @@ LineRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.92425185
-        value: 0.35969543
+        time: 0.8634303
+        value: 0.53938293
         inSlope: -1.385808
         outSlope: -1.385808
         tangentMode: 0

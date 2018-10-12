@@ -26,7 +26,7 @@ public class RoadGenerator : MonoBehaviour
     //public Vector3 roadOffset;
     List<GameObject> roads = new List<GameObject>();
 
-    public void Initialize(GameObject rootGameObject, CityCellType[,] cellTypes)
+    public void SetRootAndGridInfo(GameObject rootGameObject, CityCellType[,] cellTypes)
     {
         this.rootGameObject = rootGameObject;
         this.cellTypes = cellTypes;
