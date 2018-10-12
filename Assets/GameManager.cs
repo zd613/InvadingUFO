@@ -18,12 +18,34 @@ public class GameManager : MonoBehaviour
     public float speed = 0.02f;
     public GameObject buttonPanel;
 
+    [Header("カメラ")]
+    public GameObject mainCamera;
+
+    [Header("debug")]
+    public bool countDownOnStart = true;
+
 
     private void Awake()
     {
-        //StartCoroutine(CountDown());
+
 
         player.OnDeath += () => StartCoroutine(GameOver());
+    }
+
+    private void Start()
+    {
+        if (countDownOnStart)
+            StartCoroutine(CountDown());
+
+        mainCamera.GetComponent<FollowingCamera>().enabled = false;
+        var s = mainCamera.GetComponent<StartCameraAction>();
+        s.enabled = true;
+        s.OnFinished += () =>
+        {
+            s.enabled = false;
+            mainCamera.GetComponent<FollowingCamera>().enabled = true;
+        };
+
     }
 
     private void Update()

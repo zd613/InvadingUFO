@@ -55,11 +55,9 @@ namespace Ame
                 }
             }
 
-            print("hi");
 
             if (other.gameObject.layer == LayerMask.NameToLayer("Stage"))
             {
-                print("stage");
 
                 CreateHitEffect();
                 hit = true;
