@@ -17,14 +17,14 @@ public class PlanePitchYawController
     //}
 
     //ターゲット方向へ向くようにpitch yawをセットする
-    public void SetPitchYawLookingAt(Vector3 target)
+    public void SetPitchYawLookingAt(Vector3 targetPosition)
     {
 
         float pitch = 0;
         float yaw = 0;
 
-        var q = Quaternion.LookRotation(/*target.transform.position*/ target - transform.position);
-        Debug.DrawRay(transform.position, /*target.transform.position*/target - transform.position, Color.yellow);
+        var q = Quaternion.LookRotation(/*target.transform.position*/ targetPosition - transform.position);
+        Debug.DrawRay(transform.position, /*target.transform.position*/targetPosition - transform.position, Color.yellow);
 
 
         float targetX = q.eulerAngles.x;
@@ -58,7 +58,7 @@ public class PlanePitchYawController
         }
 
         //Yaw
-        var targetDir = /*target.position*/target - transform.position;
+        var targetDir = /*target.position*/targetPosition - transform.position;
         var forward = transform.forward;
 
         float angleY = Vector3.SignedAngle(forward, targetDir, Vector3.up);
@@ -94,4 +94,8 @@ public class PlanePitchYawController
         Yaw = yaw;
     }
 
+    //public void SetPitchYawLookingDirection(Vector3 direction)
+    //{
+    //    SetPitchYawLookingAt(transform.position + direction);
+    //}
 }
