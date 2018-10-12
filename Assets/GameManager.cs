@@ -75,13 +75,14 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1);
         countDownText.text = "1";
         yield return new WaitForSeconds(1);
-        countDownText.text = "スタート";
-        yield return new WaitForSeconds(1);
-        countDownText.gameObject.SetActive(false);
         if (player != null)
         {
             player.Rotation.isActive = true;
         }
+        countDownText.text = "スタート";
+        yield return new WaitForSeconds(1);
+        countDownText.gameObject.SetActive(false);
+
     }
 
     IEnumerator GameOver()
