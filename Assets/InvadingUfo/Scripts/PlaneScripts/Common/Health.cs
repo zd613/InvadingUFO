@@ -150,8 +150,8 @@ public class Health : MonoBehaviour, IDamageable
         var ob = GetComponentInParent<CommonCore>().gameObject;
         if (ob.tag == "Player")
         {
-            var fc = Camera.main.gameObject.GetComponent<FollowingCamera>();
-            fc.target = fracturedObjectsParent.GetComponentsInChildren<Transform>()[1];
+            //var fc = Camera.main.gameObject.GetComponent<FollowingCamera>();
+            //fc.target = fracturedObjectsParent.GetComponentsInChildren<Transform>()[1];
         }
     }
 
