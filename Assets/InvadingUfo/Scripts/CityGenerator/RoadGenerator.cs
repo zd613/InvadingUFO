@@ -18,8 +18,8 @@ public class RoadGenerator : MonoBehaviour
     public Vector3 roadOffset;//道全体を移動させる
     //あとで複数の道路に変える
     public GameObject roadGameObject;
-    public GameObject road2x2Crossroad;
-    public GameObject road2x2Straight;
+    public GameObject road2x2Staright;
+    public GameObject road2x2Cross;
     public GameObject road2x2Edge;
 
     public int deltaWidth = 4;
@@ -38,6 +38,8 @@ public class RoadGenerator : MonoBehaviour
         this.rootGameObject = rootGameObject;
         this.cellTypes = cellTypes;
     }
+
+    //2x2 は一個飛ばしですれば楽そう
 
     public void MakeRoads()
     {
@@ -102,6 +104,7 @@ public class RoadGenerator : MonoBehaviour
             var height = cellTypes.GetLength(0);
             var width = cellTypes.GetLength(1);
 
+            //x,zの順番買えたら交差点などがおかしくなるかも
             //X移動してZ方向に道路
             for (int x = 0; x < width; x += (2 + deltaWidth))
             {
@@ -121,33 +124,33 @@ public class RoadGenerator : MonoBehaviour
                 {
                     if (cellTypes[z, x] == CityCellType.Road)
                     {
-                        roadtypes[z, x] = RoadType.Normal;
+                        roadtypes[z, x] = RoadType.Straight;
                     }
                 }
             }
 
 
             //交差点
-            for (int z = 0; z < cellTypes.GetLength(0); z++)
-            {
-                for (int x = 0; x < cellTypes.GetLength(1); x++)
-                {
-                    if (roadtypes[z, x] != RoadType.None)
-                    {
-                        bool a = roadtypes[z - 1, x] != RoadType.None;
-                        bool b = roadtypes[z + 1, x] != RoadType.None;
-                        bool c = roadtypes[z, x - 1] != RoadType.None;
-                        bool d = roadtypes[z, x + 1] != RoadType.None;
+            //for (int z = 0; z < cellTypes.GetLength(0); z++)
+            //{
+            //    for (int x = 0; x < cellTypes.GetLength(1); x++)
+            //    {
+            //        if (roadtypes[z, x] != RoadType.None)
+            //        {
+            //            bool a = roadtypes[z - 1, x] != RoadType.None;
+            //            bool b = roadtypes[z + 1, x] != RoadType.None;
+            //            bool c = roadtypes[z, x - 1] != RoadType.None;
+            //            bool d = roadtypes[z, x + 1] != RoadType.None;
 
-                        //まわり全てroad
-                        if (a && b && c && d)
-                        {
-                            roadtypes[z, x] = RoadType.Crossroad;
-                        }
+            //            まわり全てroad
+            //            if (a && b && c && d)
+            //            {
+            //                roadtypes[z, x] = RoadType.Crossroad;
+            //            }
 
-                    }
-                }
-            }
+            //        }
+            //    }
+            //}
         }
 
 
@@ -211,7 +214,19 @@ public class RoadGenerator : MonoBehaviour
                 SetCityCellTypes(rx, lx, lz, uz);
 
                 var rot = Quaternion.identity;
-                var obj = Instantiate(road2x2Crossroad, position, transform.rotation);
+
+                //
+                GameObject obj = null;
+                if (lz % (deltaHeight + 2) == 0)
+                {
+                    obj = Instantiate(road2x2Cross, position, transform.rotation);
+                    SetRoadTypes2x2(lx, lz, RoadType.Crossroad);
+                }
+                else
+                {
+                    obj = Instantiate(road2x2Staright, position, transform.rotation);
+                    SetRoadTypes2x2(lx, lz, RoadType.Straight);
+                }
                 //obj.transform.Rotate(new Vector3(0, 90, 0), Space.World);
                 obj.transform.SetParent(roadParentGameObject.transform);
 
@@ -245,7 +260,17 @@ public class RoadGenerator : MonoBehaviour
 
 
                 var rot = Quaternion.identity;
-                var obj = Instantiate(road2x2Crossroad, position, transform.rotation);
+                GameObject obj = null;
+                if (lz % (deltaHeight + 2) == 0)
+                {
+                    obj = Instantiate(road2x2Cross, position, transform.rotation);
+                    SetRoadTypes2x2(lx, lz, RoadType.Crossroad);
+                }
+                else
+                {
+                    obj = Instantiate(road2x2Staright, position, transform.rotation);
+                    SetRoadTypes2x2(lx, lz, RoadType.Straight);
+                }
                 //obj.transform.Rotate(new Vector3(0, 90, 0), Space.World);
                 obj.transform.SetParent(roadParentGameObject.transform);
 
@@ -277,7 +302,9 @@ public class RoadGenerator : MonoBehaviour
 
 
                 var rot = Quaternion.identity;
-                var obj = Instantiate(road2x2Crossroad, position, transform.rotation);
+                var obj = Instantiate(road2x2Staright, position, transform.rotation);
+                SetRoadTypes2x2(lx, lz, RoadType.Straight);
+
                 obj.transform.Rotate(new Vector3(0, 90, 0), Space.World);
                 obj.transform.SetParent(roadParentGameObject.transform);
 
@@ -314,7 +341,9 @@ public class RoadGenerator : MonoBehaviour
                 SetCityCellTypes(rx, lx, lz, uz);
 
                 var rot = Quaternion.identity;
-                var obj = Instantiate(road2x2Crossroad, position, transform.rotation);
+                var obj = Instantiate(road2x2Staright, position, transform.rotation);
+                SetRoadTypes2x2(lx, lz, RoadType.Straight);
+
                 //obj.transform.Rotate(new Vector3(0, 90, 0), Space.World);
                 obj.transform.SetParent(roadParentGameObject.transform);
 
@@ -329,10 +358,21 @@ public class RoadGenerator : MonoBehaviour
 
     void SetCityCellTypes(int rx, int lx, int lz, int uz, CityCellType cityCellType = CityCellType.Road)
     {
-        cellTypes[lz, lx] = CityCellType.Road;
-        cellTypes[lz, rx] = CityCellType.Road;
-        cellTypes[uz, lx] = CityCellType.Road;
-        cellTypes[uz, rx] = CityCellType.Road;
+        cellTypes[lz, lx] = cityCellType;
+        cellTypes[lz, rx] = cityCellType;
+        cellTypes[uz, lx] = cityCellType;
+        cellTypes[uz, rx] = cityCellType;
+    }
+
+    //４つのうち左下のcellが引数
+    //そのcellの上、右、右上の４つのcellのタイプを設定
+    void SetRoadTypes2x2(int lx, int lz, RoadType roadType)
+    {
+        roadtypes[lz, lx] = roadType;
+        roadtypes[lz + 1, lx] = roadType;
+        roadtypes[lz, lx + 1] = roadType;
+        roadtypes[lz + 1, lx + 1] = roadType;
+
     }
 
     enum RoadDir
@@ -345,7 +385,7 @@ public class RoadGenerator : MonoBehaviour
     {
         None,
         Crossroad,
-        Normal,
+        Straight,
         NextToCrossroad,
     }
 }

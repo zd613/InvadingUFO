@@ -60,9 +60,9 @@ MonoBehaviour:
   roadOffset: {x: 0.5, y: 0, z: 0.5}
   roadGameObject: {fileID: 1859189187163654, guid: 60669f6cdf98fb04fb1d6b928c2b8d40,
     type: 2}
-  road2x2Crossroad: {fileID: 1465376633539910, guid: 2a796b1068546d049a1f52ddac1babbe,
+  road2x2Staright: {fileID: 1465376633539910, guid: 9face90c8fae4b64aa53738a0f1b0079,
     type: 2}
-  road2x2Straight: {fileID: 1465376633539910, guid: 9face90c8fae4b64aa53738a0f1b0079,
+  road2x2Cross: {fileID: 1859189187163654, guid: aa9baa5602a45b14b864ce599bf6d735,
     type: 2}
   road2x2Edge: {fileID: 1667120559962894, guid: dbf307259783b6545a2d21702c4ed6db,
     type: 2}
@@ -108,6 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootGameObject: {fileID: 0}
   startOnAwake: 0
+  hideAfterCreation: 1
   gridName: Grid
   gridGameObject: {fileID: 0}
   cellWidth: 1
