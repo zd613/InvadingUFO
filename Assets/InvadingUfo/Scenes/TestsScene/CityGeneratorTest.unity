@@ -295,22 +295,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114369930098665244, guid: 075a3482e6aadd74f9398c5c2218d15a,
-        type: 2}
-      propertyPath: roadGenerationMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114369930098665244, guid: 075a3482e6aadd74f9398c5c2218d15a,
-        type: 2}
-      propertyPath: road2x2Crossroad
-      value: 
-      objectReference: {fileID: 1465376633539910, guid: 2a796b1068546d049a1f52ddac1babbe,
-        type: 2}
-    - target: {fileID: 114369930098665244, guid: 075a3482e6aadd74f9398c5c2218d15a,
-        type: 2}
-      propertyPath: roadOffset.z
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 075a3482e6aadd74f9398c5c2218d15a, type: 2}
   m_IsPrefabAsset: 0
