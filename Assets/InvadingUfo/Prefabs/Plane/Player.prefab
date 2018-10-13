@@ -240,7 +240,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1173365595504734
 GameObject:
   m_ObjectHideFlags: 1
@@ -4467,7 +4467,7 @@ MonoBehaviour:
   reversePitchControl: 0
   minPitchAngle: -45
   maxPitchAngle: 45
-  canTurnByAreaWall: 0
+  canTurnByAreaWall: 1
   useAnimation: 0
 --- !u!114 &114924164139002530
 MonoBehaviour:

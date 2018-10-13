@@ -67,7 +67,7 @@ public class BoidsState : BaseState
         var center = boidsManager.CalculateCenterPosition();
 
         var centerDir = (center - transform.position).normalized;
-        Debug.Log(center);
+        //Debug.Log(center);
 
 
         var dir = (transform.forward * Turbulence + centerDir * (1 - Turbulence)).normalized;

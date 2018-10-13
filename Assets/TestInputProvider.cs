@@ -34,7 +34,7 @@ public class TestInputProvider : BaseInputProvider
         YawValue = 0;
 
         context.Execute();
-        print(PitchValue + "," + YawValue);
+        //print(PitchValue + "," + YawValue);
 
     }
 }
