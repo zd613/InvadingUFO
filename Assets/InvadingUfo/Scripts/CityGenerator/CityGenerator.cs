@@ -15,9 +15,9 @@ public class CityGenerator : MonoBehaviour
 
 
     CityCellType[,] cellTypes;
-
-    GridGenerator gridGenerator;
-    RoadGenerator roadGenerator;
+    [Header("Generator")]
+    public GridGenerator gridGenerator;
+    public RoadGenerator roadGenerator;
 
     [Header("sidewalk")]
     public string sidewalkParentName = "Sidewalk";
@@ -44,15 +44,16 @@ public class CityGenerator : MonoBehaviour
         gridGenerator = GetComponent<GridGenerator>();
 
         roadGenerator = GetComponent<RoadGenerator>();
-        Generate();
+        //Generate();
     }
 
 
     //road generator
 
 
-    void Generate()
+    public void Generate()
     {
+
 
         //ルートオブジェクト作成
         if (rootGameObject == null)

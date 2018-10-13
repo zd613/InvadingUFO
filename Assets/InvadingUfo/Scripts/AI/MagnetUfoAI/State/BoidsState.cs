@@ -71,7 +71,7 @@ public class BoidsState : BaseState
 
 
         var dir = (transform.forward * Turbulence + centerDir * (1 - Turbulence)).normalized;
-        Debug.Log(dir);
+        //Debug.Log(dir);
 
         velocity = (velocity + dir).normalized;
     }
