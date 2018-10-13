@@ -22,17 +22,16 @@ public class CityGenerator : MonoBehaviour
     [Header("sidewalk")]
     public string sidewalkParentName = "Sidewalk";
     public GameObject sidewalkParentGameObject;
-    public GameObject cube;
+    public GameObject sidewalkPrefab;//一辺が1cell の大きさのcube
     public Vector3 sidewalkOffset;
-    public Material sidewalkMaterial;
     public float sidewalkYScale = 1;
 
 
     [Header("Ground")]
     public string groundParentName = "Ground";
     public GameObject groundParentGameObject;
+    public GameObject groundPrefab;//1m x 1m x 1m の大きさのcube
     public Vector3 groundOffset;
-    public Material groundMaterial;
     public float groundYScale = 1;
 
     private void Awake()
@@ -141,11 +140,6 @@ public class CityGenerator : MonoBehaviour
                     o.transform.position = (new Vector3(px, 0, pz) + sidewalkOffset) * DefaultDeltaDistance;
                     o.transform.SetParent(sidewalkParentGameObject.transform);
 
-                    if (sidewalkMaterial != null)
-                    {
-                        o.GetComponent<MeshRenderer>().sharedMaterial = sidewalkMaterial;
-                    }
-
 
                     //celltypes の設定
                     for (int sz = z; sz <= upperRightZ; sz++)
@@ -169,10 +163,6 @@ public class CityGenerator : MonoBehaviour
 
                         ground.transform.position = (new Vector3(px, 0, pz) + groundOffset) * DefaultDeltaDistance;
                         ground.transform.SetParent(groundParentGameObject.transform);
-                        if (groundMaterial != null)
-                        {
-                            ground.GetComponent<MeshRenderer>().sharedMaterial = groundMaterial;
-                        }
                     }
 
 
@@ -197,7 +187,7 @@ public class CityGenerator : MonoBehaviour
 
     GameObject InstantiateSidewalk(int width, int height)
     {
-        var obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        var obj = Instantiate(sidewalkPrefab);/*GameObject.CreatePrimitive(PrimitiveType.Cube);*/
         obj.transform.localScale = obj.transform.localScale * DefaultDeltaDistance;
         var ls = obj.transform.localScale;
         ls.x *= width;
@@ -210,7 +200,7 @@ public class CityGenerator : MonoBehaviour
 
     GameObject InstantiateGround(int width, int height)
     {
-        var obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        var obj = Instantiate(groundPrefab);/*GameObject.CreatePrimitive(PrimitiveType.Cube);*/
         obj.transform.localScale = obj.transform.localScale * DefaultDeltaDistance;
         var ls = obj.transform.localScale;
         ls.x *= width;

@@ -81,16 +81,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootName: City
   rootGameObject: {fileID: 0}
+  gridGenerator: {fileID: 114669442776660264}
+  roadGenerator: {fileID: 114369930098665244}
   sidewalkParentName: Sidewalk
   sidewalkParentGameObject: {fileID: 0}
-  cube: {fileID: 0}
+  sidewalkPrefab: {fileID: 1941890605752934, guid: a1010dc90240cb649a6c3f384c8b8971,
+    type: 2}
   sidewalkOffset: {x: 0.5, y: 0, z: 0.5}
-  sidewalkMaterial: {fileID: 2100000, guid: a981954894a1b7a44a7897e96810d2fd, type: 2}
   sidewalkYScale: 0.1
   groundParentName: Ground
   groundParentGameObject: {fileID: 0}
+  groundPrefab: {fileID: 1442739155225920, guid: c939f184424cf4e4b832b7ee58d53c09,
+    type: 2}
   groundOffset: {x: 0.5, y: 0, z: 0.5}
-  groundMaterial: {fileID: 2100000, guid: 70cbe55d7d8308c489b33a39f9681d2f, type: 2}
   groundYScale: 0.4
 --- !u!114 &114669442776660264
 MonoBehaviour:

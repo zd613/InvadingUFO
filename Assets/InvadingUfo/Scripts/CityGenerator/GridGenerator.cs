@@ -10,6 +10,7 @@ public class GridGenerator : MonoBehaviour
 
     [Header("")]
     public bool startOnAwake;
+    public bool hideAfterCreation;
 
     [Header("グリッド")]
     public string gridName = "Grid";
@@ -78,6 +79,11 @@ public class GridGenerator : MonoBehaviour
                 grid[h, w] = plane;
                 cellTypes[h, w] = CityCellType.None;
             }
+        }
+
+        if (hideAfterCreation)
+        {
+            gridGameObject.SetActive(false);
         }
     }
 }

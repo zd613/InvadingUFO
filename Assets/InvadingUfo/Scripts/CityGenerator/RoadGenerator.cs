@@ -37,7 +37,6 @@ public class RoadGenerator : MonoBehaviour
     {
         this.rootGameObject = rootGameObject;
         this.cellTypes = cellTypes;
-        roadtypes = new RoadType[cellTypes.GetLength(0), cellTypes.GetLength(1)];
     }
 
     public void MakeRoads()
@@ -48,6 +47,10 @@ public class RoadGenerator : MonoBehaviour
             roadParentGameObject.transform.SetParent(rootGameObject.transform);
         }
 
+        if (roadtypes == null)
+        {
+            roadtypes = new RoadType[cellTypes.GetLength(0), cellTypes.GetLength(1)];
+        }
 
         if (roadGenerationMode == RoadGenerationMode.Cell1x1)
         {
@@ -99,15 +102,6 @@ public class RoadGenerator : MonoBehaviour
             var height = cellTypes.GetLength(0);
             var width = cellTypes.GetLength(1);
 
-            //float x = (float)(ll + lr) / 2;
-            //float z = (float)(ul + ll) / 2;
-            //var position = (new Vector3(x, 0, z) + roadOffset) * CityGenerator.DefaultDeltaDistance;
-            //var obj = Instantiate(road2x2Crossroad, position, Quaternion.identity);
-            //obj.transform.SetParent(roadParentGameObject.transform);
-
-            //CreateRoad2x2(0, 0, RoadDir.X);
-            //CreateRoad2x2(0, 0, RoadDir.Z);
-
             //X移動してZ方向に道路
             for (int x = 0; x < width; x += (2 + deltaWidth))
             {
@@ -117,6 +111,42 @@ public class RoadGenerator : MonoBehaviour
             for (int z = 0; z < height; z += (2 + deltaHeight))
             {
                 CreateRoad2x2(0, z, RoadDir.X);
+            }
+
+
+            //roadtype を記録
+            for (int z = 0; z < cellTypes.GetLength(0); z++)
+            {
+                for (int x = 0; x < cellTypes.GetLength(1); x++)
+                {
+                    if (cellTypes[z, x] == CityCellType.Road)
+                    {
+                        roadtypes[z, x] = RoadType.Normal;
+                    }
+                }
+            }
+
+
+            //交差点
+            for (int z = 0; z < cellTypes.GetLength(0); z++)
+            {
+                for (int x = 0; x < cellTypes.GetLength(1); x++)
+                {
+                    if (roadtypes[z, x] != RoadType.None)
+                    {
+                        bool a = roadtypes[z - 1, x] != RoadType.None;
+                        bool b = roadtypes[z + 1, x] != RoadType.None;
+                        bool c = roadtypes[z, x - 1] != RoadType.None;
+                        bool d = roadtypes[z, x + 1] != RoadType.None;
+
+                        //まわり全てroad
+                        if (a && b && c && d)
+                        {
+                            roadtypes[z, x] = RoadType.Crossroad;
+                        }
+
+                    }
+                }
             }
         }
 
