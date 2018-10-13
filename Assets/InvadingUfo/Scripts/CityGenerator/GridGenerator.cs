@@ -25,6 +25,7 @@ public class GridGenerator : MonoBehaviour
     public int gridHeightCount = 10;
 
     public Vector3 gridOffset;
+    public Material gridMaterial;
 
     private void Awake()
     {
@@ -64,6 +65,12 @@ public class GridGenerator : MonoBehaviour
                 else
                 {
                     plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
+
+                }
+
+                if (gridMaterial != null)
+                {
+                    plane.GetComponent<MeshRenderer>().sharedMaterial = gridMaterial;
                 }
 
                 plane.transform.SetParent(gridGameObject.transform);

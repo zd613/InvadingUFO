@@ -66,8 +66,8 @@ MonoBehaviour:
     type: 2}
   road2x2Edge: {fileID: 1667120559962894, guid: dbf307259783b6545a2d21702c4ed6db,
     type: 2}
-  deltaWidth: 20
-  deltaHeight: 10
+  deltaWidth: 18
+  deltaHeight: 6
 --- !u!114 &114659311844269556
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -86,12 +86,12 @@ MonoBehaviour:
   cube: {fileID: 0}
   sidewalkOffset: {x: 0.5, y: 0, z: 0.5}
   sidewalkMaterial: {fileID: 2100000, guid: a981954894a1b7a44a7897e96810d2fd, type: 2}
-  sidewalkYScale: 1
+  sidewalkYScale: 0.1
   groundParentName: Ground
   groundParentGameObject: {fileID: 0}
   groundOffset: {x: 0.5, y: 0, z: 0.5}
   groundMaterial: {fileID: 2100000, guid: 70cbe55d7d8308c489b33a39f9681d2f, type: 2}
-  groundYScale: 1
+  groundYScale: 0.4
 --- !u!114 &114669442776660264
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -114,3 +114,4 @@ MonoBehaviour:
   gridWidthCount: 100
   gridHeightCount: 100
   gridOffset: {x: 0.5, y: 0, z: 0.5}
+  gridMaterial: {fileID: 2100000, guid: 894ce95a88179984dac31bd340127047, type: 2}
