@@ -55,7 +55,10 @@ public class CommonCore : MonoBehaviour
                 if (attack != null)
                 {
                     attack.isActive = false;
-                    attack.crosshair?.gameObject?.SetActive(false);
+                    if (attack.crosshair != null)
+                    {
+                        attack.crosshair.gameObject.SetActive(false);
+                    }
                 }
 
                 var magnet = GetComponent<Magnet>();

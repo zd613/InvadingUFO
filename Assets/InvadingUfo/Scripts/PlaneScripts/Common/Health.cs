@@ -162,7 +162,9 @@ public class Health : MonoBehaviour, IDamageable
         if (!canCallOnCollisionEnter)
             return;
 
-        KillInstantly(collision.gameObject);
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Stage"))
+            KillInstantly(collision.gameObject);
     }
 
     public void KillInstantly(GameObject attacker)
