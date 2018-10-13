@@ -7,4 +7,5 @@ public enum CityCellType
     None,
     Road,
     Sidewalk,
+    Ground,
 }

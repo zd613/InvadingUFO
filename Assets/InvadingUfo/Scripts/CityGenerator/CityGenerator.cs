@@ -25,9 +25,15 @@ public class CityGenerator : MonoBehaviour
     public GameObject cube;
     public Vector3 sidewalkOffset;
     public Material sidewalkMaterial;
-    public float yScale = 1;
+    public float sidewalkYScale = 1;
 
 
+    [Header("Ground")]
+    public string groundParentName = "Ground";
+    public GameObject groundParentGameObject;
+    public Vector3 groundOffset;
+    public Material groundMaterial;
+    public float groundYScale = 1;
 
     private void Awake()
     {
@@ -64,14 +70,14 @@ public class CityGenerator : MonoBehaviour
         roadGenerator.SetRootAndGridInfo(rootGameObject, cellTypes);
         roadGenerator.MakeRoads();
 
-        CreateSidewalk();
+        CreateSidewalkAndGround();
 
 
 
     }
 
     //四角形前提
-    void CreateSidewalk()
+    void CreateSidewalkAndGround()
     {
         if (sidewalkParentGameObject == null)
         {
@@ -80,6 +86,15 @@ public class CityGenerator : MonoBehaviour
             {
                 sidewalkParentGameObject.transform.SetParent(rootGameObject.transform);
 
+            }
+        }
+
+        if (groundParentGameObject == null)
+        {
+            groundParentGameObject = new GameObject(groundParentName);
+            if (rootGameObject != null)
+            {
+                groundParentGameObject.transform.SetParent(rootGameObject.transform);
             }
         }
 
@@ -116,9 +131,12 @@ public class CityGenerator : MonoBehaviour
                     //print("w,h" + width + "," + height);
                     //print("x,z" + x + "," + z);
                     var o = InstantiateSidewalk(width, height);
+
+                    var upperRightX = (x + width - 1);
+                    var upperRightZ = (z + height - 1);
                     //cell の左下と右上のやつから真ん中をけいさんして　
-                    var px = (float)(x + (x + width - 1)) / 2;
-                    var pz = (float)(z + (z + height - 1)) / 2;
+                    var px = (float)(x + upperRightX) / 2;
+                    var pz = (float)(z + upperRightZ) / 2;
                     o.transform.position = (new Vector3(px, 0, pz) + sidewalkOffset) * DefaultDeltaDistance;
                     o.transform.SetParent(sidewalkParentGameObject.transform);
 
@@ -126,7 +144,48 @@ public class CityGenerator : MonoBehaviour
                     {
                         o.GetComponent<MeshRenderer>().sharedMaterial = sidewalkMaterial;
                     }
-                    //return;
+
+
+                    //celltypes の設定
+                    for (int sz = z; sz <= upperRightZ; sz++)
+                    {
+                        for (int sx = x; sx <= upperRightX; sx++)
+                        {
+                            //四角形の周だけsidewalkに設定
+                            if (sz == z || sz == upperRightZ || sx == x || sx == upperRightX)
+                            {
+                                cellTypes[sz, sx] = CityCellType.Sidewalk;
+                            }
+                        }
+                    }
+
+
+                    //groundの作成
+                    if (width - 2 > 0 && height - 2 > 0)
+                    {
+                        var ground = InstantiateGround(width - 2, height - 2);
+
+
+                        ground.transform.position = (new Vector3(px, 0, pz) + groundOffset) * DefaultDeltaDistance;
+                        ground.transform.SetParent(groundParentGameObject.transform);
+                        if (groundMaterial != null)
+                        {
+                            ground.GetComponent<MeshRenderer>().sharedMaterial = groundMaterial;
+                        }
+                    }
+
+
+                    //celltypes の設定
+                    for (int sz = z + 1; sz <= upperRightZ - 1; sz++)
+                    {
+                        for (int sx = x + 1; sx <= upperRightX - 1; sx++)
+                        {
+                            //四角形の周だけ
+
+                            cellTypes[sz, sx] = CityCellType.Ground;
+
+                        }
+                    }
                 }
             }
         }
@@ -141,7 +200,20 @@ public class CityGenerator : MonoBehaviour
         obj.transform.localScale = obj.transform.localScale * DefaultDeltaDistance;
         var ls = obj.transform.localScale;
         ls.x *= width;
-        ls.y *= yScale;
+        ls.y *= sidewalkYScale;
+        ls.z *= height;
+        obj.transform.localScale = ls;
+
+        return obj;
+    }
+
+    GameObject InstantiateGround(int width, int height)
+    {
+        var obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        obj.transform.localScale = obj.transform.localScale * DefaultDeltaDistance;
+        var ls = obj.transform.localScale;
+        ls.x *= width;
+        ls.y *= groundYScale;
         ls.z *= height;
         obj.transform.localScale = ls;
 

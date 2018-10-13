@@ -295,6 +295,26 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114659311844269556, guid: 075a3482e6aadd74f9398c5c2218d15a,
+        type: 2}
+      propertyPath: groundOffset.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114659311844269556, guid: 075a3482e6aadd74f9398c5c2218d15a,
+        type: 2}
+      propertyPath: groundOffset.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114659311844269556, guid: 075a3482e6aadd74f9398c5c2218d15a,
+        type: 2}
+      propertyPath: groundMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 70cbe55d7d8308c489b33a39f9681d2f, type: 2}
+    - target: {fileID: 114659311844269556, guid: 075a3482e6aadd74f9398c5c2218d15a,
+        type: 2}
+      propertyPath: sidewalkMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: a981954894a1b7a44a7897e96810d2fd, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 075a3482e6aadd74f9398c5c2218d15a, type: 2}
   m_IsPrefabAsset: 0

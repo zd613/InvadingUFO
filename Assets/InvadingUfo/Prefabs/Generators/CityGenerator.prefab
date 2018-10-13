@@ -85,8 +85,13 @@ MonoBehaviour:
   sidewalkParentGameObject: {fileID: 0}
   cube: {fileID: 0}
   sidewalkOffset: {x: 0.5, y: 0, z: 0.5}
-  sidewalkMaterial: {fileID: 0}
-  yScale: 0.1
+  sidewalkMaterial: {fileID: 2100000, guid: a981954894a1b7a44a7897e96810d2fd, type: 2}
+  sidewalkYScale: 1
+  groundParentName: Ground
+  groundParentGameObject: {fileID: 0}
+  groundOffset: {x: 0.5, y: 0, z: 0.5}
+  groundMaterial: {fileID: 2100000, guid: 70cbe55d7d8308c489b33a39f9681d2f, type: 2}
+  groundYScale: 1
 --- !u!114 &114669442776660264
 MonoBehaviour:
   m_ObjectHideFlags: 1
