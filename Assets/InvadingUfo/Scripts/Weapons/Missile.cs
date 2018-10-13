@@ -156,6 +156,8 @@ namespace Ame
                 Instantiate(hitSoundPrefab, transform.position, Quaternion.identity);
             }
 
+            print("destroy");
+
             Destroy(gameObject);
         }
 
