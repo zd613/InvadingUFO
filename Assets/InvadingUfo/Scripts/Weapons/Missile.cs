@@ -131,7 +131,7 @@ namespace Ame
 
         private void OnTriggerEnter(Collider other)
         {
-            print("other");
+            //print("other");
 
             var collision = other;
             if (!canHitToAttacker)
@@ -145,12 +145,12 @@ namespace Ame
 
 
             //hp 削る
-            print("missile hit");
+            //print("missile hit");
             var health = collision.gameObject.GetComponentInParent<IDamageable>();
             if (health != null)
             {
                 health.ApplyDamage(damage, attacker);
-                print("apply damage");
+                //print("apply damage");
 
             }
 
