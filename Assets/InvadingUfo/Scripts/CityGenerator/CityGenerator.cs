@@ -42,6 +42,8 @@ public class CityGenerator : MonoBehaviour
     public Vector3 houseOffset;
 
 
+
+
     public void Generate()
     {
 
@@ -61,12 +63,12 @@ public class CityGenerator : MonoBehaviour
 
         roadGenerator.SetRootAndGridInfo(rootGameObject, cellTypes);
         roadGenerator.MakeRoads();
-
+        roadGenerator.MakeTrafficLights();
         CreateSidewalkAndGround();
 
-        CreateTrafficLight();
 
         CreateHouse2x2();
+
     }
 
     //四角形前提
@@ -241,6 +243,8 @@ public class CityGenerator : MonoBehaviour
             }
         }
     }
+
+
 
     void SetCellType2x2(int lx, int lz, CityCellType cellType)
     {

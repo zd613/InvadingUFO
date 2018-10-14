@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,9 +26,11 @@ public class RoadGenerator : MonoBehaviour
     public int deltaWidth = 4;
     public int deltaHeight = 4;
 
-
-
-
+    [Header("Traffic Light")]
+    public string trafficLightParentName = "TrafficLight";
+    public GameObject trafficLightParentGameObject;
+    public GameObject trafficLightPrefab;
+    public Vector3 trafficLightOffset;
 
     //public Vector3 roadOffset;
     List<GameObject> roads = new List<GameObject>();
@@ -117,45 +120,101 @@ public class RoadGenerator : MonoBehaviour
             }
 
 
-            //roadtype を記録
-            for (int z = 0; z < cellTypes.GetLength(0); z++)
-            {
-                for (int x = 0; x < cellTypes.GetLength(1); x++)
-                {
-                    if (cellTypes[z, x] == CityCellType.Road)
-                    {
-                        roadtypes[z, x] = RoadType.Straight;
-                    }
-                }
-            }
-
-
-            //交差点
+            ////roadtype を記録
             //for (int z = 0; z < cellTypes.GetLength(0); z++)
             //{
             //    for (int x = 0; x < cellTypes.GetLength(1); x++)
             //    {
-            //        if (roadtypes[z, x] != RoadType.None)
+            //        if (cellTypes[z, x] == CityCellType.Road)
             //        {
-            //            bool a = roadtypes[z - 1, x] != RoadType.None;
-            //            bool b = roadtypes[z + 1, x] != RoadType.None;
-            //            bool c = roadtypes[z, x - 1] != RoadType.None;
-            //            bool d = roadtypes[z, x + 1] != RoadType.None;
-
-            //            まわり全てroad
-            //            if (a && b && c && d)
-            //            {
-            //                roadtypes[z, x] = RoadType.Crossroad;
-            //            }
-
+            //            roadtypes[z, x] = RoadType.Straight;
             //        }
             //    }
             //}
+
+
         }
 
+    }
+
+    public void MakeTrafficLights()
+    {
+        if (trafficLightParentGameObject == null)
+        {
+            trafficLightParentGameObject = new GameObject(trafficLightParentName);
+            if (rootGameObject != null)
+            {
+                trafficLightParentGameObject.transform.SetParent(rootGameObject.transform);
+
+            }
+        }
+
+        InstantiateTrafficLight(0, 0);
+
+        for (int z = 0; z < cellTypes.GetLength(0); z++)
+        {
+            for (int x = 0; x < cellTypes.GetLength(1); x++)
+            {
+
+                //if(roadtype
+                if (roadtypes[z, x] == RoadType.Crossroad)
+                {
+                    //斜めを調べてnone なら　作る
 
 
-        //交差点を作る
+                    for (int az = 0; az < naname.Length; az++)
+                    {
+                        for (int ax = 0; ax < naname.Length; ax++)
+                        {
+                            int targetX = x + naname[ax];
+                            int targetZ = z + naname[az];
+                            //範囲内かどうか
+                            if (targetZ >= 0 && targetX >= 0 && targetZ < roadtypes.GetLength(0) && targetX < roadtypes.GetLength(1))
+                            {
+                                if (roadtypes[targetZ, targetX] == RoadType.None)
+                                {
+                                    var obj = InstantiateTrafficLight(targetX, targetZ);
+
+                                    int nanamex = naname[ax];
+                                    int nanamez = naname[az];
+                                    if (nanamex == -1 && nanamez == 1)
+                                    {
+                                        //正しい
+                                    }
+                                    else if (nanamex == 1 && nanamez == 1)
+                                    {
+                                        obj.transform.Rotate(new Vector3(0, 90, 0), Space.World);
+                                    }
+
+                                    else if (nanamex == 1 && nanamez == -1)
+                                    {
+
+                                        obj.transform.Rotate(new Vector3(0, 180, 0), Space.World);
+                                    }
+
+                                    else if (nanamex == -1 && nanamez == -1)
+                                    {
+                                        obj.transform.Rotate(new Vector3(0, -90, 0), Space.World);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+    int[] naname = new int[] { -1, 1 };
+
+
+    GameObject InstantiateTrafficLight(int x, int z)
+    {
+        var obj = Instantiate(trafficLightPrefab);
+        obj.transform.position = (new Vector3(x, 0, z) + trafficLightOffset) * CityGenerator.DefaultDeltaDistance;
+        obj.transform.SetParent(trafficLightParentGameObject.transform);
+
+        return obj;
 
     }
 
@@ -192,7 +251,7 @@ public class RoadGenerator : MonoBehaviour
         int lx = lowerLeftCellX;//左
         int lz = lowerLeftCellZ;//下
         int uz = lowerLeftCellZ + 1;//上
-        //横
+                                    //横
         if (dir == RoadDir.Z)
         {
             //プラス
@@ -221,6 +280,7 @@ public class RoadGenerator : MonoBehaviour
                 {
                     obj = Instantiate(road2x2Cross, position, transform.rotation);
                     SetRoadTypes2x2(lx, lz, RoadType.Crossroad);
+
                 }
                 else
                 {
@@ -265,6 +325,7 @@ public class RoadGenerator : MonoBehaviour
                 {
                     obj = Instantiate(road2x2Cross, position, transform.rotation);
                     SetRoadTypes2x2(lx, lz, RoadType.Crossroad);
+
                 }
                 else
                 {
