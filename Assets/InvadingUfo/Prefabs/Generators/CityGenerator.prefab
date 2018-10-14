@@ -95,6 +95,11 @@ MonoBehaviour:
     type: 2}
   groundOffset: {x: 0.5, y: 0, z: 0.5}
   groundYScale: 0.4
+  houseParentName: House
+  houseParentGameObject: {fileID: 0}
+  housePrefab: {fileID: 1170844131640296, guid: 34d3add3cb7b706468e8122b151751bf,
+    type: 2}
+  houseOffset: {x: 0, y: 0.1, z: 0}
 --- !u!114 &114669442776660264
 MonoBehaviour:
   m_ObjectHideFlags: 1

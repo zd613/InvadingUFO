@@ -129,7 +129,7 @@ public class Magnet : MonoBehaviour
         if (attractable == null)
             return;
 
-        Destroy(collider.transform.gameObject);
+        Destroy(attractable.gameObject);
         targetRigidbody = null;
     }
 }
