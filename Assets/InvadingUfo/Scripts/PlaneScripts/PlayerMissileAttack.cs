@@ -30,9 +30,13 @@ namespace Ame
         public List<MissileTargetInfo> lockonTargets = new List<MissileTargetInfo>();
         Rect rect = new Rect(0, 0, 1, 1);
 
+        [Header("UI")]
+        public GameObject missileTargetUI;
+
         private void Awake()
         {
             missileCounter = maxMissile;
+
         }
 
         private void Start()
@@ -74,6 +78,25 @@ namespace Ame
             }
 
             target = nearest?.CommonCore?.gameObject;
+
+            //update ui
+            if (missileTargetUI != null)
+            {
+                if (target != null)
+                {
+
+                    if (!missileTargetUI.activeInHierarchy)
+                        missileTargetUI.SetActive(true);
+                    var pos = RectTransformUtility.WorldToScreenPoint(Camera.main, target.transform.position);
+                    missileTargetUI.transform.position = pos;
+
+                }
+                else
+                {
+                    if (missileTargetUI.activeInHierarchy)
+                        missileTargetUI.SetActive(false);
+                }
+            }
 
 
             if (Input.GetKeyDown(KeyCode.M))

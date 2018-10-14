@@ -56,7 +56,7 @@ namespace Ame
             collider.isTrigger = true;
             yield return new WaitForSeconds(noHitTimeSecToAttacker);
             canHitToAttacker = true;
-            collider.isTrigger = false;
+            //collider.isTrigger = false;
         }
 
         IEnumerator FirstSage()
@@ -131,6 +131,8 @@ namespace Ame
 
         private void OnTriggerEnter(Collider other)
         {
+            print("other");
+
             var collision = other;
             if (!canHitToAttacker)
             {
@@ -143,20 +145,20 @@ namespace Ame
 
 
             //hp 削る
-            var health = collision.gameObject.GetComponent<IDamageable>();
+            print("missile hit");
+            var health = collision.gameObject.GetComponentInParent<IDamageable>();
             if (health != null)
             {
                 health.ApplyDamage(damage, attacker);
+                print("apply damage");
+
             }
 
-            print("missile hit:" + collision.gameObject.name);
 
             if (hitSoundPrefab != null)
             {
                 Instantiate(hitSoundPrefab, transform.position, Quaternion.identity);
             }
-
-            print("destroy");
 
             Destroy(gameObject);
         }
