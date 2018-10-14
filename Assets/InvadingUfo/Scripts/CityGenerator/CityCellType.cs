@@ -8,4 +8,5 @@ public enum CityCellType
     Road,
     Sidewalk,
     Ground,
+    House,
 }

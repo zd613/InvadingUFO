@@ -34,20 +34,12 @@ public class CityGenerator : MonoBehaviour
     public Vector3 groundOffset;
     public float groundYScale = 1;
 
-    private void Awake()
-    {
-    }
-
-    private void Start()
-    {
-        gridGenerator = GetComponent<GridGenerator>();
-
-        roadGenerator = GetComponent<RoadGenerator>();
-        //Generate();
-    }
-
-
-    //road generator
+    [Header("House")]
+    public string houseParentName = "House";
+    public GameObject houseParentGameObject;
+    public GameObject housePrefab;
+    //public List<GameObject> houseGameObject;
+    public Vector3 houseOffset;
 
 
     public void Generate()
@@ -72,8 +64,9 @@ public class CityGenerator : MonoBehaviour
 
         CreateSidewalkAndGround();
 
+        CreateTrafficLight();
 
-
+        CreateHouse2x2();
     }
 
     //四角形前提
@@ -211,4 +204,49 @@ public class CityGenerator : MonoBehaviour
         return obj;
     }
 
+    void CreateTrafficLight()
+    {
+
+    }
+
+    //2x2のエリアに家を置く
+    void CreateHouse2x2()
+    {
+        if (houseParentGameObject == null)
+        {
+            houseParentGameObject = new GameObject(houseParentName);
+            if (rootGameObject != null)
+            {
+                houseParentGameObject.transform.SetParent(rootGameObject.transform);
+
+            }
+        }
+        for (int z = 0; z < cellTypes.GetLength(0); z++)
+        {
+            for (int x = 0; x < cellTypes.GetLength(1); x++)
+            {
+                if (cellTypes[z, x] == CityCellType.Ground)
+                {
+                    SetCellType2x2(x, z, CityCellType.House);
+                    var obj = Instantiate(housePrefab);
+                    var scale = obj.transform.localScale;
+                    var px = (x + x + 1) / 2.0f;
+                    var pz = (z + z + 1) / 2.0f;
+                    obj.transform.position = (new Vector3(px, 0, pz) + houseOffset) * DefaultDeltaDistance;
+                    obj.transform.Rotate(new Vector3(0, 0, 0), Space.World);
+
+                    obj.transform.SetParent(houseParentGameObject.transform);
+                }
+            }
+        }
+    }
+
+    void SetCellType2x2(int lx, int lz, CityCellType cellType)
+    {
+        cellTypes[lz, lx] = cellType;
+        cellTypes[lz + 1, lx] = cellType;
+        cellTypes[lz, lx + 1] = cellType;
+        cellTypes[lz + 1, lx + 1] = cellType;
+
+    }
 }

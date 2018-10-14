@@ -305,6 +305,37 @@ Prefab:
       propertyPath: gridGameObject
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 114659311844269556, guid: 075a3482e6aadd74f9398c5c2218d15a,
+        type: 2}
+      propertyPath: rootGameObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114659311844269556, guid: 075a3482e6aadd74f9398c5c2218d15a,
+        type: 2}
+      propertyPath: sidewalkParentGameObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114659311844269556, guid: 075a3482e6aadd74f9398c5c2218d15a,
+        type: 2}
+      propertyPath: groundParentGameObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114659311844269556, guid: 075a3482e6aadd74f9398c5c2218d15a,
+        type: 2}
+      propertyPath: housePrefab
+      value: 
+      objectReference: {fileID: 1170844131640296, guid: 34d3add3cb7b706468e8122b151751bf,
+        type: 2}
+    - target: {fileID: 114659311844269556, guid: 075a3482e6aadd74f9398c5c2218d15a,
+        type: 2}
+      propertyPath: houseParentGameObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114659311844269556, guid: 075a3482e6aadd74f9398c5c2218d15a,
+        type: 2}
+      propertyPath: houseOffset.y
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 075a3482e6aadd74f9398c5c2218d15a, type: 2}
   m_IsPrefabAsset: 0
