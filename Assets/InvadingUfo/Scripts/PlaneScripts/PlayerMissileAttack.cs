@@ -30,14 +30,20 @@ namespace Ame
         public List<MissileTargetInfo> lockonTargets = new List<MissileTargetInfo>();
         Rect rect = new Rect(0, 0, 1, 1);
 
+        public Transform crosshair;
+
+
         [Header("UI")]
         public GameObject missileTargetUI;
+        Camera mainCamera;
 
         private void Awake()
         {
             missileCounter = maxMissile;
 
         }
+
+
 
         private void Start()
         {
@@ -55,6 +61,7 @@ namespace Ame
             {
                 missileCounterText.text = missileCounter.ToString();
             }
+            mainCamera = Camera.main;
         }
 
         void Update()
@@ -64,11 +71,14 @@ namespace Ame
             //set target
             float min = float.MaxValue;
             MissileTargetInfo nearest = null;
+            var crosshairScreenPos = mainCamera.WorldToViewportPoint(crosshair.position);
+
             foreach (var item in lockonTargets)
             {
                 if (item.CanSeeInView)
                 {
-                    var distance = Vector3.Distance(transform.position, item.CommonCore.transform.position);
+                    var pos = mainCamera.WorldToViewportPoint(item.CommonCore.transform.position);
+                    var distance = Vector3.Distance(crosshairScreenPos, pos);
                     if (distance < min)
                     {
                         min = distance;
@@ -87,7 +97,7 @@ namespace Ame
 
                     if (!missileTargetUI.activeInHierarchy)
                         missileTargetUI.SetActive(true);
-                    var pos = RectTransformUtility.WorldToScreenPoint(Camera.main, target.transform.position);
+                    var pos = RectTransformUtility.WorldToScreenPoint(mainCamera, target.transform.position);
                     missileTargetUI.transform.position = pos;
 
                 }

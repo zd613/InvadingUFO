@@ -146,13 +146,6 @@ public class Health : MonoBehaviour, IDamageable
         }
 
 
-        //player
-        var ob = GetComponentInParent<CommonCore>().gameObject;
-        if (ob.tag == "Player")
-        {
-            //var fc = Camera.main.gameObject.GetComponent<FollowingCamera>();
-            //fc.target = fracturedObjectsParent.GetComponentsInChildren<Transform>()[1];
-        }
     }
 
     //地面などに当たった時
