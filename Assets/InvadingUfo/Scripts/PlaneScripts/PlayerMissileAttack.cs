@@ -163,7 +163,9 @@ namespace Ame
 
         bool CanSeeInView(Vector3 position)
         {
-            return rect.Contains(Camera.main.WorldToViewportPoint(position));
+            var toLocalPos = transform.InverseTransformPoint(position);//zが正なら正面　負なら後ろ側にターゲットがいる
+
+            return toLocalPos.z > 0 && rect.Contains(Camera.main.WorldToViewportPoint(position));
         }
 
         //attackのと違う

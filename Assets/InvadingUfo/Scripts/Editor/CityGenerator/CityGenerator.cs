@@ -11,7 +11,7 @@ namespace Ame.GeneratorEditors
         [MenuItem("Custom/CityGenerator")]
         public static void Open()
         {
-            var window = EditorWindow.GetWindow<CityGenerator>("City Generator");
+            EditorWindow.GetWindow<CityGenerator>("City Generator");
 
         }
 
