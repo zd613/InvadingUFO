@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4497299105053598}
   - component: {fileID: 33931397272231040}
   - component: {fileID: 23212298137075722}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: road3_2x2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

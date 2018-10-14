@@ -6,19 +6,30 @@ using System.Linq;
 public class Magnet : MonoBehaviour
 {
     public bool isActive = true;
-    public float maxLength = 100;
+
+    [Header("設定")]
+    public bool canAttractMultipleObjects = true;
     public float power = 10;
     public GameObject attractEffectObject;
 
-    public int AttractingObjectCount { get { return attractingObjects.Count; } }
+    public int AttractingObjectCount
+    {
+        get
+        {
+            if (canAttractMultipleObjects)
+                return attractingObjects.Count;
+            else
+                return target == null ? 0 : 1;
+        }
+
+    }
 
     public OnTriggerEnterSender attractableObjectCatcher;
     public OnTriggerEnterSender enterSender;
     public OnTriggerExitSender exitSender;
 
     public bool isAttracting = false;
-    GameObject target;
-    Rigidbody targetRigidbody;
+    public AttractableObject target;
     List<AttractableObject> attractingObjects = new List<AttractableObject>();
 
 
@@ -32,7 +43,10 @@ public class Magnet : MonoBehaviour
     {
         if (!isActive)
             return;
-        Debug.DrawRay(transform.position, Vector3.down * maxLength);
+
+        Debug.DrawRay(transform.position, Vector3.down * 3);
+
+
         UpdateAttractingList();
 
 
@@ -40,15 +54,6 @@ public class Magnet : MonoBehaviour
         {
             Attract();
         }
-        else
-        {
-            if (targetRigidbody != null)
-            {
-                //targetRigidbody.useGravity = true;
-                targetRigidbody = null;
-            }
-        }
-
     }
 
 
@@ -80,10 +85,20 @@ public class Magnet : MonoBehaviour
         if (attractable == null)
             return;
 
-        if (attractingObjects.Contains(attractable))
-            return;
+        if (canAttractMultipleObjects)
+        {
+            if (attractingObjects.Contains(attractable))
+                return;
 
-        attractingObjects.Add(attractable);
+            attractingObjects.Add(attractable);
+        }
+        else
+        {
+            if (target == null)
+            {
+                target = attractable;
+            }
+        }
     }
 
     //remove attractable objects if exists
@@ -93,31 +108,49 @@ public class Magnet : MonoBehaviour
         if (attractable == null)
             return;
 
-        if (!attractingObjects.Contains(attractable))
-            return;
+        if (canAttractMultipleObjects)
+        {
+            if (!attractingObjects.Contains(attractable))
+                return;
 
-        attractingObjects.Remove(attractable);
+            attractingObjects.Remove(attractable);
+        }
+        else
+        {
+            if (target != null)
+            {
+                target = null;
+            }
+        }
     }
 
 
 
     void Attract2()
     {
-        foreach (var item in attractingObjects)
+        if (canAttractMultipleObjects)
         {
-            if (item == null)
-                continue;
-            if (item.gameObject == null)
-                continue;
+            foreach (var item in attractingObjects)
+            {
+                if (item == null)
+                    continue;
+                if (item.gameObject == null)
+                    continue;
 
-            item.Attract(transform, power);
+                item.Attract(transform, power);
+            }
+        }
+        else
+        {
+            if (target != null)
+                target.Attract(transform, power);
         }
     }
 
     void UpdateAttractingList()
     {
-        attractingObjects = attractingObjects.Where(x => x != null).ToList();
-
+        if (canAttractMultipleObjects)
+            attractingObjects = attractingObjects.Where(x => x != null).ToList();
     }
 
 
@@ -130,6 +163,5 @@ public class Magnet : MonoBehaviour
             return;
 
         Destroy(attractable.gameObject);
-        targetRigidbody = null;
     }
 }
