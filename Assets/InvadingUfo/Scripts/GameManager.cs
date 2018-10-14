@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
     [Header("debug")]
     public bool countDownOnStart = true;
 
+    [Header("manager")]
+    public HouseManager houseManager;
+
 
     private void Awake()
     {

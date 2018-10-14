@@ -22,6 +22,8 @@ public class UfoSpawner : MonoBehaviour
     int routeIndex = 0;
     int routeCount = 0;
 
+    public HouseManager houseManager;
+
     private void Awake()
     {
         //SpawnUfo();
@@ -33,6 +35,12 @@ public class UfoSpawner : MonoBehaviour
     {
         var rot = Quaternion.identity;
         var obj = Instantiate(info.GameObject, transform.position, rot);
+
+
+        //
+        var ai = obj.GetComponent<AIManetUfoInputProvider>();
+        ai.houseManager = houseManager;
+
 
         //var followPath = obj.GetComponent<FollowPathInputProvider>();
         //followPath.targetPath = routeInfo[routeIndex].path;

@@ -3262,7 +3262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActive: 1
   maxLength: 100
-  power: 12
+  power: 15
   attractEffectObject: {fileID: 1128813276106358}
   attractableObjectCatcher: {fileID: 114495739287406146}
   enterSender: {fileID: 114716358210200776}
