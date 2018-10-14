@@ -215,6 +215,7 @@ public class CityGenerator : MonoBehaviour
         if (houseParentGameObject == null)
         {
             houseParentGameObject = new GameObject(houseParentName);
+            houseParentGameObject.AddComponent<HouseManager>();
             if (rootGameObject != null)
             {
                 houseParentGameObject.transform.SetParent(rootGameObject.transform);

@@ -43,10 +43,6 @@ public class HouseManager : MonoBehaviour
         return houses[index];
     }
 
-    private void Update()
-    {
-    }
-
     void RemoveDestroyedHouses()
     {
         for (int i = 0; i < houses.Count; i++)
