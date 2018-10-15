@@ -25,6 +25,7 @@ public class Health : MonoBehaviour, IDamageable
     public bool canExplode = false;
     public GameObject nonFracturedObjectParent;
     public GameObject fracturedObjectsParent;
+    public FracturedObjectPosition fracturedCenter;
     public float minForce = 10;
     public float maxForce = 20;
     public float radius;
@@ -93,7 +94,8 @@ public class Health : MonoBehaviour, IDamageable
 
         var move = GetComponent<Movement>();
         float speed = move.speed;
-
+        if (fracturedCenter != null)
+            fracturedCenter.enabled = true;
 
         int smokeCounter = 0;
         foreach (Transform t in fracturedObjectsParent.transform)
