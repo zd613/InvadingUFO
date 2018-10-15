@@ -10,6 +10,9 @@ public class AreaWall : MonoBehaviour
     public AreaWallCollider right;
     public AreaWallCollider left;
 
+    [Header("UI")]
+    public GameObject outOfAreaUI;
+
     private void Start()
     {
         right.OnTriggerEnterEvent += c => OnTriggerEnterMethod(c, false);
@@ -95,6 +98,11 @@ public class AreaWall : MonoBehaviour
         };
         turnList.Add(newInfo);
 
+        if (root.tag == "Player")
+        {
+            outOfAreaUI.SetActive(true);
+        }
+
         //print("add turn list");
     }
 
@@ -124,6 +132,10 @@ public class AreaWall : MonoBehaviour
 
         info.Rotation.isActive = true;
         turnList.Remove(info);
+        if (info.RootTransform.tag == "Player")
+        {
+            outOfAreaUI.SetActive(false);
+        }
         //print("exit");
     }
 
