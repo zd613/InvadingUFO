@@ -15,8 +15,15 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverUI;
     public Text gameOverText;
     [Range(0, 1)]
-    public float speed = 0.02f;
-    public GameObject buttonPanel;
+    public float gameOverAppearSpeed = 0.02f;
+    public GameObject gameOverButtonPanel;
+
+    [Header("GameClear")]
+    public GameObject gameClearUI;
+    public Text gameClearText;
+    [Range(0, 1)]
+    public float gameClearAppearSpeed = 0.02f;
+    public float sceneTransitionDelaySec = 2;
 
     [Header("カメラ")]
     public GameObject mainCamera;
@@ -24,14 +31,19 @@ public class GameManager : MonoBehaviour
     [Header("debug")]
     public bool countDownOnStart = true;
 
-    [Header("manager")]
+    [Header("manager and spawner")]
     public HouseManager houseManager;
+    public UfoManager ufoManager;
+    public UfoSpawner ufoSpawner;
 
     [Header("UI")]
     public Text totalHouseText;
     public Text currenHouseText;
     public Slider housePercentage;
 
+    [Header("game")]
+    public bool canClearGame = false;
+    bool isGameOver = false;
 
     private void Awake()
     {
@@ -39,6 +51,7 @@ public class GameManager : MonoBehaviour
 
         player.OnDeath += () => StartCoroutine(GameOver());
     }
+
 
     private void Start()
     {
@@ -53,8 +66,14 @@ public class GameManager : MonoBehaviour
             s.enabled = false;
             mainCamera.GetComponent<FollowingCamera>().enabled = true;
         };
+
+        //UI
         totalHouseText.text = houseManager.houseCount.ToString();
         currenHouseText.text = houseManager.activeHouseCount.ToString();
+
+        //Ufo
+
+        ufoSpawner.OnAllUfosSpawned += () => canClearGame = true;
     }
 
     private void Update()
@@ -70,6 +89,18 @@ public class GameManager : MonoBehaviour
         }
         currenHouseText.text = houseManager.activeHouseCount.ToString();
         housePercentage.value = houseManager.activeHouseCount / houseManager.houseCount;
+
+        if (canClearGame && !isGameOver)
+        {
+            if (ufoManager.Count <= 0)
+            {
+                print("hi");
+
+                StartCoroutine(GameClear());
+                canClearGame = false;
+
+            }
+        }
     }
 
     public IEnumerator CountDown()
@@ -98,7 +129,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameOver()
     {
-        buttonPanel.SetActive(false);
+        isGameOver = true;
+        gameOverButtonPanel.SetActive(false);
         yield return new WaitForSeconds(0.5f);
         gameOverUI.SetActive(true);
         float alpha = 0;
@@ -110,13 +142,37 @@ public class GameManager : MonoBehaviour
             gameOverUI.SetActive(true);
 
 
-            alpha += speed;
+            alpha += gameOverAppearSpeed;
 
             yield return null;
         }
-        buttonPanel.SetActive(true);
+        gameOverButtonPanel.SetActive(true);
     }
 
+    IEnumerator GameClear()
+    {
+        yield return null;
+        print("clear");
+
+        yield return new WaitForSeconds(0.5f);
+        gameClearUI.SetActive(true);
+        float alpha = 0;
+        while (alpha < 1)
+        {
+            var color = gameClearText.color;
+            color.a = alpha;
+            gameClearText.color = color;
+            //gameClearUI.SetActive(true);
+
+
+            alpha += gameClearAppearSpeed;
+
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(sceneTransitionDelaySec);
+        LoadTitle();
+    }
 
     public void Restart()
     {

@@ -32,7 +32,7 @@ public class HouseManager : MonoBehaviour
             }
         }
 
-        print("house" + activeHouseCount);
+        //print("house" + activeHouseCount);
 
     }
 

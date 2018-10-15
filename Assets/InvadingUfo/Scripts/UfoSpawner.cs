@@ -23,6 +23,11 @@ public class UfoSpawner : MonoBehaviour
     int routeCount = 0;
 
     public HouseManager houseManager;
+    public UfoManager ufoManager;
+
+    //event
+    public event System.Action OnAllUfosSpawned;
+    //bool hasAllUfosSpawned = false;
 
     private void Awake()
     {
@@ -30,6 +35,7 @@ public class UfoSpawner : MonoBehaviour
         StartCoroutine(LoopSpawning());
 
     }
+
 
     void SpawnUfo(SpawnInfo info)
     {
@@ -40,15 +46,11 @@ public class UfoSpawner : MonoBehaviour
         //
         var ai = obj.GetComponent<AIManetUfoInputProvider>();
         ai.houseManager = houseManager;
+        if (ufoManager != null)
+        {
+            ufoManager.Add(obj.GetComponent<CommonCore>());
+        }
 
-
-        //var followPath = obj.GetComponent<FollowPathInputProvider>();
-        //followPath.targetPath = routeInfo[routeIndex].path;
-        //routeCount++;
-        //if (routeCount >= routeInfo[routeIndex].ufoCount)
-        //{
-        //    routeIndex++;
-        //}
     }
 
     IEnumerator LoopSpawning()
@@ -78,6 +80,9 @@ public class UfoSpawner : MonoBehaviour
             }
             yield return new WaitForSeconds(Random.Range(minInterval, maxInterval));
         }
+        OnAllUfosSpawned?.Invoke();
+        print("invoke");
+
     }
 
 }
