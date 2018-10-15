@@ -4,41 +4,41 @@ using UnityEngine;
 
 public class House : AttractableObject
 {
-    public GameObject house;
-    public GameObject collapsedHouse;
+    //public GameObject house;
+    //public GameObject collapsedHouse;
 
-    bool hasCollapsed = false;
+    //bool hasCollapsed = false;
 
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Stage"))
-        {
-            return;
-        }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.layer == LayerMask.NameToLayer("Stage"))
+    //    {
+    //        return;
+    //    }
 
-        Collapse();
-    }
+    //    Collapse();
+    //}
 
-    private void OnTriggerEnter(Collider other)
-    {
-        //print(other.name);
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    //print(other.name);
 
-        if (other.gameObject.layer == LayerMask.NameToLayer("Weapon"))
-        {
-            Collapse();
-        }
-    }
+    //    if (other.gameObject.layer == LayerMask.NameToLayer("Weapon"))
+    //    {
+    //        Collapse();
+    //    }
+    //}
 
-    void Collapse()
-    {
-        if (hasCollapsed)
-            return;
-        //print("collapsed");
+    //void Collapse()
+    //{
+    //    if (hasCollapsed)
+    //        return;
+    //    //print("collapsed");
 
-        var rb = GetComponent<Rigidbody>();
-        Destroy(rb);
-        house.SetActive(false);
-        collapsedHouse.SetActive(true);
-    }
+    //    var rb = GetComponent<Rigidbody>();
+    //    Destroy(rb);
+    //    house.SetActive(false);
+    //    collapsedHouse.SetActive(true);
+    //}
 }
