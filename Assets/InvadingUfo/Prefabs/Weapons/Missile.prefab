@@ -420,7 +420,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   speed: 100
-  maxRange: 700
+  maxRange: 1200
   hitEffect: {fileID: 1187429217532524, guid: 901c6461d099b1541af5e3217efb74b6, type: 2}
   rotationSpeed: 1.3
   damage: 100
