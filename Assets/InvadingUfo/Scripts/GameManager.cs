@@ -27,6 +27,11 @@ public class GameManager : MonoBehaviour
     [Header("manager")]
     public HouseManager houseManager;
 
+    [Header("UI")]
+    public Text totalHouseText;
+    public Text currenHouseText;
+    public Slider housePercentage;
+
 
     private void Awake()
     {
@@ -48,7 +53,8 @@ public class GameManager : MonoBehaviour
             s.enabled = false;
             mainCamera.GetComponent<FollowingCamera>().enabled = true;
         };
-
+        totalHouseText.text = houseManager.houseCount.ToString();
+        currenHouseText.text = houseManager.activeHouseCount.ToString();
     }
 
     private void Update()
@@ -62,6 +68,8 @@ public class GameManager : MonoBehaviour
                 isRunning = false;
             }
         }
+        currenHouseText.text = houseManager.activeHouseCount.ToString();
+        housePercentage.value = houseManager.activeHouseCount / houseManager.houseCount;
     }
 
     public IEnumerator CountDown()

@@ -27,12 +27,18 @@ public class HouseManager : MonoBehaviour
                 if (h == null)
                     continue;
 
+                activeHouseCount++;
                 houses.Add(h);
             }
         }
 
         print("house" + activeHouseCount);
 
+    }
+
+    private void Update()
+    {
+        RemoveDestroyedHouses();
     }
 
     public House GetRandomHouse()
@@ -48,7 +54,10 @@ public class HouseManager : MonoBehaviour
         for (int i = 0; i < houses.Count; i++)
         {
             if (houses[i] == null || houses[i].gameObject == null)
+            {
                 houses.RemoveAt(i);
+                activeHouseCount--;
+            }
         }
     }
 
