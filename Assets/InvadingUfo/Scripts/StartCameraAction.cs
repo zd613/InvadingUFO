@@ -15,7 +15,7 @@ public class StartCameraAction : MonoBehaviour
 
     private void Awake()
     {
-        transform.position = target.transform.position + firstPositionOffset;
+        transform.position = target.transform.TransformPoint(firstPositionOffset);//target.transform.position + firstPositionOffset;
     }
     float t = 0;
     bool hasFinished = false;
@@ -23,7 +23,7 @@ public class StartCameraAction : MonoBehaviour
     private void LateUpdate()
     {
         //var desiredPos = target.transform.position + firstPositionOffset;
-        var desiredPos = target.transform.position + Vector3.Lerp(firstPositionOffset, lastPositionOffset, t);
+        var desiredPos = /*target.transform.position +*/ target.transform.TransformPoint(Vector3.Lerp(firstPositionOffset, lastPositionOffset, t));
         //var pos = Vector3.Lerp(transform.position, desiredPos, movingSpeed * Time.deltaTime);
         transform.position = desiredPos;
 

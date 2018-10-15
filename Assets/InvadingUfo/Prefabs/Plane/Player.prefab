@@ -240,7 +240,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1173365595504734
 GameObject:
   m_ObjectHideFlags: 1
@@ -1677,8 +1677,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1054719675181024}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -209.4, y: 29.4, z: -12}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.00000058114523}
+  m_LocalPosition: {x: 4, y: 29.4, z: 685}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 4772040046373004}
@@ -1688,7 +1688,7 @@ Transform:
   - {fileID: 4693683600938190}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180.00002, z: 0}
 --- !u!4 &4438134259119708
 Transform:
   m_ObjectHideFlags: 1
@@ -2072,7 +2072,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1829609930549280}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.733}
+  m_LocalPosition: {x: 0, y: 0.494, z: 1.864}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4434495508895396}
@@ -4392,6 +4392,7 @@ MonoBehaviour:
   canExplode: 1
   nonFracturedObjectParent: {fileID: 1250056392017260}
   fracturedObjectsParent: {fileID: 1372562068510036}
+  fracturedCenter: {fileID: 114446345249787026}
   minForce: 700
   maxForce: 800
   radius: 0
@@ -4425,7 +4426,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1829609930549280}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f2c984d48d40ea43838fe51943634cc, type: 3}
   m_Name: 
@@ -4506,6 +4507,8 @@ MonoBehaviour:
   missileCounterText: {fileID: 0}
   reloadSlider: {fileID: 0}
   lockonTargets: []
+  crosshair: {fileID: 4748756633368764}
+  missileTargetUI: {fileID: 0}
 --- !u!135 &135851943512065498
 SphereCollider:
   m_ObjectHideFlags: 1
