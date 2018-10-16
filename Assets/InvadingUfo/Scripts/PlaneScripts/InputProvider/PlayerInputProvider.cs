@@ -35,29 +35,36 @@ namespace Ame
                 BulletAttack = false;
             }
 
+
+
             //Pitch
-            PitchValue = 0;
-            if (Input.GetKey(KeyCode.UpArrow))
-            {
-                PitchValue = 1;
-            }
-            else if (Input.GetKey(KeyCode.DownArrow))
-            {
-                PitchValue = -1;
-            }
+            //PitchValue = 0;
+            PitchValue = Input.GetAxis("Vertical");
+
+            //if (Input.GetKey(KeyCode.UpArrow))
+            //{
+            //    PitchValue = 1;
+            //}
+            //else if (Input.GetKey(KeyCode.DownArrow))
+            //{
+            //    PitchValue = -1;
+            //}
             OnPitchRotation?.Invoke(PitchValue);
+
 
             //Yaw
 
-            YawValue = 0;
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                YawValue = 1;
-            }
-            else if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                YawValue = -1;
-            }
+            YawValue = Input.GetAxis("Horizontal");
+
+            //YawValue = 0;
+            //if (Input.GetKey(KeyCode.RightArrow))
+            //{
+            //    YawValue = 1;
+            //}
+            //else if (Input.GetKey(KeyCode.LeftArrow))
+            //{
+            //    YawValue = -1;
+            //}
             OnYawRotation?.Invoke(YawValue);
 
 

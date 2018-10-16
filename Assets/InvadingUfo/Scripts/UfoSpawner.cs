@@ -81,7 +81,7 @@ public class UfoSpawner : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(minInterval, maxInterval));
         }
         OnAllUfosSpawned?.Invoke();
-        print("invoke");
+        //print("invoke");
 
     }
 
