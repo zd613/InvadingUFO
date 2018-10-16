@@ -38,6 +38,10 @@ namespace Ame
         public float noHitTimeSecToAttacker = 1;
         bool canHitToAttacker = false;
 
+        //event 
+        //transform:target
+        public event System.Action<Transform> OnMissileHit;
+
         private void Awake()
         {
             prePos = transform.position;
@@ -146,12 +150,11 @@ namespace Ame
 
             //hp 削る
             //print("missile hit");
-            var health = collision.gameObject.GetComponentInParent<IDamageable>();
+            var health = collision.gameObject.GetComponentInParent<Health>();
             if (health != null)
             {
                 health.ApplyDamage(damage, attacker);
                 //print("apply damage");
-
             }
 
 
@@ -159,6 +162,7 @@ namespace Ame
             {
                 Instantiate(hitSoundPrefab, transform.position, Quaternion.identity);
             }
+            OnMissileHit?.Invoke(health.transform);
 
             Destroy(gameObject);
         }

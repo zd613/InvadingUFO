@@ -31,7 +31,8 @@ namespace Ame
         Rect rect = new Rect(0, 0, 1, 1);
 
         public Transform crosshair;
-
+        public GameObject missileHitCamera;
+        public float missileHitViewTimeSec = 5;
 
         [Header("UI")]
         public GameObject missileTargetUI;
@@ -147,6 +148,19 @@ namespace Ame
             var missile = obj.GetComponent<Missile>();
             missile.attacker = gameObject;
             missile.target = target;
+
+
+            //player
+            missile.OnMissileHit += (t) =>
+            {
+                missileHitCamera.SetActive(true);
+                print(missileHitCamera.activeInHierarchy);
+
+                var fc = missileHitCamera.GetComponent<FollowingCamera>();
+                fc.target = t;
+                fc.SetActiveWithDelay(false, missileHitViewTimeSec);
+
+            };
 
             missileCounter--;
             if (missileCounterText != null)

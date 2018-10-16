@@ -164,4 +164,6 @@ public class FollowingCamera : BaseCamera
         return target.forward * offset.z + target.right * offset.x
             + target.up * offset.y;
     }
+
+
 }

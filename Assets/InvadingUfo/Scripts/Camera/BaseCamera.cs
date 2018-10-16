@@ -26,4 +26,14 @@ public class BaseCamera : MonoBehaviour
 
     }
 
+    public void SetActiveWithDelay(bool isActive, float delaySec)
+    {
+        StartCoroutine(SetActiveDelay(isActive, delaySec));
+    }
+
+    IEnumerator SetActiveDelay(bool isActive,float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        gameObject.SetActive(isActive);
+    }
 }

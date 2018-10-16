@@ -42,3 +42,20 @@ public class House : AttractableObject
     //    collapsedHouse.SetActive(true);
     //}
 }
+
+//class Program
+//{
+//    static void Main()
+//    {
+//        Bar("Baz");
+//        var i = Foo<string>("Baz"); // what is the type of var?
+//    }
+//    static void Bar(dynamic d)
+//    {
+//        var i = Foo<string>(d); // what is the type of var?
+//    }
+//    static T Foo<T>(dynamic d)
+//    {
+//        return (T)d;
+//    }
+//}
