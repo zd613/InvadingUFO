@@ -47,6 +47,7 @@ public class Magnet : MonoBehaviour
         Debug.DrawRay(transform.position, Vector3.down * 3);
 
 
+
         UpdateAttractingList();
 
 
@@ -63,7 +64,7 @@ public class Magnet : MonoBehaviour
     {
         if (!isActive)
             return;
-        Attract2();
+        PrivateAttract();
     }
 
     public void StartToAttract()
@@ -85,20 +86,20 @@ public class Magnet : MonoBehaviour
         if (attractable == null)
             return;
 
-        if (canAttractMultipleObjects)
-        {
+        //if (canAttractMultipleObjects)
+        //{
             if (attractingObjects.Contains(attractable))
                 return;
 
             attractingObjects.Add(attractable);
-        }
-        else
-        {
+        //}
+        //else
+        //{
             if (target == null)
             {
                 target = attractable;
             }
-        }
+        //}
     }
 
     //remove attractable objects if exists
@@ -108,25 +109,25 @@ public class Magnet : MonoBehaviour
         if (attractable == null)
             return;
 
-        if (canAttractMultipleObjects)
-        {
-            if (!attractingObjects.Contains(attractable))
-                return;
+        //if (canAttractMultipleObjects)
+        //{
+        if (!attractingObjects.Contains(attractable))
+            return;
 
-            attractingObjects.Remove(attractable);
-        }
-        else
-        {
-            if (target != null)
-            {
-                target = null;
-            }
-        }
+        attractingObjects.Remove(attractable);
+        //}
+        //else
+        //{
+        //    if (target != null)
+        //    {
+        //        target = null;
+        //    }
+        //}
     }
 
 
 
-    void Attract2()
+    void PrivateAttract()
     {
         if (canAttractMultipleObjects)
         {
@@ -149,8 +150,23 @@ public class Magnet : MonoBehaviour
 
     void UpdateAttractingList()
     {
-        if (canAttractMultipleObjects)
-            attractingObjects = attractingObjects.Where(x => x != null).ToList();
+        //if (canAttractMultipleObjects)
+        attractingObjects = attractingObjects.Where(x => x != null).ToList();
+
+        if (!canAttractMultipleObjects)
+        {
+            float min = float.MaxValue;
+            foreach (var item in attractingObjects)
+            {
+                var d = Vector3.Distance(item.transform.position, transform.position);
+                if (d < min)
+                {
+                    target = item;
+                    min = d;
+                }
+            }
+        }
+
     }
 
 
@@ -164,9 +180,4 @@ public class Magnet : MonoBehaviour
 
         Destroy(attractable.gameObject);
     }
-
-    //public void AttractTarget()
-    //{
-    //    target
-    //}
 }
