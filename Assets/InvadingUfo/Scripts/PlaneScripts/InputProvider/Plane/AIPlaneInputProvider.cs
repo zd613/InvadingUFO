@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIPlaneInputProvider : BaseInputProvider
+public class AIPlaneInputProvider : BasePlaneInputProvider
 {
     public Transform target;
     public Collider targetSearchCollider;

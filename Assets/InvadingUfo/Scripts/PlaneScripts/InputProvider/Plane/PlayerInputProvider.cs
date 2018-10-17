@@ -7,34 +7,45 @@ using System;
 
 namespace Ame
 {
-    public class PlayerInputProvider : BaseInputProvider
+    public class PlayerInputProvider : BasePlaneInputProvider
     {
         //いらない？
         //
         //攻撃
-        public event Action OnBulletAttack;
+        //public event Action OnBulletAttack;
+        //public event Action OnMissileAttack;
 
-        //移動
-        public event Action<bool> OnBoost;
+        ////移動
+        //public event Action<bool> OnBoost;
 
-        //回転
-        public event Action<float> OnPitchRotation;
-        public event Action<float> OnYawRotation;
+        ////回転
+        //public event Action<float> OnPitchRotation;
+        //public event Action<float> OnYawRotation;
 
         //
 
         public override void UpdateInputStatus()
         {
+            //bullet
             if (Input.GetKey(KeyCode.Z))
             {
                 BulletAttack = true;
-                OnBulletAttack?.Invoke();
+                //OnBulletAttack?.Invoke();
             }
             else
             {
                 BulletAttack = false;
             }
 
+            //missile
+            if (Input.GetKey(KeyCode.X))
+            {
+                MissileAttack = true;
+            }
+            else
+            {
+                MissileAttack = false;
+            }
 
 
             //Pitch
@@ -49,7 +60,7 @@ namespace Ame
             //{
             //    PitchValue = -1;
             //}
-            OnPitchRotation?.Invoke(PitchValue);
+            //OnPitchRotation?.Invoke(PitchValue);
 
 
             //Yaw
@@ -65,7 +76,7 @@ namespace Ame
             //{
             //    YawValue = -1;
             //}
-            OnYawRotation?.Invoke(YawValue);
+            //OnYawRotation?.Invoke(YawValue);
 
 
             //boost 
@@ -73,12 +84,12 @@ namespace Ame
             if (Input.GetKey(KeyCode.Space))
             {
                 Boost = true;
-                OnBoost?.Invoke(true);
+                //OnBoost?.Invoke(true);
             }
             else
             {
                 Boost = false;
-                OnBoost?.Invoke(false);
+                //OnBoost?.Invoke(false);
             }
         }
     }
