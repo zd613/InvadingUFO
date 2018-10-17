@@ -29,7 +29,7 @@ public class CommonCore : MonoBehaviour
     {
         if (useInputProvider && inputProvider == null)
         {
-            Debug.Log("Input Provider is null.set input provider");
+            Debug.Log("Input Provider is null.set input provider", this);
         }
         //
         movement = GetComponent<Movement>();

@@ -5,11 +5,12 @@ using UnityEngine;
 //ステート管理してる
 //state context
 
-public class AIManetUfoInputProvider : BaseInputProvider
+public class AIMagnetUfoInputProvider : BaseInputProvider
 {
     public HouseManager houseManager;
     public House target;
-    public Vector3 offset;
+    public Vector3 minOffset;
+    public Vector3 maxOffset;
 
     public Transform ufoHome;
 
@@ -44,7 +45,8 @@ public class AIManetUfoInputProvider : BaseInputProvider
             {
                 //ターゲットへ向かう
                 goToTargetState.target = findTargetState.targetHouse.transform;
-                goToTargetState.offset = offset;
+                goToTargetState.offset = new Vector3(Random.Range(minOffset.x, maxOffset.x),
+                     Random.Range(minOffset.y, maxOffset.y), Random.Range(minOffset.z, maxOffset.z));
                 goToTargetState.OnReached += () =>
                 {
                     stateContext.ChangeState(attractState, Random.Range(2, 4));
@@ -63,6 +65,10 @@ public class AIManetUfoInputProvider : BaseInputProvider
             PitchValue = goToTargetState.pitch;
             YawValue = goToTargetState.yaw;
         };
+        goToTargetState.OnTimeout += () =>
+        {
+            stateContext.State = findTargetState;
+        };
 
         attractState.magnet = GetComponent<Magnet>();
         attractState.OnAllObjectsAttracted += () =>
@@ -70,8 +76,14 @@ public class AIManetUfoInputProvider : BaseInputProvider
             GetComponent<Movement>().isActive = true;
             stateContext.State = findTargetState;
         };
+        attractState.OnTimeout += () =>
+        {
+            GetComponent<Movement>().isActive = true;
+            stateContext.State = findTargetState;
+        };
 
     }
+
 
     public override void UpdateInputStatus()
     {

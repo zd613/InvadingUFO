@@ -3210,6 +3210,7 @@ MonoBehaviour:
   canExplode: 1
   nonFracturedObjectParent: {fileID: 1709690201004652}
   fracturedObjectsParent: {fileID: 1304274965463068}
+  fracturedCenter: {fileID: 0}
   minForce: 1
   maxForce: 2
   radius: 0

@@ -44,7 +44,7 @@ public class UfoSpawner : MonoBehaviour
 
 
         //
-        var ai = obj.GetComponent<AIManetUfoInputProvider>();
+        var ai = obj.GetComponent<AIMagnetUfoInputProvider>();
         ai.houseManager = houseManager;
         if (ufoManager != null)
         {

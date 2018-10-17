@@ -164,4 +164,9 @@ public class Magnet : MonoBehaviour
 
         Destroy(attractable.gameObject);
     }
+
+    //public void AttractTarget()
+    //{
+    //    target
+    //}
 }

@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class AttractState : UfoBaseState
 {
+    public GameObject target;
     public Magnet magnet;
     bool isAttracting = false;
 
-
+    float timeout = 15;
+    float time = 0;
     //event 
     public event System.Action OnAllObjectsAttracted;
+    public event System.Action OnTimeout;
     int objectCounter = 0;
 
     public override void Execute()
@@ -27,6 +30,17 @@ public class AttractState : UfoBaseState
             OnAllObjectsAttracted?.Invoke();
 
         }
+
+
+        if (time > timeout)
+        {
+            StopToAttract();
+            Debug.Log("attract timeout");
+
+            OnTimeout?.Invoke();
+            time = 0;
+        }
+        time += Time.deltaTime;
     }
 
     void StartAttracting()

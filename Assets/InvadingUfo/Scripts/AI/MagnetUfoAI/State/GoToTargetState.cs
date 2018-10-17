@@ -15,12 +15,16 @@ public class GoToTargetState : UfoBaseState
     public float pitch;
     public float yaw;
 
+    float distance = float.MaxValue;
+
     //event
     public event Action TargetNotFound;
     public event Action OnReached;
     public event Action UpdateAfterExecuted;
+    public event Action OnTimeout;
 
-
+    float timeout = 10;
+    float time = 0;
 
 
     public override void Execute()
@@ -33,6 +37,23 @@ public class GoToTargetState : UfoBaseState
         pitchYawController.transform = transform;
 
         CheckArrival();
+
+        var d = Vector3.Distance(transform.position, target.position);
+        if (d > distance)
+        {
+            time += Time.deltaTime;
+            if (time > timeout)
+            {
+                Debug.Log("goto timeout");
+
+                OnTimeout?.Invoke();
+                time = 0;
+            }
+        }
+        else
+        {
+            time = 0;
+        }
 
         pitchYawController.SetPitchYawLookingAt(target.position + offset);
         pitch = pitchYawController.Pitch;
@@ -51,6 +72,8 @@ public class GoToTargetState : UfoBaseState
             OnReached?.Invoke();
         }
     }
+
+
 
     public override string ToString()
     {
