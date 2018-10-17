@@ -5,6 +5,7 @@ using System;
 
 public class BasePlaneCore : BaseCore
 {
+    [Header("BasePlaneCore")]
     public BasePlaneInputProvider inputProvider;
 
     protected event Action Move;

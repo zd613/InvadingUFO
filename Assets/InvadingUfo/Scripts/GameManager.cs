@@ -47,8 +47,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-
-
         player.OnDeath += () => StartCoroutine(GameOver());
     }
 

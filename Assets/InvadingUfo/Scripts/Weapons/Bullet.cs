@@ -45,7 +45,7 @@ namespace Ame
             //attackerと衝突判定なし
             if (Attacker != null)
             {
-                var commonCore = other.GetComponentInParent<CommonCore>();
+                var commonCore = other.GetComponentInParent<BaseCore>();
                 if (commonCore != null)
                 {
                     if (commonCore.gameObject == Attacker)

@@ -48,7 +48,7 @@ public class UfoSpawner : MonoBehaviour
         ai.houseManager = houseManager;
         if (ufoManager != null)
         {
-            ufoManager.Add(obj.GetComponent<CommonCore>());
+            ufoManager.Add(obj.GetComponent<BaseUfoCore>());
         }
 
     }
