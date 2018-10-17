@@ -26,7 +26,7 @@ public class UfoManager : MonoBehaviour
 
     private void Update()
     {
-        ufos.RemoveAll(x => !x.IsAlive);
+        ufos.RemoveAll(x => x == null || !x.IsAlive);
 
 
         if (Input.GetKeyDown(KeyCode.A))
