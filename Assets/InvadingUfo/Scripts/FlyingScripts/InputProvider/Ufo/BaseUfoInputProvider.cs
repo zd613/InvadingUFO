@@ -8,6 +8,7 @@ public class BaseUfoInputProvider : BaseInputProvider
     public bool SpecialKey2 { get; protected set; }
 
 
+
     public override void UpdateInputStatus()
     {
         //bullet

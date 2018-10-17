@@ -5,7 +5,7 @@ using UnityEngine;
 //ステート管理してる
 //state context
 
-public class AIMagnetUfoInputProvider : BaseInputProvider
+public class AIMagnetUfoInputProvider : BaseUfoInputProvider
 {
     public HouseManager houseManager;
     public House target;
