@@ -39,21 +39,36 @@ public class Health : MonoBehaviour, IDamageable
 
     [Header("接触判定")]
     public bool canCallOnCollisionEnter = false;
+    public StageDamageMode stageDamageMode = StageDamageMode.TakeDamage;
 
-
+    Rigidbody rb;
     protected virtual void Awake()
     {
         maxHp = hp;
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ApplyDamage(10, null);
-        }
-    }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    ApplyDamage(10, null);
+        //}
 
+        //衝突時にダメージ受ける場合　回転速度などをなくす
+        var v = rb.velocity;
+        if (!Mathf.Approximately(v.x, 0) || !Mathf.Approximately(v.y, 0) || !Mathf.Approximately(v.z, 0))
+        {
+            rb.velocity = Vector3.zero;
+        }
+
+        v = rb.angularVelocity;
+        if (!Mathf.Approximately(v.x, 0) || !Mathf.Approximately(v.y, 0) || !Mathf.Approximately(v.z, 0))
+        {
+            rb.angularVelocity = Vector3.zero;
+        }
+
+    }
 
     public void ApplyDamage(float damageValue, GameObject attacker)
     {
@@ -150,16 +165,29 @@ public class Health : MonoBehaviour, IDamageable
 
     }
 
-    //地面などに当たった時
-    //一撃でhp0になる
     protected virtual void OnCollisionEnter(Collision collision)
     {
         if (!canCallOnCollisionEnter)
             return;
 
-
         //if (collision.gameObject.layer == LayerMask.NameToLayer("Stage"))
-        KillInstantly(collision.gameObject);
+        if (stageDamageMode == StageDamageMode.TakeDamage)
+        {
+            ApplyDamage(StageData.DamageValue, collision.gameObject);
+        }
+        else
+        {
+            KillInstantly(collision.gameObject);
+        }
+    }
+
+    
+    protected virtual void OnCollisionStay(Collision collision)
+    {
+        if (stageDamageMode == StageDamageMode.TakeDamage)
+        {
+            ApplyDamage(StageData.DamageValue, collision.gameObject);
+        }
     }
 
     public void KillInstantly(GameObject attacker)
