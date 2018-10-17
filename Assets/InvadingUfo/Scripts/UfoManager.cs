@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class UfoManager : MonoBehaviour
 {
-    public List<CommonCore> ufos = new List<CommonCore>();
+    public List<BaseUfoCore> ufos = new List<BaseUfoCore>();
 
     public int Count { get { return ufos.Count; } }
 
 
 
 
-    public void Add(CommonCore ufo)
+    public void Add(BaseUfoCore ufo)
     {
         if (!ufos.Contains(ufo))
         {
@@ -19,7 +19,7 @@ public class UfoManager : MonoBehaviour
         }
     }
 
-    public bool Remove(CommonCore ufo)
+    public bool Remove(BaseUfoCore ufo)
     {
         return ufos.Remove(ufo);
     }
@@ -33,7 +33,7 @@ public class UfoManager : MonoBehaviour
         {
             foreach (var item in ufos)
             {
-                item.gameObject.GetComponent<Health>().KillInstantly(gameObject);
+                item.Health.KillInstantly(gameObject);
             }
         }
 

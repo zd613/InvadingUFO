@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject menuUI;
     bool isRunning = true;
     public Text countDownText;
-    public CommonCore player;
+    public BasePlaneCore player;
 
     [Header("GameOver")]
     public GameObject gameOverUI;

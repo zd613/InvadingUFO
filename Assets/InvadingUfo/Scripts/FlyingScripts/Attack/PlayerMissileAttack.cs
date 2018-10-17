@@ -226,7 +226,7 @@ namespace Ame
         //書いてる
         void TriggerEnter(Collider other)
         {
-            var cc = other.GetComponentInParent<CommonCore>();
+            var cc = other.GetComponentInParent<BaseCore>();
             if (cc == null)
                 return;
 
@@ -248,13 +248,13 @@ namespace Ame
 
         private void TriggerExit(Collider other)
         {
-            var cc = other.GetComponentInParent<CommonCore>();
-            if (cc == null)
+            var bc = other.GetComponentInParent<BaseCore>();
+            if (bc == null)
                 return;
 
             for (int i = 0; i < lockonTargets.Count; i++)
             {
-                if (lockonTargets[i].CommonCore == cc)
+                if (lockonTargets[i].CommonCore == bc)
                 {
                     lockonTargets.RemoveAt(i);
                 }
@@ -265,7 +265,7 @@ namespace Ame
         [System.Serializable]
         public class MissileTargetInfo
         {
-            public CommonCore CommonCore;
+            public BaseCore CommonCore;
             public bool CanSeeInView;//画面上に表示されるかどうか
         }
     }

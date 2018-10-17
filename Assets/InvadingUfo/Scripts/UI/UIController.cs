@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-    public CommonCore player;
+    public BasePlaneCore player;
 
     public Text altitudeText;
 
