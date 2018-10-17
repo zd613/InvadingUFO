@@ -23,18 +23,18 @@ public class StateContext
     }
 
     //state変更後に待機
-    public void ChangeState(BaseState state, float startDelaySec = 0)
+    public void ChangeState(BaseState state, float startDelaySec = 0, float endDelaySec = 0)
     {
-        State = state;
-
-        Func<Task> delayFunc = async () => 
+        Func<float, float, Task> delayFunc = async (start, end) =>
         {
             canExecute = false;
-            await Task.Delay((int)(startDelaySec * 1000));
+            await Task.Delay((int)(start * 1000));
+            State = state;
+            await Task.Delay((int)(end * 1000));
             canExecute = true;
         };
 
-        delayFunc();
+        delayFunc(startDelaySec, endDelaySec);
 
     }
 }

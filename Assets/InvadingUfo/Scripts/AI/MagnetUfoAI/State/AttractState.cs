@@ -24,13 +24,22 @@ public class AttractState : UfoBaseState
 
         //Debug.Log(magnet.AttractingObjectCount);
 
-        if (magnet.AttractingObjectCount == 0)
+        if (magnet.canAttractMultipleObjects)
         {
-            StopToAttract();
-            OnAllObjectsAttracted?.Invoke();
-
+            if (magnet.AttractingObjectCount == 0)
+            {
+                StopToAttract();
+                OnAllObjectsAttracted?.Invoke();
+            }
         }
-
+        else
+        {
+            if (magnet.target == null)
+            {
+                StopToAttract();
+                OnAllObjectsAttracted?.Invoke();
+            }
+        }
 
         if (time > timeout)
         {
@@ -53,6 +62,12 @@ public class AttractState : UfoBaseState
     {
         magnet.StopAttracting();
         isAttracting = false;
+
+        //終わったあとも引き寄せていたので
+        if (!magnet.canAttractMultipleObjects)
+        {
+            magnet.target = null;
+        }
     }
 
     public override string ToString()

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading.Tasks;
 
 //ステート管理してる
 //state context
@@ -27,6 +28,15 @@ public class AIMagnetUfoInputProvider : BaseUfoInputProvider
 
     private void Start()
     {
+        //local func
+        System.Func<float, Task> fromtAttractingToFindTargetsState = async (sec) =>
+        {
+            stateContext.ChangeState(findTargetState);
+
+            await Task.Delay((int)(sec * 1000));
+            GetComponent<Movement>().isActive = true;
+        };
+
         //stateの設定
         stateContext.State = findTargetState;
 
@@ -49,6 +59,7 @@ public class AIMagnetUfoInputProvider : BaseUfoInputProvider
                      Random.Range(minOffset.y, maxOffset.y), Random.Range(minOffset.z, maxOffset.z));
                 goToTargetState.OnReached += () =>
                 {
+                    
                     stateContext.ChangeState(attractState, Random.Range(2, 4));
                     stateContext.State = attractState;
                     GetComponent<Movement>().isActive = false;
@@ -71,15 +82,14 @@ public class AIMagnetUfoInputProvider : BaseUfoInputProvider
         };
 
         attractState.magnet = GetComponent<Magnet>();
+        
         attractState.OnAllObjectsAttracted += () =>
         {
-            GetComponent<Movement>().isActive = true;
-            stateContext.State = findTargetState;
+            fromtAttractingToFindTargetsState(Random.Range(2, 3));
         };
         attractState.OnTimeout += () =>
         {
-            GetComponent<Movement>().isActive = true;
-            stateContext.State = findTargetState;
+            fromtAttractingToFindTargetsState(Random.Range(2,3));
         };
 
     }

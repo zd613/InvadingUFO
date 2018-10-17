@@ -88,17 +88,17 @@ public class Magnet : MonoBehaviour
 
         //if (canAttractMultipleObjects)
         //{
-            if (attractingObjects.Contains(attractable))
-                return;
+        if (attractingObjects.Contains(attractable))
+            return;
 
-            attractingObjects.Add(attractable);
+        attractingObjects.Add(attractable);
         //}
         //else
         //{
-            if (target == null)
-            {
-                target = attractable;
-            }
+        if (target == null)
+        {
+            target = attractable;
+        }
         //}
     }
 
@@ -165,6 +165,9 @@ public class Magnet : MonoBehaviour
                     min = d;
                 }
             }
+
+            if (min == float.MaxValue)
+                target = null;
         }
 
     }

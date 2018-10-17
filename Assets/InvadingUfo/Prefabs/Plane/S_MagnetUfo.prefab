@@ -436,7 +436,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4639569613973006}
   - component: {fileID: 54469875616216902}
-  - component: {fileID: 114356479792936118}
+  - component: {fileID: 114936922022138610}
   - component: {fileID: 114615435240435682}
   - component: {fileID: 114783143861668222}
   - component: {fileID: 114006045888946016}
@@ -581,7 +581,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1834858577309206
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,7 +597,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1842212119012284
 GameObject:
   m_ObjectHideFlags: 1
@@ -3038,19 +3038,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &114356479792936118
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1726071592191938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 841ab65f87e11394aa075380310a6d52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useInputProvider: 0
-  inputProvider: {fileID: 114884817131797636}
 --- !u!114 &114540853721684418
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3291,6 +3278,19 @@ MonoBehaviour:
   minOffset: {x: -1, y: 20, z: -1}
   maxOffset: {x: 1, y: 30, z: 1}
   ufoHome: {fileID: 0}
+--- !u!114 &114936922022138610
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1726071592191938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a73f6ea98b22cc45a2d84b92c7b3f1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useInputProvider: 1
+  inputProvider: {fileID: 114884817131797636}
 --- !u!114 &114979772116170350
 MonoBehaviour:
   m_ObjectHideFlags: 1
