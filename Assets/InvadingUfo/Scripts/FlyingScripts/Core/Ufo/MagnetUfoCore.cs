@@ -8,6 +8,8 @@ public class MagnetUfoCore : BaseUfoCore
     [Header("BasePlaneCore")]
     public BaseUfoInputProvider inputProvider;
 
+    public GameObject ufoGameObject;
+    public float rotationSpeed = 20;
 
     public Rotation Rotation { get { return rotation; } }
 
@@ -23,7 +25,11 @@ public class MagnetUfoCore : BaseUfoCore
     {
         //base
         health = GetComponent<Health>();
-        health.OnDeath += () => OnDeath?.Invoke();
+        health.OnDeath += () =>
+        {
+            magnet.StopAttracting();
+            OnDeath?.Invoke();
+        };
 
 
         //
@@ -96,5 +102,16 @@ public class MagnetUfoCore : BaseUfoCore
         {
             movement.Move();
         }
+
+        Animation();
+    }
+
+    void Animation()
+    {
+        if (ufoGameObject == null)
+            return;
+        if (!health.isAlive)
+            return;
+        ufoGameObject.transform.Rotate(new Vector3(0, rotationSpeed, 0) * Time.deltaTime, Space.World);
     }
 }
