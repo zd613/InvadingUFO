@@ -88,7 +88,7 @@ public class MouseInputProvider : BasePlaneInputProvider
         YawValue = x;
         PitchValue = -y;
 
-        print(YawValue + "," + PitchValue);
+        //print(YawValue + "," + PitchValue);
 
     }
 
