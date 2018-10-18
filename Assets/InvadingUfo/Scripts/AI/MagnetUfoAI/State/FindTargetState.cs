@@ -8,12 +8,21 @@ public class FindTargetState : UfoBaseState
     public HouseManager houseManager;
     public House targetHouse;
 
-    public event Action ProcessFinished;
+    public event Action OnTargetNotFound;
+    public event Action OnTargetFound;
 
     public override void Execute()
     {
         targetHouse = houseManager?.GetRandomHouse();
-        ProcessFinished?.Invoke();
+        if (targetHouse == null)
+        {
+            OnTargetNotFound?.Invoke();
+        }
+        else
+        {
+            OnTargetFound?.Invoke();
+
+        }
 
     }
 

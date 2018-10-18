@@ -2227,6 +2227,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useInputProvider: 1
   inputProvider: {fileID: 114884817131797636}
+  ufoGameObject: {fileID: 1071032675639306}
+  rotationSpeed: 30
 --- !u!222 &222595519864157658
 CanvasRenderer:
   m_ObjectHideFlags: 1

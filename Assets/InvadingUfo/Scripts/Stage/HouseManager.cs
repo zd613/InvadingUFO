@@ -45,6 +45,8 @@ public class HouseManager : MonoBehaviour
     {
         RemoveDestroyedHouses();
         //print(houses.Count);
+        if (houses.Count == 0)
+            return null;
         var index = Random.Range(0, houses.Count);
         return houses[index];
     }

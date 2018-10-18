@@ -41,9 +41,6 @@ public class MagnetUfoCore : BaseUfoCore
         movement = GetComponent<Movement>();
         rotation = GetComponent<Rotation>();
         magnet = GetComponent<Magnet>();
-
-
-
     }
 
     protected virtual void Start()
@@ -58,14 +55,6 @@ public class MagnetUfoCore : BaseUfoCore
                     movement.isActive = false;
                 if (rotation != null)
                     rotation.isActive = false;
-                //if (attack != null)
-                //{
-                //    attack.isActive = false;
-                //    if (attack.crosshair != null)
-                //    {
-                //        attack.crosshair.gameObject.SetActive(false);
-                //    }
-                //}
 
                 var magnet = GetComponent<Magnet>();
                 if (magnet != null)

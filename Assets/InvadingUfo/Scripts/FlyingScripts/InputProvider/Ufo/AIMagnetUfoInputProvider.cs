@@ -41,32 +41,29 @@ public class AIMagnetUfoInputProvider : BaseUfoInputProvider
         stateContext.State = findTargetState;
 
         findTargetState.houseManager = houseManager;
-        findTargetState.ProcessFinished += () =>
+        findTargetState.OnTargetNotFound += () =>
         {
             target = findTargetState.targetHouse;
-            if (target == null)
+            //戻る
+            goToTargetState.target = ufoHome;
+            goToTargetState.offset = Vector3.zero;
+            stateContext.State = goToTargetState;
+        };
+        findTargetState.OnTargetFound += () =>
+        {
+            //ターゲットへ向かう
+            goToTargetState.target = findTargetState.targetHouse.transform;
+            goToTargetState.offset = new Vector3(Random.Range(minOffset.x, maxOffset.x),
+                 Random.Range(minOffset.y, maxOffset.y), Random.Range(minOffset.z, maxOffset.z));
+            goToTargetState.OnReached += () =>
             {
-                //戻る
-                goToTargetState.target = ufoHome;
-                goToTargetState.offset = Vector3.zero;
-                stateContext.State = goToTargetState;
-            }
-            else
-            {
-                //ターゲットへ向かう
-                goToTargetState.target = findTargetState.targetHouse.transform;
-                goToTargetState.offset = new Vector3(Random.Range(minOffset.x, maxOffset.x),
-                     Random.Range(minOffset.y, maxOffset.y), Random.Range(minOffset.z, maxOffset.z));
-                goToTargetState.OnReached += () =>
-                {
-                    
-                    stateContext.ChangeState(attractState, Random.Range(2, 4));
-                    stateContext.State = attractState;
-                    GetComponent<Movement>().isActive = false;
-                };
-                stateContext.State = goToTargetState;
 
-            }
+                stateContext.ChangeState(attractState, Random.Range(2, 4));
+                stateContext.State = attractState;
+                GetComponent<Movement>().isActive = false;
+            };
+            stateContext.State = goToTargetState;
+
         };
 
         goToTargetState.TargetNotFound += () => stateContext.State = findTargetState;
@@ -82,14 +79,14 @@ public class AIMagnetUfoInputProvider : BaseUfoInputProvider
         };
 
         attractState.magnet = GetComponent<Magnet>();
-        
+
         attractState.OnAllObjectsAttracted += () =>
         {
             fromtAttractingToFindTargetsState(Random.Range(2, 3));
         };
         attractState.OnTimeout += () =>
         {
-            fromtAttractingToFindTargetsState(Random.Range(2,3));
+            fromtAttractingToFindTargetsState(Random.Range(2, 3));
         };
 
     }
