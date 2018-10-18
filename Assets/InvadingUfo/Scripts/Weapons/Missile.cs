@@ -162,7 +162,8 @@ namespace Ame
             {
                 Instantiate(hitSoundPrefab, transform.position, Quaternion.identity);
             }
-            OnMissileHit?.Invoke(health.transform);
+
+            OnMissileHit?.Invoke(health?.transform);
 
             Destroy(gameObject);
         }

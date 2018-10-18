@@ -11,9 +11,6 @@ public class BasePlaneCore : BaseCore
     protected event Action Move;
     protected event Action<float, float> Rotate;
 
-    public float Altitude { get { return transform.position.y; } }
-
-
     public Rotation Rotation { get { return rotation; } }
 
     //event
@@ -23,6 +20,10 @@ public class BasePlaneCore : BaseCore
     protected Movement movement;
     protected Rotation rotation;
     protected Attack attack;
+
+
+    //TODO:一般的なやつに変更する
+    protected Ame.PlayerMissileAttack playerMissileAttack;
 
     protected virtual void Awake()
     {
@@ -40,7 +41,7 @@ public class BasePlaneCore : BaseCore
         movement = GetComponent<Movement>();
         rotation = GetComponent<Rotation>();
         attack = GetComponent<Attack>();
-
+        playerMissileAttack = GetComponent<Ame.PlayerMissileAttack>();
 
 
     }
@@ -90,6 +91,15 @@ public class BasePlaneCore : BaseCore
             }
         }
 
+        if (inputProvider.MissileAttack)
+        {
+            if (playerMissileAttack != null)
+            {
+                playerMissileAttack.Fire();
+            }
+        }
+
+        //fixed updateで動かすとカクカクした
         if (rotation != null)
         {
             rotation.Rotate(inputProvider.PitchValue, inputProvider.YawValue);
@@ -100,4 +110,5 @@ public class BasePlaneCore : BaseCore
             movement.Move();
         }
     }
+
 }

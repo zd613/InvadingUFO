@@ -108,12 +108,11 @@ namespace Ame
                         missileTargetUI.SetActive(false);
                 }
             }
+        }
 
-
-            if (Input.GetKeyDown(KeyCode.M))
-            {
-                Fire(target);
-            }
+        public void Fire()
+        {
+            Fire(target);
         }
 
         void UpdateTarget()
