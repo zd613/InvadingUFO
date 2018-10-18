@@ -153,7 +153,7 @@ namespace Ame
             missile.OnMissileHit += (t) =>
             {
                 missileHitCamera.SetActive(true);
-                print(missileHitCamera.activeInHierarchy);
+                //print(missileHitCamera.activeInHierarchy);
 
                 var fc = missileHitCamera.GetComponent<FollowingCamera>();
                 fc.target = t;
