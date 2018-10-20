@@ -17,20 +17,26 @@ public class HouseManager : MonoBehaviour
     {
         houseCount = 0;
         activeHouseCount = 0;
-        foreach (Transform item in transform)
-        {
-            houseCount++;
 
-            if (item.gameObject.activeInHierarchy)
-            {
-                var h = item.GetComponent<House>();
-                if (h == null)
-                    continue;
+        var c = GetComponentsInChildren<House>();
+        houses.AddRange(c);
+        houseCount = c.Length;
+        activeHouseCount = c.Length;
 
-                activeHouseCount++;
-                houses.Add(h);
-            }
-        }
+        //foreach (Transform item in transform)
+        //{
+        //    houseCount++;
+
+        //    if (item.gameObject.activeInHierarchy)
+        //    {
+        //        var h = item.GetComponent<House>();
+        //        if (h == null)
+        //            continue;
+
+        //        activeHouseCount++;
+        //        houses.Add(h);
+        //    }
+        //}
 
         //print("house" + activeHouseCount);
 
