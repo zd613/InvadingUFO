@@ -63,7 +63,7 @@ public class MagnetUfoCore : BaseUfoCore
                     magnet.isActive = false;
                 }
 
-
+                Destroy(gameObject, 30);
             };
         }
 

@@ -17,7 +17,8 @@ public class ObjectDestroyer : MonoBehaviour
                 delayTime = delay;
                 break;
             case DestroyMode.ParticleEnds:
-                delayTime = GetComponent<ParticleSystem>().main.duration;
+                delayTime = GetParticleSystemTime();
+
                 break;
             case DestroyMode.SoundEnds:
                 delayTime = GetComponent<AudioSource>().clip.length;
@@ -26,6 +27,27 @@ public class ObjectDestroyer : MonoBehaviour
                 break;
         }
         Destroy(gameObject, delayTime);
+    }
+
+    float GetParticleSystemTime()
+    {
+        ParticleSystem ps = GetComponent<ParticleSystem>();
+        if (ps != null)
+        {
+            return ps.main.duration;
+        }
+
+
+        foreach (Transform item in transform)
+        {
+            ps = item.GetComponent<ParticleSystem>();
+        }
+        if (ps == null)
+        {
+            throw new System.Exception("particle system が見つからない");
+
+        }
+        return ps.main.duration;
     }
 }
 
