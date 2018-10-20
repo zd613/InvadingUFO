@@ -59,13 +59,14 @@ public class MagnetUfoCore : BaseUfoCore
                 var magnet = GetComponent<Magnet>();
                 if (magnet != null)
                 {
-                    magnet.attractEffectObject.SetActive(false);
+                    magnet.attractAreaCollider.enabled = false;
                     magnet.isActive = false;
                 }
 
 
             };
         }
+
     }
 
 

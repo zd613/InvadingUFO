@@ -10,7 +10,15 @@ public class Magnet : MonoBehaviour
     [Header("設定")]
     public bool canAttractMultipleObjects = true;
     public float power = 10;
-    public GameObject attractEffectObject;
+    public Collider attractAreaCollider;
+
+    [Header("Animation")]
+    public bool useAnimation;
+    public float animationSpeed = 10;
+    public GameObject beamEffect;
+
+
+    bool isPlayingAnimation = false;
 
     public int AttractingObjectCount
     {
@@ -38,6 +46,7 @@ public class Magnet : MonoBehaviour
         attractableObjectCatcher.OnTriggerEnterCalled += GetAttractableObject;
         enterSender.OnTriggerEnterCalled += EnterCollider;
         exitSender.OnTriggerExitCalled += GetOutOfCollider;
+
     }
     private void Update()
     {
@@ -70,13 +79,24 @@ public class Magnet : MonoBehaviour
     public void StartToAttract()
     {
         isAttracting = true;
-        attractEffectObject.SetActive(true);
+        beamEffect.SetActive(true);
+
+        if (useAnimation)
+        {
+            StartCoroutine(PlayMagnetAnimation());
+        }
+        else
+        {
+            attractAreaCollider.enabled = true;
+        }
     }
 
     public void StopAttracting()
     {
         isAttracting = false;
-        attractEffectObject.SetActive(false);
+        attractAreaCollider.enabled = false;
+        beamEffect.SetActive(false);
+
     }
 
     //add attractable objects to the list
@@ -129,6 +149,10 @@ public class Magnet : MonoBehaviour
 
     void PrivateAttract()
     {
+
+        if (!isAttracting)
+            return;
+
         if (canAttractMultipleObjects)
         {
             foreach (var item in attractingObjects)
@@ -146,6 +170,33 @@ public class Magnet : MonoBehaviour
             if (target != null)
                 target.Attract(transform, power);
         }
+    }
+
+
+    IEnumerator PlayMagnetAnimation()
+    {
+
+        isPlayingAnimation = true;
+        var effect = attractAreaCollider.transform;
+        var targetScale = effect.localScale;
+
+        Vector3 scale = Vector3.zero;
+        scale.y = targetScale.y;
+        while (true)
+        {
+            effect.localScale = scale;
+            scale += targetScale * animationSpeed * Time.deltaTime;
+            scale.y = targetScale.y;
+
+            if (scale.x > targetScale.x)
+            {
+                effect.localScale = targetScale;
+                break;
+            }
+            yield return null;
+        }
+        isPlayingAnimation = false;
+        attractAreaCollider.enabled = true;
     }
 
     void UpdateAttractingList()
