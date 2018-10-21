@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class UfoManager : MonoBehaviour
 {
@@ -8,7 +10,12 @@ public class UfoManager : MonoBehaviour
 
     public int Count { get { return ufos.Count; } }
 
+    [Header("UI")]
+    public Text currentUfoCountText;
+    public Text totalUfoCountText;
+    public Slider ufoPercenTageSlider;
 
+    int totalUfos = 0;
 
 
     public void Add(BaseUfoCore ufo)
@@ -16,6 +23,7 @@ public class UfoManager : MonoBehaviour
         if (!ufos.Contains(ufo))
         {
             ufos.Add(ufo);
+            totalUfos++;
         }
     }
 
@@ -37,7 +45,16 @@ public class UfoManager : MonoBehaviour
             }
         }
 
+        UpdateUI();
 
+    }
+
+    void UpdateUI()
+    {
+        currentUfoCountText.text = ufos.Count.ToString();
+        totalUfoCountText.text = totalUfos.ToString();
+
+        ufoPercenTageSlider.value = ((float)ufos.Count / totalUfos);
     }
 
 }

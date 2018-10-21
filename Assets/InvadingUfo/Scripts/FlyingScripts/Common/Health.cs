@@ -124,6 +124,7 @@ public class Health : MonoBehaviour, IDamageable
                 rb.AddExplosionForce(UnityEngine.Random.Range(minForce, maxForce),
                     transform.position, radius);
 
+
                 if (smoke != null)
                 {
                     if (/*UnityEngine.Random.Range(0, 2) == 1 &&*/ smokeCounter < maxSmokes)
