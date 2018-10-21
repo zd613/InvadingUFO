@@ -37,6 +37,7 @@ namespace Ame
         [Header("UI")]
         public GameObject missileTargetUI;
         Camera mainCamera;
+        public UnityEngine.UI.Slider coolTimeSlider;
 
         private void Awake()
         {
@@ -180,7 +181,19 @@ namespace Ame
 
         IEnumerator CoolDown()
         {
-            yield return new WaitForSeconds(coolTimeSec);
+            //yield return new WaitForSeconds(coolTimeSec);
+            float time = 0;
+            while (true)
+            {
+                yield return null;
+                time += Time.deltaTime;
+                coolTimeSlider.value = time / coolTimeSec;
+                if (time > coolTimeSec)
+                {
+                    break;
+                }
+            }
+            coolTimeSlider.value = 0;
             coolDownCoroutine = null;
         }
 

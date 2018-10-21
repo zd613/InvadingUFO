@@ -28,6 +28,7 @@ public class UfoSpawner : MonoBehaviour
     //event
     public event System.Action OnAllUfosSpawned;
     //bool hasAllUfosSpawned = false;
+    public event System.Action OnWaveFinished;
 
     private void Awake()
     {
@@ -72,6 +73,7 @@ public class UfoSpawner : MonoBehaviour
             {
                 spawnInfoListIndex++;
                 infoGameObjectCounter = 0;
+                OnWaveFinished?.Invoke();
             }
 
             if (spawnInfoListIndex == spawnInfo.Count)

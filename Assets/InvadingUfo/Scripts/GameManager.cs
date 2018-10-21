@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
         {
             if (ufoManager.Count <= 0)
             {
-                print("hi");
+                //print("hi");
 
                 StartCoroutine(GameClear());
                 canClearGame = false;

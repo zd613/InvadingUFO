@@ -48,10 +48,8 @@ public class GameController : MonoBehaviour
 
     public void QuitGame()
     {
-        print("hi");
         Application.Quit();
 #if UNITY_EDITOR
-        print("uni");
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
     }
