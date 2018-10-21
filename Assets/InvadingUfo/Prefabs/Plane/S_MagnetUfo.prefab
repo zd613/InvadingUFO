@@ -1961,7 +1961,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActive: 1
   canAttractMultipleObjects: 0
-  power: 13
+  power: 16
   attractAreaCollider: {fileID: 64359479768338552}
   useAnimation: 1
   animationSpeed: 3

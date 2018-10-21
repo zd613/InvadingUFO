@@ -44,8 +44,6 @@ public class AttractState : UfoBaseState
         {
             if (magnet.target == null)
             {
-                Debug.Log("no target");
-
                 StopToAttract();
                 OnAllObjectsAttracted?.Invoke();
             }

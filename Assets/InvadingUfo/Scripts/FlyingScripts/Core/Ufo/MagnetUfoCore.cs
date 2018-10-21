@@ -103,6 +103,6 @@ public class MagnetUfoCore : BaseUfoCore
             return;
         if (!health.isAlive)
             return;
-        ufoGameObject.transform.Rotate(new Vector3(0, rotationSpeed, 0) * Time.deltaTime, Space.World);
+        ufoGameObject.transform.Rotate(new Vector3(0, rotationSpeed, 0) * Time.deltaTime);
     }
 }

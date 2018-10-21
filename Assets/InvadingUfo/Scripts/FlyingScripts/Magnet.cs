@@ -87,14 +87,14 @@ public class Magnet : MonoBehaviour
         }
         else
         {
-            attractAreaCollider.enabled = true;
+            //attractAreaCollider.enabled = true;
         }
     }
 
     public void StopAttracting()
     {
         isAttracting = false;
-        attractAreaCollider.enabled = false;
+        //attractAreaCollider.enabled = false;
         beamEffect.SetActive(false);
 
     }
@@ -196,7 +196,7 @@ public class Magnet : MonoBehaviour
             yield return null;
         }
         isPlayingAnimation = false;
-        attractAreaCollider.enabled = true;
+        //attractAreaCollider.enabled = true;
     }
 
     void UpdateAttractingList()

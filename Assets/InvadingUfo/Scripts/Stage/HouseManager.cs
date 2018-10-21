@@ -32,7 +32,7 @@ public class HouseManager : MonoBehaviour
     public House GetRandomHouse()
     {
         RemoveDestroyedHouses();
-        print(houses.Count);
+        //print(houses.Count);
         if (houses.Count == 0)
         {
             print("null");
