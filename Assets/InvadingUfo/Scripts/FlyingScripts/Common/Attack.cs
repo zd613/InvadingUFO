@@ -45,6 +45,8 @@ public class Attack : MonoBehaviour
             crosshair.color = normalColor;
 
         bulletCounter = maxBullet;
+
+
     }
 
     protected virtual void Update()
@@ -144,17 +146,33 @@ public class Attack : MonoBehaviour
 
         Ray ray = new Ray(transform.position, transform.forward * gunRange);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        Vector3 hitPos;
+        var layerMask = LayerMask.GetMask(layerNames);
+
+        if (Physics.Raycast(ray, out hit, layerMask))
         {
-            crosshair.transform.position = hit.point;
+            hitLine.SetPosition(1, transform.InverseTransformPoint(hit.point));
             //if ()
-            crosshair.color = canHitColor;
+            //crosshair.color = canHitColor;
         }
         else
         {
-            crosshair.transform.position = transform.position + transform.forward * gunRange;
-
-            crosshair.color = normalColor;
+            hitLine.SetPosition(1, new Vector3(0, 0, 0));
         }
+        //else
+        //{
+        crosshair.transform.position = transform.position + transform.forward * gunRange;
+        //    crosshair.color = normalColor;
+        //}
+        //crosshair.transform.position = transform.position + transform.forward * gunRange;
+        //crosshairHalf.transform.position = transform.position + transform.forward * gunRange / 2;
+        gunRangeLine.SetPosition(1, transform.InverseTransformPoint(transform.position + transform.forward * gunRange));
+
+        //Debug.DrawLine(transform.position + new Vector3(0, 0, 1), transform.position + transform.forward * gunRange, Color.yellow);
     }
+
+    string[] layerNames = new string[] { "AreaWall" };
+    public GameObject crosshairHalf;
+    public LineRenderer gunRangeLine;
+    public LineRenderer hitLine;
 }
