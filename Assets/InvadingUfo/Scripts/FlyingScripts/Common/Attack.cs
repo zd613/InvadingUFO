@@ -151,7 +151,6 @@ public class Attack : MonoBehaviour
         //layerMask = ~layerMask;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, gunRange, layerMaskValue))
         {
-            print(hit.transform.name);
 
             hitLine.SetPosition(1, transform.InverseTransformPoint(hit.point));
             //if ()
@@ -170,13 +169,9 @@ public class Attack : MonoBehaviour
         //crosshairHalf.transform.position = transform.position + transform.forward * gunRange / 2;
         gunRangeLine.SetPosition(1, transform.InverseTransformPoint(transform.position + transform.forward * gunRange));
 
-        //Debug.DrawLine(transform.position + new Vector3(0, 0, 1), transform.position + transform.forward * gunRange, Color.yellow);
     }
 
     int layerMaskValue;
-    //public LayerMask[] layerMask;
-    //string[] layerNames = new string[] { "AreaWall", "Weapon" };
-    public GameObject crosshairHalf;
     public LineRenderer gunRangeLine;
     public LineRenderer hitLine;
 }
