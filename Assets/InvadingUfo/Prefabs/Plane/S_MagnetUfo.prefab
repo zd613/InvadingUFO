@@ -474,8 +474,8 @@ GameObject:
   - component: {fileID: 4013107929547596}
   - component: {fileID: 33514744836175810}
   - component: {fileID: 23141569524321654}
-  - component: {fileID: 65728258019568352}
   - component: {fileID: 114121400429793006}
+  - component: {fileID: 65161246778644280}
   m_Layer: 13
   m_Name: AttractableObjectCatcher
   m_TagString: Untagged
@@ -504,8 +504,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1998907850178864}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.000000050068, y: -0.52, z: -0.37001}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.000000050068, y: -2.56, z: -0.37001}
+  m_LocalScale: {x: 15, y: 3, z: 15}
   m_Children: []
   m_Father: {fileID: 4639569613973006}
   m_RootOrder: 3
@@ -658,7 +658,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1726071592191938}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -55.2, y: 49.7, z: 151.5}
+  m_LocalPosition: {x: -80.6, y: 60, z: 77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4914555118234064}
@@ -1612,7 +1612,7 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300022, guid: 886c84aaa9f063747a96c70f5059715c, type: 3}
---- !u!65 &65728258019568352
+--- !u!65 &65161246778644280
 BoxCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1622,8 +1622,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 9.171074, y: 1, z: 8.950775}
-  m_Center: {x: 0.09297562, y: 0, z: 0.27488708}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &82556462415376250
 AudioSource:
   m_ObjectHideFlags: 1
@@ -2292,7 +2292,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1058468459416036}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 224646090591134748}
@@ -2302,7 +2302,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7.05, y: 1.44}
+  m_AnchoredPosition: {x: 3.67, y: 3.25}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.50811696, y: 0.58220613}
 --- !u!224 &224646090591134748

@@ -74,25 +74,26 @@ public class MagnetUfoCore : BaseUfoCore
     {
         Debug.DrawRay(transform.position, transform.forward * 2, Color.red);
 
-
-        if (inputProvider.SpecialKey1)
+        if (useInputProvider)
         {
-            if (magnet != null)
+            if (inputProvider.SpecialKey1)
             {
-                magnet.Attract();
+                if (magnet != null)
+                {
+                    magnet.Attract();
+                }
+            }
+
+            if (rotation != null)
+            {
+                rotation.Rotate(inputProvider.PitchValue, inputProvider.YawValue);
+            }
+
+            if (movement != null)
+            {
+                movement.Move();
             }
         }
-
-        if (rotation != null)
-        {
-            rotation.Rotate(inputProvider.PitchValue, inputProvider.YawValue);
-        }
-
-        if (movement != null)
-        {
-            movement.Move();
-        }
-
         Animation();
     }
 

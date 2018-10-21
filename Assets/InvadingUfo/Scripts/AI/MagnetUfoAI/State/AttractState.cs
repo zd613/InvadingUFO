@@ -8,7 +8,7 @@ public class AttractState : UfoBaseState
     public Magnet magnet;
     bool isAttracting = false;
 
-    float timeout = 15;
+    float timeout = 20;
     float time = 0;
     //event 
     public event System.Action OnAllObjectsAttracted;
