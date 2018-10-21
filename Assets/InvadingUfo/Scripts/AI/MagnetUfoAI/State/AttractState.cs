@@ -19,7 +19,15 @@ public class AttractState : UfoBaseState
     {
         if (!isAttracting)
         {
+            //Debug.Log("start attract");
+
             StartAttracting();
+        }
+        if (!magnet.isAttracting)
+        {
+            //Debug.Log("magnet not attracting");
+
+            return;
         }
 
         //Debug.Log(magnet.AttractingObjectCount);
@@ -36,6 +44,8 @@ public class AttractState : UfoBaseState
         {
             if (magnet.target == null)
             {
+                Debug.Log("no target");
+
                 StopToAttract();
                 OnAllObjectsAttracted?.Invoke();
             }

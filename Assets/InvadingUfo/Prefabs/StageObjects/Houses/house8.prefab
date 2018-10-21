@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33703525721500096}
   - component: {fileID: 23251031891104370}
   - component: {fileID: 65111650872973886}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: house8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 4068921226201580}
   - component: {fileID: 54564664191655894}
   - component: {fileID: 114556238661943092}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: house8
   m_TagString: Untagged
   m_Icon: {fileID: 0}

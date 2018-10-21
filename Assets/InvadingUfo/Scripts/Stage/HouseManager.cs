@@ -22,24 +22,6 @@ public class HouseManager : MonoBehaviour
         houses.AddRange(c);
         houseCount = c.Length;
         activeHouseCount = c.Length;
-
-        //foreach (Transform item in transform)
-        //{
-        //    houseCount++;
-
-        //    if (item.gameObject.activeInHierarchy)
-        //    {
-        //        var h = item.GetComponent<House>();
-        //        if (h == null)
-        //            continue;
-
-        //        activeHouseCount++;
-        //        houses.Add(h);
-        //    }
-        //}
-
-        //print("house" + activeHouseCount);
-
     }
 
     private void Update()
@@ -50,9 +32,12 @@ public class HouseManager : MonoBehaviour
     public House GetRandomHouse()
     {
         RemoveDestroyedHouses();
-        //print(houses.Count);
+        print(houses.Count);
         if (houses.Count == 0)
+        {
+            print("null");
             return null;
+        }
         var index = Random.Range(0, houses.Count);
         return houses[index];
     }
