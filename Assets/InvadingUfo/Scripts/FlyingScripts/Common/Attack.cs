@@ -46,6 +46,7 @@ public class Attack : MonoBehaviour
 
         bulletCounter = maxBullet;
 
+        layerMaskValue = ~LayerMask.GetMask(new string[] { "AreaWall", "Weapon" });
 
     }
 
@@ -146,11 +147,12 @@ public class Attack : MonoBehaviour
 
         Ray ray = new Ray(transform.position, transform.forward * gunRange);
         RaycastHit hit;
-        Vector3 hitPos;
-        var layerMask = LayerMask.GetMask(layerNames);
 
-        if (Physics.Raycast(ray, out hit, layerMask))
+        //layerMask = ~layerMask;
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, gunRange, layerMaskValue))
         {
+            print(hit.transform.name);
+
             hitLine.SetPosition(1, transform.InverseTransformPoint(hit.point));
             //if ()
             //crosshair.color = canHitColor;
@@ -171,7 +173,9 @@ public class Attack : MonoBehaviour
         //Debug.DrawLine(transform.position + new Vector3(0, 0, 1), transform.position + transform.forward * gunRange, Color.yellow);
     }
 
-    string[] layerNames = new string[] { "AreaWall" };
+    int layerMaskValue;
+    //public LayerMask[] layerMask;
+    //string[] layerNames = new string[] { "AreaWall", "Weapon" };
     public GameObject crosshairHalf;
     public LineRenderer gunRangeLine;
     public LineRenderer hitLine;
