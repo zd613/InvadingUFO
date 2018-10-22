@@ -107,7 +107,7 @@ public class BasePlaneCore : BaseCore
 
         if (movement != null)
         {
-            movement.Move();
+            movement.Move(inputProvider.Boost);
         }
     }
 

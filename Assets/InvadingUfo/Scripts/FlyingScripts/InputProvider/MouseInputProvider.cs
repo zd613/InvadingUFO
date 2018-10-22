@@ -57,6 +57,15 @@ public class MouseInputProvider : BasePlaneInputProvider
         //pitch yaw
         SetPitchAndYaw();
 
+        if (Input.GetKey(KeyCode.Space))
+        {
+            Boost = true;
+        }
+        else
+        {
+            Boost = false;
+        }
+
     }
 
     void SetPitchAndYaw()

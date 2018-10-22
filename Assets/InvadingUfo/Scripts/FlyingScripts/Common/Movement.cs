@@ -10,17 +10,22 @@ public class Movement : MonoBehaviour
     public float speed;
     protected Rigidbody rb;
 
+    public float Speed { get; protected set; }
+
     [Space]
     public bool altitudeConstraint = true;
     public float minAltitude = 0;
     public float maxAltitude = 50;
+
+    [Space]
+    public float boostRate = 1.5f;
 
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    public virtual void Move()
+    public virtual void Move(bool boost = false)
     {
         if (!isActive)
         {
@@ -49,7 +54,16 @@ public class Movement : MonoBehaviour
             }
         }
 
-        rb.MovePosition(transform.position + forward * speed * Time.deltaTime);
+        if (boost)
+        {
+            Speed = speed * boostRate;
+        }
+        else
+        {
+            Speed = speed;
+        }
+
+        rb.MovePosition(transform.position + forward * Speed * Time.deltaTime);
         //transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
     }
