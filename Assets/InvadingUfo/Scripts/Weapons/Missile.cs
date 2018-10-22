@@ -56,8 +56,9 @@ namespace Ame
 
         IEnumerator SwitchDamageToAttacker()
         {
-            var collider = GetComponentInChildren<Collider>();
-            collider.isTrigger = true;
+            canHitToAttacker = false;
+            //var collider = GetComponentInChildren<Collider>();
+            //collider.isTrigger = true;
             yield return new WaitForSeconds(noHitTimeSecToAttacker);
             canHitToAttacker = true;
             //collider.isTrigger = false;
@@ -138,10 +139,18 @@ namespace Ame
             //print("other");
 
             var collision = other;
+
             if (!canHitToAttacker)
             {
-                if (collision.gameObject == attacker)
-                    return;
+                //TODO:プレイヤーとミサイルが当たるので応急処置
+                var core = GetComponentInParent<Health>();
+                if (core != null)
+                {
+                    if (core.gameObject == attacker)
+                        return;
+                }
+                //if (collision.gameObject == attacker)
+                //    return;
             }
 
 
@@ -153,6 +162,11 @@ namespace Ame
             var health = collision.gameObject.GetComponentInParent<Health>();
             if (health != null)
             {
+                if (health.gameObject.tag == "Player")
+                {
+                    print("player damaged");
+
+                }
                 health.ApplyDamage(damage, attacker);
                 //print("apply damage");
             }

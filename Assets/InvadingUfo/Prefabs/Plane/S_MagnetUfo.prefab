@@ -2128,7 +2128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAlive: 1
-  hp: 50
+  hp: 100
   subRoot: {fileID: 0}
   hpSlider: {fileID: 114612925874002364}
   canExplode: 1
@@ -2170,7 +2170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 1
-  speed: 10
+  speed: 15
   altitudeConstraint: 1
   minAltitude: -5
   maxAltitude: 1000

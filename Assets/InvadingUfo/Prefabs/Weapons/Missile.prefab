@@ -431,7 +431,7 @@ MonoBehaviour:
   firstStageWaitSec: 0
   firstStageGravity: 0.3
   relativeSpeed: 0
-  noHitTimeSecToAttacker: 1
+  noHitTimeSecToAttacker: 2
 --- !u!198 &198491830126933466
 ParticleSystem:
   m_ObjectHideFlags: 1

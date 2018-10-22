@@ -35,7 +35,7 @@ public class HouseManager : MonoBehaviour
         //print(houses.Count);
         if (houses.Count == 0)
         {
-            print("null");
+            //print("null");
             return null;
         }
         var index = Random.Range(0, houses.Count);
