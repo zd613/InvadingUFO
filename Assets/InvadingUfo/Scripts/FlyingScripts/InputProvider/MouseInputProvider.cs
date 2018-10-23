@@ -99,7 +99,7 @@ public class MouseInputProvider : BasePlaneInputProvider
 
         YawValue = x;
         PitchValue = -y;
-        //print(YawValue + "," + PitchValue);
+        print(YawValue + "," + PitchValue);
 
         //update ui
         foreach (var item in arrowUI)
@@ -108,11 +108,18 @@ public class MouseInputProvider : BasePlaneInputProvider
             pos = pos.normalized * outerCircleRadius;
 
             item.transform.localPosition = pos;
-            var rot = Quaternion.LookRotation(vec).eulerAngles;
-            rot.x = 0;
-            rot.y = 0;
 
-            item.transform.localRotation = Quaternion.Euler(rot);
+            //TODO:上が0 右が-90 下　180 左90になるよくわからん 左右逆なるはずでは？検証
+            var angle = Vector3.SignedAngle(Vector3.up, pos, Vector3.forward);
+            //print(-angle);
+
+
+            //arrowの上-90 右0 下90 左180に合わせるため angle を左右逆転して90度ひく
+            //angle = -angle;
+            //print(angle - 90);
+            var rot = Quaternion.Euler(0, 0, angle + 90);
+
+            item.transform.localRotation = rot;
         }
 
 
