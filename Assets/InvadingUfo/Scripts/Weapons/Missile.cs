@@ -165,7 +165,7 @@ namespace Ame
                 if (health.gameObject.tag == "Player")
                 {
                     print("player damaged");
-
+                    return;
                 }
                 health.ApplyDamage(damage, attacker);
                 //print("apply damage");
