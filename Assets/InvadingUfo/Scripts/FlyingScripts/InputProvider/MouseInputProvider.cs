@@ -21,6 +21,9 @@ public class MouseInputProvider : BasePlaneInputProvider
 
     float radius;//px
 
+    public GameObject[] arrowUI;
+
+
     private void Awake()
     {
         crosshairRayLength = GetComponent<Attack>().gunPrefab.GetComponent<Bullet>().range;
@@ -96,6 +99,22 @@ public class MouseInputProvider : BasePlaneInputProvider
 
         YawValue = x;
         PitchValue = -y;
+        //print(YawValue + "," + PitchValue);
+
+        //update ui
+        foreach (var item in arrowUI)
+        {
+            var pos = new Vector3(YawValue * outerCircleRadius, -PitchValue * outerCircleRadius, 0);
+            pos = pos.normalized * outerCircleRadius;
+
+            item.transform.localPosition = pos;
+            var rot = Quaternion.LookRotation(vec).eulerAngles;
+            rot.x = 0;
+            rot.y = 0;
+
+            item.transform.localRotation = Quaternion.Euler(rot);
+        }
+
 
         //print(YawValue + "," + PitchValue);
 
