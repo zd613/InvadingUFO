@@ -11,10 +11,11 @@ public class PlanePitchYawController
     public float Pitch { get; private set; }
     public float Yaw { get; private set; }
 
-    //PlanePitchYawController(Transform transform)
-    //{
-    //    this.transform = transform;
-    //}
+    public PlanePitchYawController() { }
+    public PlanePitchYawController(Transform transform)
+    {
+        this.transform = transform;
+    }
 
     //ターゲット方向へ向くようにpitch yawをセットする
     public void SetPitchYawLookingAt(Vector3 targetPosition)

@@ -30,11 +30,13 @@ public class UfoSpawner : MonoBehaviour
     //bool hasAllUfosSpawned = false;
     public event System.Action OnWaveFinished;
 
+    GameObject ufoHolder;
+
     private void Awake()
     {
-        //SpawnUfo();
-        StartCoroutine(LoopSpawning());
+        ufoHolder = new GameObject("UfoHolder");
 
+        StartCoroutine(LoopSpawning());
     }
 
 
@@ -42,7 +44,7 @@ public class UfoSpawner : MonoBehaviour
     {
         var rot = Quaternion.identity;
         var obj = Instantiate(info.GameObject, transform.position, rot);
-
+        obj.transform.SetParent(ufoHolder.transform);
 
         //
         var ai = obj.GetComponent<AIMagnetUfoInputProvider>();

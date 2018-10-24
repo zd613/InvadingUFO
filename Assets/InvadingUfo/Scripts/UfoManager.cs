@@ -57,4 +57,8 @@ public class UfoManager : MonoBehaviour
         ufoPercenTageSlider.value = ((float)ufos.Count / totalUfos);
     }
 
+    public BaseUfoCore GetUfo(int index)
+    {
+        return ufos[index];
+    }
 }

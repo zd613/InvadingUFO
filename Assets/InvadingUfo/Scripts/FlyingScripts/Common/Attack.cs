@@ -140,6 +140,9 @@ public class Attack : MonoBehaviour
         reloadCoroutine = null;
     }
 
+
+    public bool isRaycastHit;
+
     void UpdateCrosshairImage()
     {
         if (crosshair == null)

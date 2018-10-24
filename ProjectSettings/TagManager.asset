@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - AreaWall
+  - PlaneManager
+  - UfoManager
   layers:
   - Default
   - TransparentFX
