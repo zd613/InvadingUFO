@@ -83,8 +83,8 @@ public class AIPlaneInputProvider : BasePlaneInputProvider
         if (planeList.Count == 0)
         {
             FollowTarget();
-            if (debug)
-                print("target");
+            //if (debug)
+            //    print("target");
 
         }
         else
@@ -101,32 +101,32 @@ public class AIPlaneInputProvider : BasePlaneInputProvider
 
             if (v3 == Vector3.zero)
             {
-                if(debug)
-                {
-                    foreach (var item in planeList)
-                    {
-                        print(item.name);
+                //if(debug)
+                //{
+                //    foreach (var item in planeList)
+                //    {
+                //        print(item.name);
 
-                    }
-                }
-                if (planeList.Count == 0)
-                {
-                    print("count==0)");
+                //    }
+                //}
+                //if (planeList.Count == 0)
+                //{
+                //    print("count==0)");
 
-                }
-                print(colliders.Length);
+                //}
+                //print(colliders.Length);
 
             }
 
             v3 /= planeList.Count;
-            print(v3);
+            //print(v3);
 
 
-            pitchYaw.SetPitchYawLookingAt(transform.position + v3 );
+            pitchYaw.SetPitchYawLookingAt(transform.position + v3);
             PitchValue = pitchYaw.Pitch;
             YawValue = pitchYaw.Yaw;
-            if (debug)
-                print("avoid");
+            //if (debug)
+            //    print("avoid");
 
         }
 
@@ -143,7 +143,15 @@ public class AIPlaneInputProvider : BasePlaneInputProvider
 
         if (distance < attack.gunRange)
         {
-            attack.Fire();
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.forward, out hit, attack.gunRange))
+            {
+                var hitLayer = hit.collider.gameObject.layer;
+                if (hitLayer != LayerMask.GetMask("Plane", "Player"))
+                {
+                    attack.Fire();
+                }
+            }
         }
     }
 

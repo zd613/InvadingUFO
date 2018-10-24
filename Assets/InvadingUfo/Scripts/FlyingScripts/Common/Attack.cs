@@ -84,7 +84,10 @@ public class Attack : MonoBehaviour
         coolDownCoroutine = StartCoroutine(CoolDown());
 
         bulletCounter--;
-        reloadSlider.value = (float)bulletCounter / maxBullet;
+        if (reloadSlider != null)
+        {
+            reloadSlider.value = (float)bulletCounter / maxBullet;
+        }
 
         if (bulletCounter <= 0)
         {
