@@ -8,9 +8,6 @@ public class BasePlaneCore : BaseCore
     [Header("BasePlaneCore")]
     public BasePlaneInputProvider inputProvider;
 
-    protected event Action Move;
-    protected event Action<float, float> Rotate;
-
     public Rotation Rotation { get { return rotation; } }
 
     //event
@@ -66,6 +63,7 @@ public class BasePlaneCore : BaseCore
                         attack.crosshair.gameObject.SetActive(false);
                     }
                 }
+               
 
                 var magnet = GetComponent<Magnet>();
                 if (magnet != null)
@@ -103,6 +101,7 @@ public class BasePlaneCore : BaseCore
         if (rotation != null)
         {
             rotation.Rotate(inputProvider.PitchValue, inputProvider.YawValue);
+            rotation.CancelRotationByCollisionHit();
         }
 
         if (movement != null)

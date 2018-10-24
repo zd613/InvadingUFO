@@ -63,6 +63,22 @@ public class Rotation : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    //衝突時にダメージ受ける場合　回転速度などをなくす
+    public void CancelRotationByCollisionHit()
+    {
+        var v = rb.velocity;
+        if (!Mathf.Approximately(v.x, 0) || !Mathf.Approximately(v.y, 0) || !Mathf.Approximately(v.z, 0))
+        {
+            rb.velocity = Vector3.zero;
+        }
+
+        v = rb.angularVelocity;
+        if (!Mathf.Approximately(v.x, 0) || !Mathf.Approximately(v.y, 0) || !Mathf.Approximately(v.z, 0))
+        {
+            rb.angularVelocity = Vector3.zero;
+        }
+    }
+
 
     //private void Update()
     //{

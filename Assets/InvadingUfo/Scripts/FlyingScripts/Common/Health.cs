@@ -9,17 +9,14 @@ public class Health : MonoBehaviour, IDamageable
 {
     public bool isAlive = true;
     public float hp = 100;
-    private float maxHp;
-    public GameObject subRoot;
 
     [Header("UI")]
-    //public Image hpBar;
     public Slider hpSlider;
 
     public event Action OnDamageTaken;
     public event Action OnDeath;
 
-    public float MaxHp { get { return maxHp; } }
+    public float MaxHp { get; private set; }
 
     [Header("爆発")]
     public bool canExplode = false;
@@ -44,41 +41,19 @@ public class Health : MonoBehaviour, IDamageable
     Rigidbody rb;
     protected virtual void Awake()
     {
-        maxHp = hp;
+        MaxHp = hp;//max hp をインスペクタの値に設定する
         rb = GetComponent<Rigidbody>();
-    }
-
-    private void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    ApplyDamage(10, null);
-        //}
-
-        //衝突時にダメージ受ける場合　回転速度などをなくす
-        var v = rb.velocity;
-        if (!Mathf.Approximately(v.x, 0) || !Mathf.Approximately(v.y, 0) || !Mathf.Approximately(v.z, 0))
-        {
-            rb.velocity = Vector3.zero;
-        }
-
-        v = rb.angularVelocity;
-        if (!Mathf.Approximately(v.x, 0) || !Mathf.Approximately(v.y, 0) || !Mathf.Approximately(v.z, 0))
-        {
-            rb.angularVelocity = Vector3.zero;
-        }
-
     }
 
     public void ApplyDamage(float damageValue, GameObject attacker)
     {
-        if(attacker==gameObject)
+        if (attacker == gameObject)
         {
             print("damage" + damageValue + "," + attacker.name);
 
         }
-        //print(damageValue + "," + attacker.name);
-        //print(gameObject.name);
+
+
         if (!isAlive)
         {
             return;
@@ -162,10 +137,6 @@ public class Health : MonoBehaviour, IDamageable
         {
             explosionSound.Play();
             float soundTime = explosionSound.clip.length;
-
-            subRoot.gameObject.SetActive(false);
-
-            Destroy(gameObject, soundTime);
         }
 
 
@@ -187,7 +158,7 @@ public class Health : MonoBehaviour, IDamageable
         }
     }
 
-    
+
     protected virtual void OnCollisionStay(Collision collision)
     {
         if (stageDamageMode == StageDamageMode.TakeDamage)
@@ -205,7 +176,7 @@ public class Health : MonoBehaviour, IDamageable
     {
         if (hpSlider == null)
             return;
-        hpSlider.value = hp / maxHp;
+        hpSlider.value = hp / MaxHp;
 
     }
 }
