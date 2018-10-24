@@ -73,14 +73,17 @@ namespace Ame
             //set target
             float min = float.MaxValue;
             MissileTargetInfo nearest = null;
-            var crosshairScreenPos = mainCamera.WorldToViewportPoint(crosshair.position);
+            //var crosshairScreenPos = mainCamera.WorldToViewportPoint(crosshair.position);
+            var mouseViewPoint = mainCamera.ScreenToViewportPoint(Input.mousePosition);
+            //print(mouseViewPoint);
 
             foreach (var item in lockonTargets)
             {
                 if (item.CanSeeInView)
                 {
-                    var pos = mainCamera.WorldToViewportPoint(item.CommonCore.transform.position);
-                    var distance = Vector3.Distance(crosshairScreenPos, pos);
+                    var pos = mainCamera.WorldToViewportPoint(item.BaseCore.transform.position);
+                    pos.z = 0;//画面上なのでzは使わない
+                    var distance = Vector3.Distance(mouseViewPoint/*crosshairScreenPos*/, pos);
                     if (distance < min)
                     {
                         min = distance;
@@ -89,7 +92,8 @@ namespace Ame
                 }
             }
 
-            target = nearest?.CommonCore?.gameObject;
+            target = nearest?.BaseCore?.gameObject;
+
 
             //update ui
             if (missileTargetUI != null)
@@ -122,12 +126,12 @@ namespace Ame
                 return;
 
             //死んでるやつ削除
-            lockonTargets.RemoveAll(x => x == null || x.CommonCore == null || !x.CommonCore.IsAlive);
+            lockonTargets.RemoveAll(x => x == null || x.BaseCore == null || !x.BaseCore.IsAlive);
 
             //カメラで見えてるか判定
             foreach (var item in lockonTargets)
             {
-                item.CanSeeInView = CanSeeInView(item.CommonCore.transform.position);
+                item.CanSeeInView = CanSeeInView(item.BaseCore.transform.position);
             }
 
         }
@@ -238,22 +242,22 @@ namespace Ame
         //書いてる
         void TriggerEnter(Collider other)
         {
-            var cc = other.GetComponentInParent<BaseCore>();
-            if (cc == null)
+            var baseCore = other.GetComponentInParent<BaseCore>();
+            if (baseCore == null)
                 return;
 
 
             foreach (var item in lockonTargets)
             {
-                if (item.CommonCore == cc)
+                if (item.BaseCore == baseCore)
                     return;
             }
 
 
             var info = new MissileTargetInfo()
             {
-                CommonCore = cc,
-                CanSeeInView = CanSeeInView(cc.transform.position),
+                BaseCore = baseCore,
+                CanSeeInView = CanSeeInView(baseCore.transform.position),
             };
             lockonTargets.Add(info);
         }
@@ -266,7 +270,7 @@ namespace Ame
 
             for (int i = 0; i < lockonTargets.Count; i++)
             {
-                if (lockonTargets[i].CommonCore == bc)
+                if (lockonTargets[i].BaseCore == bc)
                 {
                     lockonTargets.RemoveAt(i);
                 }
@@ -277,7 +281,7 @@ namespace Ame
         [System.Serializable]
         public class MissileTargetInfo
         {
-            public BaseCore CommonCore;
+            public BaseCore BaseCore;
             public bool CanSeeInView;//画面上に表示されるかどうか
         }
     }
