@@ -37,13 +37,13 @@ public class UfoManager : MonoBehaviour
         ufos.RemoveAll(x => x == null || !x.IsAlive);
 
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            foreach (var item in ufos)
-            {
-                item.Health.KillInstantly(gameObject);
-            }
-        }
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+        //    foreach (var item in ufos)
+        //    {
+        //        item.Health.KillInstantly(gameObject);
+        //    }
+        //}
 
         UpdateUI();
 
