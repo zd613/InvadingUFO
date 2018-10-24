@@ -79,30 +79,6 @@ public class Rotation : MonoBehaviour
         }
     }
 
-
-    //private void Update()
-    //{
-    //    if (FixRotation)
-    //    {
-    //        //rootObj.transform.rotation = initialRotation;
-    //        return;
-    //    }
-    //    //1回目　他のクラスから呼び出されてローテーションが変更されているので
-    //    UpdateSignedEulerAngles();
-
-    //    //角度制限
-
-    //    var newRotX = Mathf.Clamp(signedEulerAngles.x, pitchLimit.Min, pitchLimit.Max);
-    //    var newRotZ = Mathf.Clamp(signedEulerAngles.z, rollLimit.Min, rollLimit.Max);
-    //    //rootObj.transform.eulerAngles = new Vector3(newRotX, rootObj.transform.eulerAngles.y, newRotZ);
-
-
-    //    //2回目　角度制限したので
-    //    UpdateSignedEulerAngles();
-    //}
-
-
-
     //pitch,yaw が1となっていたら、それぞれのpowerの値　degree/sec 回転する
     //pitch yawの値を0-1で調整することで回転を制御する
     public virtual void Rotate(float pitch, float yaw)
@@ -171,12 +147,7 @@ public class Rotation : MonoBehaviour
 
     }
 
-    //private void Yaw(float value)
-    //{
-    //    transform.Rotate(Vector3.up, power.Yaw * Mathf.Deg2Rad * -signedEulerAngles.z * Time.deltaTime, Space.World);
-    //    //signedEulerAngles.y = Angle.ToSignedEulerAngle(transform.eulerAngles.y);
 
-    //}
 
     protected virtual void Yaw(float value)
     {

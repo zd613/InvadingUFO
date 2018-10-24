@@ -153,20 +153,13 @@ public class Attack : MonoBehaviour
         {
 
             hitLine.SetPosition(1, transform.InverseTransformPoint(hit.point));
-            //if ()
-            //crosshair.color = canHitColor;
         }
         else
         {
             hitLine.SetPosition(1, new Vector3(0, 0, 0));
         }
-        //else
-        //{
+
         crosshair.transform.position = transform.position + transform.forward * gunRange;
-        //    crosshair.color = normalColor;
-        //}
-        //crosshair.transform.position = transform.position + transform.forward * gunRange;
-        //crosshairHalf.transform.position = transform.position + transform.forward * gunRange / 2;
         gunRangeLine.SetPosition(1, transform.InverseTransformPoint(transform.position + transform.forward * gunRange));
 
     }

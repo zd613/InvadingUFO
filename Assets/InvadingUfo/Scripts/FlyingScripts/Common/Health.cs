@@ -18,6 +18,7 @@ public class Health : MonoBehaviour, IDamageable
 
     public float MaxHp { get; private set; }
 
+    
     [Header("爆発")]
     public bool canExplode = false;
     public GameObject nonFracturedObjectParent;
@@ -82,7 +83,7 @@ public class Health : MonoBehaviour, IDamageable
         }
     }
 
-    void Explode()
+    protected void Explode()
     {
         nonFracturedObjectParent.SetActive(false);
         fracturedObjectsParent.SetActive(true);
@@ -100,14 +101,13 @@ public class Health : MonoBehaviour, IDamageable
             {
                 if (move.isActive)
                     rb.velocity = transform.forward * speed;
-                // rb.AddForce(transform.forward * UnityEngine.Random.Range(minForce, maxForce));
                 rb.AddExplosionForce(UnityEngine.Random.Range(minForce, maxForce),
                     transform.position, radius);
 
 
                 if (smoke != null)
                 {
-                    if (/*UnityEngine.Random.Range(0, 2) == 1 &&*/ smokeCounter < maxSmokes)
+                    if (smokeCounter < maxSmokes)
                     {
                         var parent = rb.transform;
                         var smokeInstance = Instantiate(smoke, parent.transform.position, transform.rotation);
@@ -177,6 +177,5 @@ public class Health : MonoBehaviour, IDamageable
         if (hpSlider == null)
             return;
         hpSlider.value = hp / MaxHp;
-
     }
 }
