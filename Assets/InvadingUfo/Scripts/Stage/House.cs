@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -41,6 +42,9 @@ public class House : AttractableObject
     //    house.SetActive(false);
     //    collapsedHouse.SetActive(true);
     //}
+
+
+
 }
 
 //class Program
