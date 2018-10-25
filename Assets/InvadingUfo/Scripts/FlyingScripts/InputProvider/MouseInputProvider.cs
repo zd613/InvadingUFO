@@ -82,6 +82,15 @@ public class MouseInputProvider : BasePlaneInputProvider
         float x = 0;
         float y = 0;
         //内側の円より外のとき
+
+        if (vec.x > 0)
+        {
+
+        }
+        else if (vec.x < 0)
+        {
+
+        }
         if (Mathf.Abs(vec.x) > innerCircleRadius)
         {
             //print(vec.x + "," + innerCircleRadius);
@@ -104,21 +113,40 @@ public class MouseInputProvider : BasePlaneInputProvider
         //update ui
         foreach (var item in arrowUI)
         {
+            if (YawValue == 0 && PitchValue == 0)
+            {
+                if (item.activeInHierarchy)
+                    item.SetActive(false);
+                continue;
+            }
+            else
+            {
+                if (!item.activeInHierarchy)
+                    item.SetActive(true);
+            }
+            var mx = Input.mousePosition.x;
+            var my = Input.mousePosition.y;
+
             var pos = new Vector3(YawValue * outerCircleRadius, -PitchValue * outerCircleRadius, 0);
+
+            if (pos.x * pos.x + pos.y + pos.y >= outerCircleRadius * outerCircleRadius)//外側の円より外側
+            {
+                print("out");
+                pos = pos.normalized * outerCircleRadius;
+
+            }
             pos = pos.normalized * outerCircleRadius;
 
             item.transform.localPosition = pos;
 
             //TODO:上が0 右が-90 下　180 左90になるよくわからん 左右逆なるはずでは？検証
             var angle = Vector3.SignedAngle(Vector3.up, pos, Vector3.forward);
-            //print(-angle);
 
 
             //arrowの上-90 右0 下90 左180に合わせるため angle を左右逆転して90度ひく
             //angle = -angle;
             //print(angle - 90);
             var rot = Quaternion.Euler(0, 0, angle + 90);
-
             item.transform.localRotation = rot;
         }
 
