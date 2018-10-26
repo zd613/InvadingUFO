@@ -128,9 +128,6 @@ public class Attack : MonoBehaviour
         bullet.range = gunRange;
         bullet.Attacker = gameObject;
         bullet.Initialize();
-
-        print(bullet.gameObject.activeInHierarchy);
-
     }
 
     protected IEnumerator CoolDown()

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class UfoManager : MonoBehaviour
 {
+    public GameObject ufoHolder;
     public List<BaseUfoCore> ufos = new List<BaseUfoCore>();
 
     public int Count { get { return ufos.Count; } }
@@ -35,16 +36,6 @@ public class UfoManager : MonoBehaviour
     private void Update()
     {
         ufos.RemoveAll(x => x == null || !x.IsAlive);
-
-
-        //if (Input.GetKeyDown(KeyCode.A))
-        //{
-        //    foreach (var item in ufos)
-        //    {
-        //        item.Health.KillInstantly(gameObject);
-        //    }
-        //}
-
         UpdateUI();
 
     }

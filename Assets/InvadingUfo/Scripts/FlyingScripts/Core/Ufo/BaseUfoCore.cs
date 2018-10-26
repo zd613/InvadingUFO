@@ -13,9 +13,6 @@ public class BaseUfoCore : BaseCore
     //protected event Action Move;
     //protected event Action<float, float> Rotate;
 
-    //public float Altitude { get { return transform.position.y; } }
-
-
     //public Rotation Rotation { get { return rotation; } }
 
     ////event
@@ -42,9 +39,6 @@ public class BaseUfoCore : BaseCore
     //    movement = GetComponent<Movement>();
     //    rotation = GetComponent<Rotation>();
     //    attack = GetComponent<Attack>();
-
-
-
     //}
 
     //protected virtual void Start()
