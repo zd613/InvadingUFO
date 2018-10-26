@@ -50,6 +50,8 @@ public class UfoManager : MonoBehaviour
 
     public BaseUfoCore GetUfo(int index)
     {
+        if (ufos.Count == 0)
+            return null;
         return ufos[index];
     }
 }

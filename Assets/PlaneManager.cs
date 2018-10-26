@@ -18,6 +18,18 @@ public class PlaneManager : MonoBehaviour
 
     int totalPlanes = 0;
 
+    private void Start()
+    {
+        foreach (Transform item in holder.transform)
+        {
+            var t = item.GetComponent<BasePlaneCore>();
+            if (t != null && t.gameObject.activeInHierarchy)
+            {
+                Add(t);
+            }
+        }
+    }
+
 
     public void Add(BasePlaneCore ufo)
     {
@@ -64,6 +76,8 @@ public class PlaneManager : MonoBehaviour
 
     public BasePlaneCore GetPlane(int index)
     {
+        if (planes.Count == 0)
+            return null;
         return planes[index];
     }
 

@@ -111,7 +111,7 @@ public class Attack : MonoBehaviour
         Bullet bullet;
         if (pool == null)
         {
-            print("null");
+            //print("null");
 
             var obj = Instantiate(gunPrefab, muzzleTransform.position, muzzleTransform.rotation);
             bullet = obj.GetComponent<Bullet>();
