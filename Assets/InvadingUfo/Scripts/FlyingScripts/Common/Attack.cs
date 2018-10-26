@@ -38,6 +38,9 @@ public class Attack : MonoBehaviour
     //reload時は円状のuiで赤にするなど
     public Slider reloadSlider;
 
+    [Header("pool")]
+    public BulletPool pool;
+
 
     protected virtual void Start()
     {
@@ -105,10 +108,29 @@ public class Attack : MonoBehaviour
 
     protected void CreateBullet()
     {
-        var obj = Instantiate(gunPrefab, muzzleTransform.position, muzzleTransform.rotation);
-        var bullet = obj.GetComponent<Bullet>();
+        Bullet bullet;
+        if (pool == null)
+        {
+            print("null");
+
+            var obj = Instantiate(gunPrefab, muzzleTransform.position, muzzleTransform.rotation);
+            bullet = obj.GetComponent<Bullet>();
+
+        }
+        else
+        {
+
+            bullet = pool.GetBullet();
+            bullet.pool = pool;
+            bullet.gameObject.transform.position = muzzleTransform.position;
+            bullet.gameObject.transform.rotation = muzzleTransform.rotation;
+        }
         bullet.range = gunRange;
         bullet.Attacker = gameObject;
+        bullet.Initialize();
+
+        print(bullet.gameObject.activeInHierarchy);
+
     }
 
     protected IEnumerator CoolDown()

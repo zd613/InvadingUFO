@@ -83,14 +83,29 @@ public class MouseInputProvider : BasePlaneInputProvider
         float y = 0;
         //内側の円より外のとき
 
-        if (vec.x > 0)
-        {
+        //if (vec.sqrMagnitude > innerCircleRadius * innerCircleRadius)
+        //{
 
-        }
-        else if (vec.x < 0)
-        {
+        //    //上が0 時計回り180　まで正　反時計回り-180まで　負
+        //    var angle = -Vector3.SignedAngle(Vector3.up, vec, Vector3.forward);
+        //    print(angle);
+        //    x = Mathf.Sin(Mathf.Deg2Rad * angle) * outerCircleRadius;
+        //    y = Mathf.Cos(Mathf.Deg2Rad * angle) * outerCircleRadius;
+        //    print(x + "," + y);
 
-        }
+        //}
+
+        //if (vec.x > 0)
+        //{
+
+        //}
+        //else if (vec.x < 0)
+        //{
+
+        //}
+
+        var tx = innerCircleRadius * (YawValue * outerCircleRadius);
+
         if (Mathf.Abs(vec.x) > innerCircleRadius)
         {
             //print(vec.x + "," + innerCircleRadius);
@@ -131,7 +146,7 @@ public class MouseInputProvider : BasePlaneInputProvider
 
             if (pos.x * pos.x + pos.y + pos.y >= outerCircleRadius * outerCircleRadius)//外側の円より外側
             {
-                print("out");
+                //print("out");
                 pos = pos.normalized * outerCircleRadius;
 
             }

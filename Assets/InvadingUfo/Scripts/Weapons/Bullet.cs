@@ -8,6 +8,7 @@ namespace Ame
 {
     public class Bullet : MonoBehaviour
     {
+        public BulletPool pool;
         public float speed = 10;
         public float damage = 10;
         public float range = 20;
@@ -18,11 +19,17 @@ namespace Ame
         public GameObject hitEffectPrefab;
 
         //２回目防止用
-        bool hit = false;
+        bool hit;
 
         private void Awake()
         {
+            Initialize();
+        }
+
+        public void Initialize()
+        {
             start = transform.position;
+            hit = false;
         }
 
         private void Update()
@@ -30,9 +37,7 @@ namespace Ame
 
             if (Vector3.Distance(start, transform.position) > range)
             {
-                //print(range);
-                //print(Vector3.Distance(start, transform.position));
-                Destroy(gameObject);
+                DestroyOrReturnBullet();
             }
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
@@ -61,7 +66,7 @@ namespace Ame
 
                 CreateHitEffect();
                 hit = true;
-                Destroy(gameObject);
+                DestroyOrReturnBullet();
                 return;
             }
 
@@ -73,7 +78,7 @@ namespace Ame
                 target.ApplyDamage(damage, Attacker);
                 hit = true;
 
-                Destroy(gameObject);
+                DestroyOrReturnBullet();
             }
 
         }
@@ -81,6 +86,18 @@ namespace Ame
         void CreateHitEffect()
         {
             Instantiate(hitEffectPrefab, transform.position, hitEffectPrefab.transform.rotation);
+        }
+
+        void DestroyOrReturnBullet()
+        {
+            if (pool == null)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                pool.Return(this);
+            }
         }
     }
 }
