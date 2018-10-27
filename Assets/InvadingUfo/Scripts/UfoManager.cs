@@ -18,6 +18,15 @@ public class UfoManager : MonoBehaviour
 
     int totalUfos = 0;
 
+    private void Awake()
+    {
+        if (ufoHolder == null)
+        {
+            ufoHolder = new GameObject("UfoHolder");
+
+        }
+    }
+
 
     public void Add(BaseUfoCore ufo)
     {

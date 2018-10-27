@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114640538832746394}
   m_Layer: 0
   m_Name: UfoManager
-  m_TagString: Untagged
+  m_TagString: UfoManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,7 +33,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1790646176853186}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -51,4 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59200388a83fff04383fca75403c96c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ufoHolder: {fileID: 0}
   ufos: []
+  currentUfoCountText: {fileID: 0}
+  totalUfoCountText: {fileID: 0}
+  ufoPercenTageSlider: {fileID: 0}

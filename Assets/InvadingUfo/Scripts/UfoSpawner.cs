@@ -31,14 +31,14 @@ public class UfoSpawner : MonoBehaviour
     public event System.Action OnWaveFinished;
 
     GameObject ufoHolder;
+    
 
-    private void Awake()
+    private void Start()
     {
-        ufoHolder = new GameObject("UfoHolder");
-
+        ufoHolder = ufoManager.ufoHolder;
         StartCoroutine(LoopSpawning());
-    }
 
+    }
 
     void SpawnUfo(SpawnInfo info)
     {
