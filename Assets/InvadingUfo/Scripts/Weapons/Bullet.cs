@@ -59,9 +59,8 @@ namespace Ame
                     }
                 }
             }
-
-
-            if (other.gameObject.layer == LayerMask.NameToLayer("Stage"))
+            var layer = other.gameObject.layer;
+            if (layer == LayerMask.NameToLayer("Stage") || layer == LayerMask.NameToLayer("Attractable"))
             {
 
                 CreateHitEffect();

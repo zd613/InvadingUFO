@@ -423,7 +423,7 @@ MonoBehaviour:
   maxRange: 1200
   hitEffect: {fileID: 1187429217532524, guid: 901c6461d099b1541af5e3217efb74b6, type: 2}
   rotationSpeed: 1.3
-  damage: 100
+  damage: 500
   fireSound: {fileID: 82942737092628750}
   hitSoundPrefab: {fileID: 1839291857398886, guid: 82dd524015d0ca9439e7fa72e463edf5,
     type: 2}

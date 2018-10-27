@@ -18,7 +18,7 @@ public class Health : MonoBehaviour, IDamageable
 
     public float MaxHp { get; private set; }
 
-    
+
     [Header("爆発")]
     public bool canExplode = false;
     public GameObject nonFracturedObjectParent;
@@ -37,6 +37,7 @@ public class Health : MonoBehaviour, IDamageable
 
     [Header("接触判定")]
     public bool canCallOnCollisionEnter = false;
+    public bool canCallOnCollisionStay = false;
     public StageDamageMode stageDamageMode = StageDamageMode.TakeDamage;
 
     Rigidbody rb;
@@ -161,6 +162,9 @@ public class Health : MonoBehaviour, IDamageable
 
     protected virtual void OnCollisionStay(Collision collision)
     {
+        if (!canCallOnCollisionStay)
+            return;
+
         if (stageDamageMode == StageDamageMode.TakeDamage)
         {
             ApplyDamage(StageData.DamageValue, collision.gameObject);

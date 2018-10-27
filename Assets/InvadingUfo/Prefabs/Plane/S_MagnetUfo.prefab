@@ -2176,6 +2176,7 @@ MonoBehaviour:
   maxSmokes: 8
   explosionSound: {fileID: 0}
   canCallOnCollisionEnter: 1
+  canCallOnCollisionStay: 1
   stageDamageMode: 0
 --- !u!114 &114635731141532734
 MonoBehaviour:

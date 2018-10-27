@@ -1227,3 +1227,4 @@ MonoBehaviour:
   canExplode: 1
   explosionForce: 10
   explosionRadius: 5
+  hp: 200

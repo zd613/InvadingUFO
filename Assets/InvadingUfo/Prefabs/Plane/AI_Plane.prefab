@@ -4793,6 +4793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useInputProvider: 1
   inputProvider: {fileID: 114303823948716264}
+  fspeed: 1
 --- !u!114 &114127464907906344
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4980,6 +4981,7 @@ MonoBehaviour:
   maxSmokes: 8
   explosionSound: {fileID: 0}
   canCallOnCollisionEnter: 1
+  canCallOnCollisionStay: 1
   stageDamageMode: 0
 --- !u!114 &114560392410730196
 MonoBehaviour:
@@ -5087,6 +5089,7 @@ MonoBehaviour:
   reloadTime: 5
   bulletCounter: 0
   reloadSlider: {fileID: 0}
+  pool: {fileID: 0}
   isRaycastHit: 0
   gunRangeLine: {fileID: 120492882712072378}
   hitLine: {fileID: 120048419846858034}

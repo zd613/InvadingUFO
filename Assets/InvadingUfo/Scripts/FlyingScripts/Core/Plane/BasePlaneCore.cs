@@ -79,6 +79,8 @@ public class BasePlaneCore : BaseCore
             };
         }
 
+        mainCamera = Camera.main;
+
     }
 
 
@@ -123,13 +125,14 @@ public class BasePlaneCore : BaseCore
             {
                 f += fspeed * Time.deltaTime;
             }
-            f = Mathf.Clamp(f, 30, 50);
-            Camera.main.focalLength = f;
-            print(f);
+            f = Mathf.Clamp(f, 30, 45);
+            mainCamera.focalLength = f;
         }
     }
 
+    Camera mainCamera;
+
     //プレイヤーのブースとじのカメラ操作
-    float f = 50;
+    float f = 45;
     public float fspeed = 10;
 }

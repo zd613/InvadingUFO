@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fracture : MonoBehaviour
+public class Fracture : MonoBehaviour, Ame.IDamageable
 {
     public GameObject nonFractured;
     public GameObject fractured;
@@ -12,54 +12,41 @@ public class Fracture : MonoBehaviour
     public float explosionForce = 20;
     public float explosionRadius;
 
-    private void Awake()
-    {
-
-    }
-
     bool isFractured = false;
 
-    private void OnTriggerEnter(Collider other)
+    public float hp = 200;
+
+    public void FractureObject()
     {
-        if (isFractured)
-            return;
+        var rb = GetComponent<Rigidbody>();
+        rb.useGravity = false;
+        rb.isKinematic = true;
 
-        if (other.gameObject.layer == LayerMask.NameToLayer("Weapon"))
+        nonFractured.SetActive(false);
+        fractured.SetActive(true);
+
+
+        if (canExplode)
         {
-            var rb = GetComponent<Rigidbody>();
-            rb.useGravity = false;
-            rb.isKinematic = true;
-
-            nonFractured.SetActive(false);
-            fractured.SetActive(true);
-
-
-            if (canExplode)
-            {
-                Explode(other.ClosestPointOnBounds(transform.position));
-            }
-            isFractured = true;
+            Explode(transform.position);
         }
+        isFractured = true;
     }
-
-    //public void Execute()
-    //{
-    //    nonFractured.SetActive(false);
-    //    fractured.SetActive(true);
-
-
-    //    if (canExplode)
-    //    {
-    //        Explode(other.ClosestPointOnBounds(transform.position));
-    //    }
-    //}
-
 
     private void Explode(Vector3 position)
     {
         foreach (Transform item in fractured.transform)
         {
             item.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, position, explosionRadius);
+        }
+    }
+
+    public void ApplyDamage(float damageValue, GameObject attacker)
+    {
+        hp -= damageValue;
+        if (hp <= 0)
+        {
+            FractureObject();
         }
     }
 }

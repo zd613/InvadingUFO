@@ -136,9 +136,6 @@ namespace Ame
 
         private void OnTriggerEnter(Collider other)
         {
-            //print("other");
-
-            var collision = other;
 
             if (!canHitToAttacker)
             {
@@ -153,22 +150,20 @@ namespace Ame
                 //    return;
             }
 
+            if (other.tag == "Player")
+            {
+                return;
+            }
 
             var obj = Instantiate(hitEffect, transform.position, transform.rotation);
 
 
             //hp 削る
             //print("missile hit");
-            var health = collision.gameObject.GetComponentInParent<Health>();
+            var health = other.gameObject.GetComponentInParent<IDamageable>();
             if (health != null)
             {
-                if (health.gameObject.tag == "Player")
-                {
-                    print("player damaged");
-                    return;
-                }
                 health.ApplyDamage(damage, attacker);
-                //print("apply damage");
             }
 
 
@@ -177,7 +172,12 @@ namespace Ame
                 Instantiate(hitSoundPrefab, transform.position, Quaternion.identity);
             }
 
-            OnMissileHit?.Invoke(health?.transform);
+            if (OnMissileHit != null)
+            {
+                var t = other.transform;
+                OnMissileHit.Invoke(t);
+
+            }
 
             Destroy(gameObject);
         }
