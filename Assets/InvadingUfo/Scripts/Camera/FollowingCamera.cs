@@ -17,6 +17,7 @@ public class FollowingCamera : BaseCamera
     public float rotationSpeed = 2.7f;//2.7f適当な値
 
     public float pitchRotationSpeed = 60;
+    Camera targetCamera;
     //time:0-1 の間
     public AnimationCurve yawCurve;
 
@@ -26,6 +27,7 @@ public class FollowingCamera : BaseCamera
         {
             offset = transform.position - target.transform.position;
         }
+        targetCamera = GetComponent<Camera>();
     }
 
     protected override void LateUpdate()
@@ -165,5 +167,12 @@ public class FollowingCamera : BaseCamera
             + target.up * offset.y;
     }
 
+
+    //元：32 74
+    float focalLength;
+    public void SetFocalLength(float focalLength)
+    {
+        targetCamera.focalLength = focalLength;
+    }
 
 }

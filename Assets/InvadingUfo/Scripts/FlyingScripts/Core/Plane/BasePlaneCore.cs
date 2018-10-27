@@ -41,7 +41,10 @@ public class BasePlaneCore : BaseCore
         playerMissileAttack = GetComponent<Ame.PlayerMissileAttack>();
 
 
+
     }
+
+
 
     protected virtual void Start()
     {
@@ -63,7 +66,7 @@ public class BasePlaneCore : BaseCore
                         attack.crosshair.gameObject.SetActive(false);
                     }
                 }
-               
+
 
                 var magnet = GetComponent<Magnet>();
                 if (magnet != null)
@@ -75,6 +78,7 @@ public class BasePlaneCore : BaseCore
 
             };
         }
+
     }
 
 
@@ -108,6 +112,24 @@ public class BasePlaneCore : BaseCore
         {
             movement.Move(inputProvider.Boost);
         }
+
+        if (gameObject.tag == "Player")
+        {
+            if (inputProvider.Boost)
+            {
+                f -= fspeed * Time.deltaTime;
+            }
+            else
+            {
+                f += fspeed * Time.deltaTime;
+            }
+            f = Mathf.Clamp(f, 30, 50);
+            Camera.main.focalLength = f;
+            print(f);
+        }
     }
 
+    //プレイヤーのブースとじのカメラ操作
+    float f = 50;
+    public float fspeed = 10;
 }

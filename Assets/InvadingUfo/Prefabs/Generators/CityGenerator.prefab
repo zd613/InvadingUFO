@@ -68,6 +68,11 @@ MonoBehaviour:
     type: 2}
   deltaWidth: 18
   deltaHeight: 6
+  trafficLightParentName: TrafficLight
+  trafficLightParentGameObject: {fileID: 0}
+  trafficLightPrefab: {fileID: 1070950532690296, guid: 580b6ab595b057c408c6f4c1614f78fc,
+    type: 2}
+  trafficLightOffset: {x: 0.5, y: 0, z: 0.5}
 --- !u!114 &114659311844269556
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -94,7 +99,7 @@ MonoBehaviour:
   groundPrefab: {fileID: 1442739155225920, guid: c939f184424cf4e4b832b7ee58d53c09,
     type: 2}
   groundOffset: {x: 0.5, y: 0, z: 0.5}
-  groundYScale: 0.4
+  groundYScale: 0.2
   houseParentName: House
   houseParentGameObject: {fileID: 0}
   housePrefab: {fileID: 1170844131640296, guid: 34d3add3cb7b706468e8122b151751bf,
