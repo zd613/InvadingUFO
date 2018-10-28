@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4930989203246344}
   - component: {fileID: 33326683184452726}
   - component: {fileID: 23793211508769966}
+  - component: {fileID: 65900799399158238}
   m_Layer: 0
   m_Name: building2
   m_TagString: Untagged
@@ -83,3 +84,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1457775235653500}
   m_Mesh: {fileID: 4300010, guid: 4c8c048ca4cda2f488c67dbb561cccbb, type: 3}
+--- !u!65 &65900799399158238
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1457775235653500}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 39.999996, y: 84.99999, z: 39.999996}
+  m_Center: {x: 0, y: 42.499996, z: 0}
