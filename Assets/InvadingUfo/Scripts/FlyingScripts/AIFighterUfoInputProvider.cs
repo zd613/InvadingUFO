@@ -42,7 +42,6 @@ public class AIFighterUfoInputProvider : BaseUfoInputProvider
         YawValue = 0;
         if (target == null || !target.IsAlive)
         {
-            print("change target");
 
             target = planeManager.GetPlane(Random.Range(0, planeManager.Count));
 
