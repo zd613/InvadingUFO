@@ -66,7 +66,7 @@ public class FighterUfoCore : BaseUfoCore
                 var attack = GetComponent<Attack>();
                 if (attack != null)
                 {
-
+                    attack.isActive = false;
                 }
 
                 Destroy(gameObject, 20);

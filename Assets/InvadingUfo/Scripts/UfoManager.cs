@@ -25,8 +25,24 @@ public class UfoManager : MonoBehaviour
             ufoHolder = new GameObject("UfoHolder");
 
         }
+
+
     }
 
+    private void Start()
+    {
+        if (ufoHolder != null)
+        {
+            foreach (Transform item in ufoHolder.transform)
+            {
+                var core = item.GetComponent<BaseUfoCore>();
+                if (core != null)
+                {
+                    Add(core);
+                }
+            }
+        }
+    }
 
     public void Add(BaseUfoCore ufo)
     {

@@ -1772,7 +1772,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1054719675181024}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.00000058114523}
-  m_LocalPosition: {x: -110.4, y: 53.1, z: 759.1}
+  m_LocalPosition: {x: -70.9, y: 62.77819, z: 901.6}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 4772040046373004}
@@ -4832,6 +4832,7 @@ MonoBehaviour:
   muzzleFlash: {fileID: 198391023768031956}
   showDebugRay: 1
   coolTimeSecond: 0.1
+  damage: 10
   shootSound: {fileID: 0}
   gunRange: 400
   crosshair: {fileID: 212424969541937468}

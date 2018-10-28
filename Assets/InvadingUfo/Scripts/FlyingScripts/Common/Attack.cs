@@ -15,6 +15,7 @@ public class Attack : MonoBehaviour
     [Header("パラメータ")]
     public bool showDebugRay = true;
     public float coolTimeSecond = 0.25f;
+    public float damage = 1;
     protected Coroutine coolDownCoroutine;
     [Header("音")]
     public AudioSource shootSound;
@@ -126,6 +127,7 @@ public class Attack : MonoBehaviour
             bullet.gameObject.transform.rotation = muzzleTransform.rotation;
         }
         bullet.range = gunRange;
+        bullet.damage = damage;
         bullet.Attacker = gameObject;
         bullet.Initialize();
     }

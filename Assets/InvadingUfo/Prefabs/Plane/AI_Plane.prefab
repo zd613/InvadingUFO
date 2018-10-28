@@ -5080,6 +5080,7 @@ MonoBehaviour:
   muzzleFlash: {fileID: 198654246953332580}
   showDebugRay: 1
   coolTimeSecond: 0.1
+  damage: 3
   shootSound: {fileID: 0}
   gunRange: 400
   crosshair: {fileID: 212355128365042862}
