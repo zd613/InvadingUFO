@@ -157,6 +157,14 @@ namespace Ame
             //player
             missile.OnMissileHit += (t) =>
             {
+                if (t.gameObject.layer == LayerMask.NameToLayer("Stage"))
+                {
+                    return;
+                }
+                else if (t.gameObject.layer == LayerMask.NameToLayer("Attractable"))
+                {
+                    return;
+                }
                 missileHitCamera.SetActive(true);
                 //print(missileHitCamera.activeInHierarchy);
 

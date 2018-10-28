@@ -15,6 +15,7 @@ public class Fracture : MonoBehaviour, Ame.IDamageable
     bool isFractured = false;
 
     public float hp = 200;
+    public float destroyDelay = 15;
 
     public void FractureObject()
     {
@@ -31,7 +32,7 @@ public class Fracture : MonoBehaviour, Ame.IDamageable
             Explode(transform.position);
         }
         isFractured = true;
-        Destroy(gameObject, 15);
+        Destroy(gameObject, destroyDelay);
     }
 
     private void Explode(Vector3 position)
