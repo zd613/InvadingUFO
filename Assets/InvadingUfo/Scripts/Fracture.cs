@@ -31,6 +31,7 @@ public class Fracture : MonoBehaviour, Ame.IDamageable
             Explode(transform.position);
         }
         isFractured = true;
+        Destroy(gameObject, 15);
     }
 
     private void Explode(Vector3 position)

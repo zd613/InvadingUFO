@@ -48,11 +48,20 @@ public class UfoSpawner : MonoBehaviour
 
         //
         var ai = obj.GetComponent<AIMagnetUfoInputProvider>();
-        ai.houseManager = houseManager;
-        if (ufoManager != null)
+        if (ai != null)
         {
-            ufoManager.Add(obj.GetComponent<BaseUfoCore>());
+            ai.houseManager = houseManager;
+            if (ufoManager != null)
+            {
+                ufoManager.Add(obj.GetComponent<BaseUfoCore>());
+            }
         }
+
+        //var fighterAI = obj.GetComponent<AIFighterUfoInputProvider>();
+        //if (fighterAI != null)
+        //{
+            
+        //}
 
     }
 

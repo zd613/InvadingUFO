@@ -77,6 +77,10 @@ public class Health : MonoBehaviour, IDamageable
             }
             else
             {
+                if (hpSlider != null)
+                {
+                    hpSlider.gameObject.SetActive(false);
+                }
                 gameObject.SetActive(false);
                 //Destroy(gameObject);
             }
