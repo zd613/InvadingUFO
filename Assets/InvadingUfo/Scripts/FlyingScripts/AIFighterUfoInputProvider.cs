@@ -42,6 +42,8 @@ public class AIFighterUfoInputProvider : BaseUfoInputProvider
         YawValue = 0;
         if (target == null || !target.IsAlive)
         {
+            print("change target");
+
             target = planeManager.GetPlane(Random.Range(0, planeManager.Count));
 
             //target = ufoManager.GetUfo(Random.Range(0, ufoManager.Count));
@@ -85,8 +87,6 @@ public class AIFighterUfoInputProvider : BaseUfoInputProvider
             var v3 = Vector3.zero;
             foreach (var item in ufoList)
             {
-
-
                 var diff = item.transform.position - transform.position;
                 v3 += -diff.normalized;
 
@@ -94,7 +94,6 @@ public class AIFighterUfoInputProvider : BaseUfoInputProvider
 
             v3 /= ufoList.Count;
             //print(v3);
-
 
             pitchYaw.SetPitchYawLookingAt(transform.position + v3);
             PitchValue = pitchYaw.Pitch;
@@ -104,13 +103,13 @@ public class AIFighterUfoInputProvider : BaseUfoInputProvider
 
         var distance = Vector3.Distance(transform.position, target.transform.position);
 
-        if (distance > targetChangeDistance)
-        {
-            target = planeManager.GetPlane(Random.Range(0, planeManager.Count));
+        //if (distance > targetChangeDistance)
+        //{
+        //    target = planeManager.GetPlane(Random.Range(0, planeManager.Count));
 
-            if (target == null)
-                return;
-        }
+        //    if (target == null)
+        //        return;
+        //}
 
         //攻撃
 

@@ -74,6 +74,7 @@ public class BasePlaneCore : BaseCore
                     magnet.attractAreaCollider.enabled = false;
                     magnet.isActive = false;
                 }
+                Destroy(gameObject, 15);
 
 
             };
