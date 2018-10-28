@@ -2267,4 +2267,5 @@ MonoBehaviour:
   canExplode: 0
   explosionForce: 20
   explosionRadius: 0
-  hp: 2000
+  hp: 1100
+  destroyDelay: 40
