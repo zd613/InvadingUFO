@@ -131,6 +131,10 @@ public class GameManager : MonoBehaviour
                 menuUI.SetActive(true);
                 isRunning = false;
             }
+            else
+            {
+                BackToGame();
+            }
         }
         //currentDamagePriceText.text = houseManager.activeHouseCount.ToString();
         //housePercentage.value = houseManager.activeHouseCount / houseManager.houseCount;
