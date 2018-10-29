@@ -77,6 +77,10 @@ public class GameManager : MonoBehaviour
 
         priceManager.OnDamagePriceChanged += () =>
         {
+            if (priceManager.damagePrice > priceDeadLine)
+            {
+                StartCoroutine(GameOver());
+            }
             currentDamagePriceText.text = ToDamagePriceText(priceManager.damagePrice);
         };
     }
