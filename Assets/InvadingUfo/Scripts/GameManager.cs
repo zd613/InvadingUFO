@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     public long priceDeadLine = 1000000000;
     public Text priceDeadLineText;
     public Text currentDamagePriceText;
-    //public Slider housePercentage;
+    public Slider damagePriceSlider;
 
     [Header("game")]
     public bool canClearGame = false;
@@ -82,27 +82,43 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(GameOver());
             }
             currentDamagePriceText.text = ToDamagePriceText(priceManager.damagePrice);
+            damagePriceSlider.value = ((float)priceManager.damagePrice / priceDeadLine);
         };
+        damagePriceSlider.value = 0;
     }
 
-    string[] unit = new string[] { "万", "億", "兆", "京", };
     string ToDamagePriceText(long price)
     {
-        //int counter = 1;
-        //int index = 0;
-        //while (price != 0)
-        //{
-        //    if (counter % 4 == 0)
-        //    {
+        var sb = new System.Text.StringBuilder();
+        var tyou = price / 1000000000000;
+        if (tyou != 0)
+        {
+            sb.Append(tyou + "兆");
+            price = price % 1000000000000;
+        }
 
-        //    }
-        //    price /= 10;
-        //    counter++;
 
-        //}
-        string text = price + "円";
+        var oku = price / 100000000;
+        if (oku != 0)
+        {
+            sb.Append(oku + "億");
+            price = price % 100000000;
+        }
 
-        return text;
+        var mann = price / 10000;
+        if (mann != 0)
+        {
+            sb.Append(mann + "万");
+            price = price % 10000;
+        }
+
+        if (price != 0)
+        {
+            sb.Append(price);
+        }
+        sb.Append("円");
+
+        return sb.ToString();
     }
 
     private void Update()
