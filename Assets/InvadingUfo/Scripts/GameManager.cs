@@ -47,6 +47,10 @@ public class GameManager : MonoBehaviour
     public bool canClearGame = false;
     bool isGameOver = false;
 
+    [Header("UI fps")]
+    public GameObject fpsCanvas;
+    public Toggle fpsToggle;
+
     private void Awake()
     {
         player.OnDeath += () => StartCoroutine(GameOver());
@@ -85,6 +89,8 @@ public class GameManager : MonoBehaviour
             damagePriceSlider.value = ((float)priceManager.damagePrice / priceDeadLine);
         };
         damagePriceSlider.value = 0;
+
+        fpsToggle.onValueChanged.AddListener(b => { fpsCanvas.SetActive(b); });
     }
 
     string ToDamagePriceText(long price)
