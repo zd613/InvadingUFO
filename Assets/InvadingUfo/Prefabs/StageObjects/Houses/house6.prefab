@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 4329407031451212}
   - component: {fileID: 54081604725603828}
   - component: {fileID: 114663892101348180}
+  - component: {fileID: 114891017042121242}
   m_Layer: 10
   m_Name: house6
   m_TagString: Untagged
@@ -153,3 +154,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b159a2c74f41bd54e9eeb8d699ac0d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114891017042121242
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1669671028439600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc2b6c3358c69b64a9a5812d28032428, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  price: 20000000

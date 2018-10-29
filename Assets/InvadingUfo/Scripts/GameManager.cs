@@ -35,11 +35,13 @@ public class GameManager : MonoBehaviour
     public HouseManager houseManager;
     public UfoManager ufoManager;
     public UfoSpawner ufoSpawner;
+    public PriceManager priceManager;
 
     [Header("UI")]
-    public Text totalHouseText;
-    public Text currenHouseText;
-    public Slider housePercentage;
+    public long priceDeadLine = 1000000000;
+    public Text priceDeadLineText;
+    public Text currentDamagePriceText;
+    //public Slider housePercentage;
 
     [Header("game")]
     public bool canClearGame = false;
@@ -66,12 +68,37 @@ public class GameManager : MonoBehaviour
         };
 
         //UI
-        totalHouseText.text = houseManager.houseCount.ToString();
-        currenHouseText.text = houseManager.activeHouseCount.ToString();
+        priceDeadLineText.text = ToDamagePriceText(priceDeadLine);
+        currentDamagePriceText.text = "0円";
 
         //Ufo
 
         ufoSpawner.OnAllUfosSpawned += () => canClearGame = true;
+
+        priceManager.OnDamagePriceChanged += () =>
+        {
+            currentDamagePriceText.text = ToDamagePriceText(priceManager.damagePrice);
+        };
+    }
+
+    string[] unit = new string[] { "万", "億", "兆", "京", };
+    string ToDamagePriceText(long price)
+    {
+        //int counter = 1;
+        //int index = 0;
+        //while (price != 0)
+        //{
+        //    if (counter % 4 == 0)
+        //    {
+
+        //    }
+        //    price /= 10;
+        //    counter++;
+
+        //}
+        string text = price + "円";
+
+        return text;
     }
 
     private void Update()
@@ -85,15 +112,13 @@ public class GameManager : MonoBehaviour
                 isRunning = false;
             }
         }
-        currenHouseText.text = houseManager.activeHouseCount.ToString();
-        housePercentage.value = houseManager.activeHouseCount / houseManager.houseCount;
+        //currentDamagePriceText.text = houseManager.activeHouseCount.ToString();
+        //housePercentage.value = houseManager.activeHouseCount / houseManager.houseCount;
 
         if (canClearGame && !isGameOver)
         {
             if (ufoManager.Count <= 0)
             {
-                //print("hi");
-
                 StartCoroutine(GameClear());
                 canClearGame = false;
 

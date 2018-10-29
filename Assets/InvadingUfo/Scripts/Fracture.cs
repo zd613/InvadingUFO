@@ -17,8 +17,13 @@ public class Fracture : MonoBehaviour, Ame.IDamageable
     public float hp = 200;
     public float destroyDelay = 15;
 
+    //event
+    public event System.Action OnFractured;
+
     public void FractureObject()
     {
+        if (isFractured)
+            return;
         var rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
         rb.isKinematic = true;
@@ -32,6 +37,8 @@ public class Fracture : MonoBehaviour, Ame.IDamageable
             Explode(transform.position);
         }
         isFractured = true;
+        OnFractured?.Invoke();
+
         Destroy(gameObject, destroyDelay);
     }
 
@@ -51,4 +58,5 @@ public class Fracture : MonoBehaviour, Ame.IDamageable
             FractureObject();
         }
     }
+
 }

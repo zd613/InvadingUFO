@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4863913277289672}
   - component: {fileID: 114031930007555860}
   - component: {fileID: 54616915868936758}
+  - component: {fileID: 114152509258870252}
   m_Layer: 0
   m_Name: apartment1
   m_TagString: Untagged
@@ -1228,3 +1229,16 @@ MonoBehaviour:
   explosionForce: 10
   explosionRadius: 5
   hp: 200
+  destroyDelay: 15
+--- !u!114 &114152509258870252
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1130329537477984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc2b6c3358c69b64a9a5812d28032428, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  price: 100000000
