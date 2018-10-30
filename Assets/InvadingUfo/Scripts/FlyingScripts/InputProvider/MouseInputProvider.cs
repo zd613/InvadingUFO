@@ -13,6 +13,21 @@ public class MouseInputProvider : BasePlaneInputProvider
 
 
     public GameObject arrowUI;
+    public int arrowNum = 4;
+
+    GameObject[] arrowUIs;
+
+    private void Start()
+    {
+        arrowUIs = new GameObject[arrowNum];
+        var parent = arrowUI.transform.parent;
+        for (int i = 0; i < arrowNum; i++)
+        {
+            arrowUIs[i] = Instantiate(arrowUI);
+            arrowUIs[i].transform.SetParent(parent);
+        }
+        arrowUI.SetActive(false);
+    }
 
 
     public override void UpdateInputStatus()
@@ -89,17 +104,17 @@ public class MouseInputProvider : BasePlaneInputProvider
         }
         var rateSquareToCircle = outerCircleRadius / sh;
 
-
+        Vector3 arrowPos = Vector3.zero;
         //円へと直す
         if (squareX * squareX + squareY * squareY < outerCircleRadius * outerCircleRadius)
         {
-            arrowUI.transform.position = (Vector2)(new Vector3(squareX, squareY, 0) + screenCenter);
+            arrowPos = (Vector2)(new Vector3(squareX, squareY, 0) + screenCenter);
         }
         else
         {
-            arrowUI.transform.position = (new Vector3(squareX, squareY, 0).normalized * outerCircleRadius) + screenCenter;
+            arrowPos = (new Vector3(squareX, squareY, 0).normalized * outerCircleRadius) + screenCenter;
         }
-
+        arrowUI.transform.position = arrowPos;
 
         float yaw = 0;
         float pitch = 0;
@@ -110,6 +125,14 @@ public class MouseInputProvider : BasePlaneInputProvider
             if (arrowUI.activeInHierarchy)
             {
                 arrowUI.SetActive(false);
+            }
+
+            foreach (var item in arrowUIs)
+            {
+                if (item.activeInHierarchy)
+                {
+                    item.SetActive(false);
+                }
             }
         }
         //外側
@@ -123,7 +146,28 @@ public class MouseInputProvider : BasePlaneInputProvider
             {
                 arrowUI.SetActive(true);
             }
-            arrowUI.transform.rotation = Quaternion.Euler(0, 0, -angle + 90);
+            foreach (var item in arrowUIs)
+            {
+                if (!item.activeInHierarchy)
+                {
+                    item.SetActive(true);
+                }
+            }
+
+            var rot = Quaternion.Euler(0, 0, -angle + 90);
+            arrowUI.transform.rotation = rot;
+
+            var relative = arrowPos - screenCenter;
+            var addition = (arrowPos - screenCenter) / arrowUIs.Length;
+            for (int i = 0; i < arrowUIs.Length; i++)
+            {
+                arrowUIs[i].transform.rotation = rot;
+
+                //var v2 = relative / (arrowUIs.Length - i);
+                arrowUIs[i].transform.position = screenCenter + addition * (i + 1);/*new Vector3(v2.x, v2.y, 0) + screenCenter;*/
+            }
+
+
         }
 
         yaw = Mathf.Clamp(yaw, -1, 1);
