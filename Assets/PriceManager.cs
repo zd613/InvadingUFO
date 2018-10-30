@@ -19,28 +19,38 @@ public class PriceManager : MonoBehaviour
     private void Start()
     {
         SetEventToChildren(houseHolder);
+        print("house end");
+
         SetEventToChildren(apartmentHolder);
         SetEventToChildren(buildingHolder);
     }
 
     void SetEventToChildren(Transform parent)
     {
-        foreach (Transform item in parent)
+        var fds = parent.GetComponentsInChildren<IFinancialDamage>();
+        foreach (var item in fds)
         {
-            var f = item.GetComponent<Fracture>();
-
-            if (f != null)
+            item.OnFinancialDamageOccured += (p) =>
             {
-
-                f.OnFractured += () =>
-                {
-
-                    var p = f.GetComponent<Price>();
-                    damagePrice += p.price;
-                    OnDamagePriceChanged?.Invoke();
-                };
-            }
+                damagePrice += p;
+                OnDamagePriceChanged?.Invoke();
+            };
         }
+        //foreach (Transform item in parent)
+        //{
+        //    var f = item.GetComponentInChildren<IFinancialDamage>();
+
+        //    if (f != null)
+        //    {
+        //        print(" add event");
+
+        //        f.OnFinancialDamageOccured += (p) =>
+        //        {
+        //            damagePrice += p;
+        //            OnDamagePriceChanged?.Invoke();
+        //        };
+        //    }
+        //}
     }
 
 }

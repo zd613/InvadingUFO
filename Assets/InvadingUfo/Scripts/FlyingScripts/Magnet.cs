@@ -232,6 +232,12 @@ public class Magnet : MonoBehaviour
         if (attractable == null)
             return;
 
+        var house = attractable.GetComponent<House>();
+        if (house != null)
+        {
+            house.TakeFinancialDamage();
+        }
+        
         Destroy(attractable.gameObject);
     }
 }

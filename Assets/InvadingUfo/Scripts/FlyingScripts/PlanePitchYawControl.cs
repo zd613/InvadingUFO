@@ -92,11 +92,8 @@ public class PlanePitchYawController
         }
 
         Pitch = pitch;
-        Yaw = yaw;
-    }
 
-    //public void SetPitchYawLookingDirection(Vector3 direction)
-    //{
-    //    SetPitchYawLookingAt(transform.position + direction);
-    //}
+        //TODO:マイナスなのでプラスになるように調整する
+        Yaw = -yaw;
+    }
 }

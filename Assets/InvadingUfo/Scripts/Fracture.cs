@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fracture : MonoBehaviour, Ame.IDamageable
+public class Fracture : MonoBehaviour, Ame.IDamageable, IFinancialDamage
 {
     public GameObject nonFractured;
     public GameObject fractured;
@@ -20,7 +21,7 @@ public class Fracture : MonoBehaviour, Ame.IDamageable
     public AudioSource fractureSound;
 
     //event
-    public event System.Action OnFractured;
+    public event Action<long> OnFinancialDamageOccured;
 
     public void FractureObject()
     {
@@ -47,7 +48,8 @@ public class Fracture : MonoBehaviour, Ame.IDamageable
             Explode(transform.position);
         }
         isFractured = true;
-        OnFractured?.Invoke();
+        //OnFractured?.Invoke();
+        OnFinancialDamageOccured?.Invoke(GetComponent<Price>().price);
 
         Destroy(gameObject, destroyDelay);
     }
