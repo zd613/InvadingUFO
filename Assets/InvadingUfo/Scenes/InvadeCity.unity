@@ -14280,6 +14280,11 @@ Prefab:
       propertyPath: pool
       value: 
       objectReference: {fileID: 138666437}
+    - target: {fileID: 114437027743881200, guid: beb4a4495af87284ab9cfa9146f629fe,
+        type: 2}
+      propertyPath: arrowUI
+      value: 
+      objectReference: {fileID: 1225835369}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
   m_IsPrefabAsset: 0
@@ -86089,7 +86094,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1662543475
 RectTransform:
   m_ObjectHideFlags: 0
@@ -90059,7 +90064,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1736804712
 MonoBehaviour:
   m_ObjectHideFlags: 0

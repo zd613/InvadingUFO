@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Ame;
 using UnityEngine;
-using Ame;
+using static UnityEngine.Mathf;
 
 public class MouseInputProvider : BasePlaneInputProvider
 {
@@ -21,7 +20,7 @@ public class MouseInputProvider : BasePlaneInputProvider
 
     float radius;//px
 
-    public GameObject[] arrowUI;
+    public GameObject arrowUI;
 
 
     private void Awake()
@@ -30,7 +29,7 @@ public class MouseInputProvider : BasePlaneInputProvider
         center = new Vector2(Screen.width / 2, Screen.height / 2);
         //testObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
         //testObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        radius = Mathf.Max(Screen.height, Screen.width) / 6;
+        radius = Max(Screen.height, Screen.width) / 6;
 
         threashold2 = threashold / 2;
     }
@@ -77,11 +76,53 @@ public class MouseInputProvider : BasePlaneInputProvider
 
         var screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
 
-        var vec = mousePos - screenCenter;
+        //画面中心が中心の座標
+        Vector2 relativePos = mousePos - screenCenter;
 
-        float x = 0;
-        float y = 0;
+
+
+
+
         //内側の円より外のとき
+
+        //y軸正が0°の時計回り角度　正　反時計回り　負
+        var angle = -Vector3.SignedAngle(Vector3.up, relativePos, Vector3.forward);
+
+        var squareX = relativePos.x;
+        var squareY = relativePos.y;
+
+        //一辺がouter radius の正方形に直す
+        squareX = Mathf.Clamp(squareX, -outerCircleRadius, outerCircleRadius);
+        squareY = Mathf.Clamp(squareY, -outerCircleRadius, outerCircleRadius);
+
+        float sh = 0;//正方形との好転と中心間の距離
+
+        //正方形と中心からの線が交わった時の長さ
+        if (angle >= 45)
+        {
+            sh = outerCircleRadius / Cos(Deg2Rad * (90 - angle));
+        }
+        else
+        {
+            sh = outerCircleRadius / Cos(Deg2Rad * angle);
+        }
+        var rateSquareToCircle = outerCircleRadius / sh;
+
+
+        //円へと直す
+        if (squareX * squareX + squareY * squareY < outerCircleRadius * outerCircleRadius)
+        {
+            arrowUI.transform.position = (Vector2)(new Vector3(squareX, squareY, 0) + screenCenter);
+        }
+        else
+        {
+            arrowUI.transform.position = (new Vector3(squareX, squareY, 0).normalized * outerCircleRadius) + screenCenter;
+        }
+
+
+
+        //UpdateArrowUI();
+
 
         //if (vec.sqrMagnitude > innerCircleRadius * innerCircleRadius)
         //{
@@ -104,70 +145,119 @@ public class MouseInputProvider : BasePlaneInputProvider
 
         //}
 
-        var tx = innerCircleRadius * (YawValue * outerCircleRadius);
+        //var tx = innerCircleRadius * (YawValue * outerCircleRadius);
 
-        if (Mathf.Abs(vec.x) > innerCircleRadius)
+        //if (Mathf.Abs(relativePos.x) > innerCircleRadius)
+        //{
+        //    //print(vec.x + "," + innerCircleRadius);
+
+        //    x = relativePos.x / outerCircleRadius;
+        //    x = Mathf.Clamp(x, -1, 1);
+
+        //}
+
+        //if (Mathf.Abs(relativePos.y) > innerCircleRadius)
+        //{
+        //    y = relativePos.y / outerCircleRadius;
+        //    y = Mathf.Clamp(y, -1, 1);
+        //}
+        float yaw = 0;
+        float pitch = 0;
+
+        //内側の円より内側
+        if (squareX * squareX + squareY * squareY < innerCircleRadius * innerCircleRadius)
         {
-            //print(vec.x + "," + innerCircleRadius);
+            if (arrowUI.activeInHierarchy)
+            {
+                arrowUI.SetActive(false);
+            }
+        }
+        //外側
+        else
+        {
+            yaw = squareX / outerCircleRadius;
+            pitch = squareY / outerCircleRadius;
 
-            x = vec.x / outerCircleRadius;
-            x = Mathf.Clamp(x, -1, 1);
 
+            if (!arrowUI.activeInHierarchy)
+            {
+                arrowUI.SetActive(true);
+            }
+            arrowUI.transform.rotation = Quaternion.Euler(0, 0, -angle + 90);
         }
 
-        if (Mathf.Abs(vec.y) > innerCircleRadius)
-        {
-            y = vec.y / outerCircleRadius;
-            y = Mathf.Clamp(y, -1, 1);
-        }
+        yaw = Mathf.Clamp(yaw, -1, 1);
+        pitch = Mathf.Clamp(pitch, -1, 1);
 
-        YawValue = x;
-        PitchValue = -y;
-        //print(YawValue + "," + PitchValue);
+        YawValue = yaw;
+        PitchValue = -pitch;
+
+
 
         //update ui
-        foreach (var item in arrowUI)
-        {
-            if (YawValue == 0 && PitchValue == 0)
-            {
-                if (item.activeInHierarchy)
-                    item.SetActive(false);
-                continue;
-            }
-            else
-            {
-                if (!item.activeInHierarchy)
-                    item.SetActive(true);
-            }
-            var mx = Input.mousePosition.x;
-            var my = Input.mousePosition.y;
 
-            var pos = new Vector3(YawValue * outerCircleRadius, -PitchValue * outerCircleRadius, 0);
-
-            if (pos.x * pos.x + pos.y + pos.y >= outerCircleRadius * outerCircleRadius)//外側の円より外側
-            {
-                //print("out");
-                pos = pos.normalized * outerCircleRadius;
-
-            }
-            pos = pos.normalized * outerCircleRadius;
-
-            item.transform.localPosition = pos;
-
-            //TODO:上が0 右が-90 下　180 左90になるよくわからん 左右逆なるはずでは？検証
-            var angle = Vector3.SignedAngle(Vector3.up, pos, Vector3.forward);
+        //var item = arrowUI;
 
 
-            //arrowの上-90 右0 下90 左180に合わせるため angle を左右逆転して90度ひく
-            //angle = -angle;
-            //print(angle - 90);
-            var rot = Quaternion.Euler(0, 0, angle + 90);
-            item.transform.localRotation = rot;
-        }
+        ////if (YawValue == 0 && PitchValue == 0)
+        ////{
+        ////    if (item.activeInHierarchy)
+        ////        item.SetActive(false);
+        ////    continue;
+        ////}
+        ////else
+        ////{
+        ////    if (!item.activeInHierarchy)
+        ////        item.SetActive(true);
+        ////}
+
+        //var mx = Input.mousePosition.x;
+        //var my = Input.mousePosition.y;
+
+        //var pos = new Vector3(YawValue * outerCircleRadius, -PitchValue * outerCircleRadius, 0);
+
+        ////print(pos);
+        ////if (pos.x * pos.x + pos.y + pos.y >= outerCircleRadius * outerCircleRadius)//外側の円より外側
+        ////{
+        ////    pos = pos.normalized * outerCircleRadius;
+
+        ////}
+        ////pos = pos.normalized * outerCircleRadius;
+
+        //item.transform.localPosition = pos;
+
+        ////TODO:上が0 右が-90 下　180 左90になるよくわからん 左右逆なるはずでは？検証
+        //var angle = Vector3.SignedAngle(Vector3.up, pos, Vector3.forward);
 
 
-        //print(YawValue + "," + PitchValue);
+        ////arrowの上-90 右0 下90 左180に合わせるため angle を左右逆転して90度ひく
+        ////angle = -angle;
+        ////print(angle - 90);
+        //var rot = Quaternion.Euler(0, 0, angle + 90);
+        //item.transform.localRotation = rot;
 
+
+
+    }
+
+    private void UpdateArrowUI()
+    {
+        //updat ui
+        var pos = Input.mousePosition;
+        pos.z = 0;
+
+        //TODO: 上が0 右が-90 下180 左90になるよくわからん 左右逆なるはずでは？検証
+        var angle = Vector3.SignedAngle(Vector3.up, pos, Vector3.forward);
+
+        arrowUI.transform.position = pos;
+
+
+        //arrowの上 - 90 右0 下90 左180に合わせるため angle を左右逆転して90度ひく
+        //angle = -angle;
+        var rot = Quaternion.Euler(0, 0, angle - 90);
+        arrowUI.transform.rotation = rot;
+
+        //ここまで
     }
 
     void RotationInput()
