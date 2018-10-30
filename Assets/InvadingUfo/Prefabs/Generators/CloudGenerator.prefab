@@ -63,6 +63,6 @@ MonoBehaviour:
   maxIntervalSec: 15
   cloudSpeed: 70
   minSize: 15
-  maxSize: 25
+  maxSize: 20
   minAltitude: 300
   maxAltitude: 600
