@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Linq;
 
 namespace Ame
@@ -20,12 +21,14 @@ namespace Ame
         public float coolTimeSec = 4;
         Coroutine coolDownCoroutine;
         [Header("ミサイル")]
+        //いらない
         public int maxMissile;
+
         int missileCounter;
         public float reloadTime = 5;
         Coroutine reloadCoroutine;
-        public UnityEngine.UI.Text missileCounterText;
-        public UnityEngine.UI.Slider reloadSlider;
+        public Text missileCounterText;
+        public Slider reloadSlider;
 
         public List<MissileTargetInfo> lockonTargets = new List<MissileTargetInfo>();
         Rect rect = new Rect(0, 0, 1, 1);
@@ -37,12 +40,16 @@ namespace Ame
         [Header("UI")]
         public GameObject missileTargetUI;
         Camera mainCamera;
-        public UnityEngine.UI.Slider coolTimeSlider;
+        public Slider coolTimeSlider;
+
+        public MissileInitialInfo[] missileInitialInfos;
+        int index = 0;
+
 
         private void Awake()
         {
-            missileCounter = maxMissile;
-
+            //missileCounter = maxMissile;
+            missileCounter = missileInitialInfos.Length;
         }
 
 
@@ -148,11 +155,16 @@ namespace Ame
             if (reloadCoroutine != null)
                 return;
 
-            var obj = Instantiate(missileObject, missileLauncher.position, transform.rotation);
+            var pos = missileInitialInfos[index].Transform.position;
+            var rot = missileInitialInfos[index].Transform.rotation;
+
+
+            var obj = Instantiate(missileObject, pos, rot);
             var missile = obj.GetComponent<Missile>();
             missile.attacker = gameObject;
             missile.target = target;
 
+            missileInitialInfos[index].Transform.GetChild(0).gameObject.SetActive(false);
 
             //player
             missile.OnMissileHit += (t) =>
@@ -174,14 +186,18 @@ namespace Ame
 
             };
 
-            missileCounter--;
+            index++;
+
+
+            //missileCounter--;
             if (missileCounterText != null)
             {
-                missileCounterText.text = missileCounter.ToString();
+                //missileCounterText.text = missileCounter.ToString();
+                missileCounterText.text = (missileInitialInfos.Length - index).ToString();
+
             }
 
-
-            if (missileCounter <= 0)
+            if (index >= missileInitialInfos.Length)
             {
                 reloadCoroutine = StartCoroutine(Reload());
             }
@@ -189,6 +205,15 @@ namespace Ame
             {
                 coolDownCoroutine = StartCoroutine(CoolDown());
             }
+
+            if (missileCounter <= 0)
+            {
+                reloadCoroutine = StartCoroutine(Reload());
+            }
+            //else
+            //{
+            //    coolDownCoroutine = StartCoroutine(CoolDown());
+            //}
         }
 
         IEnumerator CoolDown()
@@ -234,7 +259,8 @@ namespace Ame
                 }
                 yield return null;
             }
-            missileCounter = maxMissile;
+            missileCounter = missileInitialInfos.Length;
+            //missileCounter = maxMissile;
             if (reloadSlider != null)
             {
                 reloadSlider.value = 0;
@@ -243,6 +269,13 @@ namespace Ame
             {
                 missileCounterText.text = missileCounter.ToString();
             }
+
+            foreach (var item in missileInitialInfos)
+            {
+                item.Transform.GetChild(0).gameObject.SetActive(true);
+            }
+            index = 0;
+
             reloadCoroutine = null;
         }
 
@@ -291,6 +324,13 @@ namespace Ame
         {
             public BaseCore BaseCore;
             public bool CanSeeInView;//画面上に表示されるかどうか
+        }
+
+        [System.Serializable]
+        public class MissileInitialInfo
+        {
+            public Transform Transform;
+            public GameObject MissileObject;
         }
     }
 }
