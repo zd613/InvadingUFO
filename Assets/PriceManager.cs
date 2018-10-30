@@ -19,8 +19,6 @@ public class PriceManager : MonoBehaviour
     private void Start()
     {
         SetEventToChildren(houseHolder);
-        print("house end");
-
         SetEventToChildren(apartmentHolder);
         SetEventToChildren(buildingHolder);
     }
@@ -36,21 +34,6 @@ public class PriceManager : MonoBehaviour
                 OnDamagePriceChanged?.Invoke();
             };
         }
-        //foreach (Transform item in parent)
-        //{
-        //    var f = item.GetComponentInChildren<IFinancialDamage>();
-
-        //    if (f != null)
-        //    {
-        //        print(" add event");
-
-        //        f.OnFinancialDamageOccured += (p) =>
-        //        {
-        //            damagePrice += p;
-        //            OnDamagePriceChanged?.Invoke();
-        //        };
-        //    }
-        //}
     }
 
 }

@@ -219,6 +219,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameOver()
     {
+        if (isGameOver)
+            yield break;
         isGameOver = true;
         gameOverButtonPanel.SetActive(false);
         yield return new WaitForSeconds(0.5f);
