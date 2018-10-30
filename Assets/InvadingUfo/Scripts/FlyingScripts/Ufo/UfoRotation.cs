@@ -50,7 +50,7 @@ namespace Ame
         {
             if (reverseRollControl)
             {
-                power.Roll = -power.Roll;
+                power.Yaw = -power.Yaw;
             }
             if (reversePitchControl)
             {
@@ -115,11 +115,11 @@ namespace Ame
         {
             if (value == 0)
             {
-                ReverseToInitialPosition(Vector3.forward, signedEulerAngles.z, rollReverseBorder, reversePower.Roll);
+                ReverseToInitialPosition(Vector3.forward, signedEulerAngles.z, rollReverseBorder, reversePower.Yaw);
             }
             else
             {
-                rb.Rotate(Vector3.forward, value * power.Roll * Time.deltaTime);
+                rb.Rotate(Vector3.forward, value * power.Yaw * Time.deltaTime);
                 //TODO:角度制限
             }
             //signedEulerAngles.z = Angle.ToSignedEulerAngle(transform.eulerAngles.z);

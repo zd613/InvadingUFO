@@ -33,8 +33,8 @@ namespace Ame
 
 
             //Pitch
-
-            PitchValue = Input.GetAxis("Vertical");
+            //TODO:-をとりのぞきたい　mouse input provider も多分同じなはず
+            PitchValue = -Input.GetAxis("Vertical");
             //Yaw
             YawValue = Input.GetAxis("Horizontal");
 

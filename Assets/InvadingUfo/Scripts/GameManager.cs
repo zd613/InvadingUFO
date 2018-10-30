@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     bool isRunning = true;
     public Text countDownText;
     public BasePlaneCore player;
+    public MouseInputProvider mouseInputProvider;
+    public Ame.PlayerInputProvider keybordInputProvider;
 
     [Header("GameOver")]
     public GameObject gameOverUI;
@@ -51,6 +53,13 @@ public class GameManager : MonoBehaviour
     public GameObject fpsCanvas;
     public Toggle fpsToggle;
 
+    public Dropdown playerControlDropdown;
+    public GameObject playerMouseUI;
+
+    public Toggle reverseUpDownToggle;
+
+
+
     private void Awake()
     {
         player.OnDeath += () => StartCoroutine(GameOver());
@@ -91,6 +100,34 @@ public class GameManager : MonoBehaviour
         damagePriceSlider.value = 0;
 
         fpsToggle.onValueChanged.AddListener(b => { fpsCanvas.SetActive(b); });
+
+        playerControlDropdown.onValueChanged.AddListener((v) =>
+        {
+            if (v == 0)
+            {
+                player.inputProvider = mouseInputProvider;
+                playerMouseUI.SetActive(true);
+            }
+            else if (v == 1)
+            {
+                player.inputProvider = keybordInputProvider;
+                playerMouseUI.SetActive(false);
+            }
+        });
+
+        reverseUpDownToggle.onValueChanged.AddListener((b) =>
+        {
+            print("c");
+
+            if (b)//上下反転
+            {
+                player.Rotation.reversePitchControl = true;
+            }
+            else//default
+            {
+                player.Rotation.reversePitchControl = false;
+            }
+        });
     }
 
     string ToDamagePriceText(long price)

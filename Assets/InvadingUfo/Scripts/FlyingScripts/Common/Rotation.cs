@@ -21,10 +21,10 @@ public class Rotation : MonoBehaviour
 
 
     //反転
-    [SerializeField]
-    protected bool reverseRollControl = true;
-    [SerializeField]
-    protected bool reversePitchControl;
+    public bool reverseYawControl = true;
+    public bool reversePitchControl;
+
+
 
     //ボーダー
     protected float pitchReverseBorder = 2;
@@ -52,14 +52,14 @@ public class Rotation : MonoBehaviour
 
     protected virtual void Awake()
     {
-        if (reverseRollControl)
-        {
-            power.Roll = -power.Roll;
-        }
-        if (reversePitchControl)
-        {
-            power.Pitch = -power.Pitch;
-        }
+        //if (reverseYawControl)
+        //{
+        //    power.Yaw = -power.Yaw;
+        //}
+        //if (reversePitchControl)
+        //{
+        //    power.Pitch = -power.Pitch;
+        //}
         rb = GetComponent<Rigidbody>();
     }
 
@@ -127,25 +127,32 @@ public class Rotation : MonoBehaviour
                 }
             }
             //回転
-            rb.Rotate(Vector3.right * value * power.Pitch * Time.deltaTime);
+
+            int sign = 1;
+            if (reversePitchControl)
+            {
+                sign = -1;
+            }
+
+            rb.Rotate(Vector3.right * value * sign * power.Pitch * Time.deltaTime);
             //transform.Rotate(Vector3.right * value * power.Pitch * Time.deltaTime);
         }
     }
 
-    protected virtual void Roll(float value)
-    {
-        if (value == 0)
-        {
-            ReverseToInitialPosition(Vector3.forward, signedEulerAngles.z, rollReverseBorder, reversePower.Roll);
-        }
-        else
-        {
-            rb.Rotate(Vector3.forward, value * power.Roll * Time.deltaTime);
-            //TODO:角度制限
-        }
-        //signedEulerAngles.z = Angle.ToSignedEulerAngle(transform.eulerAngles.z);
+    //protected virtual void Roll(float value)
+    //{
+    //    if (value == 0)
+    //    {
+    //        ReverseToInitialPosition(Vector3.forward, signedEulerAngles.z, rollReverseBorder, reversePower.Yaw);
+    //    }
+    //    else
+    //    {
+    //        rb.Rotate(Vector3.forward, value * power.Roll * Time.deltaTime);
+    //        //TODO:角度制限
+    //    }
+    //    //signedEulerAngles.z = Angle.ToSignedEulerAngle(transform.eulerAngles.z);
 
-    }
+    //}
 
 
 
@@ -157,7 +164,12 @@ public class Rotation : MonoBehaviour
         }
         else
         {
-            rb.Rotate(Vector3.up, power.Yaw * value * Time.deltaTime, Space.World);
+            int sign = 1;
+            if (reverseYawControl)
+            {
+                sign = -1;
+            }
+            rb.Rotate(Vector3.up, sign * power.Yaw * value * Time.deltaTime, Space.World);
 
             //TODO:角度制限
         }
