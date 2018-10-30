@@ -17,13 +17,23 @@ public class Fracture : MonoBehaviour, Ame.IDamageable
     public float hp = 200;
     public float destroyDelay = 15;
 
+    public AudioSource fractureSound;
+
     //event
     public event System.Action OnFractured;
 
     public void FractureObject()
     {
+
         if (isFractured)
             return;
+        if (fractureSound != null)
+        {
+            print("player");
+
+            fractureSound.Play();
+
+        }
         var rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
         rb.isKinematic = true;
