@@ -126,7 +126,7 @@ public class BasePlaneCore : BaseCore
             {
                 f += fspeed * Time.deltaTime;
             }
-            f = Mathf.Clamp(f, 30, 45);
+            f = Mathf.Clamp(f, 25, 40);
             mainCamera.focalLength = f;
         }
     }
@@ -134,6 +134,8 @@ public class BasePlaneCore : BaseCore
     Camera mainCamera;
 
     //プレイヤーのブースとじのカメラ操作
-    float f = 45;
+    float f = 40;
     public float fspeed = 10;
+    public float minFocalLength = 25;
+    public float maxFocalLength = 40;
 }
