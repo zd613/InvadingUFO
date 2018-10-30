@@ -8851,7 +8851,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
-  - {fileID: 632621025}
   - {fileID: 1696239233}
   m_Father: {fileID: 1818823350}
   m_RootOrder: 0
@@ -26315,6 +26314,7 @@ GameObject:
   - component: {fileID: 632621028}
   - component: {fileID: 632621027}
   - component: {fileID: 632621026}
+  - component: {fileID: 632621029}
   m_Layer: 0
   m_Name: ufo1
   m_TagString: Untagged
@@ -26329,12 +26329,12 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 632621024}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 7, y: 7, z: 7}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 26.5, z: 0}
+  m_LocalScale: {x: 175, y: 175, z: 175}
   m_Children: []
-  m_Father: {fileID: 242490164}
-  m_RootOrder: 0
+  m_Father: {fileID: 1132393731}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &632621026
 MeshCollider:
@@ -26395,6 +26395,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 632621024}
   m_Mesh: {fileID: 4300000, guid: 9564017f61c491a4f9c023e857a13c96, type: 3}
+--- !u!54 &632621029
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 632621024}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!4 &635652254 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4229623645871392, guid: fa0665129332d4640b6ca03715601471,
@@ -32106,7 +32121,7 @@ Transform:
   - {fileID: 2132128957}
   - {fileID: 1117413804}
   m_Father: {fileID: 1132393731}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &751631960
 MonoBehaviour:
@@ -59112,6 +59127,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 961024533}
+  - {fileID: 632621025}
   - {fileID: 1818823350}
   - {fileID: 751631959}
   m_Father: {fileID: 0}
@@ -88108,7 +88124,7 @@ Transform:
   - {fileID: 526115239}
   - {fileID: 300304212}
   m_Father: {fileID: 242490164}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1697251440
 GameObject:
@@ -93459,7 +93475,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1818823350
 Transform:
   m_ObjectHideFlags: 0
@@ -93478,7 +93494,7 @@ Transform:
   - {fileID: 1073290531}
   - {fileID: 1956400350}
   m_Father: {fileID: 1132393731}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1821378511
 GameObject:

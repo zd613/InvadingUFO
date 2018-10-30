@@ -102,38 +102,6 @@ namespace Ame
             prePos = transform.position;
         }
 
-
-        //private void OnCollisionEnter(Collision collision)
-        //{
-        //    if (!canHitToAttacker)
-        //    {
-        //        if (collision.gameObject == attacker)
-        //            return;
-        //    }
-
-        //    foreach (var contact in collision.contacts)
-        //    {
-        //        var obj = Instantiate(hitEffect, contact.point, transform.rotation);
-
-        //    }
-
-        //    //hp 削る
-        //    var health = collision.gameObject.GetComponent<IDamageable>();
-        //    if (health != null)
-        //    {
-        //        health.ApplyDamage(damage, attacker);
-        //    }
-
-        //    print("missile hit:" + collision.gameObject.name);
-
-        //    if (hitSoundPrefab != null)
-        //    {
-        //        Instantiate(hitSoundPrefab, transform.position, Quaternion.identity);
-        //    }
-
-        //    Destroy(gameObject);
-        //}
-
         private void OnTriggerEnter(Collider other)
         {
 
