@@ -9,23 +9,11 @@ public class UfoSpawner : MonoBehaviour
 
     public Wave wave;
 
-    [Header("生成オブジェクト")]
-    public List<SpawnInfo> spawnInfo;
-
-
-    [Header("生成間の時間")]
-    public float minInterval = 1;
-    public float maxInterval = 2;
-
-    int spawnInfoListIndex = 0;
-    int infoGameObjectCounter = 0;
-
     public HouseManager houseManager;
     public UfoManager ufoManager;
 
     //event
     public event System.Action OnAllUfosSpawned;
-    //bool hasAllUfosSpawned = false;
     public event System.Action OnWaveFinished;
 
     GameObject ufoHolder;
@@ -122,24 +110,6 @@ public class UfoSpawner : MonoBehaviour
         }
     }
 
-    void SpawnUfo(SpawnInfo info)
-    {
-        var rot = Quaternion.identity;
-        var obj = Instantiate(info.GameObject, transform.position, rot);
-        obj.transform.SetParent(ufoHolder.transform);
-
-        //
-        var ai = obj.GetComponent<AIMagnetUfoInputProvider>();
-        if (ai != null)
-        {
-            ai.houseManager = houseManager;
-            if (ufoManager != null)
-            {
-                ufoManager.Add(obj.GetComponent<BaseUfoCore>());
-            }
-        }
-    }
-
     void SpawnUfo(GameObject prefab, Vector3 position, Quaternion rotation)
     {
         var obj = Instantiate(prefab, ufoHolder.transform);
@@ -189,54 +159,7 @@ public class UfoSpawner : MonoBehaviour
 
         spawningCoroutines[index] = null;
     }
-
-    IEnumerator LoopSpawning()
-    {
-        if (spawnInfo.Count == 0)
-            yield break;
-        while (true)
-        {
-            if (!isActive)
-            {
-                yield return null;
-                continue;
-            }
-
-            SpawnUfo(spawnInfo[spawnInfoListIndex]);
-            infoGameObjectCounter++;
-
-            if (infoGameObjectCounter >= spawnInfo[spawnInfoListIndex].Count)
-            {
-                spawnInfoListIndex++;
-                infoGameObjectCounter = 0;
-                OnWaveFinished?.Invoke();
-            }
-
-            if (spawnInfoListIndex == spawnInfo.Count)
-            {
-                break;
-            }
-            yield return new WaitForSeconds(Random.Range(minInterval, maxInterval));
-        }
-        OnAllUfosSpawned?.Invoke();
-        //print("invoke");
-
-    }
-
 }
-
-[System.Serializable]
-public class UfoRouteInfo
-{
-    public PathController path;
-    public int ufoCount;
-}
-
-//[System.Serializable]
-//public class Mission
-//{
-//    public List<Wave> WaveList;
-//}
 
 
 [System.Serializable]
