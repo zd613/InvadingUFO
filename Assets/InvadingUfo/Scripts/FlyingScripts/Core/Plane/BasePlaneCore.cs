@@ -68,15 +68,13 @@ public class BasePlaneCore : BaseCore
                 }
 
 
-                var magnet = GetComponent<Magnet>();
-                if (magnet != null)
+                var missileAttack = GetComponent<Ame.PlayerMissileAttack>();
+                if (missileAttack != null)
                 {
-                    magnet.attractAreaCollider.enabled = false;
-                    magnet.isActive = false;
+                    missileAttack.isActive = false;
                 }
+
                 Destroy(gameObject, 15);
-
-
             };
         }
 

@@ -70,6 +70,10 @@ public class Health : MonoBehaviour, IDamageable
         if (hp <= 0)
         {
             isAlive = false;
+            if (hpSlider != null)
+            {
+                hpSlider.gameObject.SetActive(false);
+            }
 
             if (canExplode)
             {
@@ -77,10 +81,7 @@ public class Health : MonoBehaviour, IDamageable
             }
             else
             {
-                if (hpSlider != null)
-                {
-                    hpSlider.gameObject.SetActive(false);
-                }
+
                 gameObject.SetActive(false);
                 //Destroy(gameObject);
             }

@@ -9,6 +9,7 @@ namespace Ame
     //ミサイルは戦闘機から出たとき少し下側へ落ちて、後ろ側へ流れたのち、速度上げて、敵へと向かう
     public class PlayerMissileAttack : MonoBehaviour
     {
+        public bool isActive = true;
         public GameObject missileObject;
         public Transform missileLauncher;
         public GameObject target;
@@ -75,6 +76,8 @@ namespace Ame
 
         void Update()
         {
+            if (!isActive)
+                return;
             UpdateTarget();
 
             //set target
@@ -124,6 +127,8 @@ namespace Ame
 
         public void Fire()
         {
+            if (!isActive)
+                return;
             Fire(target);
         }
 
