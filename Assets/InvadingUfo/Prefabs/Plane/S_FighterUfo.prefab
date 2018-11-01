@@ -2221,7 +2221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   avoidanceRadius: 100
-  targetChangeDistance: 200
+  targetChangeDistance: 500
   debug: 0
 --- !u!114 &114067823491873272
 MonoBehaviour:
@@ -2294,9 +2294,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActive: 1
   power:
-    Pitch: 30
+    Pitch: 22
     Roll: 30
-    Yaw: 30
+    Yaw: 22
   reversePower:
     Pitch: 30
     Roll: 30
@@ -2342,7 +2342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 1
-  speed: 20
+  speed: 15
   altitudeConstraint: 1
   minAltitude: -5
   maxAltitude: 1000
