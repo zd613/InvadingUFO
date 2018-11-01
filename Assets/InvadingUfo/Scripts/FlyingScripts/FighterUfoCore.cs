@@ -75,6 +75,7 @@ public class FighterUfoCore : BaseUfoCore
 
     }
 
+    bool preSpecialKey1 = false;
 
     protected virtual void Update()
     {
@@ -89,6 +90,19 @@ public class FighterUfoCore : BaseUfoCore
                     attack.Fire();
                 }
             }
+
+            if (attack != null)
+            {
+                if (preSpecialKey1 == false && inputProvider.SpecialKey1 == true)
+                {
+                    attack.StartShootSound();
+                }
+                if (preSpecialKey1 == true && inputProvider.SpecialKey1 == false)
+                {
+                    attack.StopShootSound();
+                }
+            }
+            preSpecialKey1 = inputProvider.SpecialKey1;
 
             if (rotation != null)
             {

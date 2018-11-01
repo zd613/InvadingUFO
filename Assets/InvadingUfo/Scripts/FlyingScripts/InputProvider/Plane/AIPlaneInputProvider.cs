@@ -140,7 +140,7 @@ public class AIPlaneInputProvider : BasePlaneInputProvider
         }
 
         //攻撃
-
+        BulletAttack = false;
         if (distance < attack.gunRange)
         {
             RaycastHit hit;
@@ -149,7 +149,7 @@ public class AIPlaneInputProvider : BasePlaneInputProvider
                 var hitLayer = hit.collider.gameObject.layer;
                 if (hitLayer != LayerMask.GetMask("Plane", "Player"))
                 {
-                    attack.Fire();
+                    BulletAttack = true;
                 }
             }
         }

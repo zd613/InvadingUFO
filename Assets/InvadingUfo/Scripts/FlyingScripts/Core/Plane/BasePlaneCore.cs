@@ -102,12 +102,17 @@ public class BasePlaneCore : BaseCore
 
         if (attack != null)
         {
+
             if (preAttack == false && inputProvider.BulletAttack == true)
             {
+                print("pre");
+
                 attack.StartShootSound();
             }
             if (preAttack == true && inputProvider.BulletAttack == false)
             {
+                print("stop");
+
                 attack.StopShootSound();
             }
         }

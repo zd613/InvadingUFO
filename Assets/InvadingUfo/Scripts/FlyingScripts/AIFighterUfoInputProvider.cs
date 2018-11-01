@@ -111,7 +111,7 @@ public class AIFighterUfoInputProvider : BaseUfoInputProvider
         //}
 
         //攻撃
-
+        SpecialKey1 = false;
         if (distance < attack.gunRange)
         {
             RaycastHit hit;
@@ -120,7 +120,7 @@ public class AIFighterUfoInputProvider : BaseUfoInputProvider
                 var hitLayer = hit.collider.gameObject.layer;
                 if (hitLayer != LayerMask.GetMask("Ufo"))
                 {
-                    attack.Fire();
+                    SpecialKey1 = true;
                 }
             }
         }
