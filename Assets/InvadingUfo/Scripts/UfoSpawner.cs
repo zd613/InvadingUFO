@@ -37,15 +37,25 @@ public class UfoSpawner : MonoBehaviour
 
             var coroutine = StartCoroutine(StartWave(mission.waves[i]));
             yield return coroutine;
+            //print("wave ends" + i);
         }
+        //print("all waves finished");
+
         OnAllUfosSpawned?.Invoke();
     }
 
     IEnumerator StartWave(Wave wave)
     {
         yield return new WaitForSeconds(wave.startDelay);
+        print(wave.startDelay);
+
         Initialize(wave);
+        //print("initialized");
+
         StartWaveParts(0);
+
+        //print("start wave parts ends");
+        //print(hasWaveFinished);
 
         while (!hasWaveFinished)
         {
@@ -54,11 +64,13 @@ public class UfoSpawner : MonoBehaviour
         }
 
         yield return new WaitForSeconds(wave.endDelay);
+
     }
 
     //それぞれの位置のスポナーにufo生成を振り分け
     void Initialize(Wave wave)
     {
+        order = 0;
         var spawnerTransforms = wave.wavePart.Select(x => x.spawner).Distinct().ToArray();
         int spawnerCount = spawnerTransforms.Length;
 
@@ -109,7 +121,9 @@ public class UfoSpawner : MonoBehaviour
         }
 
         if (order >= maxOrder)
+        {
             return;
+        }
         bool allNull = true;
 
         for (int i = 0; i < spawningCoroutines.Length; i++)
@@ -120,18 +134,23 @@ public class UfoSpawner : MonoBehaviour
             }
         }
 
+
         if (allNull)
         {
 
             order++;
-            StartWaveParts(order);
-
             if (order == maxOrder)
             {
                 //OnAllUfosSpawned?.Invoke();
+                //print("wave finished");
+
                 hasWaveFinished = true;
                 OnWaveFinished?.Invoke();
             }
+
+
+            StartWaveParts(order);
+
         }
     }
 
