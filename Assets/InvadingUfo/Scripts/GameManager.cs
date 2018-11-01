@@ -61,9 +61,14 @@ public class GameManager : MonoBehaviour
 
     public PlayingStatus playingStatus = PlayingStatus.PlayingNow;
 
+    public GameObject missionParent;
+    public static int missionLevel;
+
     private void Awake()
     {
         player.OnDeath += () => StartCoroutine(GameOver());
+
+        ufoSpawner.mission = missionParent.transform.GetChild(missionLevel).GetComponent<Mission>();
     }
 
 
@@ -129,6 +134,7 @@ public class GameManager : MonoBehaviour
                 player.Rotation.reversePitchControl = false;
             }
         });
+
     }
 
     string ToDamagePriceText(long price)

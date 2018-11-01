@@ -77418,6 +77418,11 @@ Prefab:
       propertyPath: gameClearAppearSpeed
       value: 0.8
       objectReference: {fileID: 0}
+    - target: {fileID: 114025863401097000, guid: c0945e666096a3a4b9ce79ce67e1e83f,
+        type: 2}
+      propertyPath: missionParent
+      value: 
+      objectReference: {fileID: 1821017044}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0945e666096a3a4b9ce79ce67e1e83f, type: 2}
   m_IsPrefabAsset: 0

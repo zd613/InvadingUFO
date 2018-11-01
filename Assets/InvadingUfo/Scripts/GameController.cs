@@ -13,19 +13,19 @@ public class GameController : MonoBehaviour
         isPlaying = true;
     }
 
-    private void Update()
-    {
+    //private void Update()
+    //{
 
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            StopGame();
-        }
+    //    if (Input.GetKeyDown(KeyCode.S))
+    //    {
+    //        StopGame();
+    //    }
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            PlayGame();
-        }
-    }
+    //    if (Input.GetKeyDown(KeyCode.R))
+    //    {
+    //        PlayGame();
+    //    }
+    //}
 
     public void StopGame()
     {
@@ -39,11 +39,29 @@ public class GameController : MonoBehaviour
         isPlaying = true;
     }
 
+    //public void ChangeSceneAndSendMissionLevel(string sceneName)
+    //{
+    //    System.Action action = () =>
+    //    {
+    //        var param = FindObjectOfType<MissionLevel>();
+    //        param.number = 1;
+    //    };
+    //    StartCoroutine(LoadSceneAsync(sceneName, action));
+    //}
 
     public void ChangeScene(string sceneName)
     {
         print("change");
         SceneManager.LoadScene(sceneName);
+    }
+
+    IEnumerator LoadSceneAsync(string sceneName, System.Action onLoad)
+    {
+        var ao = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+        yield return ao;
+
+        onLoad?.Invoke();
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void QuitGame()
