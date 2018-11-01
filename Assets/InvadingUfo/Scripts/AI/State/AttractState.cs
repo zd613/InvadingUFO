@@ -52,7 +52,7 @@ public class AttractState : UfoBaseState
         if (time > timeout)
         {
             StopToAttract();
-            Debug.Log("attract timeout");
+            //Debug.Log("attract timeout");
 
             OnTimeout?.Invoke();
             time = 0;

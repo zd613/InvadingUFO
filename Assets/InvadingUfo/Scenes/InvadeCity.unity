@@ -9378,7 +9378,7 @@ Prefab:
     - target: {fileID: 114855445284498592, guid: b9eaec796dd1d134397d76d42e6664f1,
         type: 2}
       propertyPath: waves.Array.size
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114855445284498592, guid: b9eaec796dd1d134397d76d42e6664f1,
         type: 2}
@@ -27604,6 +27604,12 @@ Transform:
   m_Father: {fileID: 145318847}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 179.99998, z: 0}
+--- !u!114 &640015645 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114016705981675244, guid: be3101b2cfc50e5499d5f7436cd6ef0a,
+    type: 2}
+  m_PrefabInternal: {fileID: 785724292}
+  m_Script: {fileID: 11500000, guid: 7022c148247009b4f8ac94b7e4fdfca2, type: 3}
 --- !u!1 &643896597
 GameObject:
   m_ObjectHideFlags: 0
@@ -79117,6 +79123,16 @@ Prefab:
       propertyPath: missionParent
       value: 
       objectReference: {fileID: 1821017044}
+    - target: {fileID: 114025863401097000, guid: c0945e666096a3a4b9ce79ce67e1e83f,
+        type: 2}
+      propertyPath: planeAllyParent
+      value: 
+      objectReference: {fileID: 2062669017}
+    - target: {fileID: 114025863401097000, guid: c0945e666096a3a4b9ce79ce67e1e83f,
+        type: 2}
+      propertyPath: planeManager
+      value: 
+      objectReference: {fileID: 640015645}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0945e666096a3a4b9ce79ce67e1e83f, type: 2}
   m_IsPrefabAsset: 0

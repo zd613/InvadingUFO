@@ -31,6 +31,14 @@ public class LevelSelect : MonoBehaviour
             var t = item.GetComponent<Toggle>();
             if (t == activeToggle)
             {
+                if (i < 4)
+                {
+                    GameManager.useAllyPlane = false;
+                }
+                else
+                {
+                    GameManager.useAllyPlane = true;
+                }
                 GameManager.missionLevel = i;
 
                 break;

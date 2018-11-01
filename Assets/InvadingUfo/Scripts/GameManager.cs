@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     public UfoManager ufoManager;
     public UfoSpawner ufoSpawner;
     public PriceManager priceManager;
+    public PlaneManager planeManager;
 
     [Header("UI")]
     public long priceDeadLine = 1000000000;
@@ -62,13 +63,29 @@ public class GameManager : MonoBehaviour
     public PlayingStatus playingStatus = PlayingStatus.PlayingNow;
 
     public GameObject missionParent;
+    public Transform planeAllyParent;
+    public bool useGlobalMission = true;
     public static int missionLevel;
+    public static bool useAllyPlane = false;
 
     private void Awake()
     {
         player.OnDeath += () => StartCoroutine(GameOver());
 
-        //ufoSpawner.mission = missionParent.transform.GetChild(missionLevel).GetComponent<Mission>();
+        if (useGlobalMission)
+        {
+            ufoSpawner.mission = missionParent.transform.GetChild(missionLevel).GetComponent<Mission>();
+
+        }
+
+        if (useAllyPlane)
+        {
+            foreach (Transform item in planeAllyParent)
+            {
+                item.gameObject.SetActive(true);
+                item.transform.parent = planeManager.holder.transform;
+            }
+        }
     }
 
 
