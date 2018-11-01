@@ -35,7 +35,7 @@ public class UfoSpawner : MonoBehaviour
             spawnQueue[i] = new Queue<WavePart>();
         }
 
-        print(spawnQueue.Length);
+        //print(spawnQueue.Length);
         for (int i = 0; i < spawnerCount; i++)
         {
             foreach (var item in wave.wavePart)
