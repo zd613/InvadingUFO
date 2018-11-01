@@ -6,6 +6,8 @@
 
 マシンガン2:missile1.mp3
 ミサイル:machinegun2.mp3
+bomb2
+heavy-machine-gun1
 
 戦闘機音:avion+dc10.mp3
 https://www.freesoundeffects.com/free-track/avion-dc10-89254/
