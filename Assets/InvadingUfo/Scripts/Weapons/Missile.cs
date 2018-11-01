@@ -73,6 +73,7 @@ namespace Ame
 
         private void Update()
         {
+
             if (firstStage)
             {
                 transform.Translate(Vector3.forward * relativeSpeed * Time.deltaTime);
@@ -104,6 +105,10 @@ namespace Ame
 
         private void OnTriggerEnter(Collider other)
         {
+            //プレイヤーに当たってしまうので応急処置
+
+            if (other.tag == "Player")
+                return;
 
             if (!canHitToAttacker)
             {
