@@ -22,7 +22,6 @@ public class Attack : MonoBehaviour
 
     public float gunRange = 300;
 
-    bool isSoundPlaying = false;
 
     [Header("crosshair")]
     public SpriteRenderer crosshair;
@@ -74,13 +73,7 @@ public class Attack : MonoBehaviour
             return false;
 
         CreateBullet();
-        if (shootSound != null)
-        {
-            if (!shootSound.isPlaying)
-            {
-                shootSound.Play();
-            }
-        }
+
         if (muzzleFlash != null)
         {
             muzzleFlash.Play();
@@ -194,4 +187,21 @@ public class Attack : MonoBehaviour
     int layerMaskValue;
     public LineRenderer gunRangeLine;
     public LineRenderer hitLine;
+
+
+    public void StartShootSound()
+    {
+        if (shootSound != null)
+        {
+            shootSound.Play();
+        }
+    }
+
+    public void StopShootSound()
+    {
+        if (shootSound != null)
+        {
+            shootSound.Stop();
+        }
+    }
 }

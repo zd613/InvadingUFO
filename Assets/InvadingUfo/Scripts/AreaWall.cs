@@ -113,6 +113,8 @@ public class AreaWall : MonoBehaviour
     private void OnTriggerExitMethod(Collider other)
     {
         var rootTransform = other.GetComponentInParent<BaseCore>().transform;
+        if (rootTransform == null)
+            return;
 
         //入るときのコライダーを出たとき
         TurnInfo info = null;

@@ -83,6 +83,8 @@ public class BasePlaneCore : BaseCore
     }
 
 
+    bool preAttack = false;
+
     protected virtual void Update()
     {
         Debug.DrawRay(transform.position, transform.forward * 2, Color.red);
@@ -91,8 +93,25 @@ public class BasePlaneCore : BaseCore
             if (attack != null)
             {
                 attack.Fire();
+
+
             }
         }
+
+        //attack sound
+
+        if (attack != null)
+        {
+            if (preAttack == false && inputProvider.BulletAttack == true)
+            {
+                attack.StartShootSound();
+            }
+            if (preAttack == true && inputProvider.BulletAttack == false)
+            {
+                attack.StopShootSound();
+            }
+        }
+        preAttack = inputProvider.BulletAttack;
 
         if (inputProvider.MissileAttack)
         {
