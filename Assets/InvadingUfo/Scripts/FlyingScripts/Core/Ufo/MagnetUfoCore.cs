@@ -86,6 +86,7 @@ public class MagnetUfoCore : BaseUfoCore
 
             if (rotation != null)
             {
+                rotation.CancelRotationByCollisionHit();
                 rotation.Rotate(inputProvider.PitchValue, inputProvider.YawValue);
             }
 
