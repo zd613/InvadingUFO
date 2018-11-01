@@ -6631,7 +6631,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 1
-  speed: 20
+  speed: 25
   altitudeConstraint: 1
   minAltitude: -5
   maxAltitude: 600
@@ -6889,6 +6889,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useInputProvider: 1
   inputProvider: {fileID: 114437027743881200}
+  missileObjectToHideOnDeath:
+  - {fileID: 1737417362698246}
+  - {fileID: 1354629456933154}
+  - {fileID: 1820873883369538}
+  - {fileID: 1213749379162056}
   fspeed: 30
   minFocalLength: 25
   maxFocalLength: 40
@@ -6953,9 +6958,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActive: 1
   power:
-    Pitch: 20
-    Roll: 20
-    Yaw: 20
+    Pitch: 25
+    Roll: 25
+    Yaw: 25
   reversePower:
     Pitch: 30
     Roll: 30

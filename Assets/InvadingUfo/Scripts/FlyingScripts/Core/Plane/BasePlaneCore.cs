@@ -22,6 +22,10 @@ public class BasePlaneCore : BaseCore
     //TODO:一般的なやつに変更する
     protected Ame.PlayerMissileAttack playerMissileAttack;
 
+
+    //TODO:あとで適切な場所に移動
+    public List<GameObject> missileObjectToHideOnDeath;
+
     protected virtual void Awake()
     {
         //base
@@ -72,6 +76,11 @@ public class BasePlaneCore : BaseCore
                 if (missileAttack != null)
                 {
                     missileAttack.isActive = false;
+                }
+
+                foreach (var item in missileObjectToHideOnDeath)
+                {
+                    item.SetActive(false);
                 }
 
                 Destroy(gameObject, 15);
