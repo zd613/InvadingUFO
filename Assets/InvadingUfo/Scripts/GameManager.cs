@@ -25,7 +25,8 @@ public class GameManager : MonoBehaviour
     public Text gameClearText;
     [Range(0, 1)]
     public float gameClearAppearSpeed = 0.02f;
-    public float sceneTransitionDelaySec = 2;
+    public float gameClearButtonAppearTime = 2;
+    public GameObject gameClearButtonPanel;
 
     [Header("カメラ")]
     public GameObject mainCamera;
@@ -179,8 +180,6 @@ public class GameManager : MonoBehaviour
                 BackToGame();
             }
         }
-        //currentDamagePriceText.text = houseManager.activeHouseCount.ToString();
-        //housePercentage.value = houseManager.activeHouseCount / houseManager.houseCount;
 
         if (canClearGame && !isGameOver)
         {
@@ -231,10 +230,9 @@ public class GameManager : MonoBehaviour
             var color = gameOverText.color;
             color.a = alpha;
             gameOverText.color = color;
-            gameOverUI.SetActive(true);
 
 
-            alpha += gameOverAppearSpeed;
+            alpha += gameOverAppearSpeed * Time.deltaTime;
 
             yield return null;
         }
@@ -254,16 +252,15 @@ public class GameManager : MonoBehaviour
             var color = gameClearText.color;
             color.a = alpha;
             gameClearText.color = color;
-            //gameClearUI.SetActive(true);
 
-
-            alpha += gameClearAppearSpeed;
+            alpha += gameClearAppearSpeed * Time.deltaTime;
 
             yield return null;
         }
 
-        yield return new WaitForSeconds(sceneTransitionDelaySec);
-        LoadTitle();
+        yield return new WaitForSeconds(gameClearButtonAppearTime);
+        gameClearButtonPanel.SetActive(true);
+
     }
 
     public void Restart()
