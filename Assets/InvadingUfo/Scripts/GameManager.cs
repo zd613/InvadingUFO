@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
 
     public Toggle reverseUpDownToggle;
 
-
+    public PlayingStatus playingStatus = PlayingStatus.PlayingNow;
 
     private void Awake()
     {
@@ -181,13 +181,14 @@ public class GameManager : MonoBehaviour
             }
         }
 
+
         if (canClearGame && !isGameOver)
         {
             if (ufoManager.Count <= 0)
             {
                 StartCoroutine(GameClear());
                 canClearGame = false;
-
+                playingStatus = PlayingStatus.GameClear;
             }
         }
     }
@@ -218,6 +219,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameOver()
     {
+        if (playingStatus == PlayingStatus.GameClear)
+            yield break;
         if (isGameOver)
             yield break;
         isGameOver = true;
@@ -289,4 +292,11 @@ public class GameManager : MonoBehaviour
         menuUI.SetActive(false);
         isRunning = true;
     }
+}
+
+public enum PlayingStatus
+{
+    PlayingNow,
+    GameOver,
+    GameClear,
 }

@@ -86,7 +86,6 @@ public class UfoSpawner : MonoBehaviour
 
         if (allNull)
         {
-            print("all null");
 
             order++;
             StartWaveParts(order);
@@ -105,7 +104,6 @@ public class UfoSpawner : MonoBehaviour
 
     void StartWaveParts(int order)
     {
-        print("wave" + order);
         for (int i = 0; i < spawnQueue.Length; i++)
         {
             if (spawnQueue[i].Count == 0)
@@ -114,13 +112,7 @@ public class UfoSpawner : MonoBehaviour
             var wp = spawnQueue[i].Peek();
             if (wp.order == order)
             {
-                print(order + "," + spawningCoroutines[i] == null ? "null" : "no");
-
                 spawningCoroutines[i] = StartCoroutine(SpawningUfoLoop(i, spawnQueue[i].Dequeue()));
-                print(spawningCoroutines[i] == null ? "nullll" : "nnnnn");
-                print(i);
-
-
             }
         }
     }
@@ -148,7 +140,6 @@ public class UfoSpawner : MonoBehaviour
 
     IEnumerator SpawningUfoLoop(int index, WavePart wavePart)
     {
-        print("s");
 
         yield return new WaitForSeconds(wavePart.startDelaySec);
 
@@ -163,7 +154,6 @@ public class UfoSpawner : MonoBehaviour
                 yield return null;
                 continue;
             }
-            print("spawn");
 
             SpawnUfo(wavePart.ufo, wavePart.spawner.position, Quaternion.identity);
             counter++;
