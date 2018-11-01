@@ -47,7 +47,7 @@ public class UfoSpawner : MonoBehaviour
     IEnumerator StartWave(Wave wave)
     {
         yield return new WaitForSeconds(wave.startDelay);
-        print(wave.startDelay);
+        //print(wave.startDelay);
 
         Initialize(wave);
         //print("initialized");

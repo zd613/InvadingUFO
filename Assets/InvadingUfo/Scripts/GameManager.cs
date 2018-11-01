@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
     {
         player.OnDeath += () => StartCoroutine(GameOver());
 
-        ufoSpawner.mission = missionParent.transform.GetChild(missionLevel).GetComponent<Mission>();
+        //ufoSpawner.mission = missionParent.transform.GetChild(missionLevel).GetComponent<Mission>();
     }
 
 
