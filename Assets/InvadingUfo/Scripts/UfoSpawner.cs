@@ -9,6 +9,9 @@ public class UfoSpawner : MonoBehaviour
 
     public Wave wave;
 
+
+    public Mission mission;
+
     public HouseManager houseManager;
     public UfoManager ufoManager;
 
@@ -23,7 +26,38 @@ public class UfoSpawner : MonoBehaviour
     int maxOrder;
     Queue<WavePart>[] spawnQueue;
 
-    private void Awake()
+    bool hasWaveFinished = false;
+
+
+
+    IEnumerator StartMission(Mission mission)
+    {
+        for (int i = 0; i < mission.waves.Count; i++)
+        {
+
+            var coroutine = StartCoroutine(StartWave(mission.waves[i]));
+            yield return coroutine;
+        }
+        OnAllUfosSpawned?.Invoke();
+    }
+
+    IEnumerator StartWave(Wave wave)
+    {
+        yield return new WaitForSeconds(wave.startDelay);
+        Initialize(wave);
+        StartWaveParts(0);
+
+        while (!hasWaveFinished)
+        {
+            yield return null;
+            continue;
+        }
+
+        yield return new WaitForSeconds(wave.endDelay);
+    }
+
+    //それぞれの位置のスポナーにufo生成を振り分け
+    void Initialize(Wave wave)
     {
         var spawnerTransforms = wave.wavePart.Select(x => x.spawner).Distinct().ToArray();
         int spawnerCount = spawnerTransforms.Length;
@@ -35,13 +69,15 @@ public class UfoSpawner : MonoBehaviour
             spawnQueue[i] = new Queue<WavePart>();
         }
 
-        //print(spawnQueue.Length);
         for (int i = 0; i < spawnerCount; i++)
         {
             foreach (var item in wave.wavePart)
             {
                 if (item == null)
+                {
                     print("null");
+                    return;
+                }
 
                 if (item.spawner == spawnerTransforms[i])
                 {
@@ -54,35 +90,35 @@ public class UfoSpawner : MonoBehaviour
         {
             maxOrder = Mathf.Max(item.Count, maxOrder);
         }
+
+        hasWaveFinished = false;
     }
-
-
 
 
     private void Start()
     {
         ufoHolder = ufoManager.ufoHolder;
-        StartToSpawn();
+        StartCoroutine(StartMission(mission));
     }
 
     private void Update()
     {
+        if (hasWaveFinished)
+        {
+            return;
+        }
+
         if (order >= maxOrder)
             return;
         bool allNull = true;
 
         for (int i = 0; i < spawningCoroutines.Length; i++)
         {
-            //print(i + "," + (spawningCoroutines[i] == null ? "null" : "not null"));
-
             if (spawningCoroutines[i] != null)
             {
                 allNull = false;
             }
         }
-
-        //print(allNull ? "all null" : "not all null");
-
 
         if (allNull)
         {
@@ -92,14 +128,11 @@ public class UfoSpawner : MonoBehaviour
 
             if (order == maxOrder)
             {
-                OnAllUfosSpawned?.Invoke();
+                //OnAllUfosSpawned?.Invoke();
+                hasWaveFinished = true;
+                OnWaveFinished?.Invoke();
             }
         }
-    }
-
-    void StartToSpawn()
-    {
-        StartWaveParts(0);
     }
 
     void StartWaveParts(int order)
@@ -169,10 +202,19 @@ public class UfoSpawner : MonoBehaviour
     }
 }
 
+[System.Serializable]
+public class WaveMission
+{
+    public List<Wave> waves;
+}
 
 [System.Serializable]
 public class Wave
 {
+    public float startDelay;
+    public float endDelay;
+
+    //上から順に実行される。
     public List<WavePart> wavePart;
 }
 
@@ -180,6 +222,9 @@ public class Wave
 public class WavePart
 {
     //実行される順番
+    //TODO:よくわからん
+    //0から順に実行されていく(スポナーごと)
+    //0から順番に番号を付けていく必要がある
     public int order;
     [Space]
     public GameObject ufo;

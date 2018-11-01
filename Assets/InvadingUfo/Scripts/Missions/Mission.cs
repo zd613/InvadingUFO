@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mission
+public class Mission : MonoBehaviour
 {
-    public event System.Action OnCompleted;
-    public event System.Action OnFailed;
+    public List<Wave> waves;
 
-
+    //public event System.Action OnCompleted;
+    //public event System.Action OnFailed;
 }
