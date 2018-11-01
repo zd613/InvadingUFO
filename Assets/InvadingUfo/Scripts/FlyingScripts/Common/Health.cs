@@ -153,7 +153,6 @@ public class Health : MonoBehaviour, IDamageable
         if (!canCallOnCollisionEnter)
             return;
 
-        //if (collision.gameObject.layer == LayerMask.NameToLayer("Stage"))
         if (stageDamageMode == StageDamageMode.TakeDamage)
         {
             ApplyDamage(StageData.DamageValue, collision.gameObject);
