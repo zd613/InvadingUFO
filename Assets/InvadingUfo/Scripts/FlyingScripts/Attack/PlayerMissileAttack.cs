@@ -203,13 +203,13 @@ namespace Ame
             //};
 
             missileCount++;
-            print("add" + missileCount);
+            //print("add" + missileCount);
 
-
+            //TODO:たまにミサイルカメラが消えてしまうことがあるのを直す
             missile.OnDestroyed += () =>
             {
                 missileCount--;
-                print("reduce:" + missileCount);
+                //print("reduce:" + missileCount);
 
                 if (missileCount == 0)
                 {

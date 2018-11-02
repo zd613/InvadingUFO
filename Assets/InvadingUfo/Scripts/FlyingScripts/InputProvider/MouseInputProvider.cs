@@ -33,7 +33,9 @@ public class MouseInputProvider : BasePlaneInputProvider
     public override void UpdateInputStatus()
     {
         //bullet
-        if (Input.GetMouseButton(0))
+
+
+        if (Input.GetMouseButton(1))
         {
             BulletAttack = true;
         }
@@ -43,7 +45,7 @@ public class MouseInputProvider : BasePlaneInputProvider
         }
 
         //missile
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(0))
         {
             MissileAttack = true;
         }
@@ -54,15 +56,25 @@ public class MouseInputProvider : BasePlaneInputProvider
 
         //pitch yaw
         SetPitchAndYaw();
+        var boost = Input.GetAxis("Boost");
+        Boost = boost > 0;
+        //if (Input.GetAxis("Boost"))
+        //{
 
-        if (Input.GetKey(KeyCode.Space))
-        {
-            Boost = true;
-        }
-        else
-        {
-            Boost = false;
-        }
+        //}
+        //else
+        //{
+
+        //}
+
+        //if (Input.GetKey(KeyCode.Space))
+        //{
+        //    Boost = true;
+        //}
+        //else
+        //{
+        //    Boost = false;
+        //}
 
     }
 
