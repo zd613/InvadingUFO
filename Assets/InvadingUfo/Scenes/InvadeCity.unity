@@ -19919,6 +19919,31 @@ Prefab:
       propertyPath: outerCircleRadius
       value: 250
       objectReference: {fileID: 0}
+    - target: {fileID: 114972026578506518, guid: beb4a4495af87284ab9cfa9146f629fe,
+        type: 2}
+      propertyPath: reloadTime
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114388207042968374, guid: beb4a4495af87284ab9cfa9146f629fe,
+        type: 2}
+      propertyPath: reloadTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114388207042968374, guid: beb4a4495af87284ab9cfa9146f629fe,
+        type: 2}
+      propertyPath: coolTimeSecond
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 114388207042968374, guid: beb4a4495af87284ab9cfa9146f629fe,
+        type: 2}
+      propertyPath: gunRange
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 114388207042968374, guid: beb4a4495af87284ab9cfa9146f629fe,
+        type: 2}
+      propertyPath: damage
+      value: 35
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114318215022178458, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
     - {fileID: 114420621889039538, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}

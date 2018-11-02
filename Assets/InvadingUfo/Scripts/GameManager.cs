@@ -140,7 +140,7 @@ public class GameManager : MonoBehaviour
 
         reverseUpDownToggle.onValueChanged.AddListener((b) =>
         {
-            print("c");
+            //print("c");
 
             if (b)//上下反転
             {
