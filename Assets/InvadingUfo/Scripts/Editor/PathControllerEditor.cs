@@ -32,13 +32,32 @@ namespace Ame
                 CreatePath(circle: true);
             }
 
+            if(GUILayout.Button("Path Sphere Renderer (On Or Off)"))
+            {
+                Toggle();
+            }
+        }
 
+        void Toggle()
+        {
+            foreach (Transform item in scriptObject.transform)
+            {
+                var meshRenderer = item.GetChild(0).GetComponent<MeshRenderer>();
+                meshRenderer.enabled = !meshRenderer.enabled;
+                EditorUtility.SetDirty(meshRenderer);
+            }
         }
 
         void CreatePath(bool circle = false)
         {
             var script = scriptObject.GetComponent<PathController>();
             script.paths.Clear();
+            //foreach (Transform item in scriptObject.transform)
+            //{
+            //    var path = item.GetComponent<Path>();
+            //    path.previous = null;
+            //    path.next = null;
+            //}
             script.isCirclePath = circle;
 
             int num = 0;
@@ -46,9 +65,9 @@ namespace Ame
             Path pre = null;
             foreach (Transform item in scriptObject.transform)
             {
-
                 var path = item.GetComponent<Path>();
                 path.number = num;
+
                 path.previous = pre;
                 if (pre != null)
                 {
@@ -58,7 +77,11 @@ namespace Ame
 
                 pre = path;
                 num++;
+
+                EditorUtility.SetDirty(path);
+                EditorUtility.SetDirty(pre);
             }
+
 
             if (circle)
             {
@@ -70,6 +93,12 @@ namespace Ame
                     last.next = first;
                 }
             }
+            else
+            {
+                script.paths[0].previous = null;
+                script.paths[script.paths.Count - 1].next = null;
+            }
+            EditorUtility.SetDirty(script);
 
         }
     }

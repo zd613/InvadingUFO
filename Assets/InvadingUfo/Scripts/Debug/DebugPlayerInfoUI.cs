@@ -15,11 +15,11 @@ public class DebugPlayerInfoUI : MonoBehaviour
     public Text inputText;
 
     Health health;
-    AbstractInputProvider inputProvider;
+    BaseInputProvider inputProvider;
     private void Awake()
     {
         health = player.GetComponent<Health>();
-        inputProvider = player.GetComponent<AbstractInputProvider>();
+        inputProvider = player.GetComponent<BaseInputProvider>();
         if (health != null)
         {
             health.OnDamageTaken += () => UpdateHpText();

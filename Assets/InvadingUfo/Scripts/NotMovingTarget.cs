@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Ame
 {
-    public class NotMovingTarget : MonoBehaviour, IDamagable
+    public class NotMovingTarget : MonoBehaviour, IDamageable
     {
         [SerializeField]
         private float hp = 1000;
