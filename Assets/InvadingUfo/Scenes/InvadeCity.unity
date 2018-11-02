@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1.49
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: ad32f0a19caf11b428b2b6192bdda2ea, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: beb71dd272b668d40a1990d50dc8fe6e, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1111541264}
-  m_IndirectSpecularColor: {r: 0.32097998, g: 0.5931297, b: 0.8191027, a: 1}
+  m_IndirectSpecularColor: {r: 0.7341267, g: 0.030638454, b: 0.000000006483945, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -19899,6 +19899,11 @@ Prefab:
       propertyPath: pool
       value: 
       objectReference: {fileID: 138666437}
+    - target: {fileID: 114972026578506518, guid: beb4a4495af87284ab9cfa9146f629fe,
+        type: 2}
+      propertyPath: missileFollowingCamera
+      value: 
+      objectReference: {fileID: 1301626502}
     m_RemovedComponents:
     - {fileID: 114318215022178458, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
     - {fileID: 114420621889039538, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
@@ -57095,8 +57100,8 @@ MonoBehaviour:
   target: {fileID: 2089124329}
   useInitialPositionForOffset: 0
   offset: {x: 0, y: 2, z: -7}
-  movingSpeed: 2.7
-  rotationSpeed: 2.7
+  movingSpeed: 3
+  rotationSpeed: 3
   pitchRotationSpeed: 60
   yawCurve:
     serializedVersion: 2
