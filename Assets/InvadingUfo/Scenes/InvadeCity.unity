@@ -19904,6 +19904,11 @@ Prefab:
       propertyPath: missileFollowingCamera
       value: 
       objectReference: {fileID: 1301626502}
+    - target: {fileID: 114972026578506518, guid: beb4a4495af87284ab9cfa9146f629fe,
+        type: 2}
+      propertyPath: missileHitViewTimeSec
+      value: 4.5
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114318215022178458, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
     - {fileID: 114420621889039538, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
@@ -57070,7 +57075,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1301626501
 Transform:
   m_ObjectHideFlags: 0

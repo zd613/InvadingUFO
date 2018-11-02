@@ -41,6 +41,9 @@ namespace Ame
         //event 
         //transform:target
         public event System.Action<Transform> OnMissileHit;
+        public event System.Action OnDestroyed;
+
+        bool destroyed = false;
 
         private void Awake()
         {
@@ -105,6 +108,8 @@ namespace Ame
 
         private void OnTriggerEnter(Collider other)
         {
+            if (destroyed)
+                return;
             //プレイヤーに当たってしまうので応急処置
 
             if (other.tag == "Player")
@@ -152,11 +157,18 @@ namespace Ame
 
             }
 
-            Destroy(gameObject);
+            Destroy();
         }
 
         void OutOfRange()
         {
+            Destroy();
+        }
+
+        void Destroy()
+        {
+            OnDestroyed?.Invoke();
+            destroyed = true;
             Destroy(gameObject);
         }
     }

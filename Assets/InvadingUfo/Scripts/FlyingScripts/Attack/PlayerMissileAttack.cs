@@ -48,6 +48,9 @@ namespace Ame
 
         public FollowingCamera missileFollowingCamera;
 
+        bool existsMissile;
+        int missileCount = 0;
+
         private void Awake()
         {
             //missileCounter = maxMissile;
@@ -154,6 +157,14 @@ namespace Ame
             Gizmos.DrawWireSphere(transform.position, lockonRange);
         }
 
+        IEnumerator HideFollowMissileCamera()
+        {
+            yield return new WaitForSeconds(missileHitViewTimeSec);
+            missileFollowingCamera.gameObject.SetActive(false);
+            missileCameraCoroutine = null;
+        }
+        Coroutine missileCameraCoroutine;
+
         void Fire(GameObject target)
         {
             if (coolDownCoroutine != null)
@@ -190,6 +201,27 @@ namespace Ame
             //    fc.target = t;
             //    fc.SetActiveWithDelay(false, missileHitViewTimeSec);
             //};
+
+            missileCount++;
+            print("add" + missileCount);
+
+
+            missile.OnDestroyed += () =>
+            {
+                missileCount--;
+                print("reduce:" + missileCount);
+
+                if (missileCount == 0)
+                {
+                    //missileFollowingCamera.SetActiveWithDelay(false, missileHitViewTimeSec);
+                    if (missileCameraCoroutine != null)
+                    {
+                        StopCoroutine(missileCameraCoroutine);
+                    }
+
+                    missileCameraCoroutine = StartCoroutine(HideFollowMissileCamera());
+                }
+            };
 
             if (missileFollowingCamera != null)
             {
