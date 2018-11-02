@@ -19922,7 +19922,7 @@ Prefab:
     - target: {fileID: 114972026578506518, guid: beb4a4495af87284ab9cfa9146f629fe,
         type: 2}
       propertyPath: reloadTime
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114388207042968374, guid: beb4a4495af87284ab9cfa9146f629fe,
         type: 2}
@@ -87345,7 +87345,7 @@ Prefab:
         type: 2}
       propertyPath: m_Text
       value: "\u30DE\u30A6\u30B9 :\u4E0A\u4E0B\u5DE6\u53F3\u79FB\u52D5\n\u5DE6\u30AF\u30EA\u30C3\u30AF
-        \ :\u6A5F\u9283\n\u53F3\u30AF\u30EA\u30C3\u30AF  :\u30DF\u30B5\u30A4\u30EB\n\u30B9\u30DA\u30FC\u30B9\u30AD\u30FC:\u30B9\u30D4\u30FC\u30C9\n
+        \ :\u30DF\u30B5\u30A4\u30EB\n\u53F3\u62BC\u3057\u7D9A\u3051\u308B :\u6A5F\u9283\n\u30B9\u30DA\u30FC\u30B9\u30AD\u30FC:\u30B9\u30D4\u30FC\u30C9\n
         \             \u30A2\u30C3\u30D7\nesc :\u30E1\u30CB\u30E5\u30FC"
       objectReference: {fileID: 0}
     - target: {fileID: 224708649897622130, guid: a305e2231452af04abd5a7a067bdd90a,
