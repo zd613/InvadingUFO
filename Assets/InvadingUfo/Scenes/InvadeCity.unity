@@ -3893,7 +3893,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 39, y: -36}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &101951108
@@ -19909,6 +19909,16 @@ Prefab:
       propertyPath: missileHitViewTimeSec
       value: 4.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114437027743881200, guid: beb4a4495af87284ab9cfa9146f629fe,
+        type: 2}
+      propertyPath: innerCircleRadius
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114437027743881200, guid: beb4a4495af87284ab9cfa9146f629fe,
+        type: 2}
+      propertyPath: outerCircleRadius
+      value: 250
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114318215022178458, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
     - {fileID: 114420621889039538, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
@@ -32133,7 +32143,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 5, y: 5}
+  m_SizeDelta: {x: 7, y: 7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &740512228
 MonoBehaviour:
@@ -60697,7 +60707,7 @@ RectTransform:
   m_GameObject: {fileID: 1384386781}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 1}
+  m_LocalScale: {x: 15, y: 15, z: 1}
   m_Children: []
   m_Father: {fileID: 187779804}
   m_RootOrder: 3
