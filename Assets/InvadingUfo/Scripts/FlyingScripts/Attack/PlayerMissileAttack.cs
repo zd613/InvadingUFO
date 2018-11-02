@@ -46,6 +46,7 @@ namespace Ame
         public MissileInitialInfo[] missileInitialInfos;
         int index = 0;
 
+        public FollowingCamera missileFollowingCamera;
 
         private void Awake()
         {
@@ -172,24 +173,29 @@ namespace Ame
             missileInitialInfos[index].Transform.GetChild(0).gameObject.SetActive(false);
 
             //player
-            missile.OnMissileHit += (t) =>
+            //missile.OnMissileHit += (t) =>
+            //{
+            //    if (t.gameObject.layer == LayerMask.NameToLayer("Stage"))
+            //    {
+            //        return;
+            //    }
+            //    else if (t.gameObject.layer == LayerMask.NameToLayer("Attractable"))
+            //    {
+            //        return;
+            //    }
+            //    missileHitCamera.SetActive(true);
+            //    //print(missileHitCamera.activeInHierarchy);
+
+            //    var fc = missileHitCamera.GetComponent<FollowingCamera>();
+            //    fc.target = t;
+            //    fc.SetActiveWithDelay(false, missileHitViewTimeSec);
+            //};
+
+            if (missileFollowingCamera != null)
             {
-                if (t.gameObject.layer == LayerMask.NameToLayer("Stage"))
-                {
-                    return;
-                }
-                else if (t.gameObject.layer == LayerMask.NameToLayer("Attractable"))
-                {
-                    return;
-                }
-                missileHitCamera.SetActive(true);
-                //print(missileHitCamera.activeInHierarchy);
-
-                var fc = missileHitCamera.GetComponent<FollowingCamera>();
-                fc.target = t;
-                fc.SetActiveWithDelay(false, missileHitViewTimeSec);
-
-            };
+                missileFollowingCamera.gameObject.SetActive(true);
+                missileFollowingCamera.target = missile.transform;
+            }
 
             index++;
 
