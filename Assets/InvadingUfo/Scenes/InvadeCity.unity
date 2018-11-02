@@ -19899,7 +19899,11 @@ Prefab:
       propertyPath: pool
       value: 
       objectReference: {fileID: 138666437}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114318215022178458, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
+    - {fileID: 114420621889039538, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
+    - {fileID: 114074128959405568, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
+    - {fileID: 114528507480222608, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: beb4a4495af87284ab9cfa9146f629fe, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &544599140
