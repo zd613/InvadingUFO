@@ -30,7 +30,7 @@ public class Fracture : MonoBehaviour, Ame.IDamageable, IFinancialDamage
             return;
         if (fractureSound != null)
         {
-            print("player");
+            //print("player");
 
             fractureSound.Play();
 

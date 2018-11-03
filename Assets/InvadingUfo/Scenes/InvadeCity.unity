@@ -79865,7 +79865,7 @@ Prefab:
     - target: {fileID: 114025863401097000, guid: c0945e666096a3a4b9ce79ce67e1e83f,
         type: 2}
       propertyPath: useGlobalMission
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0945e666096a3a4b9ce79ce67e1e83f, type: 2}
